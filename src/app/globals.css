@@ -1,12 +1,30 @@
-html,
-body {
-  margin: 0px;
-  padding: 0px;
-  background-color: rgb(250, 250, 250);
+/* 고급스러운 초록색 팔레트 */
+:root {
+  --primary-green: #2e7d32;
+  --primary-green-light: #4caf50;
+  --primary-green-dark: #1b5e20;
+  --secondary-green: #81c784;
+  --accent-green: #a5d6a7;
+  --background-green: #f1f8e9;
+  --surface-green: #e8f5e8;
 }
 
-a {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+/* 다크 모드 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-green: #81c784;
+    --primary-green-dark: #2e7d32;
+    --background-green: #1a1a1a;
+    --surface-green: #2d2d2d;
+  }
+}
+
+/* 전역 폰트, 기본 margin/padding */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  color: #212121;
+  background: var(--background-green);
 }

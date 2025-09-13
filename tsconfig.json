@@ -1,27 +1,123 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    // 언어 및 환경 설정
+    "target": "ES2022",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES6",
+      "ES2017",
+      "ES2018",
+      "ES2019",
+      "ES2020",
+      "ES2021",
+      "ES2022"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+
+    // 모듈 시스템
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // JSX 설정
     "jsx": "preserve",
     "incremental": true,
+
+    // 타입 체크 엄격도
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    // 플러그인과 경로
     "plugins": [
       {
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@/*": ["./src/*", "./app/*", "./*"],
+      "@/components/*": ["./components/*", "./src/components/*", "./app/components/*"],
+      "@/lib/*": ["./lib/*", "./src/lib/*"],
+      "@/utils/*": ["./utils/*", "./src/utils/*"],
+      "@/types/*": ["./types/*", "./src/types/*"],
+      "@/hooks/*": ["./hooks/*", "./src/hooks/*"],
+      "@/styles/*": ["./styles/*", "./src/styles/*"],
+      "@/public/*": ["./public/*"],
+      "@/api/*": ["./pages/api/*", "./app/api/*"],
+      "@/config/*": ["./config/*", "./src/config/*"]
+    },
+
+    // 소스맵과 디버깅
+    "sourceMap": true,
+    "declaration": false,
+    "declarationMap": false,
+    "removeComments": false,
+
+    // 실험적 데코레이터 (필요시)
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+
+    // 출력 설정
+    "outDir": "./dist",
+    "rootDir": ".",
+
+    // 타입 정의 파일
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+
+  // 포함할 파일들
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/**/*",
+    "pages/**/*",
+    "components/**/*",
+    "lib/**/*",
+    "utils/**/*",
+    "hooks/**/*",
+    "types/**/*",
+    "src/**/*",
+    "middleware.ts"
+  ],
+
+  // 제외할 파일들
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "dist",
+    "build",
+    "**/*.config.js",
+    "**/*.config.mjs",
+    "coverage",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "public"
+  ],
+
+  // Next.js 전용 설정
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
 }

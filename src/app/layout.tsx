@@ -1,19 +1,20 @@
 import "./globals.css";
 import Link from "next/link";
+
 import style from "./layout.module.css";
 
 async function Footer() {
-    return (
-      <footer>
-        <div>제작 @uhanuu</div>
-      </footer>
-    )
+  return (
+    <footer>
+      <div>제작 @uhanuu</div>
+    </footer>
+  );
 }
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode,
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -23,7 +24,7 @@ export default function RootLayout({
             <Link href={"/"}>📚 KokoroBridge</Link>
           </header>
           <main>{children}</main>
-          <Footer/>
+          <Footer />
         </div>
       </body>
     </html>
