@@ -1,12 +1,12 @@
 /* 고급스러운 초록색 팔레트 */
 :root {
-  --primary-green: #2e7d32;
-  --primary-green-light: #4caf50;
-  --primary-green-dark: #1b5e20;
-  --secondary-green: #81c784;
-  --accent-green: #a5d6a7;
-  --background-green: #f1f8e9;
-  --surface-green: #e8f5e8;
+  --primary-green: #264d3c; /* 딥 포레스트 그린 */
+  --primary-green-light: #3a6351; /* 고급스러운 딥 올리브 */
+  --primary-green-dark: #1a3327; /* 거의 블랙에 가까운 그린 */
+  --secondary-green: #5b9279; /* 세련된 보조색 */
+  --accent-green: #a7c4bc; /* 은은한 포인트 */
+  --background-green: #f4f7f6; /* 고급스러운 연한 배경 */
+  --surface-green: #e6f0ec; /* 카드/버튼 배경 */
 }
 
 /* 다크 모드 */
