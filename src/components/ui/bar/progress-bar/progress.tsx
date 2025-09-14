@@ -116,13 +116,7 @@ const StudyProgress: React.FC<StudyProgressProps> = ({ data, className }) => {
         <button className={styles.continueButton}>
           <span>이어서 학습하기</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M9 18L15 12L9 6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <polygon points="5,3 19,12 5,21" fill="currentColor" />
           </svg>
         </button>
       </div>

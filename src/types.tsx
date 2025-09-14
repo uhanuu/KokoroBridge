@@ -1,11 +1,8 @@
-interface KanaData {
-  char: string;
-  romaji: string;
-  type: "hiragana" | "katakana";
-  strokes: string[];
-}
-
-interface DrawPoint {
-  x: number;
-  y: number;
+interface ActivityItem {
+  id: string;
+  type: "hiragana" | "katakana" | "kanji" | "conversation";
+  character?: string;
+  score: number;
+  timestamp: string;
+  duration: number; // 분 단위
 }

@@ -221,12 +221,12 @@ export default function ProfileSettings({ className }: ProfileSettingsProps) {
 
   const handleSwitchChange = (categoryIndex: number, itemIndex: number) => {
     // 스위치 토글 로직 (실제 구현에서는 상태 관리 필요)
-    console.log(`Toggle switch for category ${categoryIndex}, item ${itemIndex}`);
+    // console.log(`Toggle switch for category ${categoryIndex}, item ${itemIndex}`);
   };
 
   const handleItemClick = (categoryIndex: number, itemIndex: number) => {
     // 아이템 클릭 로직
-    console.log(`Clicked item: category ${categoryIndex}, item ${itemIndex}`);
+    // console.log(`Clicked item: category ${categoryIndex}, item ${itemIndex}`);
   };
 
   return (

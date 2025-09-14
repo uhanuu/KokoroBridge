@@ -1,8 +1,45 @@
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 16px 0;
+.container {
+  padding: 24px 20px;
+  max-width: 100vw;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+  min-height: 100vh;
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 섹션 공통 스타일 */
+.lastStudySection,
+.statsSection,
+.activitySection,
+.quickStartSection {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2e7d32;
+  margin: 0 0 16px 0;
+  padding-left: 4px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .todayDate {
+    text-align: center;
+  }
+
+  .title {
+    font-size: 24px;
+  }
 }
