@@ -1,24 +1,22 @@
+import Navigation from "@/components/ui/navigation/navigation";
+
 import "./globals.css";
+import styles from "./layout.module.css";
 
-import Footer from "@/components/footer/footer";
-import Header from "@/components/header/main-header";
-import Navigation from "@/components/navigation/navigation";
+import { ReactNode } from "react";
 
-import style from "./layout.module.css";
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body>
-        <div className={style.container}>
-          <Header />
+    <html lang="ko">
+      <body className={`${styles.container}`}>
+        <div>
+          {/* 메인 콘텐츠 영역 */}
+          <main className={styles.content}>
+            <div className={styles.contentWrapper}>{children}</div>
+          </main>
+
+          {/* 하단 네비게이션 */}
           <Navigation />
-          {children}
-          <Footer />
         </div>
       </body>
     </html>

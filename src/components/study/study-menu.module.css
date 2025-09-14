@@ -1,0 +1,387 @@
+.container {
+  padding: 24px 20px;
+  max-width: 100vw;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* 헤더 */
+.header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2e7d32;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #66bb6a;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* 전체 진행률 */
+.overallProgress {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.1);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.progressTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.progressPercentage {
+  font-size: 18px;
+  font-weight: 700;
+  color: #4caf50;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: #e8f5e8;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50 0%, #66bb6a 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progressStats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #66bb6a;
+  font-weight: 500;
+}
+
+/* 학습 카드 목록 */
+.studyList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.studyCard {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.studyCard:hover:not(.locked) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.15);
+}
+
+.studyCard.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 카드 헤더 */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.iconContainer {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.icon {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  font-family: "Noto Sans JP", serif;
+}
+
+.lockOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2e7d32;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.difficulty {
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cardSubtitle {
+  font-size: 14px;
+  color: #66bb6a;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 카드 진행률 */
+.cardProgress {
+  margin-bottom: 20px;
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progressText {
+  font-size: 14px;
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.progressPercent {
+  font-size: 14px;
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.cardProgressBar {
+  width: 100%;
+  height: 6px;
+  background: #e8f5e8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.cardProgressFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* 카드 푸터 */
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timeInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #66bb6a;
+  font-weight: 500;
+}
+
+.startButton {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+.startButton:hover:not(.disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.startButton:active:not(.disabled) {
+  transform: translateY(0);
+}
+
+.startButton.disabled {
+  background: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* 추천 학습 */
+.recommendation {
+  margin-top: 32px;
+}
+
+.recommendationTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2e7d32;
+  margin: 0 0 16px 0;
+}
+
+.recommendationCard {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.recommendationIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.recommendationContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.recommendationContent h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: white;
+}
+
+.recommendationContent p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.recommendationButton {
+  background: white;
+  color: #4caf50;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.recommendationButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 16px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .studyCard {
+    padding: 20px;
+  }
+
+  .cardHeader {
+    gap: 12px;
+  }
+
+  .iconContainer {
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+  }
+
+  .cardFooter {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .startButton {
+    justify-content: center;
+  }
+
+  .recommendationCard {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+}
