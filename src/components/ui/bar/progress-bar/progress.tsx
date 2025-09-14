@@ -2,7 +2,8 @@
 
 import React from "react";
 
-import { getScoreColor } from "@/util/color-helper";
+import { PlayIcon } from "@/components/icons/play-icon";
+import { getScoreColor } from "@/service/studyService";
 
 import styles from "./progress.module.css";
 
@@ -20,7 +21,7 @@ interface StudyProgressProps {
   className?: string;
 }
 
-const StudyProgress: React.FC<StudyProgressProps> = ({ data, className }) => {
+export default function StudyProgress({ data, className }: StudyProgressProps) {
   const progressPercentage = (data.correctCount / data.totalCount) * 100;
   const scoreColor = getScoreColor(data.score);
 
@@ -115,13 +116,9 @@ const StudyProgress: React.FC<StudyProgressProps> = ({ data, className }) => {
 
         <button className={styles.continueButton}>
           <span>이어서 학습하기</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <polygon points="5,3 19,12 5,21" fill="currentColor" />
-          </svg>
+          <PlayIcon />
         </button>
       </div>
     </div>
   );
-};
-
-export default StudyProgress;
+}

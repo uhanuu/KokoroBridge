@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { getScoreColor } from "@/util/color-helper";
+import { getScoreColor } from "@/service/studyService";
 
 import styles from "./recent-activity.module.css";
 

@@ -1,0 +1,64 @@
+/* 추천 학습 */
+.recommendation {
+  margin-top: 32px;
+}
+
+.recommendationTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2e7d32;
+  margin: 0 0 16px 0;
+}
+
+.recommendationCard {
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.recommendationIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.recommendationContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.recommendationContent h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: white;
+}
+
+.recommendationContent p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.recommendationButton {
+  background: white;
+  color: #4caf50;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.recommendationButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
