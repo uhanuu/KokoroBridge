@@ -20,8 +20,8 @@ const navigationItems = [
   },
   {
     path: "/profile",
-    label: "전체",
-    imageUrl: "/sample_icon.png",
+    label: "프로필",
+    imageUrl: "/profile_icon.png",
   },
 ];
 
