@@ -1,0 +1,131 @@
+.container {
+  padding: var(--space-lg) var(--space-md);
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: var(--background);
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* 헤더 */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  margin-bottom: var(--space-sm) !important;
+}
+
+.subtitle {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+}
+
+/* 카드 공통 스타일 */
+.card {
+  background-color: var(--surface) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid var(--outline) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* 통계 카드 */
+.statsCard {
+  padding: var(--space-lg) !important;
+}
+
+.statsContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+}
+
+.statItem {
+  text-align: center;
+  flex: 1;
+}
+
+.statNumber {
+  color: var(--primary-600) !important;
+  font-weight: 700 !important;
+  margin-bottom: var(--space-xs) !important;
+  line-height: 1.2;
+}
+
+.statLabel {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.actionSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .statsContent {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .statItem {
+    width: 100%;
+  }
+
+  .actionSection {
+    width: 100%;
+    margin-top: var(--space-sm);
+  }
+
+  .title {
+    font-size: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-sm);
+  }
+
+  .title {
+    font-size: 24px !important;
+  }
+
+  .subtitle {
+    font-size: 14px !important;
+  }
+
+  .statNumber {
+    font-size: 32px !important;
+  }
+}

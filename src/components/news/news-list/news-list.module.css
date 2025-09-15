@@ -1,0 +1,200 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* 카드 기본 스타일 */
+.card {
+  background-color: var(--surface) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid var(--outline) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* 컨트롤 카드 */
+.controlsCard {
+  margin-bottom: var(--space-sm);
+}
+
+.controlsContent {
+  padding: var(--space-md) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.controlsSection {
+  flex: 1;
+}
+
+.sectionTitle {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  margin-bottom: 2px !important;
+}
+
+.sectionSubtitle {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+  font-size: 13px !important;
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.controlItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.controlButton {
+  color: var(--text-secondary) !important;
+  background: var(--background) !important;
+  border: 1px solid var(--outline) !important;
+}
+
+.controlButton:hover {
+  background: var(--surface-variant) !important;
+}
+
+.controlChip {
+  background: var(--background) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--outline) !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+}
+
+.controlChip:hover {
+  background: var(--surface-variant) !important;
+}
+
+/* 메뉴 스타일 */
+.menuPaper {
+  background: var(--surface) !important;
+  border: 1px solid var(--outline) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  margin-top: var(--space-xs);
+}
+
+.menuItem {
+  color: var(--text-primary) !important;
+  font-size: 14px !important;
+  min-height: 40px !important;
+  padding: var(--space-xs) var(--space-md) !important;
+}
+
+.menuItem:hover {
+  background: var(--surface-variant) !important;
+}
+
+.menuItem.Mui-selected {
+  background: var(--primary-50) !important;
+  color: var(--primary-700) !important;
+}
+
+/* 새소식 목록 */
+.newsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* 빈 상태 */
+.emptyCard {
+  text-align: center;
+  padding: var(--space-xl) !important;
+}
+
+.emptyContent {
+  padding: var(--space-xl) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.emptyTitle {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+.emptyMessage {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+  max-width: 300px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .controlsContent {
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-start;
+  }
+
+  .controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .controlItem {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .sectionTitle {
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .controlsContent {
+    padding: var(--space-sm) !important;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .controlItem {
+    width: 100%;
+    justify-content: space-between;
+    padding: var(--space-xs) var(--space-sm);
+    background: var(--background);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--outline);
+  }
+
+  .emptyContent {
+    padding: var(--space-lg) !important;
+  }
+
+  .emptyTitle {
+    font-size: 18px !important;
+  }
+}
