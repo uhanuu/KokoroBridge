@@ -3,9 +3,10 @@
 import { RecordVoiceOver, Lock } from "@mui/icons-material";
 import { Card, CardContent, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
+import GroupSelector from "@/components/group-selector";
 
 import styles from "./page.module.css";
 
@@ -52,15 +53,249 @@ const studyCategories = [
   },
 ];
 
+const hiraganaGroups = [
+  {
+    id: 1,
+    name: "あ단",
+    romaji: "A-Dan",
+    characters: ["あ", "い", "う", "え", "お"],
+    color: "#22c55e",
+    route: "/study/canvas/hiragana/a",
+  },
+  {
+    id: 2,
+    name: "か단",
+    romaji: "Ka-Dan",
+    characters: ["か", "き", "く", "け", "こ"],
+    color: "#3b82f6",
+    route: "/study/canvas/hiragana/ka",
+  },
+  {
+    id: 3,
+    name: "さ단",
+    romaji: "Sa-Dan",
+    characters: ["さ", "し", "す", "せ", "そ"],
+    color: "#f59e0b",
+    route: "/study/canvas/hiragana/sa",
+  },
+  {
+    id: 4,
+    name: "た단",
+    romaji: "Ta-Dan",
+    characters: ["た", "ち", "つ", "て", "と"],
+    color: "#8b5cf6",
+    route: "/study/canvas/hiragana/ta",
+  },
+  {
+    id: 5,
+    name: "な단",
+    romaji: "Na-Dan",
+    characters: ["な", "に", "ぬ", "ね", "の"],
+    color: "#ef4444",
+    route: "/study/canvas/hiragana/na",
+  },
+  {
+    id: 6,
+    name: "は단",
+    romaji: "Ha-Dan",
+    characters: ["は", "ひ", "ふ", "へ", "ほ"],
+    color: "#06b6d4",
+    route: "/study/canvas/hiragana/ha",
+  },
+  {
+    id: 7,
+    name: "ま단",
+    romaji: "Ma-Dan",
+    characters: ["ま", "み", "む", "め", "も"],
+    color: "#84cc16",
+    route: "/study/canvas/hiragana/ma",
+  },
+  {
+    id: 8,
+    name: "야행",
+    romaji: "Ya-Gyou",
+    characters: ["や", "ゆ", "よ"],
+    color: "#f97316",
+    route: "/study/canvas/hiragana/ya",
+  },
+  {
+    id: 9,
+    name: "ら단",
+    romaji: "Ra-Dan",
+    characters: ["ら", "り", "る", "れ", "ろ"],
+    color: "#a855f7",
+    route: "/study/canvas/hiragana/ra",
+  },
+  {
+    id: 10,
+    name: "わ행",
+    romaji: "Wa-Gyou",
+    characters: ["わ", "を", "ん"],
+    color: "#14b8a6",
+    route: "/study/canvas/hiragana/wa",
+  },
+  {
+    id: 11,
+    name: "탁음",
+    romaji: "Dakuten",
+    characters: ["が", "ざ", "だ", "ば", "ぱ"],
+    color: "#6366f1",
+    route: "/study/canvas/hiragana/dakuten",
+  },
+  {
+    id: 12,
+    name: "반탁음",
+    romaji: "Handakuten",
+    characters: ["ぱ", "ぴ", "ぷ", "ぺ", "ぽ"],
+    color: "#ec4899",
+    route: "/study/canvas/hiragana/handakuten",
+  },
+];
+
+const katakanaGroups = [
+  {
+    id: 1,
+    name: "ア단",
+    romaji: "A-Dan",
+    characters: ["ア", "イ", "ウ", "エ", "オ"],
+    color: "#22c55e",
+    route: "/study/canvas/katakana/a",
+  },
+  {
+    id: 2,
+    name: "カ단",
+    romaji: "Ka-Dan",
+    characters: ["カ", "キ", "ク", "ケ", "コ"],
+    color: "#3b82f6",
+    route: "/study/canvas/katakana/ka",
+  },
+  {
+    id: 3,
+    name: "サ단",
+    romaji: "Sa-Dan",
+    characters: ["サ", "シ", "ス", "セ", "ソ"],
+    color: "#f59e0b",
+    route: "/study/canvas/katakana/sa",
+  },
+  {
+    id: 4,
+    name: "タ단",
+    romaji: "Ta-Dan",
+    characters: ["タ", "チ", "ツ", "テ", "ト"],
+    color: "#8b5cf6",
+    route: "/study/canvas/katakana/ta",
+  },
+  {
+    id: 5,
+    name: "ナ단",
+    romaji: "Na-Dan",
+    characters: ["ナ", "ニ", "ヌ", "ネ", "ノ"],
+    color: "#ef4444",
+    route: "/study/canvas/katakana/na",
+  },
+  {
+    id: 6,
+    name: "ハ단",
+    romaji: "Ha-Dan",
+    characters: ["ハ", "ヒ", "フ", "ヘ", "ホ"],
+    color: "#06b6d4",
+    route: "/study/canvas/katakana/ha",
+  },
+  {
+    id: 7,
+    name: "マ단",
+    romaji: "Ma-Dan",
+    characters: ["マ", "ミ", "ム", "メ", "モ"],
+    color: "#84cc16",
+    route: "/study/canvas/katakana/ma",
+  },
+  {
+    id: 8,
+    name: "ヤ행",
+    romaji: "Ya-Gyou",
+    characters: ["ヤ", "ユ", "ヨ"],
+    color: "#f97316",
+    route: "/study/canvas/katakana/ya",
+  },
+  {
+    id: 9,
+    name: "ラ단",
+    romaji: "Ra-Dan",
+    characters: ["ラ", "リ", "ル", "レ", "ロ"],
+    color: "#a855f7",
+    route: "/study/canvas/katakana/ra",
+  },
+  {
+    id: 10,
+    name: "ワ행",
+    romaji: "Wa-Gyou",
+    characters: ["ワ", "ヲ", "ン"],
+    color: "#14b8a6",
+    route: "/study/canvas/katakana/wa",
+  },
+  {
+    id: 11,
+    name: "탁음",
+    romaji: "Dakuten",
+    characters: ["ガ", "ザ", "ダ", "バ", "パ"],
+    color: "#6366f1",
+    route: "/study/canvas/katakana/dakuten",
+  },
+  {
+    id: 12,
+    name: "반탁음",
+    romaji: "Handakuten",
+    characters: ["パ", "ピ", "プ", "ペ", "ポ"],
+    color: "#ec4899",
+    route: "/study/canvas/katakana/handakuten",
+  },
+];
+
 export default function StudyPage() {
   const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleCategoryClick = (category: typeof studyCategories[0]) => {
-    if (!category.isLocked) {
+    if (category.isLocked) return;
+
+    if (category.id === 1) { // 히라가나
+      setSelectedCategory("hiragana");
+    } else if (category.id === 2) { // 가타카나
+      setSelectedCategory("katakana");
+    } else {
       router.push(category.route);
     }
   };
 
+  const handleBackToCategories = () => {
+    setSelectedCategory(null);
+  };
+
+  // 히라가나 그룹 선택 화면
+  if (selectedCategory === "hiragana") {
+    return (
+      <GroupSelector
+        groups={hiraganaGroups}
+        title="히라가나"
+        subtitle="좌우로 스와이프하여 학습할 그룹을 선택하세요"
+        onBack={handleBackToCategories}
+      />
+    );
+  }
+
+  // 가타카나 그룹 선택 화면
+  if (selectedCategory === "katakana") {
+    return (
+      <GroupSelector
+        groups={katakanaGroups}
+        title="가타카나"
+        subtitle="좌우로 스와이프하여 학습할 그룹을 선택하세요"
+        onBack={handleBackToCategories}
+      />
+    );
+  }
+
+  // 기본 카테고리 선택 화면
   return (
     <div className={styles.container}>
       <div className={styles.header}>
