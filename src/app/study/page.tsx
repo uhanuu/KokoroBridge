@@ -277,7 +277,7 @@ export default function StudyPage() {
       <GroupSelector
         groups={hiraganaGroups}
         title="히라가나"
-        subtitle="좌우로 스와이프하여 학습할 그룹을 선택하세요"
+        subtitle="학습할 그룹을 선택하세요"
         onBack={handleBackToCategories}
       />
     );
@@ -289,7 +289,7 @@ export default function StudyPage() {
       <GroupSelector
         groups={katakanaGroups}
         title="가타카나"
-        subtitle="좌우로 스와이프하여 학습할 그룹을 선택하세요"
+        subtitle="학습할 그룹을 선택하세요"
         onBack={handleBackToCategories}
       />
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowBack, ArrowForward, TouchApp } from "@mui/icons-material";
+import { ArrowBack, TouchApp, ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Card, CardContent, Typography, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useCallback, useEffect } from "react";
@@ -65,7 +65,7 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
     if (!isDragging) return;
 
     const deltaX = currentX - startX;
-    const threshold = 50; // 스와이프 임계값
+    const threshold = 80; // 스와이프 임계값을 높여서 더 확실한 의도일 때만 이동
 
     if (deltaX > threshold && currentIndex > 0) {
       handlePrevious();
@@ -165,12 +165,24 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
       <div className={styles.swipeHint}>
         <TouchApp className={styles.swipeIcon} />
         <Typography variant="body2" className={styles.swipeText}>
-          좌우로 스와이프하여 그룹을 선택하세요
+          드래그, 키보드 화살표, 양옆 버튼으로 그룹을 변경하세요
         </Typography>
       </div>
 
       {/* 그룹 카드 영역 */}
       <div className={styles.cardContainer}>
+        {/* 왼쪽 네비게이션 */}
+        <button
+          className={`${styles.sideNav} ${styles.leftNav} ${
+            currentIndex === 0 ? styles.disabled : ""
+          }`}
+          onClick={currentIndex > 0 ? handlePrevious : undefined}
+          disabled={currentIndex === 0}
+          aria-label="이전 그룹"
+        >
+          <ChevronLeft className={styles.chevronIcon} />
+        </button>
+
         <Card
           className={`${styles.card} ${styles.groupCard}`}
           ref={containerRef}
@@ -219,18 +231,22 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
             />
           </CardContent>
         </Card>
+
+        {/* 오른쪽 네비게이션 */}
+        <button
+          className={`${styles.sideNav} ${styles.rightNav} ${
+            currentIndex === groups.length - 1 ? styles.disabled : ""
+          }`}
+          onClick={currentIndex < groups.length - 1 ? handleNext : undefined}
+          disabled={currentIndex === groups.length - 1}
+          aria-label="다음 그룹"
+        >
+          <ChevronRight className={styles.chevronIcon} />
+        </button>
       </div>
 
       {/* 네비게이션 컨트롤 */}
       <div className={styles.navigation}>
-        <IconButton
-          onClick={handlePrevious}
-          disabled={currentIndex === 0}
-          className={styles.navButton}
-        >
-          <ArrowBack />
-        </IconButton>
-
         {/* 인디케이터 */}
         <div className={styles.indicators}>
           {groups.map((_, index) => (
@@ -243,14 +259,6 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
             />
           ))}
         </div>
-
-        <IconButton
-          onClick={handleNext}
-          disabled={currentIndex === groups.length - 1}
-          className={styles.navButton}
-        >
-          <ArrowForward />
-        </IconButton>
       </div>
 
       {/* 그룹 리스트 (하단) */}
