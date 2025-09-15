@@ -1,0 +1,292 @@
+.container {
+  padding: var(--space-lg) var(--space-md);
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: var(--background);
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.backButton {
+  color: var(--text-primary) !important;
+  padding: var(--space-sm) !important;
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.title {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  margin-bottom: 4px !important;
+}
+
+.subtitle {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+}
+
+/* 진행도 섹션 */
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.progressBar {
+  height: 8px !important;
+  border-radius: 4px !important;
+  background-color: var(--outline) !important;
+}
+
+.progressBar .MuiLinearProgress-bar {
+  background-color: #22c55e !important;
+  border-radius: 4px !important;
+}
+
+.progressText {
+  color: var(--text-tertiary) !important;
+  text-align: right;
+}
+
+/* 카드 */
+.card {
+  background-color: var(--surface) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid var(--outline) !important;
+  transition: all 0.3s ease !important;
+}
+
+.learningCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.learningContent {
+  padding: var(--space-xl) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  flex: 1;
+}
+
+/* 문자 표시 */
+.characterDisplay {
+  text-align: center;
+}
+
+.currentCharacter {
+  color: var(--text-primary) !important;
+  font-weight: 300 !important;
+  margin: 0 !important;
+  font-family: "Noto Sans CJK JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+/* Canvas 섹션 */
+.canvasSection {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.canvas {
+  max-width: 100%;
+}
+
+/* 안내 텍스트 */
+.instructionText {
+  text-align: center;
+}
+
+.instruction {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+}
+
+/* 네비게이션 */
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline);
+}
+
+.navButton {
+  color: var(--text-primary) !important;
+  padding: var(--space-sm) !important;
+  flex-shrink: 0;
+}
+
+.navButton:disabled {
+  color: var(--text-tertiary) !important;
+  opacity: 0.5;
+}
+
+.characterList {
+  display: flex;
+  gap: var(--space-xs);
+  flex: 1;
+  justify-content: center;
+  overflow-x: auto;
+  padding: var(--space-xs) 0;
+}
+
+.characterButton {
+  min-width: 44px;
+  height: 44px;
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.characterButton:hover {
+  background: var(--outline);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.characterButton.active {
+  background: #22c55e;
+  color: white;
+  border-color: #22c55e;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.characterButton.completed {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+/* 완료 섹션 */
+.completeSection {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+/* 에러 메시지 */
+.errorMessage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .learningContent {
+    padding: var(--space-lg) !important;
+    gap: var(--space-md);
+  }
+
+  .currentCharacter {
+    font-size: 4rem !important;
+  }
+
+  .characterButton {
+    min-width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .navigation {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-sm);
+  }
+
+  .headerTop {
+    gap: var(--space-sm);
+  }
+
+  .learningContent {
+    padding: var(--space-md) !important;
+    gap: var(--space-sm);
+  }
+
+  .currentCharacter {
+    font-size: 3rem !important;
+  }
+
+  .characterButton {
+    min-width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .characterList {
+    gap: 4px;
+  }
+
+  .title {
+    font-size: 1.5rem !important;
+  }
+
+  .instruction {
+    font-size: 14px !important;
+  }
+}
+
+/* 가로 스크롤 최적화 */
+.characterList::-webkit-scrollbar {
+  height: 4px;
+}
+
+.characterList::-webkit-scrollbar-track {
+  background: var(--outline);
+  border-radius: 2px;
+}
+
+.characterList::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 2px;
+}
+
+.characterList::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

@@ -1,0 +1,170 @@
+.canvasContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.canvasWrapper {
+  position: relative;
+  border: 2px solid var(--outline);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.gridBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.guideCharacter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d1d5db;
+  font-weight: 300;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.8;
+  font-family: "Noto Sans CJK JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+.drawingCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.drawingCanvas:active {
+  cursor: none;
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.controlButton {
+  background: var(--background) !important;
+  border: 1px solid var(--outline) !important;
+  color: var(--text-secondary) !important;
+  width: 44px !important;
+  height: 44px !important;
+  transition: all 0.2s ease !important;
+}
+
+.controlButton:hover {
+  background: var(--outline) !important;
+  color: var(--text-primary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.controlButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 모바일 터치 최적화 */
+@media (max-width: 768px) {
+  .canvasContainer {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+  }
+
+  .drawingCanvas {
+    cursor: none;
+  }
+
+  .controlButton {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .guideCharacter {
+    font-weight: 200;
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .canvasContainer {
+    padding: var(--space-xs);
+  }
+
+  .canvasWrapper {
+    border-width: 1px;
+  }
+
+  .controls {
+    gap: var(--space-xs);
+  }
+
+  .controlButton {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
+/* 고해상도 디스플레이 최적화 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .drawingCanvas {
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+  }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .canvasWrapper {
+    background: #1a1a1a;
+    border-color: #404040;
+  }
+
+  .guideCharacter {
+    color: #4a5568;
+  }
+}
+
+/* 접근성 개선 */
+.drawingCanvas:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* 애니메이션 */
+.canvasWrapper {
+  transition: box-shadow 0.2s ease;
+}
+
+.canvasWrapper:hover {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 라이트/다크 테마 전환 지원 */
+[data-theme="dark"] .canvasWrapper {
+  background: #1a1a1a;
+  border-color: #404040;
+}
+
+[data-theme="dark"] .guideCharacter {
+  color: #4a5568;
+}

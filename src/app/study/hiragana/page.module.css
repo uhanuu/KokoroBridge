@@ -1,0 +1,238 @@
+.container {
+  padding: var(--space-lg) var(--space-md);
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: var(--background);
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* 헤더 */
+.header {
+  margin-bottom: var(--space-md);
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.backButton {
+  color: var(--text-primary) !important;
+  padding: var(--space-sm) !important;
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.title {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  margin-bottom: 4px !important;
+}
+
+.subtitle {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+}
+
+/* 카드 공통 스타일 */
+.card {
+  background-color: var(--surface) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid var(--outline) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 그룹 그리드 */
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.groupCard {
+  padding: 0 !important;
+}
+
+.groupContent {
+  padding: var(--space-lg) !important;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  height: 100%;
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.groupIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconText {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.groupInfo {
+  flex: 1;
+}
+
+.groupName {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  margin-bottom: 2px !important;
+}
+
+.groupRomaji {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+  font-size: 13px !important;
+}
+
+/* 문자 그리드 */
+.charactersGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-xs);
+  margin: var(--space-sm) 0;
+}
+
+.characterItem {
+  aspect-ratio: 1;
+  background: var(--background);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.characterItem:hover {
+  background: var(--outline);
+  transform: scale(1.05);
+}
+
+.character {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .groupsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .groupContent {
+    padding: var(--space-md) !important;
+    gap: var(--space-sm);
+  }
+
+  .groupIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .iconText {
+    font-size: 18px;
+  }
+
+  .charactersGrid {
+    gap: 4px;
+  }
+
+  .character {
+    font-size: 14px;
+  }
+
+  .title {
+    font-size: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-sm);
+  }
+
+  .headerTop {
+    gap: var(--space-sm);
+  }
+
+  .groupsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .groupContent {
+    padding: var(--space-sm) !important;
+  }
+
+  .groupIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .iconText {
+    font-size: 16px;
+  }
+
+  .charactersGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .character {
+    font-size: 12px;
+  }
+
+  .title {
+    font-size: 24px !important;
+  }
+
+  .subtitle {
+    font-size: 14px !important;
+  }
+}

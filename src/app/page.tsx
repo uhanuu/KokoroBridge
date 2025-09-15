@@ -13,7 +13,7 @@ import { Card, CardContent, Typography, LinearProgress } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-import ActionButton from "@/components/ui/action-button";
+import ActionButton from "@/components/ui/button/action-button";
 
 import styles from "./page.module.css";
 

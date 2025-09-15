@@ -1,0 +1,231 @@
+.container {
+  padding: var(--space-lg) var(--space-md);
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: var(--background);
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* 헤더 */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.title {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  margin-bottom: var(--space-sm) !important;
+}
+
+.subtitle {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+}
+
+/* 카드 공통 스타일 */
+.card {
+  background-color: var(--surface) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid var(--outline) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* 카테고리 카드 */
+.categoriesCard {
+  padding: var(--space-lg) !important;
+}
+
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.categoryItem {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.categoryItem:not(.locked):hover {
+  transform: translateY(-4px);
+  border-color: #22c55e;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.categoryItem.locked {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.lockOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: var(--radius-lg);
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.categoryIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.iconText {
+  font-size: 24px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.lockIconOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lockIcon {
+  color: white !important;
+  font-size: 16px !important;
+}
+
+.categoryInfo {
+  flex: 1;
+}
+
+.categoryTitle {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  margin-bottom: 2px !important;
+}
+
+.categorySubtitle {
+  color: var(--text-secondary) !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+
+.categoryDescription {
+  color: var(--text-tertiary) !important;
+  margin: 0 !important;
+  line-height: 1.5;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .categoriesGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .categoryItem {
+    padding: var(--space-md);
+  }
+
+  .categoryIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .iconText {
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 28px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-sm);
+  }
+
+  .categoriesGrid {
+    gap: var(--space-sm);
+  }
+
+  .categoryItem {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .categoryHeader {
+    gap: var(--space-sm);
+  }
+
+  .categoryIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .iconText {
+    font-size: 18px;
+  }
+
+  .title {
+    font-size: 24px !important;
+  }
+
+  .subtitle {
+    font-size: 14px !important;
+  }
+}
