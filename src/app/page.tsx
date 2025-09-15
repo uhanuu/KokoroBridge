@@ -86,19 +86,16 @@ export default function HomePage() {
       <Card className={`${styles.card} ${styles.welcomeCard}`}>
         <CardContent className={styles.welcomeContent}>
           <div className={styles.welcomeText}>
+            <Typography variant="h6" className={styles.greetingText}>
+              頑張れ、{mockData.userName}さん
+            </Typography>
             <Typography variant="body2" className={styles.greetingSubText}>
-              8월 15일 금요일
-            </Typography>
-            <Typography variant="h4" className={styles.greetingText}>
-              안녕하세요,
-            </Typography>
-            <Typography variant="h4" className={styles.greetingText}>
-              {mockData.userName}님
+              오늘도 일본어 학습을 시작해볼까요?
             </Typography>
           </div>
           <div className={styles.characterContainer}>
             <Image
-              src="/character.png"
+              src="/home-character.png"
               width={120}
               height={120}
               alt="캐릭터"
@@ -107,7 +104,6 @@ export default function HomePage() {
           </div>
         </CardContent>
       </Card>
-
 
       {/* 빠른 시작 */}
       <Card className={`${styles.card} ${styles.quickStartCard}`}>
@@ -123,19 +119,27 @@ export default function HomePage() {
           <div className={styles.learningCardsGrid}>
             {mockData.learningCards.map((card) => {
               return (
-                <div key={card.id} className={`${styles.learningItem} ${card.isLocked ? styles.locked : ''}`}>
+                <div
+                  key={card.id}
+                  className={`${styles.learningItem} ${card.isLocked ? styles.locked : ""}`}
+                >
                   {card.isLocked && <div className={styles.lockOverlay} />}
                   <div className={styles.learningItemHeader}>
                     <div
                       className={styles.learningItemIcon}
                       style={{ backgroundColor: `${card.color}20` }}
                     >
-                      {typeof card.icon === 'string' ? (
-                        <span className={styles.iconText} style={{ color: card.color, opacity: card.isLocked ? 0.3 : 1 }}>
+                      {typeof card.icon === "string" ? (
+                        <span
+                          className={styles.iconText}
+                          style={{ color: card.color, opacity: card.isLocked ? 0.3 : 1 }}
+                        >
                           {card.icon}
                         </span>
                       ) : (
-                        <card.icon style={{ color: card.color, opacity: card.isLocked ? 0.3 : 1 }} />
+                        <card.icon
+                          style={{ color: card.color, opacity: card.isLocked ? 0.3 : 1 }}
+                        />
                       )}
                       {card.isLocked && (
                         <div className={styles.lockIconOverlay}>
@@ -182,7 +186,9 @@ export default function HomePage() {
                   )}
 
                   <button
-                    className={`${styles.startLearningButton} ${card.isLocked ? styles.lockedButton : ''}`}
+                    className={`${styles.startLearningButton} ${
+                      card.isLocked ? styles.lockedButton : ""
+                    }`}
                     disabled={card.isLocked}
                   >
                     <span className={styles.buttonText}>

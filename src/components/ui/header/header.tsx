@@ -1,8 +1,9 @@
 "use client";
 
-import { Badge, IconButton } from "@mui/material";
 import { Notifications } from "@mui/icons-material";
+import { Badge, IconButton } from "@mui/material";
 import Image from "next/image";
+
 import styles from "./header.module.css";
 
 interface HeaderProps {
@@ -22,7 +23,7 @@ export default function Header({ notificationCount = 3 }: HeaderProps) {
         <div className={styles.leftSection}>
           <div className={styles.characterContainer}>
             <Image
-              src="/character.png"
+              src="/logo-text.png"
               width={40}
               height={40}
               alt="캐릭터"
@@ -38,10 +39,7 @@ export default function Header({ notificationCount = 3 }: HeaderProps) {
             className={styles.notificationButton}
             size="medium"
           >
-            <Badge
-              badgeContent={notificationCount}
-              classes={{ badge: styles.badge }}
-            >
+            <Badge badgeContent={notificationCount} classes={{ badge: styles.badge }}>
               <Notifications className={styles.notificationIcon} />
             </Badge>
           </IconButton>
