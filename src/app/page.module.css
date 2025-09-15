@@ -37,7 +37,7 @@
 
 /* 환영 헤더 카드 */
 .welcomeCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
   border: 1px solid #404040 !important;
   min-height: 120px;
 }
@@ -226,7 +226,7 @@
 
 /* 오늘의 목표 카드 */
 .goalCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
   border: 1px solid #404040 !important;
 }
 
@@ -284,7 +284,7 @@
 .mainProgressBar {
   height: 8px !important;
   border-radius: 4px !important;
-  background-color: #404040 !important;
+  background-color: #4a4a4a !important;
 }
 
 .mainProgressBar .MuiLinearProgress-bar {
@@ -294,8 +294,8 @@
 
 /* 빠른 시작 카드 */
 .quickStartCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
-  border: 1px solid #404040 !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
+  border: 1px solid #4a4a4a !important;
 }
 
 .cardHeader {
@@ -316,8 +316,8 @@
 }
 
 .learningItem {
-  background: #353535;
-  border: 1px solid #404040;
+  background: #3a3a3a;
+  border: 1px solid #4a4a4a;
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
   display: flex;
@@ -331,7 +331,7 @@
 .learningItem:not(.locked):hover {
   transform: translateY(-2px);
   border-color: #22c55e;
-  background-color: #404040;
+  background-color: #4a4a4a;
 }
 
 .learningItem.locked {
@@ -454,7 +454,7 @@
 .learningProgressBar {
   height: 3px !important;
   border-radius: 2px !important;
-  background-color: #404040 !important;
+  background-color: #4a4a4a !important;
 }
 
 .learningProgressBar .MuiLinearProgress-bar {
@@ -493,7 +493,7 @@
 }
 
 .startLearningButton.lockedButton {
-  background: linear-gradient(135deg, #666666, #555555);
+  background: linear-gradient(135deg, #6a6a6a, #5a5a5a);
   cursor: not-allowed;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
@@ -537,8 +537,8 @@
 
 /* 학습 통계 카드 */
 .statsCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
-  border: 1px solid #404040 !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
+  border: 1px solid #4a4a4a !important;
 }
 
 .statsGrid {
@@ -554,7 +554,7 @@
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-lg);
-  background-color: #353535;
+  background-color: #3a3a3a;
   border-radius: 16px;
   border: 1px solid #404040;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -577,7 +577,7 @@
 
 .statItem:hover {
   transform: translateY(-4px);
-  background-color: #404040;
+  background-color: #4a4a4a;
   border-color: #22c55e;
 }
 
@@ -617,7 +617,7 @@
 
 /* 최근 활동 카드 */
 .activityCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
   border: 1px solid #404040 !important;
 }
 
@@ -633,7 +633,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--space-lg);
-  background-color: #353535;
+  background-color: #3a3a3a;
   border-radius: 12px;
   border: 1px solid #404040;
   transition: all 0.3s ease;
@@ -642,7 +642,7 @@
 .activityItem:hover {
   transform: translateX(4px);
   border-color: #22c55e;
-  background-color: #404040;
+  background-color: #4a4a4a;
 }
 
 .activityInfo {
@@ -681,7 +681,7 @@
 .activityProgressBar {
   height: 4px !important;
   border-radius: 2px !important;
-  background-color: #404040 !important;
+  background-color: #4a4a4a !important;
 }
 
 .activityProgressBar .MuiLinearProgress-bar {
@@ -873,7 +873,7 @@
 
 /* 업적 카드 */
 .achievementsCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
   border: 1px solid #404040 !important;
 }
 
@@ -1060,7 +1060,7 @@
 
 /* 스킬 진행도 카드 */
 .skillProgressCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
   border: 1px solid #404040 !important;
 }
 
@@ -1190,7 +1190,7 @@
 
 /* 월별 진행 카드 */
 .monthlyCard {
-  background: linear-gradient(135deg, #252525, #353535) !important;
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
   border: 1px solid #404040 !important;
 }
 
