@@ -21,7 +21,7 @@
 }
 
 .card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -54,10 +54,56 @@
 }
 
 .greetingSubText {
-  color: var(--text-tertiary) !important;
-  font-size: 14px !important;
-  margin-bottom: 8px !important;
-  font-weight: 400 !important;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* 환영 텍스트 컨테이너 */
+.welcomeText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+}
+
+/* 후리가나 스타일링 */
+.greetingWithFurigana {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.rubyText {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.furigana {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-500);
+  letter-spacing: 1px;
+  text-shadow: 0 1px 2px rgba(34, 197, 94, 0.3);
+  line-height: 1;
+  text-align: center;
+}
+
+.greetingRest {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.4;
 }
 
 .greetingText {
@@ -70,20 +116,112 @@
 
 .characterContainer {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
-  border-radius: 20px;
-  border: 2px solid rgba(34, 197, 94, 0.2);
+  overflow: visible;
+  margin: -10px -10px -10px 0;
 }
 
 .characterImage {
-  border-radius: 16px;
+  border-radius: 20px;
   object-fit: cover;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
+  transition: all 0.3s ease;
+  transform: scale(1.05);
+}
+
+.characterImage:hover {
+  transform: scale(1.08);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.5));
+}
+
+/* 모바일 반응형 - 환영 카드 */
+@media (max-width: 768px) {
+  .welcomeContent {
+    gap: var(--space-md) !important;
+  }
+
+  .greetingWithFurigana {
+    line-height: 1.6;
+  }
+
+  .rubyText {
+    font-size: 24px;
+    line-height: 1.6;
+  }
+
+  .furigana {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .greetingRest {
+    font-size: 24px;
+    line-height: 1.6;
+  }
+
+  .characterContainer {
+    width: 120px;
+    height: 120px;
+    margin: -5px -5px -5px 0;
+  }
+
+  .characterImage {
+    transform: scale(1.1);
+  }
+
+  .characterImage:hover {
+    transform: scale(1.13);
+  }
+}
+
+@media (max-width: 480px) {
+  .welcomeContent {
+    padding: var(--space-lg) !important;
+    gap: var(--space-sm) !important;
+  }
+
+  .greetingWithFurigana {
+    line-height: 1.5;
+  }
+
+  .rubyText {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .furigana {
+    font-size: 11px;
+    letter-spacing: 0px;
+  }
+
+  .greetingRest {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  .greetingSubText {
+    font-size: 13px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .characterContainer {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+  }
+
+  .characterImage {
+    transform: scale(1.15);
+    border-radius: 16px;
+  }
+
+  .characterImage:hover {
+    transform: scale(1.18);
+  }
 }
 
 /* 오늘의 목표 카드 */
@@ -391,12 +529,10 @@
   transform: scale(1.1);
 }
 
-
 .cardTitle {
   color: var(--text-primary) !important;
   font-weight: 600 !important;
   font-size: 18px !important;
-  margin-bottom: var(--space-lg) !important;
 }
 
 /* 학습 통계 카드 */
@@ -427,7 +563,7 @@
 }
 
 .statItem::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -553,8 +689,6 @@
   border-radius: 2px !important;
 }
 
-
-
 /* 반응형 디자인 */
 @media (min-width: 768px) {
   .container {
@@ -636,11 +770,11 @@
   }
 
   .learningItemTitle {
-    font-size: 13px !important;
+    font-size: 15px !important;
   }
 
   .learningItemSubtitle {
-    font-size: 10px !important;
+    font-size: 12px !important;
   }
 
   .learningItemDescription {
@@ -671,6 +805,10 @@
 
   .cardSubtitle {
     font-size: 13px !important;
+  }
+
+  .cardTitle {
+    font-size: 20px !important;
   }
 
   .statsGrid {
@@ -717,11 +855,21 @@
   animation: slideUp 0.6s ease-out;
 }
 
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.card:nth-child(5) {
+  animation-delay: 0.5s;
+}
 
 /* 업적 카드 */
 .achievementsCard {

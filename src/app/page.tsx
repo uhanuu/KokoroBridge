@@ -159,18 +159,22 @@ export default function HomePage() {
       <Card className={`${styles.card} ${styles.welcomeCard}`}>
         <CardContent className={styles.welcomeContent}>
           <div className={styles.welcomeText}>
-            <Typography variant="h6" className={styles.greetingText}>
-              頑張れ、{mockData.userName}さん
-            </Typography>
-            <Typography variant="body2" className={styles.greetingSubText}>
+            <div className={styles.greetingWithFurigana}>
+              <ruby className={styles.rubyText}>
+                頑張れ
+                <rt className={styles.furigana}>がんば</rt>
+              </ruby>
+              <span className={styles.greetingRest}>、{mockData.userName}さん!</span>
+            </div>
+            <div className={styles.greetingSubText}>
               오늘도 일본어 학습을 시작해볼까요?
-            </Typography>
+            </div>
           </div>
           <div className={styles.characterContainer}>
             <Image
               src="/home-character.png"
-              width={120}
-              height={120}
+              width={140}
+              height={140}
               alt="캐릭터"
               className={styles.characterImage}
             />
