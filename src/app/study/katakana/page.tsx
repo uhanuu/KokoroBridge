@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowBack } from "@mui/icons-material";
-import { Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Card, CardContent, Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -17,6 +17,8 @@ const katakanaGroups = [
     characters: ["ア", "イ", "ウ", "エ", "オ"],
     color: "#22c55e",
     route: "/study/canvas/katakana/a",
+    progress: 80,
+    completedCharacters: 4,
   },
   {
     id: 2,
@@ -25,6 +27,8 @@ const katakanaGroups = [
     characters: ["カ", "キ", "ク", "ケ", "コ"],
     color: "#3b82f6",
     route: "/study/canvas/katakana/ka",
+    progress: 40,
+    completedCharacters: 2,
   },
   {
     id: 3,
@@ -33,6 +37,8 @@ const katakanaGroups = [
     characters: ["サ", "シ", "ス", "セ", "ソ"],
     color: "#f59e0b",
     route: "/study/canvas/katakana/sa",
+    progress: 20,
+    completedCharacters: 1,
   },
   {
     id: 4,
@@ -41,6 +47,8 @@ const katakanaGroups = [
     characters: ["タ", "チ", "ツ", "テ", "ト"],
     color: "#8b5cf6",
     route: "/study/canvas/katakana/ta",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 5,
@@ -49,6 +57,8 @@ const katakanaGroups = [
     characters: ["ナ", "ニ", "ヌ", "ネ", "ノ"],
     color: "#ef4444",
     route: "/study/canvas/katakana/na",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 6,
@@ -57,6 +67,8 @@ const katakanaGroups = [
     characters: ["ハ", "ヒ", "フ", "ヘ", "ホ"],
     color: "#06b6d4",
     route: "/study/canvas/katakana/ha",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 7,
@@ -65,6 +77,8 @@ const katakanaGroups = [
     characters: ["マ", "ミ", "ム", "メ", "モ"],
     color: "#84cc16",
     route: "/study/canvas/katakana/ma",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 8,
@@ -73,6 +87,8 @@ const katakanaGroups = [
     characters: ["ヤ", "ユ", "ヨ"],
     color: "#f97316",
     route: "/study/canvas/katakana/ya",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 9,
@@ -81,6 +97,8 @@ const katakanaGroups = [
     characters: ["ラ", "リ", "ル", "レ", "ロ"],
     color: "#a855f7",
     route: "/study/canvas/katakana/ra",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 10,
@@ -89,6 +107,8 @@ const katakanaGroups = [
     characters: ["ワ", "ヲ", "ン"],
     color: "#14b8a6",
     route: "/study/canvas/katakana/wa",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 11,
@@ -97,6 +117,8 @@ const katakanaGroups = [
     characters: ["ガ", "ザ", "ダ", "バ", "パ"],
     color: "#6366f1",
     route: "/study/canvas/katakana/dakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 12,
@@ -105,6 +127,8 @@ const katakanaGroups = [
     characters: ["パ", "ピ", "プ", "ペ", "ポ"],
     color: "#ec4899",
     route: "/study/canvas/katakana/handakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
 ];
 
@@ -168,9 +192,31 @@ export default function KatakanaPage() {
                 ))}
               </div>
 
+              {/* 진행률 표시 */}
+              <div className={styles.progressSection}>
+                <div className={styles.progressHeader}>
+                  <Typography variant="caption" className={styles.progressLabel}>
+                    학습 진행도
+                  </Typography>
+                  <Typography variant="caption" className={styles.progressStats}>
+                    {group.completedCharacters}/{group.characters.length} ({group.progress}%)
+                  </Typography>
+                </div>
+                <LinearProgress
+                  variant="determinate"
+                  value={group.progress}
+                  className={styles.progressBar}
+                  sx={{
+                    "& .MuiLinearProgress-bar": {
+                      backgroundColor: group.color,
+                    },
+                  }}
+                />
+              </div>
+
               <ActionButton
-                text="학습하기"
-                variant="primary"
+                text={group.progress === 100 ? "복습하기" : "학습하기"}
+                variant={group.progress === 100 ? "completed" : "primary"}
                 onClick={() => handleGroupClick(group)}
               />
             </CardContent>

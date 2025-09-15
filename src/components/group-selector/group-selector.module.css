@@ -13,6 +13,7 @@
 /* 헤더 */
 .header {
   margin-bottom: var(--space-md);
+  margin-top: var(--space-lg);
   width: 100%;
   max-width: 600px;
 }
@@ -233,6 +234,34 @@
 
 .startButton {
   margin-top: var(--space-md) !important;
+}
+
+/* 진행률 섹션 */
+.progressSection {
+  margin: var(--space-md) 0;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.progressLabel {
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+}
+
+.progressStats {
+  color: var(--text-tertiary) !important;
+  font-weight: 500 !important;
+}
+
+.progressBar {
+  height: 8px !important;
+  border-radius: 4px !important;
+  background-color: var(--outline) !important;
 }
 
 /* 사이드 네비게이션 */
@@ -465,6 +494,10 @@
     gap: var(--space-md);
   }
 
+  .header {
+    margin-top: var(--space-md);
+  }
+
   .card {
     border-radius: 16px !important;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
@@ -557,6 +590,10 @@
 @media (max-width: 480px) {
   .container {
     padding: var(--space-sm);
+  }
+
+  .header {
+    margin-top: var(--space-sm);
   }
 
   .card {

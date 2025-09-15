@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowBack, TouchApp, ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Card, CardContent, Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useCallback, useEffect } from "react";
 
@@ -16,6 +16,8 @@ interface GroupData {
   characters: string[];
   color: string;
   route: string;
+  progress?: number; // 0-100 진행률
+  completedCharacters?: number; // 완료한 문자 수
 }
 
 interface GroupSelectorProps {
@@ -131,6 +133,7 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
 
   const currentGroup = groups[currentIndex];
 
+
   // 유효성 검사
   if (!currentGroup || groups.length === 0) {
     return (
@@ -223,9 +226,33 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
               ))}
             </div>
 
+            {/* 진행률 표시 */}
+            {currentGroup.progress !== undefined && (
+              <div className={styles.progressSection}>
+                <div className={styles.progressHeader}>
+                  <Typography variant="caption" className={styles.progressLabel}>
+                    학습 진행도
+                  </Typography>
+                  <Typography variant="caption" className={styles.progressStats}>
+                    {currentGroup.completedCharacters || 0}/{currentGroup.characters.length} ({currentGroup.progress}%)
+                  </Typography>
+                </div>
+                <LinearProgress
+                  variant="determinate"
+                  value={currentGroup.progress}
+                  className={styles.progressBar}
+                  sx={{
+                    "& .MuiLinearProgress-bar": {
+                      backgroundColor: currentGroup.color,
+                    },
+                  }}
+                />
+              </div>
+            )}
+
             <ActionButton
-              text="학습하기"
-              variant="primary"
+              text={currentGroup.progress === 100 ? "복습하기" : "학습하기"}
+              variant={currentGroup.progress === 100 ? "completed" : "primary"}
               onClick={() => handleGroupClick(currentGroup)}
               className={styles.startButton}
             />

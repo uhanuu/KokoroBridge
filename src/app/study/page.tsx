@@ -1,7 +1,7 @@
 "use client";
 
 import { RecordVoiceOver, Lock } from "@mui/icons-material";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -20,6 +20,9 @@ const studyCategories = [
     description: "일본어의 기본 문자",
     route: "/study/hiragana",
     isLocked: false,
+    progress: 45,
+    totalCharacters: 60,
+    completedCharacters: 27,
   },
   {
     id: 2,
@@ -30,6 +33,9 @@ const studyCategories = [
     description: "외래어 표기 문자",
     route: "/study/katakana",
     isLocked: false,
+    progress: 25,
+    totalCharacters: 60,
+    completedCharacters: 15,
   },
   {
     id: 3,
@@ -40,6 +46,9 @@ const studyCategories = [
     description: "일본 한자 학습",
     route: "/study/kanji",
     isLocked: true,
+    progress: 0,
+    totalCharacters: 100,
+    completedCharacters: 0,
   },
   {
     id: 4,
@@ -50,6 +59,9 @@ const studyCategories = [
     description: "AI와 대화 연습",
     route: "/study/conversation",
     isLocked: true,
+    progress: 0,
+    totalCharacters: 50,
+    completedCharacters: 0,
   },
 ];
 
@@ -61,6 +73,8 @@ const hiraganaGroups = [
     characters: ["あ", "い", "う", "え", "お"],
     color: "#22c55e",
     route: "/study/canvas/hiragana/a",
+    progress: 100,
+    completedCharacters: 5,
   },
   {
     id: 2,
@@ -69,6 +83,8 @@ const hiraganaGroups = [
     characters: ["か", "き", "く", "け", "こ"],
     color: "#3b82f6",
     route: "/study/canvas/hiragana/ka",
+    progress: 60,
+    completedCharacters: 3,
   },
   {
     id: 3,
@@ -77,6 +93,8 @@ const hiraganaGroups = [
     characters: ["さ", "し", "す", "せ", "そ"],
     color: "#f59e0b",
     route: "/study/canvas/hiragana/sa",
+    progress: 40,
+    completedCharacters: 2,
   },
   {
     id: 4,
@@ -85,6 +103,8 @@ const hiraganaGroups = [
     characters: ["た", "ち", "つ", "て", "と"],
     color: "#8b5cf6",
     route: "/study/canvas/hiragana/ta",
+    progress: 20,
+    completedCharacters: 1,
   },
   {
     id: 5,
@@ -93,6 +113,8 @@ const hiraganaGroups = [
     characters: ["な", "に", "ぬ", "ね", "の"],
     color: "#ef4444",
     route: "/study/canvas/hiragana/na",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 6,
@@ -101,6 +123,8 @@ const hiraganaGroups = [
     characters: ["は", "ひ", "ふ", "へ", "ほ"],
     color: "#06b6d4",
     route: "/study/canvas/hiragana/ha",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 7,
@@ -109,6 +133,8 @@ const hiraganaGroups = [
     characters: ["ま", "み", "む", "め", "も"],
     color: "#84cc16",
     route: "/study/canvas/hiragana/ma",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 8,
@@ -117,6 +143,8 @@ const hiraganaGroups = [
     characters: ["や", "ゆ", "よ"],
     color: "#f97316",
     route: "/study/canvas/hiragana/ya",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 9,
@@ -125,6 +153,8 @@ const hiraganaGroups = [
     characters: ["ら", "り", "る", "れ", "ろ"],
     color: "#a855f7",
     route: "/study/canvas/hiragana/ra",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 10,
@@ -133,6 +163,8 @@ const hiraganaGroups = [
     characters: ["わ", "を", "ん"],
     color: "#14b8a6",
     route: "/study/canvas/hiragana/wa",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 11,
@@ -141,6 +173,8 @@ const hiraganaGroups = [
     characters: ["が", "ざ", "だ", "ば", "ぱ"],
     color: "#6366f1",
     route: "/study/canvas/hiragana/dakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 12,
@@ -149,6 +183,8 @@ const hiraganaGroups = [
     characters: ["ぱ", "ぴ", "ぷ", "ぺ", "ぽ"],
     color: "#ec4899",
     route: "/study/canvas/hiragana/handakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
 ];
 
@@ -160,6 +196,8 @@ const katakanaGroups = [
     characters: ["ア", "イ", "ウ", "エ", "オ"],
     color: "#22c55e",
     route: "/study/canvas/katakana/a",
+    progress: 80,
+    completedCharacters: 4,
   },
   {
     id: 2,
@@ -168,6 +206,8 @@ const katakanaGroups = [
     characters: ["カ", "キ", "ク", "ケ", "コ"],
     color: "#3b82f6",
     route: "/study/canvas/katakana/ka",
+    progress: 40,
+    completedCharacters: 2,
   },
   {
     id: 3,
@@ -176,6 +216,8 @@ const katakanaGroups = [
     characters: ["サ", "シ", "ス", "セ", "ソ"],
     color: "#f59e0b",
     route: "/study/canvas/katakana/sa",
+    progress: 20,
+    completedCharacters: 1,
   },
   {
     id: 4,
@@ -184,6 +226,8 @@ const katakanaGroups = [
     characters: ["タ", "チ", "ツ", "テ", "ト"],
     color: "#8b5cf6",
     route: "/study/canvas/katakana/ta",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 5,
@@ -192,6 +236,8 @@ const katakanaGroups = [
     characters: ["ナ", "ニ", "ヌ", "ネ", "ノ"],
     color: "#ef4444",
     route: "/study/canvas/katakana/na",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 6,
@@ -200,6 +246,8 @@ const katakanaGroups = [
     characters: ["ハ", "ヒ", "フ", "ヘ", "ホ"],
     color: "#06b6d4",
     route: "/study/canvas/katakana/ha",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 7,
@@ -208,6 +256,8 @@ const katakanaGroups = [
     characters: ["マ", "ミ", "ム", "メ", "モ"],
     color: "#84cc16",
     route: "/study/canvas/katakana/ma",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 8,
@@ -216,6 +266,8 @@ const katakanaGroups = [
     characters: ["ヤ", "ユ", "ヨ"],
     color: "#f97316",
     route: "/study/canvas/katakana/ya",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 9,
@@ -224,6 +276,8 @@ const katakanaGroups = [
     characters: ["ラ", "リ", "ル", "レ", "ロ"],
     color: "#a855f7",
     route: "/study/canvas/katakana/ra",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 10,
@@ -232,6 +286,8 @@ const katakanaGroups = [
     characters: ["ワ", "ヲ", "ン"],
     color: "#14b8a6",
     route: "/study/canvas/katakana/wa",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 11,
@@ -240,6 +296,8 @@ const katakanaGroups = [
     characters: ["ガ", "ザ", "ダ", "バ", "パ"],
     color: "#6366f1",
     route: "/study/canvas/katakana/dakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 12,
@@ -248,6 +306,8 @@ const katakanaGroups = [
     characters: ["パ", "ピ", "プ", "ペ", "ポ"],
     color: "#ec4899",
     route: "/study/canvas/katakana/handakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
 ];
 
@@ -356,6 +416,30 @@ export default function StudyPage() {
                   <Typography variant="body2" className={styles.categoryDescription}>
                     {category.isLocked ? "곧 출시 예정" : category.description}
                   </Typography>
+
+                  {/* 진행률 표시 */}
+                  {!category.isLocked && (
+                    <div className={styles.progressSection}>
+                      <div className={styles.progressHeader}>
+                        <Typography variant="caption" className={styles.progressLabel}>
+                          학습 진행도
+                        </Typography>
+                        <Typography variant="caption" className={styles.progressStats}>
+                          {category.completedCharacters}/{category.totalCharacters} ({category.progress}%)
+                        </Typography>
+                      </div>
+                      <LinearProgress
+                        variant="determinate"
+                        value={category.progress}
+                        className={styles.progressBar}
+                        sx={{
+                          "& .MuiLinearProgress-bar": {
+                            backgroundColor: category.color,
+                          },
+                        }}
+                      />
+                    </div>
+                  )}
 
                   <ActionButton
                     text={category.isLocked ? "잠금됨" : "시작하기"}

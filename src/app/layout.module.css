@@ -27,6 +27,7 @@
   margin: 0 auto;
   position: relative;
   min-height: calc(100vh - 100px); /* 네비게이션 높이만 제외 */
+  padding-top: var(--space-lg);
 }
 
 /* 스크롤바 스타일링 (웹킷 기반 브라우저) */
@@ -51,7 +52,7 @@
 @media (min-width: 768px) {
   .contentWrapper {
     max-width: 600px;
-    padding: 0 var(--space-lg);
+    padding: var(--space-xl) var(--space-lg) 0;
   }
 
   .content {
@@ -61,6 +62,10 @@
 }
 
 @media (max-width: 768px) {
+  .contentWrapper {
+    padding-top: var(--space-md);
+  }
+
   .content {
     padding-top: 0;
   }
@@ -73,7 +78,7 @@
   }
 
   .contentWrapper {
-    padding: 0 var(--space-md);
+    padding: var(--space-sm) var(--space-md) 0;
   }
 }
 

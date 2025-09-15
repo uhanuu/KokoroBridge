@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowBack } from "@mui/icons-material";
-import { Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Card, CardContent, Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -17,6 +17,8 @@ const hiraganaGroups = [
     characters: ["あ", "い", "う", "え", "お"],
     color: "#22c55e",
     route: "/study/canvas/hiragana/a",
+    progress: 100,
+    completedCharacters: 5,
   },
   {
     id: 2,
@@ -25,6 +27,8 @@ const hiraganaGroups = [
     characters: ["か", "き", "く", "け", "こ"],
     color: "#3b82f6",
     route: "/study/canvas/hiragana/ka",
+    progress: 60,
+    completedCharacters: 3,
   },
   {
     id: 3,
@@ -33,6 +37,8 @@ const hiraganaGroups = [
     characters: ["さ", "し", "す", "せ", "そ"],
     color: "#f59e0b",
     route: "/study/canvas/hiragana/sa",
+    progress: 40,
+    completedCharacters: 2,
   },
   {
     id: 4,
@@ -41,6 +47,8 @@ const hiraganaGroups = [
     characters: ["た", "ち", "つ", "て", "と"],
     color: "#8b5cf6",
     route: "/study/canvas/hiragana/ta",
+    progress: 20,
+    completedCharacters: 1,
   },
   {
     id: 5,
@@ -49,6 +57,8 @@ const hiraganaGroups = [
     characters: ["な", "に", "ぬ", "ね", "の"],
     color: "#ef4444",
     route: "/study/canvas/hiragana/na",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 6,
@@ -57,6 +67,8 @@ const hiraganaGroups = [
     characters: ["は", "ひ", "ふ", "へ", "ほ"],
     color: "#06b6d4",
     route: "/study/canvas/hiragana/ha",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 7,
@@ -65,6 +77,8 @@ const hiraganaGroups = [
     characters: ["ま", "み", "む", "め", "も"],
     color: "#84cc16",
     route: "/study/canvas/hiragana/ma",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 8,
@@ -73,6 +87,8 @@ const hiraganaGroups = [
     characters: ["や", "ゆ", "よ"],
     color: "#f97316",
     route: "/study/canvas/hiragana/ya",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 9,
@@ -81,6 +97,8 @@ const hiraganaGroups = [
     characters: ["ら", "り", "る", "れ", "ろ"],
     color: "#a855f7",
     route: "/study/canvas/hiragana/ra",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 10,
@@ -89,6 +107,8 @@ const hiraganaGroups = [
     characters: ["わ", "を", "ん"],
     color: "#14b8a6",
     route: "/study/canvas/hiragana/wa",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 11,
@@ -97,6 +117,8 @@ const hiraganaGroups = [
     characters: ["が", "ざ", "だ", "ば", "ぱ"],
     color: "#6366f1",
     route: "/study/canvas/hiragana/dakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
   {
     id: 12,
@@ -105,6 +127,8 @@ const hiraganaGroups = [
     characters: ["ぱ", "ぴ", "ぷ", "ぺ", "ぽ"],
     color: "#ec4899",
     route: "/study/canvas/hiragana/handakuten",
+    progress: 0,
+    completedCharacters: 0,
   },
 ];
 
@@ -168,9 +192,31 @@ export default function HiraganaPage() {
                 ))}
               </div>
 
+              {/* 진행률 표시 */}
+              <div className={styles.progressSection}>
+                <div className={styles.progressHeader}>
+                  <Typography variant="caption" className={styles.progressLabel}>
+                    학습 진행도
+                  </Typography>
+                  <Typography variant="caption" className={styles.progressStats}>
+                    {group.completedCharacters}/{group.characters.length} ({group.progress}%)
+                  </Typography>
+                </div>
+                <LinearProgress
+                  variant="determinate"
+                  value={group.progress}
+                  className={styles.progressBar}
+                  sx={{
+                    "& .MuiLinearProgress-bar": {
+                      backgroundColor: group.color,
+                    },
+                  }}
+                />
+              </div>
+
               <ActionButton
-                text="학습하기"
-                variant="primary"
+                text={group.progress === 100 ? "복습하기" : "학습하기"}
+                variant={group.progress === 100 ? "completed" : "primary"}
                 onClick={() => handleGroupClick(group)}
               />
             </CardContent>
