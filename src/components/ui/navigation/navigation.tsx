@@ -1,6 +1,7 @@
 "use client";
 
-import { Home, School, Person } from "@mui/icons-material";
+import { Home, School, Person, Notifications } from "@mui/icons-material";
+import { Badge } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -16,6 +17,13 @@ const navigationItems = [
     path: "/study",
     label: "학습",
     Icon: School,
+  },
+  {
+    path: "/news",
+    label: "새소식",
+    Icon: Notifications,
+    hasNotification: true,
+    notificationCount: 3,
   },
   {
     path: "/profile",
@@ -36,7 +44,23 @@ export default function Navigation() {
             href={item.path}
             className={`${styles.navItem} ${pathname === item.path ? styles.active : ""}`}
           >
-            <item.Icon className={styles.icon} />
+            {item.hasNotification ? (
+              <div className={styles.notificationContainer}>
+                <Badge
+                  badgeContent={item.notificationCount}
+                  classes={{ badge: styles.notificationBadge }}
+                  sx={{
+                    '& .MuiBadge-badge': {
+                      animation: 'none !important',
+                    }
+                  }}
+                >
+                  <item.Icon className={styles.icon} />
+                </Badge>
+              </div>
+            ) : (
+              <item.Icon className={styles.icon} />
+            )}
             <span className={styles.label}>{item.label}</span>
           </Link>
         ))}

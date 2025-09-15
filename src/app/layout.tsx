@@ -1,4 +1,3 @@
-import Header from "@/components/ui/header/header";
 import Navigation from "@/components/ui/navigation/navigation";
 
 import "./globals.css";
@@ -10,7 +9,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={styles.body}>
         <div className={styles.container}>
           {/* 헤더 */}
-          <Header />
 
           {/* 메인 콘텐츠 영역 */}
           <main className={styles.content}>

@@ -16,7 +16,7 @@
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-top: 64px; /* 헤더 높이만큼 상단 패딩 */
+  padding-top: 0; /* 헤더 제거로 상단 패딩 제거 */
   padding-bottom: 100px; /* 네비게이션 높이만큼 하단 패딩 */
   -webkit-overflow-scrolling: touch; /* iOS 스크롤 최적화 */
   background-color: var(--background);
@@ -26,7 +26,7 @@
   max-width: 100vw;
   margin: 0 auto;
   position: relative;
-  min-height: calc(100vh - 164px); /* 헤더와 네비게이션 높이 제외 */
+  min-height: calc(100vh - 100px); /* 네비게이션 높이만 제외 */
 }
 
 /* 스크롤바 스타일링 (웹킷 기반 브라우저) */
@@ -55,20 +55,20 @@
   }
 
   .content {
-    padding-top: 64px;
+    padding-top: 0;
     padding-bottom: 120px;
   }
 }
 
 @media (max-width: 768px) {
   .content {
-    padding-top: 56px;
+    padding-top: 0;
   }
 }
 
 @media (max-width: 480px) {
   .content {
-    padding-top: 52px;
+    padding-top: 0;
     padding-bottom: 90px;
   }
 
