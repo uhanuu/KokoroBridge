@@ -1,0 +1,150 @@
+.actionButton {
+  width: 100%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: var(--space-sm);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 120px;
+}
+
+.actionButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.actionButton:active::before {
+  left: 150%;
+}
+
+.actionButton:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(34, 197, 94, 0.3), 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.actionButton:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.2);
+  transition: all 0.1s ease;
+}
+
+.actionButton.lockedButton {
+  background: linear-gradient(135deg, #6a6a6a, #5a5a5a);
+  cursor: not-allowed;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.actionButton.completedButton {
+  background: linear-gradient(135deg, #10b981, #059669);
+  cursor: default;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+}
+
+.actionButton.completedButton:hover {
+  transform: none !important;
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3) !important;
+}
+
+.actionButton.completedButton::before {
+  display: none;
+}
+
+.actionButton.completedButton .playIconCircle:hover {
+  transform: none !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.actionButton:disabled::before {
+  display: none;
+}
+
+.actionButton:disabled:hover {
+  transform: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.actionButton:disabled .playIconCircle {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  transform: none !important;
+}
+
+.buttonText {
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+}
+
+.playIconCircle {
+  width: 22px;
+  height: 22px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.playIcon {
+  font-size: 13px !important;
+  color: white;
+  margin-left: 1px;
+}
+
+.actionButton:not(:disabled):hover .playIconCircle {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 480px) {
+  .actionButton {
+    font-size: 14px;
+    padding: var(--space-md);
+    justify-content: center;
+  }
+
+  .buttonText {
+    font-size: 14px;
+  }
+
+  .playIconCircle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .playIcon {
+    font-size: 12px !important;
+  }
+}

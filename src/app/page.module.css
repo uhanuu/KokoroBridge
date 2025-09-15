@@ -409,21 +409,21 @@
 .learningItemTitle {
   color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 14px !important;
+  font-size: 16px !important;
   margin: 0 !important;
   line-height: 1.3 !important;
 }
 
 .learningItemSubtitle {
   color: var(--text-tertiary) !important;
-  font-size: 11px !important;
+  font-size: 13px !important;
   margin-top: 2px !important;
   display: block;
 }
 
 .learningItemDescription {
   color: var(--text-secondary) !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 1.4;
   position: relative;
   z-index: 2;
@@ -470,12 +470,12 @@
   color: white;
   border: none;
   border-radius: var(--radius-md);
-  padding: var(--space-sm);
+  padding: var(--space-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-xs);
-  font-size: 12px;
+  gap: var(--space-sm);
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -483,6 +483,23 @@
   margin-top: var(--space-sm);
   position: relative;
   z-index: 2;
+  overflow: hidden;
+}
+
+.startLearningButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.startLearningButton:active::before {
+  left: 150%;
 }
 
 .startLearningButton:not(:disabled):hover {
@@ -491,7 +508,9 @@
 }
 
 .startLearningButton:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.2);
+  transition: all 0.1s ease;
 }
 
 .startLearningButton.lockedButton {
@@ -505,23 +524,27 @@
 }
 
 .buttonText {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
+  position: relative;
+  z-index: 2;
 }
 
 .playIconCircle {
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .playIcon {
-  font-size: 11px !important;
+  font-size: 13px !important;
   color: white;
   margin-left: 1px;
 }
@@ -624,71 +647,158 @@
 }
 
 .activityList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  display: grid;
+  gap: var(--space-lg);
   margin-top: var(--space-lg);
 }
 
 .activityItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-lg);
-  background-color: #3a3a3a;
-  border-radius: 12px;
-  border: 1px solid #404040;
-  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #2a2a2a, #3a3a3a);
+  border-radius: var(--radius-xl);
+  border: 1px solid #4a4a4a;
+  padding: var(--space-xl);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 .activityItem:hover {
-  transform: translateX(4px);
+  transform: translateY(-4px);
   border-color: #22c55e;
-  background-color: #4a4a4a;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.15), 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.activityContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
 }
 
 .activityInfo {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
 .activityTitle {
   color: var(--text-primary) !important;
   font-weight: 600 !important;
-  font-size: 14px !important;
+  font-size: 16px !important;
   margin: 0 !important;
+  line-height: 1.4;
 }
 
 .activityTime {
   color: var(--text-tertiary) !important;
   font-size: 12px !important;
-}
-
-.activityProgress {
-  min-width: 80px;
+  opacity: 0.8;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: var(--space-xs);
 }
 
+.activityTypeTag {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.activityProgressSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+}
+
+.activityProgress {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-right: var(--space-lg);
+}
+
 .activityPercent {
-  color: var(--text-tertiary) !important;
-  text-align: right;
-  font-weight: 500 !important;
-  font-size: 12px !important;
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  align-self: flex-end;
 }
 
 .activityProgressBar {
-  height: 4px !important;
-  border-radius: 2px !important;
-  background-color: #4a4a4a !important;
+  width: 100% !important;
+  height: 6px !important;
+  border-radius: 3px !important;
+  background-color: #2a2a2a !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .activityProgressBar .MuiLinearProgress-bar {
   background: linear-gradient(90deg, #22c55e, #16a34a) !important;
-  border-radius: 2px !important;
+  border-radius: 3px !important;
+  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.3);
+}
+
+/* 최근 활동 학습 버튼 */
+.activityStudyButton {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-lg);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  position: relative;
+}
+
+.activityStudyButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.activityStudyButton:active::before {
+  left: 150%;
+}
+
+.activityStudyButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(34, 197, 94, 0.4);
+}
+
+.activityStudyButton:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 1px 2px rgba(34, 197, 94, 0.2);
+  transition: all 0.1s ease;
+}
+
+.activityStudyButtonText {
+  position: relative;
+  z-index: 2;
 }
 
 /* 반응형 디자인 */
@@ -826,18 +936,28 @@
   }
 
   .activityItem {
+    padding: var(--space-lg);
+  }
+
+  .activityContent {
+    margin-bottom: var(--space-md);
+  }
+
+  .activityProgressSection {
     flex-direction: column;
+    gap: var(--space-md);
     align-items: stretch;
-    gap: var(--space-sm);
-    padding: var(--space-md);
   }
 
   .activityProgress {
-    min-width: auto;
+    margin-right: 0;
   }
 
-  .activityPercent {
-    text-align: left;
+  .activityStudyButton {
+    min-width: 100%;
+    justify-content: center;
+    font-size: 14px;
+    padding: var(--space-md);
   }
 }
 

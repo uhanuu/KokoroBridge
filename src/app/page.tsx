@@ -2,26 +2,23 @@
 
 import {
   RecordVoiceOver,
-  PlayArrow,
   TrendingUp,
   Schedule,
   Book,
   Star,
   Lock,
-  Create,
-  AccessTime,
-  MenuBook,
-  EmojiEvents,
   CheckCircle,
 } from "@mui/icons-material";
 import { Card, CardContent, Typography, LinearProgress } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
+import ActionButton from "@/components/ui/action-button";
+
 import styles from "./page.module.css";
 
 const mockData = {
-  userName: "사용자",
+  userName: "유현우",
   todayProgress: { completed: 2, total: 4 },
   learningCards: [
     {
@@ -166,9 +163,7 @@ export default function HomePage() {
               </ruby>
               <span className={styles.greetingRest}>、{mockData.userName}さん!</span>
             </div>
-            <div className={styles.greetingSubText}>
-              오늘도 일본어 학습을 시작해볼까요?
-            </div>
+            <div className={styles.greetingSubText}>오늘도 일본어 학습을 시작해볼까요?</div>
           </div>
           <div className={styles.characterContainer}>
             <Image
@@ -238,47 +233,11 @@ export default function HomePage() {
                     {card.isLocked ? "곧 출시 예정" : card.description}
                   </Typography>
 
-                  {!card.isLocked && (
-                    <div className={styles.learningItemProgress}>
-                      <div className={styles.learningItemStats}>
-                        <Typography variant="caption" className={styles.progressText}>
-                          {card.learnedCharacters || card.completedSessions}/
-                          {card.totalCharacters || card.totalSessions}
-                        </Typography>
-                        <Typography variant="caption" className={styles.progressPercent}>
-                          {card.progress}%
-                        </Typography>
-                      </div>
-                      <LinearProgress
-                        variant="determinate"
-                        value={card.progress}
-                        className={styles.learningProgressBar}
-                        style={
-                          {
-                            "--progress-color": card.color,
-                          } as React.CSSProperties
-                        }
-                      />
-                    </div>
-                  )}
-
-                  <button
-                    className={`${styles.startLearningButton} ${
-                      card.isLocked ? styles.lockedButton : ""
-                    }`}
+                  <ActionButton
+                    text={card.isLocked ? "잠금됨" : "시작하기"}
+                    variant={card.isLocked ? "locked" : "primary"}
                     disabled={card.isLocked}
-                  >
-                    <span className={styles.buttonText}>
-                      {card.isLocked ? "잠금됨" : "시작하기"}
-                    </span>
-                    <div className={styles.playIconCircle}>
-                      {card.isLocked ? (
-                        <Lock className={styles.playIcon} />
-                      ) : (
-                        <PlayArrow className={styles.playIcon} />
-                      )}
-                    </div>
-                  </button>
+                  />
                 </div>
               );
             })}
@@ -295,22 +254,34 @@ export default function HomePage() {
           <div className={styles.activityList}>
             {mockData.recentActivities.map((activity) => (
               <div key={activity.id} className={styles.activityItem}>
-                <div className={styles.activityInfo}>
-                  <Typography variant="body2" className={styles.activityTitle}>
-                    {activity.title}
-                  </Typography>
-                  <Typography variant="caption" className={styles.activityTime}>
-                    {activity.time} · {activity.type}
-                  </Typography>
+                <div className={styles.activityContent}>
+                  <div className={styles.activityInfo}>
+                    <Typography variant="body2" className={styles.activityTitle}>
+                      {activity.title}
+                    </Typography>
+                    <div className={styles.activityTime}>
+                      <span>{activity.time}</span>
+                      <span className={styles.activityTypeTag}>
+                        {activity.type}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.activityProgress}>
-                  <Typography variant="caption" className={styles.activityPercent}>
-                    {activity.progress}%
-                  </Typography>
-                  <LinearProgress
-                    variant="determinate"
-                    value={activity.progress}
-                    className={styles.activityProgressBar}
+                <div className={styles.activityProgressSection}>
+                  <div className={styles.activityProgress}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={activity.progress}
+                      className={styles.activityProgressBar}
+                    />
+                    <Typography variant="caption" className={styles.activityPercent}>
+                      {activity.progress}%
+                    </Typography>
+                  </div>
+                  <ActionButton
+                    text={activity.progress === 100 ? "완료됨" : "계속하기"}
+                    variant={activity.progress === 100 ? "completed" : "primary"}
+                    disabled={activity.progress === 100}
                   />
                 </div>
               </div>
