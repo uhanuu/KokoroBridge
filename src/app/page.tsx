@@ -8,6 +8,11 @@ import {
   Book,
   Star,
   Lock,
+  Create,
+  AccessTime,
+  MenuBook,
+  EmojiEvents,
+  CheckCircle,
 } from "@mui/icons-material";
 import { Card, CardContent, Typography, LinearProgress } from "@mui/material";
 import Image from "next/image";
@@ -66,12 +71,55 @@ const mockData = {
       isLocked: true,
     },
   ],
-  weeklyStats: {
-    studyDays: 5,
-    totalMinutes: 240,
-    wordsLearned: 42,
-    streak: 7,
+  learningStats: {
+    continuousDays: 12,
+    totalHours: 48,
+    completedLessons: 156,
+    averageScore: 87,
+    weeklyData: [
+      { day: "월", hours: 2.5 },
+      { day: "화", hours: 3.2 },
+      { day: "수", hours: 1.8 },
+      { day: "목", hours: 4.1 },
+      { day: "금", hours: 2.9 },
+      { day: "토", hours: 2.3 },
+      { day: "일", hours: 3.5 },
+    ],
   },
+  achievements: [
+    {
+      id: 1,
+      title: "첫 걸음",
+      description: "첫 번째 레슨 완료",
+      date: "2024년 1월 15일",
+      isCompleted: true,
+      icon: "🎯",
+    },
+    {
+      id: 2,
+      title: "일주일 연속",
+      description: "7일 연속 학습 완료",
+      date: "2024년 3월 1일",
+      isCompleted: true,
+      icon: "🔥",
+    },
+    {
+      id: 3,
+      title: "히라가나 마스터",
+      description: "히라가나 완전 정복",
+      date: "2024년 3월 10일",
+      isCompleted: true,
+      icon: "あ",
+    },
+    {
+      id: 4,
+      title: "가타카나 마스터",
+      description: "가타카나 완전 정복",
+      date: null,
+      isCompleted: false,
+      icon: "ア",
+    },
+  ],
   recentActivities: [
     { id: 1, title: "히라가나 あ리즈 학습", time: "2시간 전", type: "히라가나", progress: 85 },
     { id: 2, title: "AI 회화 - 일상 인사", time: "오늘 오후", type: "AI 회화", progress: 100 },
@@ -209,11 +257,11 @@ export default function HomePage() {
         </CardContent>
       </Card>
 
-      {/* 이번주 학습 현황 */}
+      {/* 학습 통계 */}
       <Card className={`${styles.card} ${styles.statsCard}`}>
         <CardContent>
           <Typography variant="h6" className={styles.cardTitle}>
-            이번주 학습 현황
+            학습 통계
           </Typography>
           <div className={styles.statsGrid}>
             <div className={styles.statItem}>
@@ -221,10 +269,10 @@ export default function HomePage() {
                 <TrendingUp className={styles.statIcon} />
               </div>
               <Typography variant="h5" className={styles.statNumber}>
-                {mockData.weeklyStats.studyDays}
+                {mockData.learningStats.continuousDays}
               </Typography>
               <Typography variant="caption" className={styles.statLabel}>
-                학습 일수
+                연속 학습
               </Typography>
             </div>
             <div className={styles.statItem}>
@@ -232,10 +280,10 @@ export default function HomePage() {
                 <Schedule className={styles.statIcon} />
               </div>
               <Typography variant="h5" className={styles.statNumber}>
-                {mockData.weeklyStats.totalMinutes}
+                {mockData.learningStats.totalHours}
               </Typography>
               <Typography variant="caption" className={styles.statLabel}>
-                학습 시간(분)
+                총 학습 시간
               </Typography>
             </div>
             <div className={styles.statItem}>
@@ -243,10 +291,10 @@ export default function HomePage() {
                 <Book className={styles.statIcon} />
               </div>
               <Typography variant="h5" className={styles.statNumber}>
-                {mockData.weeklyStats.wordsLearned}
+                {mockData.learningStats.completedLessons}
               </Typography>
               <Typography variant="caption" className={styles.statLabel}>
-                새 단어
+                완료한 레슨
               </Typography>
             </div>
             <div className={styles.statItem}>
@@ -254,10 +302,10 @@ export default function HomePage() {
                 <Star className={styles.statIcon} />
               </div>
               <Typography variant="h5" className={styles.statNumber}>
-                {mockData.weeklyStats.streak}
+                {mockData.learningStats.averageScore}
               </Typography>
               <Typography variant="caption" className={styles.statLabel}>
-                연속 일수
+                평균 점수
               </Typography>
             </div>
           </div>
@@ -293,6 +341,91 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 업적 */}
+      <Card className={`${styles.card} ${styles.achievementsCard}`}>
+        <CardContent>
+          <Typography variant="h6" className={styles.cardTitle}>
+            업적
+          </Typography>
+          <div className={styles.achievementProgress}>
+            <Typography variant="body2" className={styles.progressText}>
+              {mockData.achievements.filter((a) => a.isCompleted).length}/
+              {mockData.achievements.length} 달성
+            </Typography>
+            <LinearProgress
+              variant="determinate"
+              value={
+                (mockData.achievements.filter((a) => a.isCompleted).length /
+                  mockData.achievements.length) *
+                100
+              }
+              className={styles.achievementProgressBar}
+            />
+          </div>
+
+          <div className={styles.achievementList}>
+            {mockData.achievements.map((achievement) => (
+              <div
+                key={achievement.id}
+                className={`${styles.achievementItem} ${
+                  !achievement.isCompleted ? styles.locked : ""
+                }`}
+              >
+                <div className={styles.achievementIcon}>
+                  {achievement.isCompleted ? (
+                    <CheckCircle className={styles.completedIcon} />
+                  ) : (
+                    <div className={styles.lockIcon}>
+                      <Lock />
+                    </div>
+                  )}
+                  <div className={styles.iconEmoji}>{achievement.icon}</div>
+                </div>
+                <div className={styles.achievementInfo}>
+                  <Typography variant="body2" className={styles.achievementTitle}>
+                    {achievement.title}
+                  </Typography>
+                  <Typography variant="caption" className={styles.achievementDescription}>
+                    {achievement.description}
+                  </Typography>
+                  {achievement.date && (
+                    <Typography variant="caption" className={styles.achievementDate}>
+                      📅 {achievement.date}
+                    </Typography>
+                  )}
+                </div>
+                <div className={styles.achievementStatus}>
+                  {achievement.isCompleted ? (
+                    <div className={styles.completedBadge}>✓ 완료</div>
+                  ) : (
+                    <div className={styles.lockedBadge}>🔒 잠금</div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className={styles.achievementSummary}>
+            <div className={styles.summaryItem}>
+              <Typography variant="h4" className={styles.summaryNumber}>
+                {mockData.achievements.filter((a) => a.isCompleted).length}
+              </Typography>
+              <Typography variant="caption" className={styles.summaryLabel}>
+                완료된 업적
+              </Typography>
+            </div>
+            <div className={styles.summaryItem}>
+              <Typography variant="h4" className={styles.summaryNumber}>
+                {mockData.achievements.filter((a) => !a.isCompleted).length}
+              </Typography>
+              <Typography variant="caption" className={styles.summaryLabel}>
+                남은 업적
+              </Typography>
+            </div>
           </div>
         </CardContent>
       </Card>

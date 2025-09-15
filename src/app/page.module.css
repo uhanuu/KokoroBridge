@@ -399,7 +399,7 @@
   margin-bottom: var(--space-lg) !important;
 }
 
-/* 이번주 학습 현황 카드 */
+/* 학습 통계 카드 */
 .statsCard {
   background: linear-gradient(135deg, #252525, #353535) !important;
   border: 1px solid #404040 !important;
@@ -723,13 +723,201 @@
 .card:nth-child(4) { animation-delay: 0.4s; }
 .card:nth-child(5) { animation-delay: 0.5s; }
 
+/* 업적 카드 */
+.achievementsCard {
+  background: linear-gradient(135deg, #252525, #353535) !important;
+  border: 1px solid #404040 !important;
+}
+
+.achievementProgress {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: rgba(34, 197, 94, 0.05);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.progressText {
+  color: var(--text-secondary) !important;
+  margin-bottom: var(--space-sm) !important;
+  font-weight: 600 !important;
+}
+
+.achievementProgressBar {
+  height: 6px !important;
+  border-radius: 3px !important;
+  background-color: rgba(34, 197, 94, 0.1) !important;
+}
+
+.achievementProgressBar .MuiLinearProgress-bar {
+  background: linear-gradient(90deg, #22c55e, #16a34a) !important;
+  border-radius: 3px !important;
+}
+
+.achievementList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.achievementItem {
+  display: flex;
+  align-items: center;
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+  gap: var(--space-lg);
+}
+
+.achievementItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.achievementItem.locked {
+  opacity: 0.6;
+  background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.achievementIcon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: var(--radius-xl);
+  border: 2px solid rgba(34, 197, 94, 0.2);
+}
+
+.achievementItem.locked .achievementIcon {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.completedIcon {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  color: #22c55e !important;
+  font-size: 16px !important;
+  background: var(--dark-background);
+  border-radius: 50%;
+}
+
+.lockIcon {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  color: #94a3b8 !important;
+  font-size: 12px !important;
+  background: var(--dark-background);
+  border-radius: 50%;
+  padding: 2px;
+}
+
+.iconEmoji {
+  font-size: 20px;
+  filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.3));
+}
+
+.achievementItem.locked .iconEmoji {
+  filter: grayscale(100%) opacity(0.5);
+}
+
+.achievementInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.achievementTitle {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+.achievementItem.locked .achievementTitle {
+  color: var(--text-tertiary) !important;
+}
+
+.achievementDescription {
+  color: var(--text-secondary) !important;
+  font-size: 12px !important;
+}
+
+.achievementDate {
+  color: var(--text-tertiary) !important;
+  font-size: 11px !important;
+  margin-top: var(--space-xs) !important;
+}
+
+.achievementStatus {
+  display: flex;
+  align-items: center;
+}
+
+.completedBadge {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.lockedBadge {
+  background: rgba(148, 163, 184, 0.1);
+  color: #94a3b8;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.achievementSummary {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.summaryNumber {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+}
+
+.summaryLabel {
+  color: var(--text-tertiary) !important;
+  font-size: 12px !important;
+  text-align: center;
+}
+
 /* 접근성 */
 @media (prefers-reduced-motion: reduce) {
   .card,
   .statItem,
   .lessonItem,
   .playButton,
-  .startButton {
+  .startButton,
+  .achievementItem {
     animation: none !important;
     transition: none !important;
   }
