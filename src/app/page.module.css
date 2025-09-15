@@ -1,45 +1,736 @@
 .container {
-  padding: 24px 20px;
-  max-width: 100vw;
+  padding: var(--space-lg) var(--space-md);
+  max-width: 100%;
   margin: 0 auto;
-  background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
-  min-height: 100vh;
-  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--background);
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
 }
 
-/* 섹션 공통 스타일 */
-.lastStudySection,
-.statsSection,
-.activitySection,
-.quickStartSection {
-  margin-bottom: 32px;
+/* 카드 공통 스타일 */
+.card {
+  background-color: var(--surface) !important;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid var(--outline) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
+  overflow: hidden;
 }
 
-.sectionTitle {
-  font-size: 20px;
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* 환영 헤더 카드 */
+.welcomeCard {
+  background: linear-gradient(135deg, #252525, #353535) !important;
+  border: 1px solid #404040 !important;
+  min-height: 120px;
+}
+
+.welcomeContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xl) !important;
+}
+
+.welcomeText {
+  flex: 1;
+}
+
+.greetingSubText {
+  color: var(--text-tertiary) !important;
+  font-size: 14px !important;
+  margin-bottom: 8px !important;
+  font-weight: 400 !important;
+}
+
+.greetingText {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 28px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+.characterContainer {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+  border-radius: 20px;
+  border: 2px solid rgba(34, 197, 94, 0.2);
+}
+
+.characterImage {
+  border-radius: 16px;
+  object-fit: cover;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* 오늘의 목표 카드 */
+.goalCard {
+  background: linear-gradient(135deg, #252525, #353535) !important;
+  border: 1px solid #404040 !important;
+}
+
+.goalsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.goalItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+.goalIcon {
+  font-size: 20px !important;
+  transition: all 0.3s ease;
+}
+
+.goalIcon.completed {
+  color: #22c55e !important;
+}
+
+.goalIcon.pending {
+  color: var(--text-tertiary) !important;
+}
+
+.goalText {
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  flex: 1;
+}
+
+.goalText.completedText {
+  text-decoration: line-through;
+  color: var(--text-tertiary) !important;
+}
+
+.goalProgress {
+  margin-top: var(--space-lg);
+}
+
+.goalProgressText {
+  color: var(--text-tertiary) !important;
+  font-size: 12px !important;
+  margin-bottom: var(--space-sm) !important;
+  display: block;
+}
+
+.mainProgressBar {
+  height: 8px !important;
+  border-radius: 4px !important;
+  background-color: #404040 !important;
+}
+
+.mainProgressBar .MuiLinearProgress-bar {
+  background: linear-gradient(90deg, #22c55e, #16a34a) !important;
+  border-radius: 4px !important;
+}
+
+/* 빠른 시작 카드 */
+.quickStartCard {
+  background: linear-gradient(135deg, #252525, #353535) !important;
+  border: 1px solid #404040 !important;
+}
+
+.cardHeader {
+  margin-bottom: var(--space-md);
+}
+
+.cardSubtitle {
+  color: var(--text-tertiary) !important;
+  font-size: 14px !important;
+  margin-top: var(--space-xs) !important;
+  margin-bottom: 0 !important;
+}
+
+.learningCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.learningItem {
+  background: #353535;
+  border: 1px solid #404040;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.learningItem:not(.locked):hover {
+  transform: translateY(-2px);
+  border-color: #22c55e;
+  background-color: #404040;
+}
+
+.learningItem.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.lockOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.learningItemHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  position: relative;
+  z-index: 2;
+}
+
+.learningItemIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.learningItemIcon svg {
+  font-size: 20px !important;
+}
+
+.lockIconOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.lockIcon {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 16px !important;
+}
+
+.iconText {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  font-family: "Noto Sans CJK JP", "Hiragino Sans", sans-serif;
+}
+
+.learningItemInfo {
+  flex: 1;
+}
+
+.learningItemTitle {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+}
+
+.learningItemSubtitle {
+  color: var(--text-tertiary) !important;
+  font-size: 11px !important;
+  margin-top: 2px !important;
+  display: block;
+}
+
+.learningItemDescription {
+  color: var(--text-secondary) !important;
+  font-size: 12px !important;
+  line-height: 1.4;
+  position: relative;
+  z-index: 2;
+}
+
+.learningItemProgress {
+  position: relative;
+  z-index: 2;
+}
+
+.learningItemStats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-xs);
+}
+
+.progressText {
+  color: var(--text-tertiary) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+
+.progressPercent {
+  color: var(--text-secondary) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.learningProgressBar {
+  height: 3px !important;
+  border-radius: 2px !important;
+  background-color: #404040 !important;
+}
+
+.learningProgressBar .MuiLinearProgress-bar {
+  background: var(--progress-color, #22c55e) !important;
+  border-radius: 2px !important;
+}
+
+.startLearningButton {
+  width: 100%;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  font-size: 12px;
   font-weight: 600;
-  color: #2e7d32;
-  margin: 0 0 16px 0;
-  padding-left: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(34, 197, 94, 0.3);
+  margin-top: var(--space-sm);
+  position: relative;
+  z-index: 2;
 }
+
+.startLearningButton:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(34, 197, 94, 0.4);
+}
+
+.startLearningButton:active {
+  transform: translateY(0);
+}
+
+.startLearningButton.lockedButton {
+  background: linear-gradient(135deg, #666666, #555555);
+  cursor: not-allowed;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.startLearningButton:disabled {
+  opacity: 0.7;
+}
+
+.buttonText {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.playIconCircle {
+  width: 18px;
+  height: 18px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.playIcon {
+  font-size: 11px !important;
+  color: white;
+  margin-left: 1px;
+}
+
+.startLearningButton:not(:disabled):hover .playIconCircle {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+
+.cardTitle {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  margin-bottom: var(--space-lg) !important;
+}
+
+/* 이번주 학습 현황 카드 */
+.statsCard {
+  background: linear-gradient(135deg, #252525, #353535) !important;
+  border: 1px solid #404040 !important;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background-color: #353535;
+  border-radius: 16px;
+  border: 1px solid #404040;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statItem::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.statItem:hover {
+  transform: translateY(-4px);
+  background-color: #404040;
+  border-color: #22c55e;
+}
+
+.statItem:hover::before {
+  transform: scaleX(1);
+}
+
+.statIconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xs);
+}
+
+.statIcon {
+  color: #22c55e !important;
+  font-size: 24px !important;
+}
+
+.statNumber {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  margin: 0 !important;
+}
+
+.statLabel {
+  color: var(--text-tertiary) !important;
+  font-weight: 500 !important;
+  text-align: center;
+  font-size: 12px !important;
+}
+
+/* 최근 활동 카드 */
+.activityCard {
+  background: linear-gradient(135deg, #252525, #353535) !important;
+  border: 1px solid #404040 !important;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  background-color: #353535;
+  border-radius: 12px;
+  border: 1px solid #404040;
+  transition: all 0.3s ease;
+}
+
+.activityItem:hover {
+  transform: translateX(4px);
+  border-color: #22c55e;
+  background-color: #404040;
+}
+
+.activityInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.activityTitle {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+
+.activityTime {
+  color: var(--text-tertiary) !important;
+  font-size: 12px !important;
+}
+
+.activityProgress {
+  min-width: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.activityPercent {
+  color: var(--text-tertiary) !important;
+  text-align: right;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+}
+
+.activityProgressBar {
+  height: 4px !important;
+  border-radius: 2px !important;
+  background-color: #404040 !important;
+}
+
+.activityProgressBar .MuiLinearProgress-bar {
+  background: linear-gradient(90deg, #22c55e, #16a34a) !important;
+  border-radius: 2px !important;
+}
+
+
 
 /* 반응형 디자인 */
-@media (max-width: 480px) {
+@media (min-width: 768px) {
   .container {
-    padding: 20px 16px;
+    padding: var(--space-xl) var(--space-lg);
+    max-width: 600px;
+    margin: 0 auto;
   }
 
-  .header {
+  .learningCardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .welcomeContent {
     flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
-  }
-
-  .todayDate {
+    gap: var(--space-lg);
     text-align: center;
   }
 
-  .title {
-    font-size: 24px;
+  .characterContainer {
+    width: 100px;
+    height: 100px;
+  }
+
+  .characterImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .greetingText {
+    font-size: 24px !important;
+  }
+
+  .goalDistance {
+    font-size: 40px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-md) var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .welcomeContent {
+    padding: var(--space-lg) !important;
+  }
+
+  .greetingText {
+    font-size: 20px !important;
+  }
+
+  .learningCardsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .learningCardContent {
+    padding: var(--space-md) !important;
+  }
+
+  .learningCardsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .learningItem {
+    padding: var(--space-md);
+  }
+
+  .learningItemIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .iconText {
+    font-size: 20px;
+  }
+
+  .learningItemTitle {
+    font-size: 13px !important;
+  }
+
+  .learningItemSubtitle {
+    font-size: 10px !important;
+  }
+
+  .learningItemDescription {
+    font-size: 11px !important;
+  }
+
+  .lockIcon {
+    font-size: 14px !important;
+  }
+
+  .startLearningButton {
+    padding: var(--space-sm);
+    font-size: 11px;
+  }
+
+  .buttonText {
+    font-size: 11px;
+  }
+
+  .playIconCircle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .playIcon {
+    font-size: 12px !important;
+  }
+
+  .cardSubtitle {
+    font-size: 13px !important;
+  }
+
+  .statsGrid {
+    gap: var(--space-sm);
+  }
+
+  .statItem {
+    padding: var(--space-md);
+  }
+
+  .statNumber {
+    font-size: 20px !important;
+  }
+
+  .activityItem {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+  }
+
+  .activityProgress {
+    min-width: auto;
+  }
+
+  .activityPercent {
+    text-align: left;
+  }
+}
+
+/* 애니메이션 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: slideUp 0.6s ease-out;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+
+/* 접근성 */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .statItem,
+  .lessonItem,
+  .playButton,
+  .startButton {
+    animation: none !important;
+    transition: none !important;
   }
 }

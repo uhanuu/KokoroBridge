@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Home, School, Person } from "@mui/icons-material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,18 +10,17 @@ const navigationItems = [
   {
     path: "/",
     label: "홈",
-    imageUrl: "/home_icon.png",
+    Icon: Home,
   },
   {
     path: "/study",
     label: "학습",
-    imageUrl: "/pencil_icon.png",
-    badge: 3,
+    Icon: School,
   },
   {
     path: "/profile",
     label: "프로필",
-    imageUrl: "/profile_icon.png",
+    Icon: Person,
   },
 ];
 
@@ -33,18 +32,12 @@ export default function Navigation() {
       <div className={styles.navigationBar}>
         {navigationItems.map((item) => (
           <Link
-            href={item.path}
             key={item.path}
+            href={item.path}
             className={`${styles.navItem} ${pathname === item.path ? styles.active : ""}`}
           >
-            <div className={styles.iconContainer}>
-              <Image src={item.imageUrl} width={18} height={18} alt="navigation 대체 이미지" />
-              {item.badge && <span className={styles.badge}>{item.badge}</span>}
-            </div>
+            <item.Icon className={styles.icon} />
             <span className={styles.label}>{item.label}</span>
-
-            {/* 활성 상태 인디케이터 */}
-            {pathname === item.path && <div className={styles.activeIndicator} />}
           </Link>
         ))}
       </div>
