@@ -72,19 +72,44 @@ const mockData = {
     },
   ],
   learningStats: {
-    continuousDays: 12,
-    totalHours: 48,
-    completedLessons: 156,
-    averageScore: 87,
+    overview: {
+      continuousDays: 12,
+      totalHours: 48,
+      completedLessons: 156,
+      averageScore: 87,
+    },
     weeklyData: [
-      { day: "월", hours: 2.5 },
-      { day: "화", hours: 3.2 },
-      { day: "수", hours: 1.8 },
-      { day: "목", hours: 4.1 },
-      { day: "금", hours: 2.9 },
-      { day: "토", hours: 2.3 },
-      { day: "일", hours: 3.5 },
+      { day: "월", hours: 2.5, lessons: 3, accuracy: 85 },
+      { day: "화", hours: 3.2, lessons: 4, accuracy: 92 },
+      { day: "수", hours: 1.8, lessons: 2, accuracy: 78 },
+      { day: "목", hours: 4.1, lessons: 5, accuracy: 94 },
+      { day: "금", hours: 2.9, lessons: 3, accuracy: 89 },
+      { day: "토", hours: 2.3, lessons: 2, accuracy: 81 },
+      { day: "일", hours: 3.5, lessons: 4, accuracy: 87 },
     ],
+    skillProgress: [
+      { skill: "히라가나", progress: 95, total: 46, completed: 44, color: "#22c55e" },
+      { skill: "가타카나", progress: 65, total: 46, completed: 30, color: "#3b82f6" },
+      { skill: "기초 한자", progress: 30, total: 100, completed: 30, color: "#f59e0b" },
+      { skill: "일상 회화", progress: 45, total: 50, completed: 23, color: "#8b5cf6" },
+    ],
+    monthlyProgress: [
+      { month: "1월", hours: 32, lessons: 45, score: 82 },
+      { month: "2월", hours: 41, lessons: 58, score: 85 },
+      { month: "3월", hours: 48, lessons: 67, score: 87 },
+    ],
+    studyStreak: {
+      current: 12,
+      longest: 18,
+      thisMonth: 15,
+      percentage: 67, // 이번 달 학습 참여율
+    },
+    levelInfo: {
+      currentLevel: "중급",
+      currentXP: 2840,
+      nextLevelXP: 3500,
+      progress: 81, // (2840/3500) * 100
+    },
   },
   achievements: [
     {
@@ -257,61 +282,6 @@ export default function HomePage() {
         </CardContent>
       </Card>
 
-      {/* 학습 통계 */}
-      <Card className={`${styles.card} ${styles.statsCard}`}>
-        <CardContent>
-          <Typography variant="h6" className={styles.cardTitle}>
-            학습 통계
-          </Typography>
-          <div className={styles.statsGrid}>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <TrendingUp className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockData.learningStats.continuousDays}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                연속 학습
-              </Typography>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <Schedule className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockData.learningStats.totalHours}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                총 학습 시간
-              </Typography>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <Book className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockData.learningStats.completedLessons}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                완료한 레슨
-              </Typography>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <Star className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockData.learningStats.averageScore}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                평균 점수
-              </Typography>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* 최근 활동 */}
       <Card className={`${styles.card} ${styles.activityCard}`}>
         <CardContent>
@@ -338,6 +308,214 @@ export default function HomePage() {
                     value={activity.progress}
                     className={styles.activityProgressBar}
                   />
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 학습 통계 - 개요 */}
+      <Card className={`${styles.card} ${styles.statsCard}`}>
+        <CardContent>
+          <Typography variant="h6" className={styles.cardTitle}>
+            학습 통계
+          </Typography>
+          <div className={styles.statsGrid}>
+            <div className={styles.statItem}>
+              <div className={styles.statIconWrapper}>
+                <TrendingUp className={styles.statIcon} />
+              </div>
+              <Typography variant="h5" className={styles.statNumber}>
+                {mockData.learningStats.overview.continuousDays}
+              </Typography>
+              <Typography variant="caption" className={styles.statLabel}>
+                연속 학습
+              </Typography>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statIconWrapper}>
+                <Schedule className={styles.statIcon} />
+              </div>
+              <Typography variant="h5" className={styles.statNumber}>
+                {mockData.learningStats.overview.totalHours}
+              </Typography>
+              <Typography variant="caption" className={styles.statLabel}>
+                총 학습 시간
+              </Typography>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statIconWrapper}>
+                <Book className={styles.statIcon} />
+              </div>
+              <Typography variant="h5" className={styles.statNumber}>
+                {mockData.learningStats.overview.completedLessons}
+              </Typography>
+              <Typography variant="caption" className={styles.statLabel}>
+                완료한 레슨
+              </Typography>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statIconWrapper}>
+                <Star className={styles.statIcon} />
+              </div>
+              <Typography variant="h5" className={styles.statNumber}>
+                {mockData.learningStats.overview.averageScore}
+              </Typography>
+              <Typography variant="caption" className={styles.statLabel}>
+                평균 점수
+              </Typography>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 학습 스킬 진행도 */}
+      <Card className={`${styles.card} ${styles.skillProgressCard}`}>
+        <CardContent>
+          <Typography variant="h6" className={styles.cardTitle}>
+            스킬 진행도
+          </Typography>
+          <div className={styles.skillProgressList}>
+            {mockData.learningStats.skillProgress.map((skill, index) => (
+              <div key={index} className={styles.skillProgressItem}>
+                <div className={styles.skillHeader}>
+                  <Typography variant="body2" className={styles.skillName}>
+                    {skill.skill}
+                  </Typography>
+                  <Typography variant="caption" className={styles.skillStats}>
+                    {skill.completed}/{skill.total} ({skill.progress}%)
+                  </Typography>
+                </div>
+                <LinearProgress
+                  variant="determinate"
+                  value={skill.progress}
+                  className={styles.skillProgressBar}
+                  sx={{
+                    "& .MuiLinearProgress-bar": {
+                      backgroundColor: skill.color,
+                    },
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 레벨 및 경험치 */}
+      <Card className={`${styles.card} ${styles.levelCard}`}>
+        <CardContent>
+          <div className={styles.levelHeader}>
+            <div className={styles.levelInfo}>
+              <Typography variant="h6" className={styles.levelTitle}>
+                {mockData.learningStats.levelInfo.currentLevel}
+              </Typography>
+              <Typography variant="caption" className={styles.levelSubtitle}>
+                현재 레벨
+              </Typography>
+            </div>
+            <div className={styles.xpInfo}>
+              <Typography variant="body2" className={styles.xpText}>
+                {mockData.learningStats.levelInfo.currentXP} /{" "}
+                {mockData.learningStats.levelInfo.nextLevelXP} XP
+              </Typography>
+              <Typography variant="caption" className={styles.xpRemaining}>
+                다음 레벨까지{" "}
+                {mockData.learningStats.levelInfo.nextLevelXP -
+                  mockData.learningStats.levelInfo.currentXP}{" "}
+                XP 남음
+              </Typography>
+            </div>
+          </div>
+          <LinearProgress
+            variant="determinate"
+            value={mockData.learningStats.levelInfo.progress}
+            className={styles.levelProgressBar}
+          />
+        </CardContent>
+      </Card>
+
+      {/* 학습 스트릭 */}
+      <Card className={`${styles.card} ${styles.streakCard}`}>
+        <CardContent>
+          <Typography variant="h6" className={styles.cardTitle}>
+            학습 연속성
+          </Typography>
+          <div className={styles.streakGrid}>
+            <div className={styles.streakItem}>
+              <Typography variant="h4" className={styles.streakNumber}>
+                {mockData.learningStats.studyStreak.current}
+              </Typography>
+              <Typography variant="caption" className={styles.streakLabel}>
+                현재 연속일
+              </Typography>
+            </div>
+            <div className={styles.streakItem}>
+              <Typography variant="h4" className={styles.streakNumber}>
+                {mockData.learningStats.studyStreak.longest}
+              </Typography>
+              <Typography variant="caption" className={styles.streakLabel}>
+                최고 기록
+              </Typography>
+            </div>
+            <div className={styles.streakItem}>
+              <Typography variant="h4" className={styles.streakNumber}>
+                {mockData.learningStats.studyStreak.thisMonth}
+              </Typography>
+              <Typography variant="caption" className={styles.streakLabel}>
+                이번 달
+              </Typography>
+            </div>
+            <div className={styles.streakItem}>
+              <Typography variant="h4" className={styles.streakNumber}>
+                {mockData.learningStats.studyStreak.percentage}%
+              </Typography>
+              <Typography variant="caption" className={styles.streakLabel}>
+                참여율
+              </Typography>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 월별 진행 상황 */}
+      <Card className={`${styles.card} ${styles.monthlyCard}`}>
+        <CardContent>
+          <Typography variant="h6" className={styles.cardTitle}>
+            월별 진행 상황
+          </Typography>
+          <div className={styles.monthlyChart}>
+            {mockData.learningStats.monthlyProgress.map((month, index) => (
+              <div key={index} className={styles.monthlyItem}>
+                <Typography variant="caption" className={styles.monthLabel}>
+                  {month.month}
+                </Typography>
+                <div className={styles.monthlyStats}>
+                  <div className={styles.monthlyStat}>
+                    <Typography variant="body2" className={styles.monthlyValue}>
+                      {month.hours}h
+                    </Typography>
+                    <Typography variant="caption" className={styles.monthlyDesc}>
+                      학습시간
+                    </Typography>
+                  </div>
+                  <div className={styles.monthlyStat}>
+                    <Typography variant="body2" className={styles.monthlyValue}>
+                      {month.lessons}개
+                    </Typography>
+                    <Typography variant="caption" className={styles.monthlyDesc}>
+                      레슨
+                    </Typography>
+                  </div>
+                  <div className={styles.monthlyStat}>
+                    <Typography variant="body2" className={styles.monthlyValue}>
+                      {month.score}점
+                    </Typography>
+                    <Typography variant="caption" className={styles.monthlyDesc}>
+                      평균점수
+                    </Typography>
+                  </div>
                 </div>
               </div>
             ))}
