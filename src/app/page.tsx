@@ -261,9 +261,7 @@ export default function HomePage() {
                     </Typography>
                     <div className={styles.activityTime}>
                       <span>{activity.time}</span>
-                      <span className={styles.activityTypeTag}>
-                        {activity.type}
-                      </span>
+                      <span className={styles.activityTypeTag}>{activity.type}</span>
                     </div>
                   </div>
                 </div>
@@ -450,50 +448,6 @@ export default function HomePage() {
                 참여율
               </Typography>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 월별 진행 상황 */}
-      <Card className={`${styles.card} ${styles.monthlyCard}`}>
-        <CardContent>
-          <Typography variant="h6" className={styles.cardTitle}>
-            월별 진행 상황
-          </Typography>
-          <div className={styles.monthlyChart}>
-            {mockData.learningStats.monthlyProgress.map((month, index) => (
-              <div key={index} className={styles.monthlyItem}>
-                <Typography variant="caption" className={styles.monthLabel}>
-                  {month.month}
-                </Typography>
-                <div className={styles.monthlyStats}>
-                  <div className={styles.monthlyStat}>
-                    <Typography variant="body2" className={styles.monthlyValue}>
-                      {month.hours}h
-                    </Typography>
-                    <Typography variant="caption" className={styles.monthlyDesc}>
-                      학습시간
-                    </Typography>
-                  </div>
-                  <div className={styles.monthlyStat}>
-                    <Typography variant="body2" className={styles.monthlyValue}>
-                      {month.lessons}개
-                    </Typography>
-                    <Typography variant="caption" className={styles.monthlyDesc}>
-                      레슨
-                    </Typography>
-                  </div>
-                  <div className={styles.monthlyStat}>
-                    <Typography variant="body2" className={styles.monthlyValue}>
-                      {month.score}점
-                    </Typography>
-                    <Typography variant="caption" className={styles.monthlyDesc}>
-                      평균점수
-                    </Typography>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </CardContent>
       </Card>
