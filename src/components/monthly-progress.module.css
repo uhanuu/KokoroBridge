@@ -1,0 +1,326 @@
+.monthlyCard {
+  background: linear-gradient(135deg, #2a2a2a, #3a3a3a) !important;
+  border: 1px solid #4a4a4a !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.title {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.navButton {
+  background: linear-gradient(135deg, #374151, #4b5563);
+  border: 1px solid #6b7280;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+}
+
+.navButton:hover:not(.disabled) {
+  background: linear-gradient(135deg, #4b5563, #6b7280);
+  border-color: #9ca3af;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navButton.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: linear-gradient(135deg, #374151, #374151);
+}
+
+.monthIndicator {
+  color: var(--text-secondary) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  min-width: 40px;
+  text-align: center;
+}
+
+.monthlyContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: rgba(0, 0, 0, 0.1);
+  padding: var(--space-md);
+}
+
+.monthlyScroll {
+  display: flex;
+  gap: var(--space-lg);
+  transition: transform 0.3s ease;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: var(--space-sm);
+}
+
+.monthlyScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.monthlyItem {
+  min-width: 260px;
+  background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+  border: 1px solid #4a4a4a;
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.monthlyItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.monthlyItem:hover {
+  transform: translateY(-4px);
+  border-color: #22c55e;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.monthHeader {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: var(--space-md);
+}
+
+.monthTitle {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  margin-bottom: var(--space-xs) !important;
+}
+
+.yearText {
+  color: var(--text-tertiary) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.statItem {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.statItem:hover {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.statIcon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon {
+  color: #22c55e !important;
+  font-size: 18px !important;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.statNumber {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+}
+
+.statLabel {
+  color: var(--text-tertiary) !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.monthSummary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progressRing {
+  position: relative;
+}
+
+.progressCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.progressInner {
+  width: 42px;
+  height: 42px;
+  background: #2a2a2a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progressText {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+}
+
+.summaryText {
+  color: var(--text-secondary) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-align: center;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .monthlyContainer {
+    padding: var(--space-sm);
+  }
+
+  .monthlyItem {
+    min-width: 220px;
+    padding: var(--space-lg);
+  }
+
+  .monthTitle {
+    font-size: 18px !important;
+  }
+
+  .statsGrid {
+    gap: var(--space-sm);
+  }
+
+  .statItem {
+    padding: var(--space-sm);
+  }
+
+  .statNumber {
+    font-size: 16px !important;
+  }
+
+  .statIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .icon {
+    font-size: 16px !important;
+  }
+
+  .progressCircle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .progressInner {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .navigation {
+    align-self: flex-end;
+  }
+
+  .monthlyItem {
+    min-width: 200px;
+    padding: var(--space-md);
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .statItem {
+    padding: var(--space-xs);
+  }
+
+  .monthSummary {
+    margin-top: var(--space-sm);
+  }
+}
+
+/* 접근성 */
+@media (prefers-reduced-motion: reduce) {
+  .monthlyItem,
+  .statItem,
+  .navButton,
+  .monthlyScroll {
+    animation: none !important;
+    transition: none !important;
+  }
+}

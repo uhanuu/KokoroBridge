@@ -13,6 +13,7 @@ import { Card, CardContent, Typography, LinearProgress } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
+import MonthlyProgress from "@/components/monthly-progress";
 import ActionButton from "@/components/ui/action-button";
 
 import styles from "./page.module.css";
@@ -94,6 +95,89 @@ const mockData = {
       { month: "1월", hours: 32, lessons: 45, score: 82 },
       { month: "2월", hours: 41, lessons: 58, score: 85 },
       { month: "3월", hours: 48, lessons: 67, score: 87 },
+    ],
+    monthlyDetailedProgress: [
+      {
+        year: 2023,
+        month: 10,
+        monthName: "10월",
+        hours: 25,
+        lessons: 35,
+        streak: 8,
+        averageScore: 78,
+      },
+      {
+        year: 2023,
+        month: 11,
+        monthName: "11월",
+        hours: 30,
+        lessons: 42,
+        streak: 12,
+        averageScore: 81,
+      },
+      {
+        year: 2023,
+        month: 12,
+        monthName: "12월",
+        hours: 28,
+        lessons: 38,
+        streak: 10,
+        averageScore: 79,
+      },
+      {
+        year: 2024,
+        month: 1,
+        monthName: "1월",
+        hours: 32,
+        lessons: 45,
+        streak: 15,
+        averageScore: 82,
+      },
+      {
+        year: 2024,
+        month: 2,
+        monthName: "2월",
+        hours: 41,
+        lessons: 58,
+        streak: 18,
+        averageScore: 85,
+      },
+      {
+        year: 2024,
+        month: 3,
+        monthName: "3월",
+        hours: 48,
+        lessons: 67,
+        streak: 22,
+        averageScore: 87,
+      },
+      {
+        year: 2024,
+        month: 4,
+        monthName: "4월",
+        hours: 38,
+        lessons: 52,
+        streak: 16,
+        averageScore: 84,
+      },
+      {
+        year: 2024,
+        month: 5,
+        monthName: "5월",
+        hours: 45,
+        lessons: 63,
+        streak: 20,
+        averageScore: 89,
+      },
+      {
+        year: 2024,
+        month: 6,
+        monthName: "6월",
+        hours: 52,
+        lessons: 71,
+        streak: 25,
+        averageScore: 91,
+      },
     ],
     studyStreak: {
       current: 12,
@@ -451,6 +535,9 @@ export default function HomePage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* 월별 진행 현황 */}
+      {/* <MonthlyProgress monthlyData={mockData.learningStats.monthlyDetailedProgress} /> */}
 
       {/* 업적 */}
       <Card className={`${styles.card} ${styles.achievementsCard}`}>
