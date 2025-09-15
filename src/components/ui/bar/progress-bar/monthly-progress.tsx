@@ -1,7 +1,7 @@
 "use client";
 
-import { Card, CardContent, Typography } from "@mui/material";
 import { ChevronLeft, ChevronRight, TrendingUp, Book, Whatshot, Star } from "@mui/icons-material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 
 import styles from "./monthly-progress.module.css";
@@ -38,7 +38,7 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
       const cardWidth = 280; // 카드 너비 + gap
       container.scrollTo({
         left: currentIndex * cardWidth,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   }, [currentIndex]);
@@ -56,7 +56,7 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
             <button
               onClick={handlePrevious}
               disabled={currentIndex === 0}
-              className={`${styles.navButton} ${currentIndex === 0 ? styles.disabled : ''}`}
+              className={`${styles.navButton} ${currentIndex === 0 ? styles.disabled : ""}`}
             >
               <ChevronLeft />
             </button>
@@ -66,7 +66,9 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
             <button
               onClick={handleNext}
               disabled={currentIndex >= monthlyData.length - 3}
-              className={`${styles.navButton} ${currentIndex >= monthlyData.length - 3 ? styles.disabled : ''}`}
+              className={`${styles.navButton} ${
+                currentIndex >= monthlyData.length - 3 ? styles.disabled : ""
+              }`}
             >
               <ChevronRight />
             </button>
@@ -74,10 +76,7 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
         </div>
 
         <div className={styles.monthlyContainer}>
-          <div
-            ref={scrollContainerRef}
-            className={styles.monthlyScroll}
-          >
+          <div ref={scrollContainerRef} className={styles.monthlyScroll}>
             {monthlyData.map((data, index) => (
               <div key={`${data.year}-${data.month}`} className={styles.monthlyItem}>
                 <div className={styles.monthHeader}>
@@ -152,7 +151,9 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
                     <div
                       className={styles.progressCircle}
                       style={{
-                        background: `conic-gradient(#22c55e ${(data.averageScore / 100) * 360}deg, #374151 0deg)`
+                        background: `conic-gradient(#22c55e ${
+                          (data.averageScore / 100) * 360
+                        }deg, #374151 0deg)`,
                       }}
                     >
                       <div className={styles.progressInner}>

@@ -13,7 +13,6 @@ import { Card, CardContent, Typography, LinearProgress } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-import MonthlyProgress from "@/components/monthly-progress";
 import ActionButton from "@/components/ui/action-button";
 
 import styles from "./page.module.css";
