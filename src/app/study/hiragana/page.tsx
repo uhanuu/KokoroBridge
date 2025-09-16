@@ -139,7 +139,7 @@ export default function HiraganaPage() {
     router.push("/study");
   };
 
-  const handleGroupClick = (group: typeof hiraganaGroups[0]) => {
+  const handleGroupClick = (group: (typeof hiraganaGroups)[0]) => {
     router.push(group.route);
   };
 
@@ -166,10 +166,7 @@ export default function HiraganaPage() {
           <Card key={group.id} className={`${styles.card} ${styles.groupCard}`}>
             <CardContent className={styles.groupContent}>
               <div className={styles.groupHeader}>
-                <div
-                  className={styles.groupIcon}
-                  style={{ backgroundColor: `${group.color}20` }}
-                >
+                <div className={styles.groupIcon} style={{ backgroundColor: `${group.color}20` }}>
                   <span className={styles.iconText} style={{ color: group.color }}>
                     {group.characters[0]}
                   </span>

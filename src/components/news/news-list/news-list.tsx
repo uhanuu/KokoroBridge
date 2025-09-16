@@ -11,13 +11,15 @@ import NewsCard from "../news-card/news-card";
 
 import styles from "./news-list.module.css";
 
-interface NewsItem {
+type NewsItemType = "release" | "upcoming" | "beta" | "update" | "event";
+
+export interface NewsItem {
   id: number;
   title: string;
   content: string;
   date: string;
   category: string;
-  type: "release" | "upcoming" | "beta" | "update" | "event";
+  type: NewsItemType;
   priority: "high" | "medium" | "low";
   isRead: boolean;
   icon: React.ComponentType<any>;

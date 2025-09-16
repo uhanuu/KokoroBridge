@@ -47,9 +47,12 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
     }
   }, [currentIndex, groups.length]);
 
-  const handleGroupClick = useCallback((group: GroupData) => {
-    router.push(group.route);
-  }, [router]);
+  const handleGroupClick = useCallback(
+    (group: GroupData) => {
+      router.push(group.route);
+    },
+    [router]
+  );
 
   // 터치/마우스 이벤트 핸들러
   const handleStart = useCallback((clientX: number) => {
@@ -58,10 +61,13 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
     setCurrentX(clientX);
   }, []);
 
-  const handleMove = useCallback((clientX: number) => {
-    if (!isDragging) return;
-    setCurrentX(clientX);
-  }, [isDragging]);
+  const handleMove = useCallback(
+    (clientX: number) => {
+      if (!isDragging) return;
+      setCurrentX(clientX);
+    },
+    [isDragging]
+  );
 
   const handleEnd = useCallback(() => {
     if (!isDragging) return;
@@ -97,11 +103,11 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
 
   // 터치 이벤트
   const handleTouchStart = (e: React.TouchEvent) => {
-    handleStart(e.touches[0].clientX);
+    handleStart(e.touches[0]!.clientX);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    handleMove(e.touches[0].clientX);
+    handleMove(e.touches[0]!.clientX);
   };
 
   const handleTouchEnd = () => {
@@ -109,13 +115,16 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
   };
 
   // 키보드 네비게이션
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === "ArrowLeft") {
-      handlePrevious();
-    } else if (e.key === "ArrowRight") {
-      handleNext();
-    }
-  }, [handlePrevious, handleNext]);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        handlePrevious();
+      } else if (e.key === "ArrowRight") {
+        handleNext();
+      }
+    },
+    [handlePrevious, handleNext]
+  );
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
@@ -132,7 +141,6 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
   };
 
   const currentGroup = groups[currentIndex];
-
 
   // 유효성 검사
   if (!currentGroup || groups.length === 0) {
@@ -234,7 +242,8 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
                     학습 진행도
                   </Typography>
                   <Typography variant="caption" className={styles.progressStats}>
-                    {currentGroup.completedCharacters || 0}/{currentGroup.characters.length} ({currentGroup.progress}%)
+                    {currentGroup.completedCharacters || 0}/{currentGroup.characters.length} (
+                    {currentGroup.progress}%)
                   </Typography>
                 </div>
                 <LinearProgress
@@ -279,9 +288,7 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
           {groups.map((_, index) => (
             <button
               key={index}
-              className={`${styles.indicator} ${
-                index === currentIndex ? styles.active : ""
-              }`}
+              className={`${styles.indicator} ${index === currentIndex ? styles.active : ""}`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}

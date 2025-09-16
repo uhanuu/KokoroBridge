@@ -14,6 +14,10 @@ interface WritingCanvasProps {
   onDrawingComplete?: (hasDrawing: boolean) => void;
 }
 
+function isPointerEvent(e: any): e is PointerEvent {
+  return "pressure" in e;
+}
+
 export default function WritingCanvas({
   character = "",
   width = 320,
@@ -59,10 +63,12 @@ export default function WritingCanvas({
       if (!canvas) return { x: 0, y: 0 };
 
       const rect = canvas.getBoundingClientRect();
-      let clientX: number, clientY: number, pressure = 0.5;
+      let clientX: number,
+        clientY: number,
+        pressure = 0.5;
 
       if (event instanceof TouchEvent && event.touches.length > 0) {
-        const touch = event.touches[0];
+        const touch = event.touches[0]!;
         clientX = touch.clientX;
         clientY = touch.clientY;
         // 터치 이벤트에서 압력 정보 (WebKit에서 지원)
@@ -73,7 +79,7 @@ export default function WritingCanvas({
         clientX = event.clientX;
         clientY = event.clientY;
         // 마우스 이벤트에서 압력 정보 (일부 브라우저에서 지원)
-        if ("pressure" in event && event.pressure > 0) {
+        if (isPointerEvent(event) && event.pressure > 0) {
           pressure = event.pressure;
         }
       } else {
@@ -205,12 +211,7 @@ export default function WritingCanvas({
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <pattern
-              id="grid"
-              width={width / 4}
-              height={height / 4}
-              patternUnits="userSpaceOnUse"
-            >
+            <pattern id="grid" width={width / 4} height={height / 4} patternUnits="userSpaceOnUse">
               <path
                 d={`M ${width / 8} 0 v ${height / 4} M 0 ${height / 8} h ${width / 4}`}
                 fill="none"
@@ -261,11 +262,7 @@ export default function WritingCanvas({
         )}
 
         {/* 그리기 캔버스 */}
-        <canvas
-          ref={canvasRef}
-          className={styles.drawingCanvas}
-          style={{ width, height }}
-        />
+        <canvas ref={canvasRef} className={styles.drawingCanvas} style={{ width, height }} />
       </div>
 
       {/* 제어 버튼들 */}
