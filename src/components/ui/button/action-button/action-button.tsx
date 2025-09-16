@@ -1,6 +1,6 @@
 "use client";
 
-import { PlayArrow, Lock, CheckCircle, Check, Notifications, Science, Visibility, Event } from "@mui/icons-material";
+import { PlayArrow, Lock, CheckCircle, Check, Notifications, Science, Visibility, Event, Delete } from "@mui/icons-material";
 import React from "react";
 
 import styles from "./action-button.module.css";
@@ -12,7 +12,7 @@ interface ActionButtonProps {
   variant?: "primary" | "locked" | "completed";
   className?: string;
   hideIcon?: boolean;
-  iconType?: "play" | "check" | "notifications" | "science" | "visibility" | "event";
+  iconType?: "play" | "check" | "notifications" | "science" | "visibility" | "event" | "delete";
 }
 
 export default function ActionButton({
@@ -46,6 +46,8 @@ export default function ActionButton({
         return <Visibility className={styles.playIcon} />;
       case "event":
         return <Event className={styles.playIcon} />;
+      case "delete":
+        return <Delete className={styles.playIcon} />;
       case "play":
       default:
         return <PlayArrow className={styles.playIcon} />;

@@ -49,80 +49,135 @@
 
 /* 통계 카드 */
 .statsCard {
-  padding: var(--space-lg) !important;
+  padding: var(--space-md) !important;
 }
 
 .statsContent {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-sm);
 }
 
 .statsRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .statItem {
   text-align: center;
+  width: 120px;
+  flex-shrink: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
   flex: 1;
+  align-items: center;
+  min-width: 160px;
 }
 
 .statNumber {
   color: var(--primary-600) !important;
   font-weight: 700 !important;
   margin-bottom: var(--space-xs) !important;
-  line-height: 1.2;
+  line-height: 1.1;
+  font-size: 32px !important;
 }
 
 .statLabel {
   color: var(--text-secondary) !important;
   font-weight: 500 !important;
-  font-size: 12px !important;
+  font-size: 13px !important;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.actionSection {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+.readAllButton,
+.deleteButton {
+  width: 100%;
+  max-width: 200px;
+  min-width: 140px;
+  height: 36px;
+  font-size: 12px !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* 모바일 반응형 */
-@media (max-width: 768px) {
+.deleteButton {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  color: white !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.deleteButton:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.3), 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.deleteButton:active {
+  transform: translateY(0) scale(0.96) !important;
+  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.2) !important;
+  transition: all 0.1s ease !important;
+}
+
+/* 중간 태블릿 반응형 (600px~768px) */
+@media (max-width: 768px) and (min-width: 600px) {
   .container {
     padding: var(--space-md);
     gap: var(--space-md);
   }
 
-  .statsContent {
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
   .statsRow {
-    justify-content: space-around;
-    gap: var(--space-md);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    flex-wrap: nowrap;
   }
 
   .statItem {
     text-align: center;
-    flex: 1;
+    width: 100px;
+    flex-shrink: 0;
+    word-break: keep-all;
   }
 
-  .actionSection {
-    flex: 0 0 auto;
+  .buttonGroup {
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex: 1;
+    align-items: center;
+    min-width: 150px;
+  }
+
+  .readAllButton,
+  .deleteButton {
+    width: 100%;
+    max-width: 180px;
+    min-width: 130px;
+    height: 36px;
+    font-size: 11px !important;
   }
 
   .title {
-    font-size: 28px !important;
+    font-size: 26px !important;
   }
 
   .statNumber {
-    font-size: 32px !important;
+    font-size: 28px !important;
   }
 
   .statLabel {
@@ -130,55 +185,140 @@
   }
 }
 
-@media (max-width: 480px) {
+/* 작은 태블릿 반응형 (480px~599px) */
+@media (max-width: 599px) and (min-width: 480px) {
   .container {
-    padding: var(--space-sm);
-    gap: var(--space-sm);
-  }
-
-  .statsContent {
-    flex-direction: column;
+    padding: var(--space-md);
     gap: var(--space-md);
-    align-items: stretch;
   }
 
   .statsRow {
-    justify-content: space-around;
-    gap: var(--space-sm);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    flex-wrap: nowrap;
   }
 
   .statItem {
     text-align: center;
+    width: 85px;
+    flex-shrink: 0;
+    word-break: keep-all;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: var(--space-xs);
     flex: 1;
+    align-items: center;
+    min-width: 130px;
   }
 
-  .statNumber {
-    font-size: 24px !important;
-    margin-bottom: var(--space-xs) !important;
-  }
-
-  .statLabel {
-    font-size: 11px !important;
-  }
-
-  .actionSection {
+  .readAllButton,
+  .deleteButton {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: var(--space-sm);
-  }
-
-  .actionSection button {
-    padding: var(--space-sm) var(--space-lg) !important;
-    font-size: 14px !important;
-    min-height: 40px !important;
+    max-width: 160px;
+    min-width: 120px;
+    height: 34px;
+    font-size: 10px !important;
   }
 
   .title {
     font-size: 24px !important;
   }
 
+  .statNumber {
+    font-size: 24px !important;
+  }
+
+  .statLabel {
+    font-size: 11px !important;
+  }
+}
+
+/* 모바일 반응형 (360px~479px) */
+@media (max-width: 479px) and (min-width: 360px) {
+  .container {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+  }
+
+  .statsRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+  }
+
+  .statItem {
+    text-align: center;
+    width: 80px;
+    flex-shrink: 0;
+    word-break: keep-all;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex: 1;
+    align-items: center;
+    min-width: 110px;
+  }
+
+  .readAllButton,
+  .deleteButton {
+    width: 100%;
+    max-width: 140px;
+    min-width: 100px;
+    height: 34px;
+    font-size: 10px !important;
+  }
+
+  .statNumber {
+    font-size: 22px !important;
+    margin-bottom: var(--space-xs) !important;
+  }
+
+  .statLabel {
+    font-size: 10px !important;
+  }
+
+  .title {
+    font-size: 22px !important;
+  }
+
   .subtitle {
-    font-size: 14px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* 아주 작은 화면 반응형 */
+@media (max-width: 360px) {
+  .statsRow {
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .statItem {
+    width: 100%;
+    text-align: center;
+  }
+
+  .buttonGroup {
+    width: 100%;
+    align-items: center;
+  }
+
+  .readAllButton,
+  .deleteButton {
+    width: 100%;
+    max-width: 180px;
+    min-width: 140px;
+    height: 36px;
+    font-size: 11px !important;
   }
 }

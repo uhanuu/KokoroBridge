@@ -113,6 +113,7 @@ export default function NewsPage() {
   const [news, setNews] = useState(newsData);
 
   const unreadCount = news.filter((item) => !item.isRead).length;
+  const readCount = news.filter((item) => item.isRead).length;
   const totalCount = news.length;
 
   const handleMarkAsRead = (newsId: number) => {
@@ -127,6 +128,10 @@ export default function NewsPage() {
 
   const handleDeleteNews = (newsId: number) => {
     setNews((prevNews) => prevNews.filter((item) => item.id !== newsId));
+  };
+
+  const handleDeleteAllRead = () => {
+    setNews((prevNews) => prevNews.filter((item) => !item.isRead));
   };
 
   return (
@@ -162,16 +167,24 @@ export default function NewsPage() {
                   전체 소식
                 </Typography>
               </div>
-            </div>
-            <div className={styles.actionSection}>
-              {unreadCount > 0 && (
+              <div className={styles.buttonGroup}>
                 <ActionButton
                   text="모두 읽기"
                   variant="primary"
                   iconType="check"
                   onClick={handleMarkAllAsRead}
+                  disabled={unreadCount === 0}
+                  className={styles.readAllButton}
                 />
-              )}
+                <ActionButton
+                  text="읽은글 삭제"
+                  variant="primary"
+                  iconType="delete"
+                  onClick={handleDeleteAllRead}
+                  disabled={readCount === 0}
+                  className={styles.deleteButton}
+                />
+              </div>
             </div>
           </div>
         </CardContent>

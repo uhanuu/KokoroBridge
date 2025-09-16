@@ -162,8 +162,18 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
         anchorEl={filterAnchor}
         open={Boolean(filterAnchor)}
         onClose={handleFilterClose}
-        PaperProps={{
-          className: styles.menuPaper,
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        slotProps={{
+          paper: {
+            className: styles.menuPaper,
+          }
         }}
       >
         {Object.entries(filterLabels).map(([key, label]) => (
@@ -183,8 +193,18 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
         anchorEl={sortAnchor}
         open={Boolean(sortAnchor)}
         onClose={handleSortClose}
-        PaperProps={{
-          className: styles.menuPaper,
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        slotProps={{
+          paper: {
+            className: styles.menuPaper,
+          }
         }}
       >
         {Object.entries(sortLabels).map(([key, label]) => (
