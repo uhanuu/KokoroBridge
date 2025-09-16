@@ -54,6 +54,12 @@
 
 .statsContent {
   display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.statsRow {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-lg);
@@ -95,26 +101,77 @@
   .statsContent {
     flex-direction: column;
     gap: var(--space-md);
-    text-align: center;
+  }
+
+  .statsRow {
+    justify-content: space-around;
+    gap: var(--space-md);
   }
 
   .statItem {
-    width: 100%;
+    text-align: center;
+    flex: 1;
   }
 
   .actionSection {
-    width: 100%;
-    margin-top: var(--space-sm);
+    flex: 0 0 auto;
   }
 
   .title {
     font-size: 28px !important;
+  }
+
+  .statNumber {
+    font-size: 32px !important;
+  }
+
+  .statLabel {
+    font-size: 12px !important;
   }
 }
 
 @media (max-width: 480px) {
   .container {
     padding: var(--space-sm);
+    gap: var(--space-sm);
+  }
+
+  .statsContent {
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: stretch;
+  }
+
+  .statsRow {
+    justify-content: space-around;
+    gap: var(--space-sm);
+  }
+
+  .statItem {
+    text-align: center;
+    flex: 1;
+  }
+
+  .statNumber {
+    font-size: 24px !important;
+    margin-bottom: var(--space-xs) !important;
+  }
+
+  .statLabel {
+    font-size: 11px !important;
+  }
+
+  .actionSection {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-sm);
+  }
+
+  .actionSection button {
+    padding: var(--space-sm) var(--space-lg) !important;
+    font-size: 14px !important;
+    min-height: 40px !important;
   }
 
   .title {
@@ -123,9 +180,5 @@
 
   .subtitle {
     font-size: 14px !important;
-  }
-
-  .statNumber {
-    font-size: 32px !important;
   }
 }

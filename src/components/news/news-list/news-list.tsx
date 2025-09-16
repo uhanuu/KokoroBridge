@@ -1,7 +1,7 @@
 "use client";
 
 import { FilterList, Sort } from "@mui/icons-material";
-import { Card, CardContent, Typography, Chip, IconButton, Menu, MenuItem } from "@mui/material";
+import { Typography, Chip, Menu, MenuItem } from "@mui/material";
 import React, { useState, useMemo } from "react";
 
 import ConfirmDialog from "@/components/ui/confirm-dialog";
@@ -126,47 +126,34 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
   return (
     <div className={styles.container}>
       {/* 필터 및 정렬 헤더 */}
-      <Card className={`${styles.card} ${styles.controlsCard}`}>
-        <CardContent className={styles.controlsContent}>
-          <div className={styles.controlsSection}>
-            <Typography variant="h6" className={styles.sectionTitle}>
-              소식 목록
-            </Typography>
-            <Typography variant="body2" className={styles.sectionSubtitle}>
-              {filteredAndSortedNews.length}개의 소식
-              {unreadCount > 0 && ` (읽지 않음 ${unreadCount}개)`}
-            </Typography>
-          </div>
+      <div className={styles.controlsHeader}>
+        <div className={styles.headerInfo}>
+          <Typography variant="h6" className={styles.sectionTitle}>
+            소식 목록
+          </Typography>
+          <Typography variant="body2" className={styles.sectionSubtitle}>
+            {filteredAndSortedNews.length}개의 소식
+            {unreadCount > 0 && ` (읽지 않음 ${unreadCount}개)`}
+          </Typography>
+        </div>
 
-          <div className={styles.controls}>
-            {/* 필터 버튼 */}
-            <div className={styles.controlItem}>
-              <IconButton onClick={handleFilterClick} className={styles.controlButton} size="small">
-                <FilterList />
-              </IconButton>
-              <Chip
-                label={filterLabels[filter]}
-                size="small"
-                className={styles.controlChip}
-                onClick={handleFilterClick}
-              />
-            </div>
-
-            {/* 정렬 버튼 */}
-            <div className={styles.controlItem}>
-              <IconButton onClick={handleSortClick} className={styles.controlButton} size="small">
-                <Sort />
-              </IconButton>
-              <Chip
-                label={sortLabels[sort]}
-                size="small"
-                className={styles.controlChip}
-                onClick={handleSortClick}
-              />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        <div className={styles.controlsCompact}>
+          <Chip
+            icon={<FilterList />}
+            label={filterLabels[filter]}
+            onClick={handleFilterClick}
+            className={styles.filterChip}
+            variant={filter !== "all" ? "filled" : "outlined"}
+          />
+          <Chip
+            icon={<Sort />}
+            label={sortLabels[sort]}
+            onClick={handleSortClick}
+            className={styles.sortChip}
+            variant="outlined"
+          />
+        </div>
+      </div>
 
       {/* 필터 메뉴 */}
       <Menu
@@ -222,16 +209,14 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
             />
           ))
         ) : (
-          <Card className={`${styles.card} ${styles.emptyCard}`}>
-            <CardContent className={styles.emptyContent}>
-              <Typography variant="h6" className={styles.emptyTitle}>
-                표시할 소식이 없습니다
-              </Typography>
-              <Typography variant="body2" className={styles.emptyMessage}>
-                선택한 필터 조건에 해당하는 소식이 없습니다.
-              </Typography>
-            </CardContent>
-          </Card>
+          <div className={styles.emptyState}>
+            <Typography variant="h6" className={styles.emptyTitle}>
+              표시할 소식이 없습니다
+            </Typography>
+            <Typography variant="body2" className={styles.emptyMessage}>
+              선택한 필터 조건에 해당하는 소식이 없습니다.
+            </Typography>
+          </div>
         )}
       </div>
 

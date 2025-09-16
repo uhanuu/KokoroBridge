@@ -1,6 +1,6 @@
 "use client";
 
-import { PlayArrow, Lock, CheckCircle } from "@mui/icons-material";
+import { PlayArrow, Lock, CheckCircle, Check, Notifications, Science, Visibility, Event } from "@mui/icons-material";
 import React from "react";
 
 import styles from "./action-button.module.css";
@@ -12,6 +12,7 @@ interface ActionButtonProps {
   variant?: "primary" | "locked" | "completed";
   className?: string;
   hideIcon?: boolean;
+  iconType?: "play" | "check" | "notifications" | "science" | "visibility" | "event";
 }
 
 export default function ActionButton({
@@ -21,6 +22,7 @@ export default function ActionButton({
   variant = "primary",
   className = "",
   hideIcon = false,
+  iconType = "play",
 }: ActionButtonProps) {
   const buttonClass = `
     ${styles.actionButton}
@@ -29,18 +31,33 @@ export default function ActionButton({
     ${className}
   `.trim();
 
+  const getIcon = () => {
+    if (variant === "locked") return <Lock className={styles.playIcon} />;
+    if (variant === "completed") return <CheckCircle className={styles.playIcon} />;
+
+    switch (iconType) {
+      case "check":
+        return <Check className={styles.playIcon} />;
+      case "notifications":
+        return <Notifications className={styles.playIcon} />;
+      case "science":
+        return <Science className={styles.playIcon} />;
+      case "visibility":
+        return <Visibility className={styles.playIcon} />;
+      case "event":
+        return <Event className={styles.playIcon} />;
+      case "play":
+      default:
+        return <PlayArrow className={styles.playIcon} />;
+    }
+  };
+
   return (
     <button className={buttonClass} onClick={onClick} disabled={disabled}>
       <span className={styles.buttonText}>{text}</span>
       {!hideIcon && (
         <div className={styles.playIconCircle}>
-          {variant === "locked" ? (
-            <Lock className={styles.playIcon} />
-          ) : variant === "completed" ? (
-            <CheckCircle className={styles.playIcon} />
-          ) : (
-            <PlayArrow className={styles.playIcon} />
-          )}
+          {getIcon()}
         </div>
       )}
     </button>

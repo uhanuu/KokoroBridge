@@ -25,20 +25,16 @@
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
-/* 컨트롤 카드 */
-.controlsCard {
-  margin-bottom: var(--space-sm);
-}
-
-.controlsContent {
-  padding: var(--space-md) !important;
+/* 컨트롤 헤더 */
+.controlsHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: var(--space-lg);
   gap: var(--space-md);
 }
 
-.controlsSection {
+.headerInfo {
   flex: 1;
 }
 
@@ -46,47 +42,53 @@
   color: var(--text-primary) !important;
   font-weight: 600 !important;
   margin: 0 !important;
-  margin-bottom: 2px !important;
+  margin-bottom: 4px !important;
 }
 
 .sectionSubtitle {
   color: var(--text-secondary) !important;
   margin: 0 !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 
-.controls {
+.controlsCompact {
   display: flex;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   align-items: center;
 }
 
-.controlItem {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
-.controlButton {
-  color: var(--text-secondary) !important;
-  background: var(--background) !important;
-  border: 1px solid var(--outline) !important;
-}
-
-.controlButton:hover {
-  background: var(--surface-variant) !important;
-}
-
-.controlChip {
-  background: var(--background) !important;
+.filterChip {
+  background: var(--surface) !important;
   color: var(--text-primary) !important;
   border: 1px solid var(--outline) !important;
   font-weight: 500 !important;
   cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.controlChip:hover {
+.filterChip:hover {
   background: var(--surface-variant) !important;
+  transform: translateY(-1px);
+}
+
+.filterChip[data-variant="filled"] {
+  background: var(--primary-100) !important;
+  color: var(--primary-700) !important;
+  border-color: var(--primary-300) !important;
+}
+
+.sortChip {
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--outline) !important;
+  font-weight: 500 !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sortChip:hover {
+  background: var(--surface-variant) !important;
+  transform: translateY(-1px);
 }
 
 /* 메뉴 스타일 */
@@ -116,23 +118,21 @@
 
 /* 새소식 목록 */
 .newsList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: start;
 }
 
 /* 빈 상태 */
-.emptyCard {
+.emptyState {
   text-align: center;
-  padding: var(--space-xl) !important;
-}
-
-.emptyContent {
-  padding: var(--space-xl) !important;
+  padding: var(--space-xl);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-sm);
+  grid-column: 1 / -1;
 }
 
 .emptyTitle {
@@ -144,57 +144,64 @@
 .emptyMessage {
   color: var(--text-secondary) !important;
   margin: 0 !important;
-  max-width: 300px;
+  max-width: 400px;
 }
 
 /* 반응형 디자인 */
+@media (min-width: 1200px) {
+  .newsList {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
 @media (max-width: 768px) {
-  .controlsContent {
+  .controlsHeader {
     flex-direction: column;
-    gap: var(--space-sm);
     align-items: flex-start;
+    gap: var(--space-md);
   }
 
-  .controls {
+  .controlsCompact {
     width: 100%;
-    justify-content: space-between;
-  }
-
-  .controlItem {
-    flex: 1;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .sectionTitle {
     font-size: 18px !important;
   }
+
+  .newsList {
+    gap: var(--space-md);
+  }
 }
 
 @media (max-width: 480px) {
-  .controlsContent {
-    padding: var(--space-sm) !important;
-  }
-
-  .controls {
-    flex-direction: column;
+  .controlsHeader {
     gap: var(--space-sm);
+  }
+
+  .controlsCompact {
+    flex-direction: column;
+    gap: var(--space-md);
     width: 100%;
   }
 
-  .controlItem {
+  .filterChip,
+  .sortChip {
     width: 100%;
-    justify-content: space-between;
-    padding: var(--space-xs) var(--space-sm);
-    background: var(--background);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--outline);
+    justify-content: center;
   }
 
-  .emptyContent {
-    padding: var(--space-lg) !important;
+  .emptyState {
+    padding: var(--space-lg);
   }
 
   .emptyTitle {
     font-size: 18px !important;
+  }
+
+  .newsList {
+    gap: var(--space-sm);
   }
 }

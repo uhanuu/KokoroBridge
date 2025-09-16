@@ -179,6 +179,7 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             <ActionButton
               text="체험해보기"
               variant="primary"
+              iconType="play"
               onClick={() => {}}
             />
           )}
@@ -186,6 +187,7 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             <ActionButton
               text="알림 설정"
               variant="primary"
+              iconType="notifications"
               onClick={() => {}}
             />
           )}
@@ -193,6 +195,7 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             <ActionButton
               text="베타 참여"
               variant="primary"
+              iconType="science"
               onClick={() => {}}
             />
           )}
@@ -200,6 +203,7 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             <ActionButton
               text="확인하기"
               variant="primary"
+              iconType="visibility"
               onClick={() => {}}
             />
           )}
@@ -207,6 +211,7 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             <ActionButton
               text="이벤트 참여"
               variant="primary"
+              iconType="event"
               onClick={() => {}}
             />
           )}
