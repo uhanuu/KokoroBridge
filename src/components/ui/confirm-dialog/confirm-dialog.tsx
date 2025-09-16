@@ -118,8 +118,11 @@ export default function ConfirmDialog({
       <div className={styles.container}>
         <Card className={styles.dialog}>
           <CardContent className={styles.content}>
-            {/* 닫기 버튼 */}
-            <div className={styles.closeSection}>
+            {/* 헤더 섹션 (제목 + 닫기 버튼) */}
+            <div className={styles.headerSection}>
+              <Typography variant="h6" className={styles.title}>
+                {title}
+              </Typography>
               <IconButton onClick={onClose} className={styles.closeButton} size="small">
                 <Close />
               </IconButton>
@@ -132,16 +135,10 @@ export default function ConfirmDialog({
                   <Image
                     src={mascotImage}
                     alt="마스코트"
-                    width={80}
-                    height={80}
+                    width={120}
+                    height={120}
                     className={styles.mascotImage}
                   />
-                  <div
-                    className={styles.typeIconOverlay}
-                    style={{ backgroundColor: config.bgColor }}
-                  >
-                    <IconComponent className={styles.typeIcon} style={{ color: config.color }} />
-                  </div>
                 </div>
               ) : (
                 <div className={styles.iconContainer} style={{ backgroundColor: config.bgColor }}>
@@ -150,14 +147,13 @@ export default function ConfirmDialog({
               )}
             </div>
 
-            {/* 제목과 메시지 */}
-            <div className={styles.textSection}>
-              <Typography variant="h6" className={styles.title}>
-                {title}
-              </Typography>
-              <Typography variant="body1" className={styles.message}>
-                {message}
-              </Typography>
+            {/* 메시지 */}
+            <div className={styles.messageSection}>
+              {message.split('\n').map((line, index) => (
+                <Typography key={index} variant="body1" className={styles.message}>
+                  {line}
+                </Typography>
+              ))}
             </div>
 
             {/* 액션 버튼들 */}

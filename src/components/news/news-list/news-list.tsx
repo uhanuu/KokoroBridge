@@ -4,9 +4,10 @@ import { FilterList, Sort } from "@mui/icons-material";
 import { Card, CardContent, Typography, Chip, IconButton, Menu, MenuItem } from "@mui/material";
 import React, { useState, useMemo } from "react";
 
-import NewsCard from "../news-card/news-card";
 import ConfirmDialog from "@/components/ui/confirm-dialog";
 import { useConfirm } from "@/hooks/useConfirm";
+
+import NewsCard from "../news-card/news-card";
 
 import styles from "./news-list.module.css";
 
@@ -37,13 +38,13 @@ type SortType = "latest" | "oldest" | "priority";
 const filterLabels = {
   all: "전체",
   unread: "읽지 않음",
-  read: "읽음"
+  read: "읽음",
 };
 
 const sortLabels = {
   latest: "최신순",
   oldest: "오래된순",
-  priority: "중요도순"
+  priority: "중요도순",
 };
 
 export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListProps) {
@@ -58,9 +59,9 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
 
     // 필터링
     if (filter === "unread") {
-      filtered = filtered.filter(item => !item.isRead);
+      filtered = filtered.filter((item) => !item.isRead);
     } else if (filter === "read") {
-      filtered = filtered.filter(item => item.isRead);
+      filtered = filtered.filter((item) => item.isRead);
     }
 
     // 정렬
@@ -105,16 +106,16 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
     handleSortClose();
   };
 
-  const unreadCount = news.filter(item => !item.isRead).length;
+  const unreadCount = news.filter((item) => !item.isRead).length;
 
   const handleDeleteNews = async (newsId: number) => {
     const confirmed = await confirm({
       title: "소식 삭제",
-      message: "이 소식을 삭제하시겠습니까?\n삭제된 소식은 복구할 수 없습니다.",
+      message: "삭제된 소식은 복구할 수 없습니다.\n그럼에도 삭제하시겠습니까?",
       type: "error",
       confirmText: "삭제하기",
       cancelText: "취소",
-      mascotImage: "/home-character.png"
+      mascotImage: "/warning-character.png",
     });
 
     if (confirmed) {
@@ -140,11 +141,7 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
           <div className={styles.controls}>
             {/* 필터 버튼 */}
             <div className={styles.controlItem}>
-              <IconButton
-                onClick={handleFilterClick}
-                className={styles.controlButton}
-                size="small"
-              >
+              <IconButton onClick={handleFilterClick} className={styles.controlButton} size="small">
                 <FilterList />
               </IconButton>
               <Chip
@@ -157,11 +154,7 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
 
             {/* 정렬 버튼 */}
             <div className={styles.controlItem}>
-              <IconButton
-                onClick={handleSortClick}
-                className={styles.controlButton}
-                size="small"
-              >
+              <IconButton onClick={handleSortClick} className={styles.controlButton} size="small">
                 <Sort />
               </IconButton>
               <Chip
@@ -181,7 +174,7 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
         open={Boolean(filterAnchor)}
         onClose={handleFilterClose}
         PaperProps={{
-          className: styles.menuPaper
+          className: styles.menuPaper,
         }}
       >
         {Object.entries(filterLabels).map(([key, label]) => (
@@ -202,7 +195,7 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
         open={Boolean(sortAnchor)}
         onClose={handleSortClose}
         PaperProps={{
-          className: styles.menuPaper
+          className: styles.menuPaper,
         }}
       >
         {Object.entries(sortLabels).map(([key, label]) => (
@@ -243,10 +236,7 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
       </div>
 
       {/* 확인 다이얼로그 */}
-      <ConfirmDialog
-        {...confirmProps}
-        onClose={hideConfirm}
-      />
+      <ConfirmDialog {...confirmProps} onClose={hideConfirm} />
     </div>
   );
 }
