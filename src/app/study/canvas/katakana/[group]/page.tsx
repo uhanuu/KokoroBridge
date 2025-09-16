@@ -6,7 +6,7 @@ import { useRouter, useParams } from "next/navigation";
 import React, { useState, useCallback } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
-import WritingCanvas from "@/components/writing-canvas";
+import WritingCanvas from "@/components/canvas";
 
 import styles from "./page.module.css";
 
@@ -21,7 +21,10 @@ const katakanaGroups: Record<string, { name: string; characters: string[] }> = {
   ya: { name: "ヤ행", characters: ["ヤ", "ユ", "ヨ"] },
   ra: { name: "ラ단", characters: ["ラ", "リ", "ル", "レ", "ロ"] },
   wa: { name: "ワ행", characters: ["ワ", "ヲ", "ン"] },
-  dakuten: { name: "탁음", characters: ["ガ", "ギ", "グ", "ゲ", "ゴ", "ザ", "ジ", "ズ", "ゼ", "ゾ"] },
+  dakuten: {
+    name: "탁음",
+    characters: ["ガ", "ギ", "グ", "ゲ", "ゴ", "ザ", "ジ", "ズ", "ゼ", "ゾ"],
+  },
   handakuten: { name: "반탁음", characters: ["パ", "ピ", "プ", "ペ", "ポ"] },
 };
 
@@ -96,11 +99,7 @@ export default function KatakanaGroupPage() {
 
         {/* 진행도 바 */}
         <div className={styles.progressSection}>
-          <LinearProgress
-            variant="determinate"
-            value={progress}
-            className={styles.progressBar}
-          />
+          <LinearProgress variant="determinate" value={progress} className={styles.progressBar} />
           <Typography variant="caption" className={styles.progressText}>
             {Math.round(progress)}% 완료
           </Typography>
@@ -161,11 +160,7 @@ export default function KatakanaGroupPage() {
           ))}
         </div>
 
-        <IconButton
-          onClick={handleNext}
-          disabled={isLastCharacter}
-          className={styles.navButton}
-        >
+        <IconButton onClick={handleNext} disabled={isLastCharacter} className={styles.navButton}>
           <ArrowForward />
         </IconButton>
       </div>

@@ -44,7 +44,7 @@ export function useConfirm(): UseConfirmReturn {
   });
 
   const hideConfirm = useCallback(() => {
-    setConfirmState(prev => ({ ...prev, isOpen: false }));
+    setConfirmState((prev) => ({ ...prev, isOpen: false }));
   }, []);
 
   const showConfirm = useCallback((config: ConfirmConfig): Promise<boolean> => {
@@ -63,48 +63,63 @@ export function useConfirm(): UseConfirmReturn {
   }, []);
 
   // 확인/취소 다이얼로그
-  const confirm = useCallback((config: Omit<ConfirmConfig, "showCancel">): Promise<boolean> => {
-    return showConfirm({
-      ...config,
-      type: config.type || "warning",
-      showCancel: true,
-    });
-  }, [showConfirm]);
+  const confirm = useCallback(
+    (config: Omit<ConfirmConfig, "showCancel">): Promise<boolean> => {
+      return showConfirm({
+        ...config,
+        type: config.type || "warning",
+        showCancel: true,
+      });
+    },
+    [showConfirm]
+  );
 
   // 성공 알림 (확인 버튼만)
-  const success = useCallback((config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
-    return showConfirm({
-      ...config,
-      type: "success",
-      showCancel: config.showCancel !== undefined ? config.showCancel : false,
-    });
-  }, [showConfirm]);
+  const success = useCallback(
+    (config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
+      return showConfirm({
+        ...config,
+        type: "success",
+        showCancel: config.showCancel !== undefined ? config.showCancel : false,
+      });
+    },
+    [showConfirm]
+  );
 
   // 에러 알림
-  const error = useCallback((config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
-    return showConfirm({
-      ...config,
-      type: "error",
-      showCancel: config.showCancel !== undefined ? config.showCancel : false,
-    });
-  }, [showConfirm]);
+  const error = useCallback(
+    (config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
+      return showConfirm({
+        ...config,
+        type: "error",
+        showCancel: config.showCancel !== undefined ? config.showCancel : false,
+      });
+    },
+    [showConfirm]
+  );
 
   // 경고 알림
-  const warning = useCallback((config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
-    return showConfirm({
-      ...config,
-      type: "warning",
-    });
-  }, [showConfirm]);
+  const warning = useCallback(
+    (config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
+      return showConfirm({
+        ...config,
+        type: "warning",
+      });
+    },
+    [showConfirm]
+  );
 
   // 정보 알림
-  const info = useCallback((config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
-    return showConfirm({
-      ...config,
-      type: "info",
-      showCancel: config.showCancel !== undefined ? config.showCancel : false,
-    });
-  }, [showConfirm]);
+  const info = useCallback(
+    (config: Omit<ConfirmConfig, "type">): Promise<boolean> => {
+      return showConfirm({
+        ...config,
+        type: "info",
+        showCancel: config.showCancel !== undefined ? config.showCancel : false,
+      });
+    },
+    [showConfirm]
+  );
 
   const confirmProps: Omit<ConfirmDialogProps, "onClose"> = {
     isOpen: confirmState.isOpen,

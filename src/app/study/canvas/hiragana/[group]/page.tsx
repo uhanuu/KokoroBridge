@@ -5,8 +5,8 @@ import { Card, CardContent, Typography, IconButton, LinearProgress } from "@mui/
 import { useRouter, useParams } from "next/navigation";
 import React, { useState, useCallback } from "react";
 
+import WritingCanvas from "@/components/canvas";
 import ActionButton from "@/components/ui/button/action-button";
-import WritingCanvas from "@/components/writing-canvas";
 
 import styles from "./page.module.css";
 
@@ -21,7 +21,10 @@ const hiraganaGroups: Record<string, { name: string; characters: string[] }> = {
   ya: { name: "や행", characters: ["や", "ゆ", "よ"] },
   ra: { name: "ら단", characters: ["ら", "り", "る", "れ", "ろ"] },
   wa: { name: "わ행", characters: ["わ", "を", "ん"] },
-  dakuten: { name: "탁음", characters: ["が", "ぎ", "ぐ", "げ", "ご", "ざ", "じ", "ず", "ぜ", "ぞ"] },
+  dakuten: {
+    name: "탁음",
+    characters: ["が", "ぎ", "ぐ", "げ", "ご", "ざ", "じ", "ず", "ぜ", "ぞ"],
+  },
   handakuten: { name: "반탁음", characters: ["ぱ", "ぴ", "ぷ", "ぺ", "ぽ"] },
 };
 
@@ -96,11 +99,7 @@ export default function HiraganaGroupPage() {
 
         {/* 진행도 바 */}
         <div className={styles.progressSection}>
-          <LinearProgress
-            variant="determinate"
-            value={progress}
-            className={styles.progressBar}
-          />
+          <LinearProgress variant="determinate" value={progress} className={styles.progressBar} />
           <Typography variant="caption" className={styles.progressText}>
             {Math.round(progress)}% 완료
           </Typography>
@@ -161,11 +160,7 @@ export default function HiraganaGroupPage() {
           ))}
         </div>
 
-        <IconButton
-          onClick={handleNext}
-          disabled={isLastCharacter}
-          className={styles.navButton}
-        >
+        <IconButton onClick={handleNext} disabled={isLastCharacter} className={styles.navButton}>
           <ArrowForward />
         </IconButton>
       </div>
