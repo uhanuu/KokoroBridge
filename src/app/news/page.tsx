@@ -23,8 +23,8 @@ const newsData = [
     content: "드디어 기다리던 히라가나와 가타카나 학습 서비스가 정식으로 출시되었습니다. 46개 문자를 체계적으로 학습하고, 실시간 필기 인식으로 정확한 쓰기 연습을 해보세요!",
     date: "2024년 3월 15일",
     category: "서비스 오픈",
-    type: "release",
-    priority: "high",
+    type: "release" as const,
+    priority: "high" as const,
     isRead: false,
     icon: NewReleases,
     color: "#22c55e",
@@ -43,8 +43,8 @@ const newsData = [
     content: "일본에서 자주 사용되는 기초 한자 100개부터 시작하여 점진적으로 확장될 예정입니다. 한자의 의미, 읽기, 쓰기를 종합적으로 학습할 수 있습니다.",
     date: "2024년 3월 12일",
     category: "출시 예정",
-    type: "upcoming",
-    priority: "medium",
+    type: "upcoming" as const,
+    priority: "medium" as const,
     isRead: false,
     icon: Schedule,
     color: "#f59e0b",
@@ -62,8 +62,8 @@ const newsData = [
     content: "실제 일본어 대화 상황을 시뮬레이션할 수 있는 AI 회화 기능의 베타 테스트가 시작되었습니다. 다양한 상황별 대화를 연습해보세요!",
     date: "2024년 3월 10일",
     category: "베타 테스트",
-    type: "beta",
-    priority: "medium",
+    type: "beta" as const,
+    priority: "medium" as const,
     isRead: true,
     icon: Announcement,
     color: "#8b5cf6",
@@ -81,8 +81,8 @@ const newsData = [
     content: "더욱 상세한 학습 진도를 확인할 수 있도록 대시보드가 개선되었습니다. 일별, 주별, 월별 학습 통계를 한눈에 확인하세요!",
     date: "2024년 3월 8일",
     category: "시스템 업데이트",
-    type: "update",
-    priority: "low",
+    type: "update" as const,
+    priority: "low" as const,
     isRead: true,
     icon: Update,
     color: "#3b82f6",
@@ -100,8 +100,8 @@ const newsData = [
     content: "새로 가입한 사용자를 위한 특별 이벤트입니다. 7일 연속 학습을 완료하면 특별 배지와 함께 프리미엄 기능을 1주일 무료로 체험할 수 있습니다!",
     date: "2024년 3월 5일",
     category: "이벤트",
-    type: "event",
-    priority: "medium",
+    type: "event" as const,
+    priority: "medium" as const,
     isRead: false,
     icon: Event,
     color: "#ef4444",
@@ -113,7 +113,7 @@ const newsData = [
       "추가 경험치 보너스"
     ]
   }
-];
+] as const;
 
 export default function NewsPage() {
   const [news, setNews] = useState(newsData);

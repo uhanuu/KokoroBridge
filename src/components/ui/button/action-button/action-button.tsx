@@ -11,6 +11,7 @@ interface ActionButtonProps {
   disabled?: boolean;
   variant?: "primary" | "locked" | "completed";
   className?: string;
+  hideIcon?: boolean;
 }
 
 export default function ActionButton({
@@ -19,6 +20,7 @@ export default function ActionButton({
   disabled = false,
   variant = "primary",
   className = "",
+  hideIcon = false,
 }: ActionButtonProps) {
   const buttonClass = `
     ${styles.actionButton}
@@ -30,15 +32,17 @@ export default function ActionButton({
   return (
     <button className={buttonClass} onClick={onClick} disabled={disabled}>
       <span className={styles.buttonText}>{text}</span>
-      <div className={styles.playIconCircle}>
-        {variant === "locked" ? (
-          <Lock className={styles.playIcon} />
-        ) : variant === "completed" ? (
-          <CheckCircle className={styles.playIcon} />
-        ) : (
-          <PlayArrow className={styles.playIcon} />
-        )}
-      </div>
+      {!hideIcon && (
+        <div className={styles.playIconCircle}>
+          {variant === "locked" ? (
+            <Lock className={styles.playIcon} />
+          ) : variant === "completed" ? (
+            <CheckCircle className={styles.playIcon} />
+          ) : (
+            <PlayArrow className={styles.playIcon} />
+          )}
+        </div>
+      )}
     </button>
   );
 }

@@ -3,7 +3,7 @@
 import { Warning, CheckCircle, Error, Info, Close } from "@mui/icons-material";
 import { Card, CardContent, Typography, IconButton } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
 
@@ -27,23 +27,23 @@ const dialogTypeConfig = {
   warning: {
     icon: Warning,
     color: "#f59e0b",
-    bgColor: "rgba(245, 158, 11, 0.1)"
+    bgColor: "rgba(245, 158, 11, 0.1)",
   },
   success: {
     icon: CheckCircle,
     color: "#22c55e",
-    bgColor: "rgba(34, 197, 94, 0.1)"
+    bgColor: "rgba(34, 197, 94, 0.1)",
   },
   error: {
     icon: Error,
     color: "#ef4444",
-    bgColor: "rgba(239, 68, 68, 0.1)"
+    bgColor: "rgba(239, 68, 68, 0.1)",
   },
   info: {
     icon: Info,
     color: "#3b82f6",
-    bgColor: "rgba(59, 130, 246, 0.1)"
-  }
+    bgColor: "rgba(59, 130, 246, 0.1)",
+  },
 };
 
 export default function ConfirmDialog({
@@ -57,10 +57,41 @@ export default function ConfirmDialog({
   mascotImage,
   onConfirm,
   onCancel,
-  onClose
+  onClose,
 }: ConfirmDialogProps) {
   const config = dialogTypeConfig[type];
   const IconComponent = config.icon;
+
+  useEffect(() => {
+    if (isOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = 'hidden';
+
+      const preventScroll = (e: Event) => {
+        e.preventDefault();
+      };
+
+      const preventWheel = (e: WheelEvent) => {
+        e.preventDefault();
+      };
+
+      const preventTouchMove = (e: TouchEvent) => {
+        e.preventDefault();
+      };
+
+      document.addEventListener('wheel', preventWheel, { passive: false });
+      document.addEventListener('touchmove', preventTouchMove, { passive: false });
+      document.addEventListener('scroll', preventScroll, { passive: false });
+
+      return () => {
+        document.body.style.overflow = originalStyle;
+        document.removeEventListener('wheel', preventWheel);
+        document.removeEventListener('touchmove', preventTouchMove);
+        document.removeEventListener('scroll', preventScroll);
+      };
+    }
+    return () => {};
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -89,11 +120,7 @@ export default function ConfirmDialog({
           <CardContent className={styles.content}>
             {/* 닫기 버튼 */}
             <div className={styles.closeSection}>
-              <IconButton
-                onClick={onClose}
-                className={styles.closeButton}
-                size="small"
-              >
+              <IconButton onClick={onClose} className={styles.closeButton} size="small">
                 <Close />
               </IconButton>
             </div>
@@ -113,21 +140,12 @@ export default function ConfirmDialog({
                     className={styles.typeIconOverlay}
                     style={{ backgroundColor: config.bgColor }}
                   >
-                    <IconComponent
-                      className={styles.typeIcon}
-                      style={{ color: config.color }}
-                    />
+                    <IconComponent className={styles.typeIcon} style={{ color: config.color }} />
                   </div>
                 </div>
               ) : (
-                <div
-                  className={styles.iconContainer}
-                  style={{ backgroundColor: config.bgColor }}
-                >
-                  <IconComponent
-                    className={styles.mainIcon}
-                    style={{ color: config.color }}
-                  />
+                <div className={styles.iconContainer} style={{ backgroundColor: config.bgColor }}>
+                  <IconComponent className={styles.mainIcon} style={{ color: config.color }} />
                 </div>
               )}
             </div>
@@ -150,6 +168,7 @@ export default function ConfirmDialog({
                   variant="primary"
                   onClick={handleCancel}
                   className={styles.cancelButton}
+                  hideIcon={true}
                 />
               )}
               <ActionButton
@@ -157,6 +176,7 @@ export default function ConfirmDialog({
                 variant={type === "error" ? "primary" : "primary"}
                 onClick={handleConfirm}
                 className={`${styles.confirmButton} ${styles[`${type}Button`]}`}
+                hideIcon={true}
               />
             </div>
           </CardContent>

@@ -11,8 +11,6 @@ import Image from "next/image";
 import React from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
-import ConfirmDialog from "@/components/ui/confirm-dialog";
-import { useConfirm } from "@/hooks/useConfirm";
 
 import styles from "./news-card.module.css";
 
@@ -50,27 +48,14 @@ const priorityColors = {
 };
 
 export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardProps) {
-  const { confirmProps, hideConfirm, confirm } = useConfirm();
-
   const handleToggleRead = () => {
     if (!news.isRead) {
       onMarkAsRead(news.id);
     }
   };
 
-  const handleDelete = async () => {
-    const confirmed = await confirm({
-      title: "소식 삭제",
-      message: "이 소식을 삭제하시겠습니까?\n삭제된 소식은 복구할 수 없습니다.",
-      type: "error",
-      confirmText: "삭제하기",
-      cancelText: "취소",
-      mascotImage: "/home-character.png"
-    });
-
-    if (confirmed) {
-      onDeleteNews(news.id);
-    }
+  const handleDelete = () => {
+    onDeleteNews(news.id);
   };
 
   const getPriorityColor = () => {
@@ -227,12 +212,6 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
           )}
         </div>
       </CardContent>
-
-      {/* 확인 다이얼로그 */}
-      <ConfirmDialog
-        {...confirmProps}
-        onClose={hideConfirm}
-      />
     </Card>
   );
 }

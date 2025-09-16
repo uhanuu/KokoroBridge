@@ -5,6 +5,8 @@ import { Card, CardContent, Typography, Chip, IconButton, Menu, MenuItem } from 
 import React, { useState, useMemo } from "react";
 
 import NewsCard from "../news-card/news-card";
+import ConfirmDialog from "@/components/ui/confirm-dialog";
+import { useConfirm } from "@/hooks/useConfirm";
 
 import styles from "./news-list.module.css";
 
@@ -49,6 +51,7 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
   const [sort, setSort] = useState<SortType>("latest");
   const [filterAnchor, setFilterAnchor] = useState<null | HTMLElement>(null);
   const [sortAnchor, setSortAnchor] = useState<null | HTMLElement>(null);
+  const { confirmProps, hideConfirm, confirm } = useConfirm();
 
   const filteredAndSortedNews = useMemo(() => {
     let filtered = [...news];
@@ -103,6 +106,21 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
   };
 
   const unreadCount = news.filter(item => !item.isRead).length;
+
+  const handleDeleteNews = async (newsId: number) => {
+    const confirmed = await confirm({
+      title: "소식 삭제",
+      message: "이 소식을 삭제하시겠습니까?\n삭제된 소식은 복구할 수 없습니다.",
+      type: "error",
+      confirmText: "삭제하기",
+      cancelText: "취소",
+      mascotImage: "/home-character.png"
+    });
+
+    if (confirmed) {
+      onDeleteNews(newsId);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -207,7 +225,7 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
               key={newsItem.id}
               news={newsItem}
               onMarkAsRead={onMarkAsRead}
-              onDeleteNews={onDeleteNews}
+              onDeleteNews={handleDeleteNews}
             />
           ))
         ) : (
@@ -223,6 +241,12 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
           </Card>
         )}
       </div>
+
+      {/* 확인 다이얼로그 */}
+      <ConfirmDialog
+        {...confirmProps}
+        onClose={hideConfirm}
+      />
     </div>
   );
 }
