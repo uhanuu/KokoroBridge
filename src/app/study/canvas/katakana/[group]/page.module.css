@@ -23,8 +23,8 @@
 }
 
 .backButton {
-  color: var(--text-primary) !important;
-  padding: var(--space-sm) !important;
+  color: var(--text-primary);
+  padding: var(--space-sm);
 }
 
 .headerContent {
@@ -32,15 +32,15 @@
 }
 
 .title {
-  color: var(--text-primary) !important;
-  font-weight: 700 !important;
-  margin: 0 !important;
-  margin-bottom: 4px !important;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 4px;
 }
 
 .subtitle {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* 진행도 섹션 */
@@ -51,28 +51,28 @@
 }
 
 .progressBar {
-  height: 8px !important;
-  border-radius: 4px !important;
-  background-color: var(--outline) !important;
+  height: 8px;
+  border-radius: 4px;
+  background-color: var(--outline);
 }
 
 .progressBar .MuiLinearProgress-bar {
-  background-color: #3b82f6 !important;
-  border-radius: 4px !important;
+  background-color: var(--info);
+  border-radius: 4px;
 }
 
 .progressText {
-  color: var(--text-tertiary) !important;
+  color: var(--text-tertiary);
   text-align: right;
 }
 
 /* 카드 */
 .card {
-  background-color: var(--surface) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
-  border: 1px solid var(--outline) !important;
-  transition: all 0.3s ease !important;
+  background-color: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
+  border: 1px solid var(--outline);
+  transition: all 0.3s ease;
 }
 
 .learningCard {
@@ -82,7 +82,7 @@
 }
 
 .learningContent {
-  padding: var(--space-xl) !important;
+  padding: var(--space-xl);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,9 +96,9 @@
 }
 
 .currentCharacter {
-  color: var(--text-primary) !important;
-  font-weight: 300 !important;
-  margin: 0 !important;
+  color: var(--text-primary);
+  font-weight: 300;
+  margin: 0;
   font-family: "Noto Sans CJK JP", "Hiragino Sans", "Yu Gothic", sans-serif;
 }
 
@@ -119,8 +119,8 @@
 }
 
 .instruction {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* 네비게이션 */
@@ -135,13 +135,13 @@
 }
 
 .navButton {
-  color: var(--text-primary) !important;
-  padding: var(--space-sm) !important;
+  color: var(--text-primary);
+  padding: var(--space-sm);
   flex-shrink: 0;
 }
 
 .navButton:disabled {
-  color: var(--text-tertiary) !important;
+  color: var(--text-tertiary);
   opacity: 0.5;
 }
 
@@ -174,20 +174,20 @@
 .characterButton:hover {
   background: var(--outline);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(var(--background-rgb), 0.1);
 }
 
 .characterButton.active {
-  background: #3b82f6;
-  color: white;
-  border-color: #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  background: var(--info);
+  color: var(--text-primary);
+  border-color: var(--info);
+  box-shadow: 0 4px 12px rgba(var(--info-rgb), 0.3);
 }
 
 .characterButton.completed {
-  background: #2563eb;
-  color: white;
-  border-color: #2563eb;
+  background: var(--info);
+  color: var(--text-primary);
+  border-color: var(--info);
 }
 
 /* 완료 섹션 */
@@ -215,12 +215,12 @@
   }
 
   .learningContent {
-    padding: var(--space-lg) !important;
+    padding: var(--space-lg);
     gap: var(--space-md);
   }
 
   .currentCharacter {
-    font-size: 4rem !important;
+    font-size: 4rem;
   }
 
   .characterButton {
@@ -245,12 +245,12 @@
   }
 
   .learningContent {
-    padding: var(--space-md) !important;
+    padding: var(--space-md);
     gap: var(--space-sm);
   }
 
   .currentCharacter {
-    font-size: 3rem !important;
+    font-size: 3rem;
   }
 
   .characterButton {
@@ -264,11 +264,11 @@
   }
 
   .title {
-    font-size: 1.5rem !important;
+    font-size: 1.5rem;
   }
 
   .instruction {
-    font-size: 14px !important;
+    font-size: 14px;
   }
 }
 

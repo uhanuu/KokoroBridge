@@ -48,12 +48,7 @@ export default function Navigation() {
               <div className={styles.notificationContainer}>
                 <Badge
                   badgeContent={item.notificationCount}
-                  classes={{ badge: styles.notificationBadge }}
-                  sx={{
-                    '& .MuiBadge-badge': {
-                      animation: 'none !important',
-                    }
-                  }}
+                  className={styles.customBadge}
                 >
                   <item.Icon className={styles.icon} />
                 </Badge>

@@ -7,16 +7,16 @@
   background: var(--surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--outline);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(var(--background-rgb), 0.08);
 }
 
 .canvasWrapper {
   position: relative;
   border: 2px solid var(--outline);
   border-radius: var(--radius-md);
-  background: #ffffff;
+  background: var(--text-primary);
   overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 2px 4px rgba(var(--background-rgb), 0.05);
 }
 
 .gridBackground {
@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #d1d5db;
+  color: var(--text-tertiary);
   font-weight: 300;
   pointer-events: none;
   user-select: none;
@@ -63,24 +63,24 @@
 }
 
 .controlButton {
-  background: var(--background) !important;
-  border: 1px solid var(--outline) !important;
-  color: var(--text-secondary) !important;
-  width: 44px !important;
-  height: 44px !important;
-  transition: all 0.2s ease !important;
+  background: var(--background);
+  border: 1px solid var(--outline);
+  color: var(--text-secondary);
+  width: 44px;
+  height: 44px;
+  transition: all 0.2s ease;
 }
 
 .controlButton:hover {
-  background: var(--outline) !important;
-  color: var(--text-primary) !important;
+  background: var(--outline);
+  color: var(--text-primary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 4px 12px rgba(var(--background-rgb), 0.15);
 }
 
 .controlButton:active {
   transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 4px rgba(var(--background-rgb), 0.1);
 }
 
 /* 모바일 터치 최적화 */
@@ -95,8 +95,8 @@
   }
 
   .controlButton {
-    width: 48px !important;
-    height: 48px !important;
+    width: 48px;
+    height: 48px;
   }
 
   .guideCharacter {
@@ -119,8 +119,8 @@
   }
 
   .controlButton {
-    width: 40px !important;
-    height: 40px !important;
+    width: 40px;
+    height: 40px;
   }
 }
 
@@ -135,18 +135,18 @@
 /* 다크 모드 지원 */
 @media (prefers-color-scheme: dark) {
   .canvasWrapper {
-    background: #1a1a1a;
-    border-color: #404040;
+    background: var(--surface);
+    border-color: var(--outline);
   }
 
   .guideCharacter {
-    color: #4a5568;
+    color: var(--text-secondary);
   }
 }
 
 /* 접근성 개선 */
 .drawingCanvas:focus {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--info);
   outline-offset: 2px;
 }
 
@@ -156,15 +156,15 @@
 }
 
 .canvasWrapper:hover {
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px rgba(var(--background-rgb), 0.1), 0 2px 8px rgba(var(--background-rgb), 0.1);
 }
 
 /* 라이트/다크 테마 전환 지원 */
 [data-theme="dark"] .canvasWrapper {
-  background: #1a1a1a;
-  border-color: #404040;
+  background: var(--surface);
+  border-color: var(--outline);
 }
 
 [data-theme="dark"] .guideCharacter {
-  color: #4a5568;
+  color: var(--text-secondary);
 }

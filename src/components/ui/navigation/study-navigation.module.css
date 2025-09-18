@@ -7,7 +7,7 @@
 }
 
 .quickStartCard {
-  background: white;
+  background: var(--text-primary);
   border: none;
   border-radius: 16px;
   padding: 20px;
@@ -15,7 +15,7 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.1);
+  box-shadow: 0 4px 12px rgba(var(--primary-500-rgb), 0.1);
   transition: all 0.2s ease;
   cursor: pointer;
   min-height: 100px;
@@ -23,26 +23,26 @@
 
 .quickStartCard:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.15);
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: 0 6px 20px rgba(var(--primary-500-rgb), 0.15);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--surface-variant) 100%);
 }
 
 .quickStartCard:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.1);
+  box-shadow: 0 2px 8px rgba(var(--primary-500-rgb), 0.1);
 }
 
 .quickStartIcon {
   font-size: 32px;
   font-weight: bold;
-  color: #4caf50;
+  color: var(--primary-500);
   line-height: 1;
 }
 
 .quickStartText {
   font-size: 14px;
   font-weight: 600;
-  color: #2e7d32;
+  color: var(--primary-700);
   text-align: center;
 }
 

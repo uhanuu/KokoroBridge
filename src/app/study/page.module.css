@@ -16,23 +16,23 @@
 }
 
 .title {
-  color: var(--text-primary) !important;
-  font-weight: 700 !important;
-  margin-bottom: var(--space-sm) !important;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
 }
 
 .subtitle {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* 카드 공통 스타일 */
 .card {
-  background-color: var(--surface) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
-  border: 1px solid var(--outline) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background-color: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
+  border: 1px solid var(--outline);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -44,17 +44,17 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18) !important;
+  box-shadow: 0 12px 48px rgba(var(--background-rgb), 0.18);
 }
 
 /* 카테고리 카드 */
 .categoriesCard {
-  padding: var(--space-lg) !important;
+  padding: var(--space-lg);
 }
 
 .categoriesGrid {
@@ -79,8 +79,8 @@
 
 .categoryItem:not(.locked):hover {
   transform: translateY(-4px);
-  border-color: #22c55e;
-  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-500);
+  box-shadow: 0 8px 24px rgba(var(--primary-500-rgb), 0.12), 0 4px 12px rgba(var(--background-rgb), 0.15);
 }
 
 .categoryItem.locked {
@@ -94,7 +94,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(var(--background-rgb), 0.1);
   z-index: 1;
   border-radius: var(--radius-lg);
 }
@@ -127,7 +127,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(var(--background-rgb), 0.7);
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -137,8 +137,8 @@
 }
 
 .lockIcon {
-  color: white !important;
-  font-size: 16px !important;
+  color: var(--text-primary);
+  font-size: 16px;
 }
 
 .categoryInfo {
@@ -146,21 +146,21 @@
 }
 
 .categoryTitle {
-  color: var(--text-primary) !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-  margin-bottom: 2px !important;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 2px;
 }
 
 .categorySubtitle {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
-  font-size: 14px !important;
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 14px;
 }
 
 .categoryDescription {
-  color: var(--text-tertiary) !important;
-  margin: 0 !important;
+  color: var(--text-tertiary);
+  margin: 0;
   line-height: 1.5;
 }
 
@@ -178,20 +178,20 @@
 }
 
 .progressLabel {
-  color: var(--text-secondary) !important;
-  font-weight: 500 !important;
-  font-size: 12px !important;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 12px;
 }
 
 .progressStats {
-  color: var(--text-tertiary) !important;
-  font-size: 12px !important;
+  color: var(--text-tertiary);
+  font-size: 12px;
 }
 
 .progressBar {
-  height: 6px !important;
-  border-radius: 3px !important;
-  background-color: var(--surface-variant) !important;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--surface-variant);
 }
 
 /* 모바일 반응형 */
@@ -220,7 +220,7 @@
   }
 
   .title {
-    font-size: 28px !important;
+    font-size: 28px;
   }
 }
 
@@ -252,10 +252,10 @@
   }
 
   .title {
-    font-size: 24px !important;
+    font-size: 24px;
   }
 
   .subtitle {
-    font-size: 14px !important;
+    font-size: 14px;
   }
 }

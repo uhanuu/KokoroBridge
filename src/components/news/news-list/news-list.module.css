@@ -6,11 +6,11 @@
 
 /* 카드 기본 스타일 */
 .card {
-  background-color: var(--surface) !important;
-  border-radius: 20px !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
-  border: 1px solid var(--outline) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background-color: var(--surface);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(var(--background-rgb), 0.08);
+  border: 1px solid var(--outline);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -22,7 +22,7 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
 }
 
 /* 컨트롤 헤더 */
@@ -41,15 +41,15 @@
 }
 
 .sectionTitle {
-  color: var(--text-primary) !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
 }
 
 .sectionSubtitle {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
-  font-size: 14px !important;
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 14px;
 }
 
 .controlsCompact {
@@ -60,72 +60,72 @@
 }
 
 .filterChip {
-  background: var(--surface) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--outline) !important;
-  font-weight: 500 !important;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--outline);
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .filterChip:hover {
-  background: var(--surface-variant) !important;
+  background: var(--surface-variant);
   transform: translateY(-1px);
 }
 
 .filterChip[data-variant="filled"] {
-  background: var(--primary-100) !important;
-  color: var(--primary-700) !important;
-  border-color: var(--primary-300) !important;
+  background: var(--primary-100);
+  color: var(--primary-700);
+  border-color: var(--primary-300);
 }
 
 .sortChip {
-  background: var(--surface) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--outline) !important;
-  font-weight: 500 !important;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--outline);
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .sortChip:hover {
-  background: var(--surface-variant) !important;
+  background: var(--surface-variant);
   transform: translateY(-1px);
 }
 
 /* 메뉴 스타일 */
 .menuPaper {
-  background: var(--surface) !important;
-  border: 1px solid var(--outline) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15) !important;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 48px rgba(var(--background-rgb), 0.15);
   margin-top: var(--space-xs);
   min-width: 140px;
   backdrop-filter: blur(8px);
 }
 
 .menuItem {
-  color: var(--text-primary) !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  min-height: 36px !important;
-  padding: var(--space-xs) var(--space-md) !important;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  min-height: 36px;
+  padding: var(--space-xs) var(--space-md);
   transition: all 0.15s ease;
 }
 
 .menuItem:hover {
-  background: var(--surface-variant) !important;
+  background: var(--surface-variant);
   transform: translateX(2px);
 }
 
 .menuItem.Mui-selected {
-  background: var(--primary-50) !important;
-  color: var(--primary-700) !important;
-  font-weight: 600 !important;
+  background: var(--primary-50);
+  color: var(--primary-700);
+  font-weight: 600;
 }
 
 .menuItem.Mui-selected:hover {
-  background: var(--primary-100) !important;
+  background: var(--primary-100);
 }
 
 /* 새소식 목록 */
@@ -148,14 +148,14 @@
 }
 
 .emptyTitle {
-  color: var(--text-primary) !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
 }
 
 .emptyMessage {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
+  color: var(--text-secondary);
+  margin: 0;
   max-width: 400px;
 }
 
@@ -190,7 +190,7 @@
   .sortChip {
     min-width: 100px;
     height: 32px;
-    font-size: 13px !important;
+    font-size: 13px;
   }
 }
 
@@ -217,16 +217,16 @@
   .sortChip {
     min-width: 70px;
     height: 28px;
-    font-size: 11px !important;
-    padding: 0 var(--space-xs) !important;
+    font-size: 11px;
+    padding: 0 var(--space-xs);
   }
 
   .sectionTitle {
-    font-size: 16px !important;
+    font-size: 16px;
   }
 
   .sectionSubtitle {
-    font-size: 12px !important;
+    font-size: 12px;
   }
 
   .emptyState {
@@ -234,7 +234,7 @@
   }
 
   .emptyTitle {
-    font-size: 16px !important;
+    font-size: 16px;
   }
 
   .newsList {

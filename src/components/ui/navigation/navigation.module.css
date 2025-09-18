@@ -3,13 +3,13 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(26, 26, 26, 0.95);
+  background: var(--surface);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(var(--text-primary-rgb), 0.1);
   border-top-left-radius: var(--radius-2xl);
   border-top-right-radius: var(--radius-2xl);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 -4px 20px rgba(var(--background-rgb), 0.3);
   z-index: var(--z-navigation);
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -50,7 +50,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.05));
+  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.2), rgba(var(--primary-500-rgb), 0.05));
   opacity: 0;
   transform: scale(0.8);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -62,7 +62,7 @@
 }
 
 .navItem.active {
-  color: #22c55e;
+  color: var(--primary-500);
 }
 
 .navItem.active::before {
@@ -78,31 +78,31 @@
   transform: translateX(-50%);
   width: 22px;
   height: 2px;
-  background: linear-gradient(90deg, #22c55e, #16a34a);
+  background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
   border-radius: 2px;
 }
 
 /* IconButton styling */
 .iconButton {
-  color: inherit !important;
-  padding: var(--space-sm) !important;
-  transition: all var(--duration-normal) !important;
+  color: inherit;
+  padding: var(--space-sm);
+  transition: all var(--duration-normal);
 }
 
 .iconButton:hover {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .icon {
-  font-size: 22px !important;
+  font-size: 22px;
   color: inherit;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navItem.active .icon {
-  color: #22c55e;
+  color: var(--primary-500);
   transform: scale(1.15);
-  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.3));
+  filter: drop-shadow(0 0 8px rgba(var(--primary-500-rgb), 0.3));
 }
 
 /* Label */
@@ -118,9 +118,9 @@
 
 .navItem.active .label {
   font-weight: 700;
-  color: #22c55e;
+  color: var(--primary-500);
   opacity: 1;
-  text-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+  text-shadow: 0 0 8px rgba(var(--primary-500-rgb), 0.3);
 }
 
 /* 안전 영역 */
@@ -142,7 +142,7 @@
   }
 
   .icon {
-    font-size: 24px !important;
+    font-size: 24px;
   }
 
   .label {
@@ -164,7 +164,7 @@
   }
 
   .icon {
-    font-size: 24px !important;
+    font-size: 24px;
     padding: 3px 0;
   }
 
@@ -181,19 +181,19 @@
   justify-content: center;
 }
 
-.notificationBadge {
-  background-color: #ef4444 !important;
-  color: white !important;
-  font-size: 10px !important;
-  font-weight: 600 !important;
-  min-width: 16px !important;
-  height: 16px !important;
-  border-radius: 8px !important;
-  animation: none !important;
-  transform: translateX(4px) translateY(-2px) !important;
-  transition: none !important;
-  right: -2px !important;
-  top: -2px !important;
+.customBadge .MuiBadge-badge {
+  background-color: var(--error);
+  color: var(--text-primary);
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  animation: none;
+  transform: translateX(4px) translateY(-2px);
+  transition: none;
+  right: -2px;
+  top: -2px;
 }
 
 /* 접근성 */
@@ -203,8 +203,8 @@
   .icon,
   .iconButton,
   .notificationBadge {
-    transition: none !important;
-    animation: none !important;
+    transition: none;
+    animation: none;
   }
 }
 
@@ -215,12 +215,12 @@
   }
 
   .navItem.active {
-    background-color: #22c55e;
-    color: white;
+    background-color: var(--primary-500);
+    color: var(--text-primary);
   }
 
   .navItem.active .icon,
   .navItem.active .label {
-    color: white;
+    color: var(--text-primary);
   }
 }

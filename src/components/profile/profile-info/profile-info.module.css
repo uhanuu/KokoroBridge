@@ -1,0 +1,287 @@
+/* 카드 공통 스타일 */
+.card {
+  background-color: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
+  border: 1px solid var(--outline);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 48px rgba(var(--background-rgb), 0.18);
+}
+
+/* 프로필 카드 - 청록 테마 */
+.profileCard {
+  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.08), rgba(5, 150, 105, 0.03));
+  border: 1px solid rgba(var(--primary-500-rgb), 0.25);
+}
+
+.profileCard::before {
+  background: linear-gradient(90deg, transparent, rgba(var(--primary-500-rgb), 0.12), transparent);
+}
+
+.profileCard:hover {
+  border-color: rgba(var(--primary-500-rgb), 0.4);
+  box-shadow: 0 12px 48px rgba(var(--primary-500-rgb), 0.18);
+}
+
+.profileContent {
+  padding: var(--space-xl);
+}
+
+.profileHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.avatarSection {
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  font-size: 32px;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  border: 3px solid rgba(var(--primary-500-rgb), 0.3);
+  box-shadow: 0 8px 20px rgba(var(--primary-500-rgb), 0.2);
+}
+
+.profileInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.userName {
+  color: var(--primary-500);
+  font-weight: 800;
+  font-size: 26px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.userEmail {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin: 0;
+  font-weight: 500;
+}
+
+.levelBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(var(--primary-500-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-500-rgb), 0.3);
+  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  margin-top: var(--space-sm);
+  align-self: flex-start;
+}
+
+.levelIcon {
+  color: var(--primary-500);
+  font-size: 18px;
+}
+
+.levelText {
+  color: var(--primary-500);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* 프로필 통계 */
+.profileStats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--outline);
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+.statItem:hover {
+  background: rgba(var(--primary-500-rgb), 0.05);
+  border-color: rgba(var(--primary-500-rgb), 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(var(--primary-500-rgb), 0.1);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.15), rgba(var(--primary-500-rgb), 0.05));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon {
+  color: var(--primary-500);
+  font-size: 22px;
+}
+
+.statContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statNumber {
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 22px;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.statLabel {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .profileHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-md);
+  }
+
+  .avatar {
+    width: 75px;
+    height: 75px;
+    font-size: 30px;
+  }
+
+  .userName {
+    font-size: 24px;
+  }
+
+  .userEmail {
+    font-size: 14px;
+  }
+
+  .levelText {
+    font-size: 12px;
+  }
+
+  .profileStats {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .statItem {
+    padding: var(--space-md);
+  }
+
+  .statNumber {
+    font-size: 20px;
+  }
+
+  .statLabel {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profileContent {
+    padding: var(--space-lg);
+  }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+
+  .userName {
+    font-size: 20px;
+  }
+
+  .userEmail {
+    font-size: 13px;
+  }
+
+  .levelText {
+    font-size: 11px;
+  }
+
+  .statIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon {
+    font-size: 18px;
+  }
+
+  .statNumber {
+    font-size: 16px;
+  }
+
+  .statLabel {
+    font-size: 10px;
+  }
+}
+
+/* 애니메이션 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: slideUp 0.6s ease-out;
+}
+
+/* 접근성 */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .statItem {
+    animation: none;
+    transition: none;
+  }
+}

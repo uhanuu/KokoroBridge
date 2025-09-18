@@ -1,7 +1,7 @@
 .actionButton {
   width: 100%;
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  color: white;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: var(--text-primary);
   border: none;
   border-radius: var(--radius-lg);
   padding: var(--space-sm) var(--space-md);
@@ -13,7 +13,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(var(--primary-500-rgb), 0.2), 0 1px 3px rgba(var(--background-rgb), 0.1);
   margin-top: var(--space-sm);
   position: relative;
   z-index: 2;
@@ -29,7 +29,7 @@
   left: -150%;
   width: 150%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.3), transparent);
   transition: left 0.8s ease;
   z-index: 1;
 }
@@ -40,30 +40,30 @@
 
 .actionButton:not(:disabled):hover {
   transform: translateY(-1px);
-  box-shadow: 0 3px 12px rgba(34, 197, 94, 0.3), 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 12px rgba(var(--primary-500-rgb), 0.3), 0 2px 6px rgba(var(--background-rgb), 0.1);
 }
 
 .actionButton:active {
   transform: translateY(0) scale(0.96);
-  box-shadow: 0 1px 3px rgba(34, 197, 94, 0.2);
+  box-shadow: 0 1px 3px rgba(var(--primary-500-rgb), 0.2);
   transition: all 0.1s ease;
 }
 
 .actionButton.lockedButton {
-  background: linear-gradient(135deg, #6a6a6a, #5a5a5a);
+  background: linear-gradient(135deg, var(--surface-variant), var(--surface-variant));
   cursor: not-allowed;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.2);
 }
 
 .actionButton.completedButton {
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
   cursor: default;
-  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 1px 3px rgba(var(--primary-500-rgb), 0.3);
 }
 
 .actionButton.completedButton:hover {
-  transform: none !important;
-  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3) !important;
+  transform: none;
+  box-shadow: 0 1px 3px rgba(var(--primary-500-rgb), 0.3);
 }
 
 .actionButton.completedButton::before {
@@ -71,15 +71,15 @@
 }
 
 .actionButton.completedButton .playIconCircle:hover {
-  transform: none !important;
-  background-color: rgba(255, 255, 255, 0.2) !important;
+  transform: none;
+  background-color: rgba(var(--text-primary-rgb), 0.2);
 }
 
 .actionButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  transform: none !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transform: none;
+  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.1);
 }
 
 .actionButton:disabled::before {
@@ -87,13 +87,13 @@
 }
 
 .actionButton:disabled:hover {
-  transform: none !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  transform: none;
+  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.1);
 }
 
 .actionButton:disabled .playIconCircle {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  transform: none !important;
+  background-color: rgba(var(--text-primary-rgb), 0.1);
+  transform: none;
 }
 
 .buttonText {
@@ -106,7 +106,7 @@
 .playIconCircle {
   width: 22px;
   height: 22px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(var(--text-primary-rgb), 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -117,22 +117,67 @@
 }
 
 .playIcon {
-  font-size: 13px !important;
-  color: white;
+  font-size: 13px;
+  color: var(--text-primary);
   margin-left: 1px;
 }
 
 .actionButton:not(:disabled):hover .playIconCircle {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(var(--text-primary-rgb), 0.3);
   transform: scale(1.1);
 }
 
-/* 모바일 반응형 */
-@media (max-width: 480px) {
+/* 반응형 디자인 */
+/* 데스크톱 (1024px 이상) */
+@media (min-width: 1024px) {
+  .actionButton {
+    font-size: 15px;
+    padding: var(--space-md) var(--space-lg);
+    min-width: 140px;
+  }
+
+  .buttonText {
+    font-size: 15px;
+  }
+
+  .playIconCircle {
+    width: 24px;
+    height: 24px;
+  }
+
+  .playIcon {
+    font-size: 14px;
+  }
+}
+
+/* 태블릿 (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
   .actionButton {
     font-size: 14px;
-    padding: var(--space-md);
-    justify-content: center;
+    padding: var(--space-sm) var(--space-md);
+    min-width: 130px;
+  }
+
+  .buttonText {
+    font-size: 14px;
+  }
+
+  .playIconCircle {
+    width: 22px;
+    height: 22px;
+  }
+
+  .playIcon {
+    font-size: 13px;
+  }
+}
+
+/* 작은 태블릿/큰 모바일 (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .actionButton {
+    font-size: 14px;
+    padding: var(--space-sm) var(--space-md);
+    min-width: 120px;
   }
 
   .buttonText {
@@ -145,6 +190,52 @@
   }
 
   .playIcon {
-    font-size: 12px !important;
+    font-size: 12px;
+  }
+}
+
+/* 모바일 (480px 이하) */
+@media (max-width: 480px) {
+  .actionButton {
+    font-size: 13px;
+    padding: var(--space-sm);
+    justify-content: center;
+    min-width: 100px;
+  }
+
+  .buttonText {
+    font-size: 13px;
+  }
+
+  .playIconCircle {
+    width: 18px;
+    height: 18px;
+  }
+
+  .playIcon {
+    font-size: 11px;
+  }
+}
+
+/* 매우 작은 모바일 (360px 이하) */
+@media (max-width: 360px) {
+  .actionButton {
+    font-size: 12px;
+    padding: 8px 12px;
+    min-width: 80px;
+    gap: 4px;
+  }
+
+  .buttonText {
+    font-size: 12px;
+  }
+
+  .playIconCircle {
+    width: 16px;
+    height: 16px;
+  }
+
+  .playIcon {
+    font-size: 10px;
   }
 }

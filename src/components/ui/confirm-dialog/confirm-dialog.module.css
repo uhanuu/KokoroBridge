@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(var(--background-rgb), 0.5);
   backdrop-filter: blur(4px);
   z-index: 9999;
   display: flex;
@@ -44,10 +44,10 @@
 
 /* 다이얼로그 카드 */
 .dialog {
-  background-color: var(--surface) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
-  border: 1px solid var(--outline) !important;
+  background-color: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(var(--background-rgb), 0.3);
+  border: 1px solid var(--outline);
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -60,12 +60,12 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.2), transparent);
 }
 
 /* 콘텐츠 */
 .content {
-  padding: var(--space-xl) !important;
+  padding: var(--space-xl);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,9 +83,9 @@
 }
 
 .title {
-  color: var(--text-primary) !important;
-  font-weight: 700 !important;
-  margin: 0 !important;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin: 0;
   line-height: 1.3;
   position: absolute;
   left: 50%;
@@ -94,18 +94,18 @@
 }
 
 .closeButton {
-  color: var(--text-tertiary) !important;
-  background: var(--background) !important;
-  border: 1px solid var(--outline) !important;
-  border-radius: 50% !important;
-  position: absolute !important;
-  right: 0 !important;
-  left: auto !important;
+  color: var(--text-tertiary);
+  background: var(--background);
+  border: 1px solid var(--outline);
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  left: auto;
 }
 
 .closeButton:hover {
-  background: var(--surface-variant) !important;
-  color: var(--text-secondary) !important;
+  background: var(--surface-variant);
+  color: var(--text-secondary);
 }
 
 /* 아이콘 섹션 */
@@ -127,7 +127,7 @@
 }
 
 .mainIcon {
-  font-size: 40px !important;
+  font-size: 40px;
 }
 
 /* 마스코트 컨테이너 */
@@ -145,7 +145,7 @@
 }
 
 .typeIcon {
-  font-size: 18px !important;
+  font-size: 18px;
 }
 
 /* 메시지 섹션 */
@@ -160,8 +160,8 @@
 
 
 .message {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
+  color: var(--text-secondary);
+  margin: 0;
   line-height: 1.5;
   word-break: break-word;
 }
@@ -178,88 +178,88 @@
 .cancelButton {
   flex: 1;
   min-width: 120px;
-  background: var(--background) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--outline) !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  background: var(--background);
+  color: var(--text-primary);
+  border: 1px solid var(--outline);
+  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.1);
 }
 
 .cancelButton:hover {
-  background: var(--surface-variant) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
-  transform: none !important;
+  background: var(--surface-variant);
+  box-shadow: 0 2px 6px rgba(var(--background-rgb), 0.15);
+  transform: none;
 }
 
 .cancelButton::before {
-  display: none !important;
+  display: none;
 }
 
 .confirmButton {
   flex: 1;
   min-width: 120px;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .confirmButton:hover {
-  transform: none !important;
-  box-shadow: none !important;
+  transform: none;
+  box-shadow: none;
 }
 
 .confirmButton::before {
-  display: none !important;
+  display: none;
 }
 
 /* 타입별 확인 버튼 스타일 */
 .warningButton {
-  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--warning), var(--warning-600));
+  color: var(--text-primary);
+  border: none;
+  box-shadow: none;
 }
 
 .warningButton:hover {
-  background: linear-gradient(135deg, #d97706, #b45309) !important;
-  transform: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--warning-600), var(--warning-700));
+  transform: none;
+  box-shadow: none;
 }
 
 .successButton {
-  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: var(--text-primary);
+  border: none;
+  box-shadow: none;
 }
 
 .successButton:hover {
-  background: linear-gradient(135deg, #16a34a, #15803d) !important;
-  transform: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  transform: none;
+  box-shadow: none;
 }
 
 .errorButton {
-  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--error), var(--error-600));
+  color: var(--text-primary);
+  border: none;
+  box-shadow: none;
 }
 
 .errorButton:hover {
-  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-  transform: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--error-600), var(--error-700));
+  transform: none;
+  box-shadow: none;
 }
 
 .infoButton {
-  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-  color: white !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--info), var(--info));
+  color: var(--text-primary);
+  border: none;
+  box-shadow: none;
 }
 
 .infoButton:hover {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-  transform: none !important;
-  box-shadow: none !important;
+  background: linear-gradient(135deg, var(--info), var(--info-700));
+  transform: none;
+  box-shadow: none;
 }
 
 /* 반응형 디자인 */
@@ -270,7 +270,7 @@
   }
 
   .content {
-    padding: var(--space-lg) !important;
+    padding: var(--space-lg);
     gap: var(--space-lg);
   }
 
@@ -285,7 +285,7 @@
   }
 
   .mainIcon {
-    font-size: 36px !important;
+    font-size: 36px;
   }
 }
 
@@ -300,7 +300,7 @@
   }
 
   .content {
-    padding: var(--space-lg) !important;
+    padding: var(--space-lg);
     gap: var(--space-md);
   }
 
@@ -315,16 +315,16 @@
   }
 
   .mainIcon {
-    font-size: 32px !important;
+    font-size: 32px;
   }
 
   .title {
-    font-size: 20px !important;
+    font-size: 20px;
     line-height: 1.4;
   }
 
   .message {
-    font-size: 15px !important;
+    font-size: 15px;
     line-height: 1.5;
   }
 
@@ -352,7 +352,7 @@
   }
 
   .content {
-    padding: var(--space-md) !important;
+    padding: var(--space-md);
     gap: var(--space-md);
   }
 
@@ -367,16 +367,16 @@
   }
 
   .mainIcon {
-    font-size: 30px !important;
+    font-size: 30px;
   }
 
   .title {
-    font-size: 19px !important;
+    font-size: 19px;
     text-align: center;
   }
 
   .message {
-    font-size: 14px !important;
+    font-size: 14px;
     text-align: center;
   }
 }
@@ -392,7 +392,7 @@
   }
 
   .content {
-    padding: var(--space-md) !important;
+    padding: var(--space-md);
     gap: var(--space-sm);
   }
 
@@ -408,16 +408,16 @@
   }
 
   .mainIcon {
-    font-size: 28px !important;
+    font-size: 28px;
   }
 
   .title {
-    font-size: 18px !important;
+    font-size: 18px;
     text-align: center;
   }
 
   .message {
-    font-size: 13px !important;
+    font-size: 13px;
     text-align: center;
     line-height: 1.6;
   }
@@ -444,7 +444,7 @@
   }
 
   .content {
-    padding: var(--space-sm) !important;
+    padding: var(--space-sm);
   }
 
   .mascotImage {
@@ -458,14 +458,14 @@
   }
 
   .mainIcon {
-    font-size: 24px !important;
+    font-size: 24px;
   }
 
   .title {
-    font-size: 16px !important;
+    font-size: 16px;
   }
 
   .message {
-    font-size: 12px !important;
+    font-size: 12px;
   }
 }

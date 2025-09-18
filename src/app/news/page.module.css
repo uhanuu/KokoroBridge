@@ -16,23 +16,23 @@
 }
 
 .title {
-  color: var(--text-primary) !important;
-  font-weight: 700 !important;
-  margin-bottom: var(--space-sm) !important;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
 }
 
 .subtitle {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* 카드 공통 스타일 */
 .card {
-  background-color: var(--surface) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
-  border: 1px solid var(--outline) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background-color: var(--surface);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
+  border: 1px solid var(--outline);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -44,12 +44,12 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
 }
 
 /* 통계 카드 */
 .statsCard {
-  padding: var(--space-md) !important;
+  padding: var(--space-md);
 }
 
 .statsContent {
@@ -83,17 +83,17 @@
 }
 
 .statNumber {
-  color: var(--primary-600) !important;
-  font-weight: 700 !important;
-  margin-bottom: var(--space-xs) !important;
+  color: var(--primary-600);
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
   line-height: 1.1;
-  font-size: 32px !important;
+  font-size: 32px;
 }
 
 .statLabel {
-  color: var(--text-secondary) !important;
-  font-weight: 500 !important;
-  font-size: 13px !important;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.3px;
   line-height: 1.2;
@@ -106,30 +106,30 @@
   max-width: 200px;
   min-width: 140px;
   height: 36px;
-  font-size: 12px !important;
+  font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .deleteButton {
-  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-  color: white !important;
-  border: none !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(135deg, var(--error), var(--error-600));
+  color: var(--text-primary);
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(var(--error-rgb), 0.2), 0 1px 3px rgba(var(--background-rgb), 0.1);
 }
 
 .deleteButton:hover {
-  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 3px 12px rgba(239, 68, 68, 0.3), 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(135deg, var(--error-600), var(--error-700));
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(var(--error-rgb), 0.3), 0 2px 6px rgba(var(--background-rgb), 0.1);
 }
 
 .deleteButton:active {
-  transform: translateY(0) scale(0.96) !important;
-  box-shadow: 0 1px 3px rgba(239, 68, 68, 0.2) !important;
-  transition: all 0.1s ease !important;
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 1px 3px rgba(var(--error-rgb), 0.2);
+  transition: all 0.1s ease;
 }
 
 /* 중간 태블릿 반응형 (600px~768px) */
@@ -169,19 +169,19 @@
     max-width: 180px;
     min-width: 130px;
     height: 36px;
-    font-size: 11px !important;
+    font-size: 11px;
   }
 
   .title {
-    font-size: 26px !important;
+    font-size: 26px;
   }
 
   .statNumber {
-    font-size: 28px !important;
+    font-size: 28px;
   }
 
   .statLabel {
-    font-size: 12px !important;
+    font-size: 12px;
   }
 }
 
@@ -222,19 +222,19 @@
     max-width: 160px;
     min-width: 120px;
     height: 34px;
-    font-size: 10px !important;
+    font-size: 10px;
   }
 
   .title {
-    font-size: 24px !important;
+    font-size: 24px;
   }
 
   .statNumber {
-    font-size: 24px !important;
+    font-size: 24px;
   }
 
   .statLabel {
-    font-size: 11px !important;
+    font-size: 11px;
   }
 }
 
@@ -274,24 +274,24 @@
     max-width: 140px;
     min-width: 100px;
     height: 34px;
-    font-size: 10px !important;
+    font-size: 10px;
   }
 
   .statNumber {
-    font-size: 22px !important;
-    margin-bottom: var(--space-xs) !important;
+    font-size: 22px;
+    margin-bottom: var(--space-xs);
   }
 
   .statLabel {
-    font-size: 10px !important;
+    font-size: 10px;
   }
 
   .title {
-    font-size: 22px !important;
+    font-size: 22px;
   }
 
   .subtitle {
-    font-size: 13px !important;
+    font-size: 13px;
   }
 }
 
@@ -319,6 +319,6 @@
     max-width: 180px;
     min-width: 140px;
     height: 36px;
-    font-size: 11px !important;
+    font-size: 11px;
   }
 }

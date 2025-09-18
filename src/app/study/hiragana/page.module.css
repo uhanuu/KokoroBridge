@@ -21,8 +21,8 @@
 }
 
 .backButton {
-  color: var(--text-primary) !important;
-  padding: var(--space-sm) !important;
+  color: var(--text-primary);
+  padding: var(--space-sm);
 }
 
 .headerContent {
@@ -30,24 +30,24 @@
 }
 
 .title {
-  color: var(--text-primary) !important;
-  font-weight: 700 !important;
-  margin: 0 !important;
-  margin-bottom: 4px !important;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 4px;
 }
 
 .subtitle {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* 카드 공통 스타일 */
 .card {
-  background-color: var(--surface) !important;
-  border-radius: 20px !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
-  border: 1px solid var(--outline) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background-color: var(--surface);
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(var(--background-rgb), 0.08);
+  border: 1px solid var(--outline);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -60,12 +60,12 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.15);
 }
 
 /* 그룹 그리드 */
@@ -76,11 +76,11 @@
 }
 
 .groupCard {
-  padding: 0 !important;
+  padding: 0;
 }
 
 .groupContent {
-  padding: var(--space-lg) !important;
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
@@ -113,16 +113,16 @@
 }
 
 .groupName {
-  color: var(--text-primary) !important;
-  font-weight: 600 !important;
-  margin: 0 !important;
-  margin-bottom: 2px !important;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 2px;
 }
 
 .groupRomaji {
-  color: var(--text-secondary) !important;
-  margin: 0 !important;
-  font-size: 13px !important;
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 13px;
 }
 
 /* 문자 그리드 */
@@ -169,20 +169,20 @@
 }
 
 .progressLabel {
-  color: var(--text-secondary) !important;
-  font-weight: 500 !important;
-  font-size: 12px !important;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 12px;
 }
 
 .progressStats {
-  color: var(--text-tertiary) !important;
-  font-size: 12px !important;
+  color: var(--text-tertiary);
+  font-size: 12px;
 }
 
 .progressBar {
-  height: 6px !important;
-  border-radius: 3px !important;
-  background-color: var(--surface-variant) !important;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--surface-variant);
 }
 
 /* 모바일 반응형 */
@@ -198,7 +198,7 @@
   }
 
   .groupContent {
-    padding: var(--space-md) !important;
+    padding: var(--space-md);
     gap: var(--space-sm);
   }
 
@@ -220,7 +220,7 @@
   }
 
   .title {
-    font-size: 28px !important;
+    font-size: 28px;
   }
 }
 
@@ -238,7 +238,7 @@
   }
 
   .groupContent {
-    padding: var(--space-sm) !important;
+    padding: var(--space-sm);
   }
 
   .groupIcon {
@@ -259,10 +259,10 @@
   }
 
   .title {
-    font-size: 24px !important;
+    font-size: 24px;
   }
 
   .subtitle {
-    font-size: 14px !important;
+    font-size: 14px;
   }
 }

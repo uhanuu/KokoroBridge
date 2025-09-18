@@ -1,0 +1,244 @@
+/* 기본 카드 스타일 */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--outline);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-normal) cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", sans-serif;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
+}
+
+.cardContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+/* 변형 스타일 */
+.variant-default {
+  background-color: var(--surface);
+  border-color: var(--outline);
+}
+
+.variant-gradient {
+  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
+  border-color: var(--outline);
+}
+
+.variant-elevated {
+  background-color: var(--surface);
+  border-color: var(--outline-variant);
+}
+
+.variant-flat {
+  background-color: var(--surface-variant);
+  border: none;
+  box-shadow: none;
+}
+
+/* 크기 스타일 */
+.size-sm {
+  min-height: 80px;
+}
+
+.size-md {
+  min-height: 120px;
+}
+
+.size-lg {
+  min-height: 180px;
+}
+
+/* 패딩 스타일 */
+.padding-none .cardContent {
+  padding: 0;
+}
+
+.padding-sm .cardContent {
+  padding: var(--space-sm);
+}
+
+.padding-md .cardContent {
+  padding: var(--space-md);
+}
+
+.padding-lg .cardContent {
+  padding: var(--space-lg);
+}
+
+.padding-xl .cardContent {
+  padding: var(--space-xl);
+}
+
+/* 보더 레디우스 */
+.radius-sm {
+  border-radius: var(--radius-sm);
+}
+
+.radius-md {
+  border-radius: var(--radius-md);
+}
+
+.radius-lg {
+  border-radius: var(--radius-lg);
+}
+
+.radius-xl {
+  border-radius: var(--radius-xl);
+}
+
+.radius-2xl {
+  border-radius: var(--radius-2xl);
+}
+
+/* 그림자 스타일 */
+.shadow-none {
+  box-shadow: none;
+}
+
+.shadow-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* 호버 효과 */
+.hover:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 25px -5px rgba(var(--background-rgb), 0.3),
+    0 8px 32px -12px rgba(var(--background-rgb), 0.4),
+    inset 0 1px 0 rgba(var(--text-primary-rgb), 0.1);
+}
+
+.hover:hover::before {
+  opacity: 0.8;
+}
+
+
+/* 클릭 가능한 카드 */
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:active {
+  transform: translateY(-1px);
+  transition: all 0.1s ease;
+}
+
+/* 애니메이션 */
+.animated {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 특별한 카드 변형들 */
+.variant-gradient.primary {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: var(--text-primary);
+  border: none;
+}
+
+.variant-gradient.info {
+  background: linear-gradient(135deg, var(--info-700), var(--info), var(--info-400));
+  color: var(--text-primary);
+  border: none;
+}
+
+.variant-gradient.accent {
+  background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
+  color: var(--text-primary);
+  border: none;
+}
+
+.variant-gradient.error {
+  background: linear-gradient(135deg, var(--error), var(--error-600));
+  color: var(--text-primary);
+  border: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .card {
+    border-radius: var(--radius-md);
+  }
+
+  .padding-lg .cardContent {
+    padding: var(--space-md);
+  }
+
+  .padding-xl .cardContent {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    border-radius: var(--radius-sm);
+  }
+
+  .padding-md .cardContent {
+    padding: var(--space-sm);
+  }
+
+  .padding-lg .cardContent {
+    padding: var(--space-sm);
+  }
+
+  .padding-xl .cardContent {
+    padding: var(--space-md);
+  }
+}
+
+/* 접근성 */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .animated {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid var(--text-primary);
+  }
+
+  .variant-gradient {
+    background: var(--surface);
+    border: 2px solid var(--primary-500);
+  }
+}
