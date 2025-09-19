@@ -264,7 +264,7 @@
   color: var(--text-primary);
   line-height: 1;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-shadow: 0 1px 2px rgba(var(--background-rgb), 0.3);
 }
 
@@ -274,7 +274,7 @@
   color: var(--text-secondary);
   line-height: 1;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   opacity: 0.8;
 }
@@ -383,7 +383,6 @@
   padding: var(--space-xs) var(--space-sm);
 }
 
-
 .errorMessage {
   flex: 1;
   display: flex;
@@ -392,6 +391,7 @@
   color: var(--error);
 }
 
+/* 데스크톱 대형 (1441px+) */
 @media (min-width: 1441px) {
   .container {
     height: calc(100vh - 120px);
@@ -438,6 +438,7 @@
   }
 }
 
+/* 노트북/데스크톱 (769px - 1440px) */
 @media (min-width: 769px) and (max-width: 1440px) {
   .container {
     height: calc(100vh - 120px);
@@ -493,7 +494,8 @@
   }
 }
 
-@media (max-width: 768px) {
+/* 태블릿 (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
   .container {
     height: calc(100vh - 100px);
     max-height: calc(100vh - 100px);
@@ -518,52 +520,58 @@
   }
 
   .groupCard {
-    width: 300px;
+    width: 280px;
   }
 
   .groupIcon {
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
   }
 
   .iconText {
-    font-size: 22px;
+    font-size: 19px;
   }
 
   .groupName {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .groupRomaji {
-    font-size: 13px;
+    font-size: 11px;
   }
 
   .characterItem {
-    width: 85px;
-    height: 95px;
-    padding: 12px 7px;
-    gap: 7px;
+    width: 68px;
+    height: 76px;
+    padding: 9px 5px;
+    gap: 5px;
   }
 
   .character {
-    font-size: 30px;
+    font-size: 22px;
   }
 
   .romaji {
-    font-size: 15px;
+    font-size: 11px;
   }
 
   .charactersGrid {
-    gap: 10px;
+    gap: 7px;
   }
 
   .startButton {
-    min-height: 38px;
-    font-size: 14px;
+    min-height: 32px;
+    font-size: 12px;
   }
 }
 
-@media (max-width: 480px) {
+/* 큰 모바일 (376px - 480px) */
+@media (min-width: 376px) and (max-width: 480px) {
+  .container {
+    height: calc(100vh - 90px);
+    max-height: calc(100vh - 90px);
+  }
+
   .header {
     padding: var(--space-md) var(--space-md) var(--space-sm);
   }
@@ -599,23 +607,13 @@
     width: 260px;
   }
 
-  .charactersGrid {
-    gap: 7px;
-  }
-
-  .characterItem {
-    width: 44px;
-    height: 44px;
-    border-radius: 11px;
-  }
-
   .groupIcon {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
   }
 
   .iconText {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .groupName {
@@ -626,8 +624,23 @@
     font-size: 10px;
   }
 
+  .characterItem {
+    width: 64px;
+    height: 72px;
+    padding: 8px 4px;
+    gap: 4px;
+  }
+
   .character {
-    font-size: 17px;
+    font-size: 20px;
+  }
+
+  .romaji {
+    font-size: 10px;
+  }
+
+  .charactersGrid {
+    gap: 6px;
   }
 
   .startButton {
@@ -636,10 +649,15 @@
   }
 }
 
-@media (max-width: 375px) {
+/* 일반 모바일 (321px - 375px) */
+@media (min-width: 321px) and (max-width: 375px) {
   .container {
     height: calc(100vh - 90px);
     max-height: calc(100vh - 90px);
+  }
+
+  .header {
+    padding: var(--space-md) var(--space-md) var(--space-sm);
   }
 
   .headerSpacer {
@@ -647,16 +665,12 @@
     height: 28px;
   }
 
-  .header {
-    padding: var(--space-md) var(--space-md) var(--space-sm);
-  }
-
   .title {
     font-size: 26px;
   }
 
   .subtitle {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .swipeHint {
@@ -665,7 +679,7 @@
   }
 
   .swipeText {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .groupsContainer {
@@ -674,112 +688,16 @@
   }
 
   .groupCard {
-    width: 270px;
-  }
-
-  .groupIcon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .iconText {
-    font-size: 18px;
-  }
-
-  .groupName {
-    font-size: 14px;
-  }
-
-  .groupRomaji {
-    font-size: 11px;
-  }
-
-  .characterItem {
-    width: 75px;
-    height: 85px;
-    padding: 10px 6px;
-    gap: 6px;
-  }
-
-  .character {
-    font-size: 26px;
-  }
-
-  .romaji {
-    font-size: 13px;
-  }
-
-  .charactersGrid {
-    gap: 8px;
-  }
-
-  .startButton {
-    min-height: 34px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 320px) {
-  .container {
-    height: calc(100vh - 90px);
-    max-height: calc(100vh - 90px);
-  }
-
-  .header {
-    padding: var(--space-sm) var(--space-sm) var(--space-xs);
-  }
-
-  .headerTop {
-    gap: var(--space-sm);
-  }
-
-  .title {
-    font-size: 24px;
-  }
-
-  .subtitle {
-    font-size: 13px;
-  }
-
-  .swipeHint {
-    margin: 0 var(--space-sm);
-    padding: var(--space-xs) var(--space-sm);
-  }
-
-  .swipeIcon {
-    font-size: 18px;
-  }
-
-  .swipeText {
-    font-size: 12px;
-  }
-
-  .groupsContainer {
-    padding: var(--space-sm);
-    gap: var(--space-xs);
-  }
-
-  .groupCard {
     width: 240px;
   }
 
-  .charactersGrid {
-    gap: 6px;
-  }
-
-  .characterItem {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-  }
-
   .groupIcon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
   }
 
   .iconText {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .groupName {
@@ -791,13 +709,18 @@
   }
 
   .characterItem {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
+    width: 60px;
+    height: 68px;
+    padding: 7px 4px;
+    gap: 3px;
   }
 
   .character {
-    font-size: 16px;
+    font-size: 18px;
+  }
+
+  .romaji {
+    font-size: 9px;
   }
 
   .charactersGrid {
@@ -808,6 +731,7 @@
     min-height: 28px;
     font-size: 10px;
   }
+
   .groupsContainer {
     gap: 4px;
   }
@@ -870,6 +794,7 @@
   }
 }
 
+/* 작은 모바일 (320px 이하) */
 @media (max-width: 320px) {
   .container {
     height: calc(100vh - 80px);
