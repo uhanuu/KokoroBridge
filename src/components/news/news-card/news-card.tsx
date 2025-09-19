@@ -4,11 +4,12 @@ import {
   AccessTime,
   Delete
 } from "@mui/icons-material";
-import { Card, CardContent, Typography, Chip, IconButton } from "@mui/material";
+import { Typography, Chip, IconButton } from "@mui/material";
 import Image from "next/image";
 import React, { useState } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 
 import styles from "./news-card.module.css";
 
@@ -66,10 +67,13 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
 
   return (
     <Card
-      className={`${styles.card} ${styles.newsCard} ${!news.isRead ? styles.unread : styles.read} ${styles.clickableCard}`}
+      variant="default"
+      size="lg"
+      padding="xl"
+      borderRadius="2xl"
+      className={`${styles.newsCard} ${!news.isRead ? styles.unread : styles.read} ${styles.clickableCard}`}
       onClick={handleToggleExpand}
     >
-      <CardContent className={styles.cardContent}>
         {/* 카드 헤더 */}
         <div className={styles.cardHeader}>
           <div className={styles.categorySection}>
@@ -236,7 +240,6 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             </div>
           </>
         )}
-      </CardContent>
     </Card>
   );
 }

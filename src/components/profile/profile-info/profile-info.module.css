@@ -1,42 +1,6 @@
-/* 카드 공통 스타일 */
-.card {
-  background-color: var(--surface);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
-  border: 1px solid var(--outline);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 48px rgba(var(--background-rgb), 0.18);
-}
-
-/* 프로필 카드 - 청록 테마 */
+/* 프로필 카드 */
 .profileCard {
-  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.08), rgba(5, 150, 105, 0.03));
-  border: 1px solid rgba(var(--primary-500-rgb), 0.25);
-}
-
-.profileCard::before {
-  background: linear-gradient(90deg, transparent, rgba(var(--primary-500-rgb), 0.12), transparent);
-}
-
-.profileCard:hover {
-  border-color: rgba(var(--primary-500-rgb), 0.4);
-  box-shadow: 0 12px 48px rgba(var(--primary-500-rgb), 0.18);
+  background-color: var(--surface);
 }
 
 .profileContent {

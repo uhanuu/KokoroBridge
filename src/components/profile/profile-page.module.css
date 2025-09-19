@@ -9,32 +9,6 @@
   gap: var(--space-lg);
 }
 
-/* 카드 공통 스타일 */
-.card {
-  background-color: var(--surface);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
-  border: 1px solid var(--outline);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 48px rgba(var(--background-rgb), 0.18);
-}
-
 .cardTitle {
   color: var(--text-primary);
   font-weight: 600;
@@ -44,8 +18,7 @@
 
 /* 학습 통계 카드 */
 .statsCard {
-  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
-  border: 1px solid var(--outline);
+  background-color: var(--surface);
 }
 
 .statsGrid {
@@ -127,8 +100,7 @@
 
 /* 스킬 진행도 카드 - 파란 테마 */
 .skillProgressCard {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(37, 99, 235, 0.02));
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  background-color: var(--surface);
 }
 
 .skillProgressCard::before {
@@ -189,9 +161,7 @@
 
 /* 레벨 카드 - 보라 테마 */
 .levelCard {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05));
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  position: relative;
+  background-color: var(--surface);
 }
 
 .levelCard::before {
@@ -261,8 +231,7 @@
 
 /* 스트릭 카드 - 주황 테마 */
 .streakCard {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background-color: var(--surface);
 }
 
 .streakCard::before {
@@ -314,8 +283,7 @@
 
 /* 업적 카드 - 빨간 테마 */
 .achievementsCard {
-  background: linear-gradient(135deg, rgba(var(--error-rgb), 0.05), rgba(220, 38, 38, 0.02));
-  border: 1px solid rgba(var(--error-rgb), 0.2);
+  background-color: var(--surface);
 }
 
 .achievementsCard::before {
@@ -529,23 +497,19 @@
 
 /* 설정 카드 */
 .settingsCard {
-  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
-  border: 1px solid var(--outline);
+  background-color: var(--surface);
 }
 
 .accountCard {
-  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
-  border: 1px solid var(--outline);
+  background-color: var(--surface);
 }
 
 .supportCard {
-  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
-  border: 1px solid var(--outline);
+  background-color: var(--surface);
 }
 
 .logoutCard {
-  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
-  border: 1px solid var(--outline);
+  background-color: var(--surface);
 }
 
 .settingsGrid {

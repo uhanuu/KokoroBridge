@@ -34,7 +34,7 @@
   padding: var(--space-md) var(--space-sm);
   background: transparent;
   border: none;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -164,7 +164,7 @@
   }
 
   .icon {
-    font-size: 24px;
+    font-size: 28px;
     padding: 3px 0;
   }
 
@@ -181,7 +181,7 @@
   justify-content: center;
 }
 
-.customBadge .MuiBadge-badge {
+.container .navigationBar .navItem .customBadge .MuiBadge-badge {
   background-color: var(--error);
   color: var(--text-primary);
   font-size: 10px;
@@ -194,6 +194,43 @@
   transition: none;
   right: -2px;
   top: -2px;
+  box-shadow: 0 0 0 2px var(--surface);
+}
+
+/* MUI Badge 우선순위 높은 선택자 */
+.container .navigationBar .navItem .MuiBadge-badge,
+.container .navigationBar .navItem .MuiBadge-standard,
+.container .navigationBar .navItem .MuiBadge-anchorOriginTopRight,
+.container .navigationBar .navItem .MuiBadge-anchorOriginTopRightRectangular,
+.container .navigationBar .navItem .MuiBadge-overlapRectangular,
+.container .navigationBar .navItem [class*="MuiBadge-badge"],
+.container .navigationBar .navItem [class*="css-"][class*="MuiBadge-badge"],
+.container .navigationBar .navItem span[class*="MuiBadge-badge"] {
+  background-color: var(--error);
+  color: var(--text-primary);
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--surface);
+}
+
+.container .navigationBar .navItem .MuiBadge-colorError {
+  background-color: var(--error);
+  color: var(--text-primary);
+}
+
+/* 특정 클래스 직접 타겟팅 */
+.container .navigationBar .navItem .css-2ao5rv-MuiBadge-badge {
+  background-color: var(--error);
+  color: var(--text-primary);
+  font-size: 10px;
+  font-weight: 600;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--surface);
 }
 
 /* 접근성 */

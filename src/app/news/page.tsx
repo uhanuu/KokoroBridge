@@ -1,12 +1,13 @@
 "use client";
 
 import { Announcement, NewReleases, Update, Event, Star, Schedule } from "@mui/icons-material";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import React, { useState } from "react";
 
 import { NewsList } from "@/components/news";
 import { NewsItem } from "@/components/news/news-list/news-list";
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 
 import styles from "./page.module.css";
 
@@ -147,9 +148,14 @@ export default function NewsPage() {
       </div>
 
       {/* 통계 카드 */}
-      <Card className={`${styles.card} ${styles.statsCard}`}>
-        <CardContent>
-          <div className={styles.statsContent}>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.statsCard}
+      >
+        <div className={styles.statsContent}>
             <div className={styles.statsRow}>
               <div className={styles.statItem}>
                 <Typography variant="h3" className={styles.statNumber}>
@@ -186,8 +192,7 @@ export default function NewsPage() {
                 />
               </div>
             </div>
-          </div>
-        </CardContent>
+        </div>
       </Card>
 
       {/* 새소식 목록 */}

@@ -26,35 +26,9 @@
   margin: 0;
 }
 
-/* 카드 공통 스타일 */
-.card {
-  background-color: var(--surface);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
-  border: 1px solid var(--outline);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 48px rgba(var(--background-rgb), 0.18);
-}
-
 /* 카테고리 카드 */
 .categoriesCard {
-  padding: var(--space-lg);
+  background-color: var(--surface);
 }
 
 .categoriesGrid {
@@ -64,7 +38,7 @@
 }
 
 .categoryItem {
-  background: var(--surface);
+  background-color: var(--surface);
   border: 1px solid var(--outline);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
@@ -85,7 +59,7 @@
 
 .categoryItem.locked {
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .lockOverlay {
@@ -94,7 +68,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(var(--background-rgb), 0.1);
+  background-color: rgba(var(--background-rgb), 0.1);
   z-index: 1;
   border-radius: var(--radius-lg);
 }
@@ -108,6 +82,8 @@
 .categoryIcon {
   width: 56px;
   height: 56px;
+  background-color: var(--surface-variant);
+  border: 1px solid var(--outline);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -127,7 +103,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(var(--background-rgb), 0.7);
+  background-color: rgba(var(--background-rgb), 0.9);
+  border: 1px solid var(--outline);
   border-radius: 50%;
   width: 32px;
   height: 32px;

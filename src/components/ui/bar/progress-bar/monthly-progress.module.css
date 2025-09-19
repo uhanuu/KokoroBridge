@@ -1,22 +1,7 @@
 /* 월별 진행률 - 완전히 새로운 디자인 */
 
 .monthlyCard {
-  background: var(--surface);
-  border: 1px solid var(--outline);
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(var(--background-rgb), 0.08);
-  overflow: hidden;
-  position: relative;
-}
-
-.monthlyCard::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
+  background-color: var(--surface);
 }
 
 /* 헤더 */

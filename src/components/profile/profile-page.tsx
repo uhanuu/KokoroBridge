@@ -16,9 +16,10 @@ import {
   Lock,
   CheckCircle
 } from "@mui/icons-material";
-import { Card, CardContent, Typography, Switch, LinearProgress } from "@mui/material";
+import { Typography, Switch, LinearProgress } from "@mui/material";
 import React, { useState } from "react";
 
+import Card from "@/components/ui/card";
 import styles from "./profile-page.module.css";
 import ProfileInfo from "./profile-info/profile-info";
 import SettingsMenuItem from "./settings-menu-item/settings-menu-item";
@@ -206,8 +207,13 @@ export default function ProfilePage() {
       <ProfileInfo profile={mockUserProfile} />
 
       {/* 학습 통계 - 개요 */}
-      <Card className={`${styles.card} ${styles.statsCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.statsCard}
+      >
           <Typography variant="h6" className={styles.cardTitle}>
             학습 통계
           </Typography>
@@ -257,12 +263,16 @@ export default function ProfilePage() {
               </Typography>
             </div>
           </div>
-        </CardContent>
       </Card>
 
       {/* 학습 스킬 진행도 */}
-      <Card className={`${styles.card} ${styles.skillProgressCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.skillProgressCard}
+      >
           <Typography variant="h6" className={styles.cardTitle}>
             스킬 진행도
           </Typography>
@@ -290,12 +300,16 @@ export default function ProfilePage() {
               </div>
             ))}
           </div>
-        </CardContent>
       </Card>
 
       {/* 레벨 및 경험치 */}
-      <Card className={`${styles.card} ${styles.levelCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.levelCard}
+      >
           <div className={styles.levelHeader}>
             <div className={styles.levelInfo}>
               <Typography variant="h6" className={styles.levelTitle}>
@@ -323,12 +337,16 @@ export default function ProfilePage() {
             value={mockLearningStats.levelInfo.progress}
             className={styles.levelProgressBar}
           />
-        </CardContent>
       </Card>
 
       {/* 학습 스트릭 */}
-      <Card className={`${styles.card} ${styles.streakCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.streakCard}
+      >
           <Typography variant="h6" className={styles.cardTitle}>
             학습 연속성
           </Typography>
@@ -366,15 +384,19 @@ export default function ProfilePage() {
               </Typography>
             </div>
           </div>
-        </CardContent>
       </Card>
 
       {/* 월별 진행 현황 */}
       <MonthlyProgress monthlyData={mockLearningStats.monthlyDetailedProgress} />
 
       {/* 업적 */}
-      <Card className={`${styles.card} ${styles.achievementsCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.achievementsCard}
+      >
           <Typography variant="h6" className={styles.cardTitle}>
             업적
           </Typography>
@@ -454,12 +476,16 @@ export default function ProfilePage() {
               </Typography>
             </div>
           </div>
-        </CardContent>
       </Card>
 
       {/* 설정 메뉴 */}
-      <Card className={`${styles.card} ${styles.settingsCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.settingsCard}
+      >
           <Typography variant="h6" className={styles.cardTitle}>
             설정
           </Typography>
@@ -509,12 +535,16 @@ export default function ProfilePage() {
               />
             </div>
           </div>
-        </CardContent>
       </Card>
 
       {/* 계정 관리 */}
-      <Card className={`${styles.card} ${styles.accountCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.accountCard}
+      >
           <Typography variant="h6" className={styles.cardTitle}>
             계정 관리
           </Typography>
@@ -534,12 +564,16 @@ export default function ProfilePage() {
               onClick={() => {}}
             />
           </div>
-        </CardContent>
       </Card>
 
       {/* 지원 및 정보 */}
-      <Card className={`${styles.card} ${styles.supportCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.supportCard}
+      >
           <Typography variant="h6" className={styles.cardTitle}>
             지원 및 정보
           </Typography>
@@ -573,12 +607,16 @@ export default function ProfilePage() {
               onClick={() => {}}
             />
           </div>
-        </CardContent>
       </Card>
 
       {/* 로그아웃 */}
-      <Card className={`${styles.card} ${styles.logoutCard}`}>
-        <CardContent>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.logoutCard}
+      >
           <SettingsMenuItem
             icon={<ExitToApp className={styles.iconLogout} />}
             title="로그아웃"
@@ -586,7 +624,6 @@ export default function ProfilePage() {
             onClick={() => {}}
             isLogout={true}
           />
-        </CardContent>
       </Card>
     </div>
   );

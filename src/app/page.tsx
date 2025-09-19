@@ -1,17 +1,12 @@
 "use client";
 
-import {
-  RecordVoiceOver,
-  Schedule,
-  Lock,
-  CheckCircle,
-} from "@mui/icons-material";
+import { RecordVoiceOver, Schedule, Lock, CheckCircle } from "@mui/icons-material";
 import { Typography, LinearProgress } from "@mui/material";
-import Card from "@/components/ui/card";
 import Image from "next/image";
 import React from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 
 import styles from "./page.module.css";
 
@@ -301,9 +296,7 @@ export default function HomePage() {
                         {card.icon}
                       </span>
                     ) : (
-                      <card.icon
-                        style={{ color: card.color, opacity: card.isLocked ? 0.3 : 1 }}
-                      />
+                      <card.icon style={{ color: card.color, opacity: card.isLocked ? 0.3 : 1 }} />
                     )}
                     {card.isLocked && (
                       <div className={styles.lockIconOverlay}>
@@ -384,13 +377,7 @@ export default function HomePage() {
       </Card>
 
       {/* 오늘의 목표 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.goalCard}
-      >
+      <Card variant="default" size="lg" padding="xl" borderRadius="2xl" className={styles.goalCard}>
         <div className={styles.goalHeader}>
           <Typography variant="h6" className={styles.goalSectionTitle}>
             오늘의 목표
@@ -407,7 +394,9 @@ export default function HomePage() {
             {[...Array(mockData.todayProgress.total)].map((_, index) => (
               <div
                 key={index}
-                className={`${styles.goalProgressNode} ${index < mockData.todayProgress.completed ? styles.completed : styles.incomplete}`}
+                className={`${styles.goalProgressNode} ${
+                  index < mockData.todayProgress.completed ? styles.completed : styles.incomplete
+                }`}
               >
                 <div className={styles.goalProgressDot}></div>
               </div>
@@ -481,7 +470,6 @@ export default function HomePage() {
           </div>
         </div>
       </Card>
-
     </div>
   );
 }

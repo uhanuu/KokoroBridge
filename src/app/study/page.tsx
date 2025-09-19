@@ -1,11 +1,12 @@
 "use client";
 
 import { RecordVoiceOver, Lock } from "@mui/icons-material";
-import { Card, CardContent, Typography, LinearProgress } from "@mui/material";
+import { Typography, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 import GroupSelector from "@/components/group-selector";
 
 import styles from "./page.module.css";
@@ -367,9 +368,14 @@ export default function StudyPage() {
         </Typography>
       </div>
 
-      <Card className={`${styles.card} ${styles.categoriesCard}`}>
-        <CardContent>
-          <div className={styles.categoriesGrid}>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.categoriesCard}
+      >
+        <div className={styles.categoriesGrid}>
             {studyCategories.map((category) => {
               return (
                 <div
@@ -450,8 +456,7 @@ export default function StudyPage() {
                 </div>
               );
             })}
-          </div>
-        </CardContent>
+        </div>
       </Card>
     </div>
   );

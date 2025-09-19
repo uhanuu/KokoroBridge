@@ -1,9 +1,10 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 
+import Card from "@/components/ui/card";
 import styles from "./monthly-progress.module.css";
 
 interface MonthlyData {
@@ -112,8 +113,13 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
   };
 
   return (
-    <Card className={styles.monthlyCard}>
-      <CardContent>
+    <Card
+      variant="default"
+      size="lg"
+      padding="xl"
+      borderRadius="2xl"
+      className={styles.monthlyCard}
+    >
         <div className={styles.header}>
           <div className={styles.headerInfo}>
             <Typography variant="h6" className={styles.title}>
@@ -235,7 +241,6 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
             })}
           </div>
         </div>
-      </CardContent>
     </Card>
   );
 }

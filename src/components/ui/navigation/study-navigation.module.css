@@ -7,8 +7,8 @@
 }
 
 .quickStartCard {
-  background: var(--text-primary);
-  border: none;
+  background-color: var(--surface);
+  border: 1px solid var(--outline);
   border-radius: 16px;
   padding: 20px;
   display: flex;
@@ -24,7 +24,7 @@
 .quickStartCard:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(var(--primary-500-rgb), 0.15);
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--surface-variant) 100%);
+  background-color: var(--surface-variant);
 }
 
 .quickStartCard:active {
@@ -46,6 +46,52 @@
   text-align: center;
 }
 
+/* 태블릿 가로 모드 (1024px 이상) */
+@media (min-width: 1024px) {
+  .quickStartGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+
+  .quickStartCard {
+    padding: var(--space-xl);
+    min-height: 120px;
+    border-radius: 20px;
+  }
+
+  .quickStartIcon {
+    font-size: 40px;
+  }
+
+  .quickStartText {
+    font-size: 16px;
+  }
+}
+
+/* 태블릿 세로 모드 (768px-1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .quickStartGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .quickStartCard {
+    padding: var(--space-lg);
+    min-height: 110px;
+    border-radius: 18px;
+  }
+
+  .quickStartIcon {
+    font-size: 36px;
+  }
+
+  .quickStartText {
+    font-size: 15px;
+  }
+}
+
 /* 반응형 디자인 */
 @media (max-width: 480px) {
   .quickStartGrid {
@@ -61,5 +107,44 @@
 
   .quickStartIcon {
     font-size: 28px;
+  }
+}
+
+/* 초소형 모바일 최적화 (320px-375px) */
+@media (max-width: 375px) {
+  .quickStartCard {
+    padding: 16px;
+    min-height: 70px;
+    gap: 10px;
+  }
+
+  .quickStartIcon {
+    font-size: 24px;
+  }
+
+  .quickStartText {
+    font-size: 13px;
+  }
+}
+
+/* 최소 너비 320px 지원 */
+@media (max-width: 320px) {
+  .quickStartGrid {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .quickStartCard {
+    padding: 12px;
+    min-height: 60px;
+    gap: 8px;
+  }
+
+  .quickStartIcon {
+    font-size: 20px;
+  }
+
+  .quickStartText {
+    font-size: 12px;
   }
 }

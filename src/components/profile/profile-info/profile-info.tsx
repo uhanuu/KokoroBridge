@@ -1,9 +1,10 @@
 "use client";
 
 import { Star, Whatshot, CalendarMonth } from "@mui/icons-material";
-import { Card, CardContent, Typography, Avatar } from "@mui/material";
+import { Typography, Avatar } from "@mui/material";
 import React from "react";
 
+import Card from "@/components/ui/card";
 import styles from "./profile-info.module.css";
 
 interface UserProfile {
@@ -21,8 +22,14 @@ interface ProfileInfoProps {
 
 export default function ProfileInfo({ profile }: ProfileInfoProps) {
   return (
-    <Card className={`${styles.card} ${styles.profileCard}`}>
-      <CardContent className={styles.profileContent}>
+    <Card
+      variant="default"
+      size="lg"
+      padding="xl"
+      borderRadius="2xl"
+      className={styles.profileCard}
+    >
+      <div className={styles.profileContent}>
         {/* 프로필 헤더 */}
         <div className={styles.profileHeader}>
           <div className={styles.avatarSection}>
@@ -82,7 +89,7 @@ export default function ProfileInfo({ profile }: ProfileInfoProps) {
             </div>
           </div>
         </div>
-      </CardContent>
+      </div>
     </Card>
   );
 }

@@ -173,10 +173,16 @@ body {
   overscroll-behavior: none;
 }
 
-/* 전역 컨테이너 색상 보장 */
+/* 전역 컨테이너 색상 보장 - 루트 요소에만 적용 */
 #__next,
-[data-reactroot],
-.container {
+[data-reactroot] {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: inherit;
+}
+
+/* 유틸리티 클래스로만 사용할 전역 컨테이너 스타일 */
+.global-container {
   background-color: var(--background);
   color: var(--text-primary);
   font-family: inherit;
@@ -264,8 +270,8 @@ button {
               box-shadow var(--duration-normal);
 }
 
-/* Responsive utility classes */
-.container {
+/* Responsive utility classes - 유틸리티 전용 */
+.global-container-responsive {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -328,7 +334,7 @@ button:active {
     font-size: 14px;
   }
 
-  .container {
+  .global-container-responsive {
     padding: 0 var(--space-md);
   }
 }

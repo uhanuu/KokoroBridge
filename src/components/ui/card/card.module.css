@@ -7,6 +7,7 @@
   overflow: hidden;
   transition: all var(--duration-normal) cubic-bezier(0.4, 0, 0.2, 1);
   font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", sans-serif;
+  font-size: 16px;
 }
 
 .card::before {
@@ -191,8 +192,21 @@
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-  .card {
+  /* 기본 카드와 radius 클래스들을 반응형으로 조정 */
+  .card:not([class*="radius-"]) {
     border-radius: var(--radius-md);
+  }
+
+  .radius-lg {
+    border-radius: var(--radius-md);
+  }
+
+  .radius-xl {
+    border-radius: var(--radius-lg);
+  }
+
+  .radius-2xl {
+    border-radius: var(--radius-xl);
   }
 
   .padding-lg .cardContent {
@@ -205,8 +219,25 @@
 }
 
 @media (max-width: 480px) {
-  .card {
+  /* 모바일에서 더 작은 border-radius 적용 */
+  .card:not([class*="radius-"]) {
     border-radius: var(--radius-sm);
+  }
+
+  .radius-md {
+    border-radius: var(--radius-sm);
+  }
+
+  .radius-lg {
+    border-radius: var(--radius-sm);
+  }
+
+  .radius-xl {
+    border-radius: var(--radius-md);
+  }
+
+  .radius-2xl {
+    border-radius: var(--radius-lg);
   }
 
   .padding-md .cardContent {
