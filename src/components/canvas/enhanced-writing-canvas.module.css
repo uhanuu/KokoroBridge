@@ -1,0 +1,303 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-md);
+  background-color: var(--background);
+}
+
+/* 캔버스 래퍼 */
+.canvasWrapper {
+  position: relative;
+  border-radius: var(--radius-2xl);
+  background: linear-gradient(135deg, var(--surface), var(--background));
+  box-shadow:
+    0 8px 32px rgba(var(--background-rgb), 0.12),
+    inset 0 1px 0 rgba(var(--text-primary-rgb), 0.1);
+  border: 2px solid var(--outline);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.canvasWrapper:hover {
+  box-shadow:
+    0 12px 40px rgba(var(--background-rgb), 0.15),
+    inset 0 1px 0 rgba(var(--text-primary-rgb), 0.1);
+  transform: translateY(-2px);
+}
+
+/* 그리드 배경 */
+.gridBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 가이드 문자 */
+.guideCharacter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  opacity: 0.3;
+  font-family: "Noto Sans CJK JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  font-weight: 300;
+  pointer-events: none;
+  z-index: 2;
+  user-select: none;
+  transition: opacity 0.3s ease;
+}
+
+/* 데모 캔버스 */
+.demoCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* 그리기 캔버스 */
+.drawingCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  cursor: crosshair;
+  border-radius: inherit;
+  touch-action: none;
+}
+
+.drawingCanvas:active {
+  cursor: crosshair;
+}
+
+/* 컨트롤 버튼들 */
+.controls {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 16px rgba(var(--background-rgb), 0.1);
+  border: 1px solid var(--outline);
+}
+
+.controlButton {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(var(--primary-500-rgb), 0.2);
+  width: 48px;
+  height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.controlButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.controlButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--primary-500-rgb), 0.3);
+}
+
+.controlButton:hover::before {
+  left: 100%;
+}
+
+.controlButton:active {
+  transform: translateY(0) scale(0.95);
+  box-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.2);
+  transition: all 0.1s ease;
+}
+
+.controlButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.1);
+}
+
+.controlButton:disabled:hover {
+  transform: none;
+}
+
+.controlButton:disabled::before {
+  display: none;
+}
+
+/* 반응형 디자인 */
+@media (min-width: 1024px) {
+  .container {
+    padding: var(--space-lg);
+    gap: var(--space-xl);
+  }
+
+  .canvasWrapper {
+    border-radius: var(--radius-3xl);
+  }
+
+  .controls {
+    gap: var(--space-lg);
+    padding: var(--space-md);
+  }
+
+  .controlButton {
+    width: 56px;
+    height: 56px;
+  }
+
+  .guideCharacter {
+    opacity: 0.25;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .canvasWrapper {
+    border-radius: var(--radius-xl);
+    border-width: 1px;
+  }
+
+  .controls {
+    gap: var(--space-sm);
+    padding: var(--space-xs);
+  }
+
+  .controlButton {
+    width: 44px;
+    height: 44px;
+  }
+
+  .guideCharacter {
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-xs);
+    gap: var(--space-sm);
+  }
+
+  .canvasWrapper {
+    border-radius: var(--radius-lg);
+  }
+
+  .controls {
+    gap: var(--space-xs);
+  }
+
+  .controlButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .guideCharacter {
+    opacity: 0.4;
+  }
+}
+
+/* 다크 모드 최적화 */
+[data-theme="dark"] .canvasWrapper {
+  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(var(--text-primary-rgb), 0.1);
+}
+
+[data-theme="dark"] .canvasWrapper:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(var(--text-primary-rgb), 0.1);
+}
+
+[data-theme="dark"] .controls {
+  background: var(--surface-variant);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .guideCharacter {
+  opacity: 0.2;
+}
+
+/* 접근성 */
+@media (prefers-reduced-motion: reduce) {
+  .canvasWrapper,
+  .controlButton,
+  .controlButton::before,
+  .guideCharacter {
+    transition: none;
+    animation: none;
+  }
+
+  .canvasWrapper:hover {
+    transform: none;
+  }
+
+  .controlButton:hover {
+    transform: none;
+  }
+
+  .controlButton:active {
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .canvasWrapper {
+    border-width: 3px;
+    border-color: var(--text-primary);
+  }
+
+  .controls {
+    border-width: 2px;
+    border-color: var(--text-primary);
+  }
+
+  .controlButton {
+    border: 2px solid var(--text-primary);
+  }
+
+  .guideCharacter {
+    opacity: 0.5;
+    color: var(--text-secondary);
+  }
+}
+
+/* 포커스 스타일 */
+.controlButton:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+
+.drawingCanvas:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: -2px;
+}

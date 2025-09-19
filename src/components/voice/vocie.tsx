@@ -11,10 +11,6 @@ const CatSpeech: React.FC = () => {
     const loadVoices = () => {
       const availableVoices = speechSynthesis.getVoices();
       setVoices(availableVoices.filter((v) => v.lang.includes("ja")));
-      console.log(
-        "사용 가능한 일본어 음성들:",
-        availableVoices.filter((v) => v.lang.includes("ja"))
-      );
     };
 
     loadVoices();
@@ -40,7 +36,7 @@ const CatSpeech: React.FC = () => {
 
     // 일본어 여성 음성 우선 선택 (Mac/Windows 호환)
     const japaneseVoice =
-      // voices.find((v) => v.name === "O-Ren") ||
+      voices.find((v) => v.name === "O-Ren") ||
       voices.find((v) => v.name === "Google 日本語") ||
       voices.find((v) => v.name === "Kyoko") ||
       voices.find((v) => v.lang === "ja-JP"); // fallback: 첫번째 일본어 음성

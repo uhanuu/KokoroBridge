@@ -1,13 +1,12 @@
 "use client";
 
-import { ArrowBack, ArrowForward, ArrowBack as PrevIcon } from "@mui/icons-material";
-import { Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter, useParams } from "next/navigation";
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
-import WritingCanvas from "@/components/canvas";
-import ActionButton from "@/components/ui/button/action-button";
-import Card from "@/components/ui/card";
+import { EnhancedWritingCanvas } from "@/components/canvas";
+import StudyCanvasHeader from "@/components/ui/header/study-canvas-header";
+import { ValidationResult } from "@/services/stroke-validation.service";
+import { ttsService } from "@/services/tts.service";
 
 import styles from "./page.module.css";
 
@@ -36,151 +35,90 @@ export default function HiraganaGroupPage() {
 
   const currentGroup = hiraganaGroups[groupKey];
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [hasDrawing, setHasDrawing] = useState(false);
-
-  const handleBackClick = useCallback(() => {
-    router.push("/study/hiragana");
-  }, [router]);
+  const [completedCharacters, setCompletedCharacters] = useState<Set<number>>(new Set());
 
   const handlePrevious = useCallback(() => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      setHasDrawing(false);
     }
   }, [currentIndex]);
 
   const handleNext = useCallback(() => {
     if (currentGroup && currentIndex < currentGroup.characters.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      setHasDrawing(false);
     }
   }, [currentGroup, currentIndex]);
 
-  const handleDrawingComplete = useCallback((drawing: boolean) => {
-    setHasDrawing(drawing);
-  }, []);
+  const handleValidationResult = useCallback((result: ValidationResult) => {
+    if (result.isCorrect && result.completedStrokes === result.totalStrokes) {
+      // 현재 문자를 완료로 표시
+      setCompletedCharacters(prev => new Set([...prev, currentIndex]));
+    }
+  }, [currentIndex]);
 
-  const handleComplete = useCallback(() => {
-    // 학습 완료 처리 (향후 진도 저장 등)
-    router.push("/study/hiragana");
-  }, [router]);
+  const handleCharacterComplete = useCallback(async () => {
+    // 완료 사운드 재생
+    try {
+      await ttsService.speak('よくできました', { rate: 0.9, pitch: 1.1 }); // "잘했습니다"
+    } catch (error) {
+      console.error('TTS Error:', error);
+    }
+
+    // 자동으로 다음 문자로 이동 (마지막 문자가 아닌 경우)
+    setTimeout(() => {
+      if (currentIndex < (currentGroup?.characters.length || 0) - 1) {
+        handleNext();
+      } else {
+        // 모든 문자 완료시 완료 페이지로 이동
+        router.push("/study/hiragana");
+      }
+    }, 2000);
+  }, [currentIndex, currentGroup, handleNext, router]);
 
   if (!currentGroup) {
     return (
-      <div className={styles.container}>
+      <div className={styles.errorContainer}>
         <div className={styles.errorMessage}>
-          <Typography variant="h6">잘못된 그룹입니다.</Typography>
-          <ActionButton text="돌아가기" onClick={handleBackClick} />
+          <h2>잘못된 그룹입니다.</h2>
+          <button onClick={() => router.push("/study/hiragana")}>
+            돌아가기
+          </button>
         </div>
       </div>
     );
   }
 
   const currentCharacter = currentGroup.characters[currentIndex];
-  const progress = ((currentIndex + 1) / currentGroup.characters.length) * 100;
-  const isLastCharacter = currentIndex === currentGroup.characters.length - 1;
+  const completedCount = completedCharacters.size;
+  const progress = (completedCount / currentGroup.characters.length) * 100;
 
   return (
     <div className={styles.container}>
       {/* 헤더 */}
-      <div className={styles.header}>
-        <div className={styles.headerTop}>
-          <IconButton onClick={handleBackClick} className={styles.backButton}>
-            <ArrowBack />
-          </IconButton>
-          <div className={styles.headerContent}>
-            <Typography variant="h5" className={styles.title}>
-              {currentGroup.name} 학습
-            </Typography>
-            <Typography variant="body2" className={styles.subtitle}>
-              {currentIndex + 1} / {currentGroup.characters.length}
-            </Typography>
-          </div>
-        </div>
+      <StudyCanvasHeader
+        title={`${currentGroup.name} 학습`}
+        subtitle={currentCharacter}
+        currentIndex={currentIndex}
+        totalCount={currentGroup.characters.length}
+        progress={progress}
+        backRoute="/study/hiragana"
+        onPrevious={handlePrevious}
+        onNext={handleNext}
+        hasPrevious={currentIndex > 0}
+        hasNext={currentIndex < currentGroup.characters.length - 1}
+      />
 
-        {/* 진행도 바 */}
-        <div className={styles.progressSection}>
-          <LinearProgress variant="determinate" value={progress} className={styles.progressBar} />
-          <Typography variant="caption" className={styles.progressText}>
-            {Math.round(progress)}% 완료
-          </Typography>
-        </div>
+      {/* 캔버스 영역 */}
+      <div className={styles.canvasContainer}>
+        <EnhancedWritingCanvas
+          character={currentCharacter || ""}
+          onValidationResult={handleValidationResult}
+          onCharacterComplete={handleCharacterComplete}
+          autoPlayTTS={true}
+          showStrokeDemo={true}
+          className={styles.canvas}
+        />
       </div>
-
-      {/* 학습 영역 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.learningCard}
-      >
-          {/* 현재 문자 표시 */}
-          <div className={styles.characterDisplay}>
-            <Typography variant="h2" className={styles.currentCharacter}>
-              {currentCharacter}
-            </Typography>
-          </div>
-
-          {/* Canvas 영역 */}
-          <div className={styles.canvasSection}>
-            <WritingCanvas
-              character={currentCharacter}
-              width={300}
-              height={300}
-              onDrawingComplete={handleDrawingComplete}
-              className={styles.canvas}
-            />
-          </div>
-
-          {/* 안내 텍스트 */}
-          <div className={styles.instructionText}>
-            <Typography variant="body1" className={styles.instruction}>
-              위의 문자를 보고 따라 그려보세요
-            </Typography>
-          </div>
-      </Card>
-
-      {/* 네비게이션 */}
-      <div className={styles.navigation}>
-        <IconButton
-          onClick={handlePrevious}
-          disabled={currentIndex === 0}
-          className={styles.navButton}
-        >
-          <PrevIcon />
-        </IconButton>
-
-        <div className={styles.characterList}>
-          {currentGroup.characters.map((char, index) => (
-            <button
-              key={index}
-              className={`${styles.characterButton} ${
-                index === currentIndex ? styles.active : ""
-              } ${index < currentIndex ? styles.completed : ""}`}
-              onClick={() => setCurrentIndex(index)}
-            >
-              {char}
-            </button>
-          ))}
-        </div>
-
-        <IconButton onClick={handleNext} disabled={isLastCharacter} className={styles.navButton}>
-          <ArrowForward />
-        </IconButton>
-      </div>
-
-      {/* 완료 버튼 */}
-      {isLastCharacter && (
-        <div className={styles.completeSection}>
-          <ActionButton
-            text="학습 완료"
-            variant={hasDrawing ? "primary" : "locked"}
-            disabled={!hasDrawing}
-            onClick={handleComplete}
-          />
-        </div>
-      )}
     </div>
   );
 }
