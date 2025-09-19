@@ -1,11 +1,12 @@
 "use client";
 
 import { ArrowBack } from "@mui/icons-material";
-import { Card, CardContent, Typography, IconButton, LinearProgress } from "@mui/material";
+import { Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 
 import styles from "./page.module.css";
 
@@ -163,8 +164,14 @@ export default function HiraganaPage() {
 
       <div className={styles.groupsGrid}>
         {hiraganaGroups.map((group) => (
-          <Card key={group.id} className={`${styles.card} ${styles.groupCard}`}>
-            <CardContent className={styles.groupContent}>
+          <Card
+            key={group.id}
+            variant="default"
+            size="lg"
+            padding="xl"
+            borderRadius="2xl"
+            className={styles.groupCard}
+          >
               <div className={styles.groupHeader}>
                 <div className={styles.groupIcon} style={{ backgroundColor: `${group.color}20` }}>
                   <span className={styles.iconText} style={{ color: group.color }}>
@@ -216,7 +223,6 @@ export default function HiraganaPage() {
                 variant={group.progress === 100 ? "completed" : "primary"}
                 onClick={() => handleGroupClick(group)}
               />
-            </CardContent>
           </Card>
         ))}
       </div>

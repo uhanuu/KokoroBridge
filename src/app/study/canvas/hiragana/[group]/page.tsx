@@ -1,12 +1,13 @@
 "use client";
 
 import { ArrowBack, ArrowForward, ArrowBack as PrevIcon } from "@mui/icons-material";
-import { Card, CardContent, Typography, IconButton, LinearProgress } from "@mui/material";
+import { Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter, useParams } from "next/navigation";
 import React, { useState, useCallback } from "react";
 
 import WritingCanvas from "@/components/canvas";
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 
 import styles from "./page.module.css";
 
@@ -107,8 +108,13 @@ export default function HiraganaGroupPage() {
       </div>
 
       {/* 학습 영역 */}
-      <Card className={`${styles.card} ${styles.learningCard}`}>
-        <CardContent className={styles.learningContent}>
+      <Card
+        variant="default"
+        size="lg"
+        padding="xl"
+        borderRadius="2xl"
+        className={styles.learningCard}
+      >
           {/* 현재 문자 표시 */}
           <div className={styles.characterDisplay}>
             <Typography variant="h2" className={styles.currentCharacter}>
@@ -133,7 +139,6 @@ export default function HiraganaGroupPage() {
               위의 문자를 보고 따라 그려보세요
             </Typography>
           </div>
-        </CardContent>
       </Card>
 
       {/* 네비게이션 */}

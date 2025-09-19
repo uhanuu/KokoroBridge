@@ -61,35 +61,37 @@
 
 .filterChip {
   background: var(--surface);
-  color: var(--text-primary);
-  border: 1px solid var(--outline);
-  font-weight: 500;
+  color: var(--primary-500);
+  border: 1px solid rgba(var(--primary-500-rgb), 0.3);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .filterChip:hover {
-  background: var(--surface-variant);
+  background: rgba(var(--primary-500-rgb), 0.05);
+  border-color: var(--primary-500);
   transform: translateY(-1px);
 }
 
 .filterChip[data-variant="filled"] {
-  background: var(--primary-100);
-  color: var(--primary-700);
-  border-color: var(--primary-300);
+  background: var(--primary-500);
+  color: var(--text-primary);
+  border-color: var(--primary-500);
 }
 
 .sortChip {
   background: var(--surface);
-  color: var(--text-primary);
-  border: 1px solid var(--outline);
-  font-weight: 500;
+  color: var(--primary-500);
+  border: 1px solid rgba(var(--primary-500-rgb), 0.3);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .sortChip:hover {
-  background: var(--surface-variant);
+  background: rgba(var(--primary-500-rgb), 0.05);
+  border-color: var(--primary-500);
   transform: translateY(-1px);
 }
 

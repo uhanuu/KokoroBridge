@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  padding: var(--space-lg);
 }
 
 /* 읽음/읽지 않음 상태 */
@@ -179,12 +180,15 @@
 }
 
 .deleteButton {
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
   padding: 4px;
+  transition: all 0.2s ease;
 }
 
 .deleteButton:hover {
-  color: var(--error-600);
+  color: var(--error-500);
+  background: rgba(var(--error-500-rgb), 0.1);
+  border-radius: var(--radius-sm);
 }
 
 .deleteIcon {
@@ -371,6 +375,7 @@
 @media (max-width: 768px) {
   .newsCard {
     gap: var(--space-sm);
+    padding: var(--space-md);
   }
 
   .titleSection {
@@ -400,6 +405,9 @@
 }
 
 @media (max-width: 480px) {
+  .newsCard {
+    padding: var(--space-md);
+  }
 
   .cardHeader {
     flex-direction: row;
@@ -454,6 +462,9 @@
 
 /* 초소형 모바일 최적화 (320px-375px) */
 @media (max-width: 375px) {
+  .newsCard {
+    padding: var(--space-sm);
+  }
 
   .title {
     font-size: 17px;
@@ -477,6 +488,9 @@
 
 /* 최소 너비 320px 지원 */
 @media (max-width: 320px) {
+  .newsCard {
+    padding: 12px;
+  }
 
   .title {
     font-size: 16px;

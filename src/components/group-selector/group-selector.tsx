@@ -1,11 +1,12 @@
 "use client";
 
 import { ArrowBack, TouchApp, ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { Card, CardContent, Typography, IconButton, LinearProgress } from "@mui/material";
+import { Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useCallback, useEffect } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 
 import styles from "./group-selector.module.css";
 
@@ -195,8 +196,11 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
         </button>
 
         <Card
-          className={`${styles.card} ${styles.groupCard}`}
-          ref={containerRef}
+          variant="default"
+          size="lg"
+          padding="xl"
+          borderRadius="2xl"
+          className={styles.groupCard}
           style={{ transform: getTransform() }}
           onMouseDown={handleMouseDown}
           onMouseMove={isDragging ? handleMouseMove : undefined}
@@ -206,7 +210,6 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <CardContent className={styles.groupContent}>
             <div className={styles.groupHeader}>
               <div
                 className={styles.groupIcon}
@@ -265,7 +268,6 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
               onClick={() => handleGroupClick(currentGroup)}
               className={styles.startButton}
             />
-          </CardContent>
         </Card>
 
         {/* 오른쪽 네비게이션 */}

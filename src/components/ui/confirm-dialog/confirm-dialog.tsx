@@ -1,11 +1,12 @@
 "use client";
 
 import { Warning, CheckCircle, Error, Info, Close } from "@mui/icons-material";
-import { Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Typography, IconButton } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
+import Card from "@/components/ui/card";
 
 import styles from "./confirm-dialog.module.css";
 
@@ -116,8 +117,13 @@ export default function ConfirmDialog({
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
       <div className={styles.container}>
-        <Card className={styles.dialog}>
-          <CardContent className={styles.content}>
+        <Card
+          variant="default"
+          size="lg"
+          padding="xl"
+          borderRadius="2xl"
+          className={styles.dialog}
+        >
             {/* 헤더 섹션 (제목 + 닫기 버튼) */}
             <div className={styles.headerSection}>
               <Typography variant="h6" className={styles.title}>
@@ -175,7 +181,6 @@ export default function ConfirmDialog({
                 hideIcon={true}
               />
             </div>
-          </CardContent>
         </Card>
       </div>
     </div>
