@@ -72,15 +72,16 @@ export default function StudyCharacterPage({
         </div>
       </div>
 
-      <div className={styles.swipeHint}>
-        <TouchApp className={styles.swipeIcon} />
-        <Typography variant="body2" className={styles.swipeText}>
-          {swipeText}
-        </Typography>
-      </div>
+      <div className={styles.contentArea}>
+        <div className={styles.swipeHint}>
+          <TouchApp className={styles.swipeIcon} />
+          <Typography variant="body2" className={styles.swipeText}>
+            {swipeText}
+          </Typography>
+        </div>
 
-      <div className={styles.groupsContainer}>
-        {groups.map((group, _index) => (
+        <div className={styles.groupsContainer}>
+          {groups.map((group, _index) => (
           <div key={group.id} className={styles.groupCard}>
             <div className={styles.cardContent}>
               <div className={styles.groupHeader}>
@@ -149,6 +150,7 @@ export default function StudyCharacterPage({
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

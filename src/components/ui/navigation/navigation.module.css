@@ -94,7 +94,7 @@
 }
 
 .icon {
-  font-size: 22px;
+  font-size: 24px;
   color: inherit;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -130,10 +130,30 @@
 }
 
 /* 반응형 디자인 */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .navigationBar {
     padding: var(--space-lg) var(--space-3xl);
     gap: var(--space-3xl);
+  }
+
+  .navItem {
+    min-width: 90px;
+    padding: var(--space-lg);
+  }
+
+  .icon {
+    font-size: 28px;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navigationBar {
+    padding: var(--space-lg) var(--space-2xl);
+    gap: var(--space-2xl);
   }
 
   .navItem {
@@ -142,7 +162,7 @@
   }
 
   .icon {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .label {
@@ -151,6 +171,27 @@
 }
 
 /* 모바일 최적화 */
+@media (max-width: 767px) and (min-width: 481px) {
+  .navigationBar {
+    padding: var(--space-md) var(--space-lg);
+    gap: var(--space-lg);
+    min-height: 70px;
+  }
+
+  .navItem {
+    padding: var(--space-sm) var(--space-xs);
+    min-width: 60px;
+  }
+
+  .icon {
+    font-size: 26px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+}
+
 @media (max-width: 480px) {
   .navigationBar {
     padding: var(--space-md) var(--space-md);
@@ -164,7 +205,7 @@
   }
 
   .icon {
-    font-size: 28px;
+    font-size: 30px;
     padding: 3px 0;
   }
 
@@ -197,32 +238,9 @@
   box-shadow: 0 0 0 2px var(--surface);
 }
 
-/* MUI Badge 우선순위 높은 선택자 */
+/* MUI Badge 스타일링 */
 .container .navigationBar .navItem .MuiBadge-badge,
-.container .navigationBar .navItem .MuiBadge-standard,
-.container .navigationBar .navItem .MuiBadge-anchorOriginTopRight,
-.container .navigationBar .navItem .MuiBadge-anchorOriginTopRightRectangular,
-.container .navigationBar .navItem .MuiBadge-overlapRectangular,
-.container .navigationBar .navItem [class*="MuiBadge-badge"],
-.container .navigationBar .navItem [class*="css-"][class*="MuiBadge-badge"],
-.container .navigationBar .navItem span[class*="MuiBadge-badge"] {
-  background-color: var(--error);
-  color: var(--text-primary);
-  font-size: 10px;
-  font-weight: 600;
-  min-width: 16px;
-  height: 16px;
-  border-radius: 8px;
-  box-shadow: 0 0 0 2px var(--surface);
-}
-
-.container .navigationBar .navItem .MuiBadge-colorError {
-  background-color: var(--error);
-  color: var(--text-primary);
-}
-
-/* 특정 클래스 직접 타겟팅 */
-.container .navigationBar .navItem .css-2ao5rv-MuiBadge-badge {
+.container .navigationBar .navItem [class*="MuiBadge-badge"] {
   background-color: var(--error);
   color: var(--text-primary);
   font-size: 10px;

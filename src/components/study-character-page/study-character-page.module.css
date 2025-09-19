@@ -1,6 +1,7 @@
 .container {
   height: calc(100vh - 100px);
   max-height: calc(100vh - 100px);
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   background-color: var(--background);
@@ -91,13 +92,34 @@
   font-weight: 500;
 }
 
-.groupsContainer {
+.contentArea {
   flex: 1;
   display: flex;
+  flex-direction: column;
+  padding: 0 0 var(--space-xl);
+}
+
+.swipeHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0 var(--space-lg) var(--space-md);
+  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.08), rgba(var(--primary-300-rgb), 0.05));
+  border-radius: var(--radius-lg);
+  margin: 0 var(--space-lg) var(--space-md);
+  animation: pulse 2s infinite;
+}
+
+.groupsContainer {
+  display: flex;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   gap: var(--space-md);
-  padding: var(--space-lg);
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  padding: var(--space-md) var(--space-lg);
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
@@ -105,22 +127,23 @@
 }
 
 .groupsContainer::-webkit-scrollbar {
-  height: 6px;
+  height: 8px;
+  background: rgba(var(--background-rgb), 0.1);
 }
 
 .groupsContainer::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(var(--background-rgb), 0.05);
+  border-radius: 4px;
 }
 
 .groupsContainer::-webkit-scrollbar-thumb {
-  background-color: var(--primary-300);
-  border-radius: 3px;
-  opacity: 0.7;
+  background-color: var(--primary-400);
+  border-radius: 4px;
+  opacity: 1;
 }
 
 .groupsContainer::-webkit-scrollbar-thumb:hover {
   background-color: var(--primary-500);
-  opacity: 1;
 }
 
 .groupCard {
@@ -132,7 +155,9 @@
   overflow: hidden;
   padding: var(--space-md);
   cursor: pointer;
-  height: 100%;
+  height: 440px;
+  max-height: calc(100vh - 250px);
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -259,7 +284,7 @@
 }
 
 .character {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--text-primary);
   line-height: 1;
@@ -425,7 +450,7 @@
   }
 
   .character {
-    font-size: 14px;
+    font-size: 28px;
   }
 
   .charactersGrid {
@@ -485,7 +510,7 @@
   }
 
   .character {
-    font-size: 19px;
+    font-size: 24px;
   }
 
   .startButton {
@@ -548,7 +573,7 @@
   }
 
   .character {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .romaji {
@@ -632,7 +657,7 @@
   }
 
   .character {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .romaji {
@@ -716,7 +741,7 @@
   }
 
   .character {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .romaji {
@@ -730,67 +755,6 @@
   .startButton {
     min-height: 28px;
     font-size: 10px;
-  }
-
-  .groupsContainer {
-    gap: 4px;
-  }
-
-  .groupCard {
-    width: 220px;
-  }
-
-  .cardContent {
-    gap: 4px;
-  }
-
-  .groupHeader {
-    gap: 4px;
-  }
-
-  .groupIcon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .iconText {
-    font-size: 12px;
-  }
-
-  .groupName {
-    font-size: 11px;
-  }
-
-  .groupRomaji {
-    font-size: 8px;
-  }
-
-  .charactersGrid {
-    gap: 2px;
-    margin: 4px 0;
-  }
-
-  .character {
-    font-size: 9px;
-  }
-
-  .progressSection {
-    gap: 2px;
-    margin: 4px 0;
-  }
-
-  .progressLabel,
-  .progressStats {
-    font-size: 8px;
-  }
-
-  .progressBar {
-    height: 3px;
-  }
-
-  .startButton {
-    min-height: 24px;
-    font-size: 9px;
   }
 }
 
@@ -845,7 +809,7 @@
   }
 
   .character {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .charactersGrid {
