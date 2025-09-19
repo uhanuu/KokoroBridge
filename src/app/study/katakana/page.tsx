@@ -1,14 +1,9 @@
 "use client";
 
-import { ArrowBack } from "@mui/icons-material";
-import { Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-import ActionButton from "@/components/ui/button/action-button";
-import Card from "@/components/ui/card";
-
-import styles from "./page.module.css";
+import GroupSelector from "@/components/group-selector";
 
 const katakanaGroups = [
   {
@@ -136,99 +131,16 @@ const katakanaGroups = [
 export default function KatakanaPage() {
   const router = useRouter();
 
-  const handleBackClick = () => {
+  const handleBack = () => {
     router.push("/study");
   };
 
-  const handleGroupClick = (group: typeof katakanaGroups[0]) => {
-    router.push(group.route);
-  };
-
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.headerTop}>
-          <IconButton onClick={handleBackClick} className={styles.backButton}>
-            <ArrowBack />
-          </IconButton>
-          <div className={styles.headerContent}>
-            <Typography variant="h4" className={styles.title}>
-              가타카나
-            </Typography>
-            <Typography variant="body1" className={styles.subtitle}>
-              학습할 그룹을 선택해주세요
-            </Typography>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.groupsGrid}>
-        {katakanaGroups.map((group) => (
-          <Card
-            key={group.id}
-            variant="default"
-            size="lg"
-            padding="xl"
-            borderRadius="2xl"
-            className={styles.groupCard}
-          >
-              <div className={styles.groupHeader}>
-                <div
-                  className={styles.groupIcon}
-                  style={{ backgroundColor: `${group.color}20` }}
-                >
-                  <span className={styles.iconText} style={{ color: group.color }}>
-                    {group.characters[0]}
-                  </span>
-                </div>
-                <div className={styles.groupInfo}>
-                  <Typography variant="h6" className={styles.groupName}>
-                    {group.name}
-                  </Typography>
-                  <Typography variant="body2" className={styles.groupRomaji}>
-                    {group.romaji}
-                  </Typography>
-                </div>
-              </div>
-
-              <div className={styles.charactersGrid}>
-                {group.characters.map((char, index) => (
-                  <div key={index} className={styles.characterItem}>
-                    <span className={styles.character}>{char}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* 진행률 표시 */}
-              <div className={styles.progressSection}>
-                <div className={styles.progressHeader}>
-                  <Typography variant="caption" className={styles.progressLabel}>
-                    학습 진행도
-                  </Typography>
-                  <Typography variant="caption" className={styles.progressStats}>
-                    {group.completedCharacters}/{group.characters.length} ({group.progress}%)
-                  </Typography>
-                </div>
-                <LinearProgress
-                  variant="determinate"
-                  value={group.progress}
-                  className={styles.progressBar}
-                  sx={{
-                    "& .MuiLinearProgress-bar": {
-                      backgroundColor: group.color,
-                    },
-                  }}
-                />
-              </div>
-
-              <ActionButton
-                text={group.progress === 100 ? "복습하기" : "학습하기"}
-                variant={group.progress === 100 ? "completed" : "primary"}
-                onClick={() => handleGroupClick(group)}
-              />
-          </Card>
-        ))}
-      </div>
-    </div>
+    <GroupSelector
+      groups={katakanaGroups}
+      title="가타카나"
+      subtitle="학습할 그룹을 선택하세요"
+      onBack={handleBack}
+    />
   );
 }

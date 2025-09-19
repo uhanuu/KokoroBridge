@@ -68,15 +68,32 @@
   box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.15);
 }
 
-/* 그룹 그리드 */
+/* 그룹 그리드 - 가로 스크롤 */
 .groupsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
   gap: var(--space-md);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: var(--space-xs) 0 var(--space-lg) 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.groupsGrid::-webkit-scrollbar {
+  display: none;
+}
+
+.groupsGrid {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .groupCard {
   padding: 0;
+  min-width: 280px;
+  max-width: 280px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 .groupContent {
@@ -193,8 +210,13 @@
   }
 
   .groupsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: var(--space-sm);
+    padding: var(--space-xs) 0 var(--space-md) 0;
+  }
+
+  .groupCard {
+    min-width: 240px;
+    max-width: 240px;
   }
 
   .groupContent {
@@ -234,7 +256,13 @@
   }
 
   .groupsGrid {
-    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+    padding: var(--space-xs) 0;
+  }
+
+  .groupCard {
+    min-width: 200px;
+    max-width: 200px;
   }
 
   .groupContent {

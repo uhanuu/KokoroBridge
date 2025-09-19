@@ -56,14 +56,14 @@
 }
 
 .actionButton.completedButton {
-  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  background: linear-gradient(135deg, #10b981, #059669);
   cursor: default;
-  box-shadow: 0 1px 3px rgba(var(--primary-500-rgb), 0.3);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
 }
 
 .actionButton.completedButton:hover {
   transform: none;
-  box-shadow: 0 1px 3px rgba(var(--primary-500-rgb), 0.3);
+  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3);
 }
 
 .actionButton.completedButton::before {

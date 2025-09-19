@@ -1,32 +1,48 @@
 .container {
-  padding: var(--space-lg) var(--space-md);
-  max-width: 100%;
-  margin: 0 auto;
-  background-color: var(--background);
-  min-height: calc(100vh - 100px);
+  height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  background-color: var(--background);
+  overflow: hidden;
+  padding: 0;
+  position: relative;
 }
 
-/* 헤더 */
 .header {
-  margin-bottom: var(--space-md);
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  flex-shrink: 0;
+  background-color: var(--background);
+  z-index: 2;
 }
 
 .headerTop {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
+  position: relative;
+  width: 100%;
 }
 
 .backButton {
-  color: var(--text-primary);
-  padding: var(--space-sm);
+  position: absolute;
+  left: 0;
+  z-index: 10;
 }
 
 .headerContent {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.headerSpacer {
+  width: 40px;
+  height: 40px;
+  visibility: hidden;
 }
 
 .title {
@@ -34,82 +50,155 @@
   font-weight: 700;
   margin: 0;
   margin-bottom: 4px;
+  font-size: 32px;
 }
 
 .subtitle {
   color: var(--text-secondary);
   margin: 0;
+  font-size: 16px;
 }
 
-/* 카드 공통 스타일 */
-.card {
-  background-color: var(--surface);
-  border-radius: 20px;
-  box-shadow: 0 4px 16px rgba(var(--background-rgb), 0.08);
-  border: 1px solid var(--outline);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
+.swipeHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 0 var(--space-lg) var(--space-md);
+  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.08), rgba(var(--primary-300-rgb), 0.05));
+  border-radius: var(--radius-lg);
+  margin: 0 var(--space-lg);
+  animation: pulse 2s infinite;
 }
 
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.15);
+.swipeIcon {
+  color: var(--primary-500);
+  font-size: 20px;
 }
 
-/* 그룹 그리드 */
-.groupsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+.swipeText {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.groupsContainer {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
   gap: var(--space-md);
+  padding: var(--space-lg);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-300) transparent;
+}
+
+.groupsContainer::-webkit-scrollbar {
+  height: 6px;
+}
+
+.groupsContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.groupsContainer::-webkit-scrollbar-thumb {
+  background-color: var(--primary-300);
+  border-radius: 3px;
+  opacity: 0.7;
+}
+
+.groupsContainer::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-500);
+  opacity: 1;
 }
 
 .groupCard {
-  padding: 0;
-}
-
-.groupContent {
-  padding: var(--space-lg);
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 2px 8px rgba(var(--background-rgb), 0.1);
+  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  padding: var(--space-md);
+  cursor: pointer;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  flex-shrink: 0;
+  width: 280px;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.groupCard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(var(--background-rgb), 0.15);
+}
+
+.groupCard:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.1);
+  transition: all 0.1s ease;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
   height: 100%;
+  justify-content: space-between;
 }
 
 .groupHeader {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-xs);
+  text-align: center;
 }
 
 .groupIcon {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  margin: 0 auto;
+  position: relative;
+}
+
+.groupIcon::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, currentColor, transparent);
+  opacity: 0.2;
 }
 
 .iconText {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
+  position: relative;
+  z-index: 1;
 }
 
 .groupInfo {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .groupName {
@@ -117,49 +206,148 @@
   font-weight: 600;
   margin: 0;
   margin-bottom: 2px;
+  font-size: 14px;
 }
 
 .groupRomaji {
   color: var(--text-secondary);
   margin: 0;
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 500;
 }
 
-/* 문자 그리드 */
 .charactersGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-xs);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin: var(--space-sm) 0;
+  flex: 1;
+  justify-content: center;
+  align-content: flex-start;
+  min-height: 0;
 }
 
 .characterItem {
-  aspect-ratio: 1;
-  background: var(--background);
-  border: 1px solid var(--outline);
-  border-radius: var(--radius-sm);
+  width: 72px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--surface), var(--background));
+  border: none;
+  border-radius: var(--radius-lg);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  gap: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(var(--background-rgb), 0.1);
+  position: relative;
+  overflow: hidden;
+  padding: 10px 6px;
+  cursor: pointer;
 }
 
 .characterItem:hover {
-  background: var(--outline);
-  transform: scale(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(var(--background-rgb), 0.15);
+}
+
+.characterItem:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.1);
+  transition: all 0.1s ease;
 }
 
 .character {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 700;
   color: var(--text-primary);
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(var(--background-rgb), 0.3);
 }
 
-/* 진행률 섹션 */
+.romaji {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.characterItem.completed {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  box-shadow: 0 2px 8px rgba(var(--primary-500-rgb), 0.2), 0 1px 3px rgba(var(--background-rgb), 0.1);
+  position: relative;
+}
+
+.characterItem.completed::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.3), transparent);
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.characterItem.completed:active::before {
+  left: 150%;
+}
+
+.characterItem.completed .character {
+  color: var(--text-primary);
+  position: relative;
+  z-index: 2;
+}
+
+.characterItem.completed .romaji {
+  color: var(--text-primary);
+  opacity: 0.8;
+  position: relative;
+  z-index: 2;
+}
+
+.characterItem.completed:hover {
+  box-shadow: 0 3px 12px rgba(var(--primary-500-rgb), 0.3), 0 2px 6px rgba(var(--background-rgb), 0.1);
+}
+
+.characterItem.uncompleted {
+  background: linear-gradient(135deg, var(--surface-variant), var(--surface-variant));
+  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.2);
+  position: relative;
+  opacity: 0.7;
+}
+
+.characterItem.uncompleted .character {
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 2;
+}
+
+.characterItem.uncompleted .romaji {
+  color: var(--text-tertiary);
+  position: relative;
+  z-index: 2;
+}
+
+.characterItem.uncompleted:hover {
+  opacity: 0.8;
+  box-shadow: 0 2px 6px rgba(var(--background-rgb), 0.25);
+}
+
 .progressSection {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 4px;
+  margin: 0;
+  margin-top: auto;
 }
 
 .progressHeader {
@@ -171,35 +359,111 @@
 .progressLabel {
   color: var(--text-secondary);
   font-weight: 500;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .progressStats {
   color: var(--text-tertiary);
-  font-size: 12px;
+  font-size: 10px;
+  font-weight: 500;
 }
 
 .progressBar {
-  height: 6px;
-  border-radius: 3px;
+  height: 4px;
+  border-radius: 2px;
   background-color: var(--surface-variant);
+  overflow: hidden;
 }
 
-/* 모바일 반응형 */
-@media (max-width: 768px) {
+.startButton {
+  margin-top: var(--space-xs);
+  min-height: 36px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: var(--space-xs) var(--space-sm);
+}
+
+
+.errorMessage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--error);
+}
+
+@media (min-width: 1441px) {
   .container {
-    padding: var(--space-md);
-    gap: var(--space-md);
+    height: calc(100vh - 120px);
+    max-height: calc(100vh - 120px);
   }
 
-  .groupsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-sm);
+  .groupsContainer {
+    padding: var(--space-2xl);
+    gap: var(--space-xl);
   }
 
-  .groupContent {
-    padding: var(--space-md);
-    gap: var(--space-sm);
+  .groupCard {
+    width: 320px;
+  }
+
+  .groupIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .iconText {
+    font-size: 22px;
+  }
+
+  .groupName {
+    font-size: 16px;
+  }
+
+  .groupRomaji {
+    font-size: 13px;
+  }
+
+  .character {
+    font-size: 14px;
+  }
+
+  .charactersGrid {
+    gap: 6px;
+  }
+
+  .startButton {
+    min-height: 36px;
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1440px) {
+  .container {
+    height: calc(100vh - 120px);
+    max-height: calc(100vh - 120px);
+  }
+
+  .header {
+    padding: var(--space-lg) var(--space-xl) var(--space-md);
+  }
+
+  .headerSpacer {
+    width: 44px;
+    height: 44px;
+  }
+
+  .swipeHint {
+    margin: 0 var(--space-xl);
+  }
+
+  .groupsContainer {
+    padding: var(--space-xl);
+    gap: var(--space-lg);
+  }
+
+  .groupCard {
+    width: 300px;
   }
 
   .groupIcon {
@@ -208,37 +472,209 @@
   }
 
   .iconText {
-    font-size: 18px;
+    font-size: 20px;
   }
 
-  .charactersGrid {
-    gap: 4px;
+  .groupName {
+    font-size: 15px;
+  }
+
+  .groupRomaji {
+    font-size: 12px;
   }
 
   .character {
+    font-size: 19px;
+  }
+
+  .startButton {
+    min-height: 34px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    height: calc(100vh - 100px);
+    max-height: calc(100vh - 100px);
+  }
+
+  .header {
+    padding: var(--space-lg) var(--space-lg) var(--space-md);
+  }
+
+  .headerSpacer {
+    width: 36px;
+    height: 36px;
+  }
+
+  .swipeHint {
+    margin: 0 var(--space-lg);
+  }
+
+  .groupsContainer {
+    padding: var(--space-lg);
+    gap: var(--space-md);
+  }
+
+  .groupCard {
+    width: 300px;
+  }
+
+  .groupIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .iconText {
+    font-size: 22px;
+  }
+
+  .groupName {
+    font-size: 16px;
+  }
+
+  .groupRomaji {
+    font-size: 13px;
+  }
+
+  .characterItem {
+    width: 85px;
+    height: 95px;
+    padding: 12px 7px;
+    gap: 7px;
+  }
+
+  .character {
+    font-size: 30px;
+  }
+
+  .romaji {
+    font-size: 15px;
+  }
+
+  .charactersGrid {
+    gap: 10px;
+  }
+
+  .startButton {
+    min-height: 38px;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+  }
+
+  .headerSpacer {
+    width: 32px;
+    height: 32px;
   }
 
   .title {
     font-size: 28px;
   }
-}
 
-@media (max-width: 480px) {
-  .container {
-    padding: var(--space-sm);
+  .subtitle {
+    font-size: 14px;
   }
 
-  .headerTop {
+  .swipeHint {
+    margin: 0 var(--space-md);
+    padding: var(--space-xs) var(--space-md) var(--space-sm);
+  }
+
+  .swipeText {
+    font-size: 13px;
+  }
+
+  .groupsContainer {
+    padding: var(--space-md);
     gap: var(--space-sm);
   }
 
-  .groupsGrid {
-    grid-template-columns: 1fr;
+  .groupCard {
+    width: 260px;
   }
 
-  .groupContent {
-    padding: var(--space-sm);
+  .charactersGrid {
+    gap: 7px;
+  }
+
+  .characterItem {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+  }
+
+  .groupIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .iconText {
+    font-size: 16px;
+  }
+
+  .groupName {
+    font-size: 13px;
+  }
+
+  .groupRomaji {
+    font-size: 10px;
+  }
+
+  .character {
+    font-size: 17px;
+  }
+
+  .startButton {
+    min-height: 30px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 375px) {
+  .container {
+    height: calc(100vh - 90px);
+    max-height: calc(100vh - 90px);
+  }
+
+  .headerSpacer {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header {
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .swipeHint {
+    margin: 0 var(--space-md);
+    padding: var(--space-xs) var(--space-md) var(--space-sm);
+  }
+
+  .swipeText {
+    font-size: 13px;
+  }
+
+  .groupsContainer {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .groupCard {
+    width: 270px;
   }
 
   .groupIcon {
@@ -247,15 +683,54 @@
   }
 
   .iconText {
-    font-size: 16px;
+    font-size: 18px;
   }
 
-  .charactersGrid {
-    grid-template-columns: repeat(3, 1fr);
+  .groupName {
+    font-size: 14px;
+  }
+
+  .groupRomaji {
+    font-size: 11px;
+  }
+
+  .characterItem {
+    width: 75px;
+    height: 85px;
+    padding: 10px 6px;
+    gap: 6px;
   }
 
   .character {
-    font-size: 12px;
+    font-size: 26px;
+  }
+
+  .romaji {
+    font-size: 13px;
+  }
+
+  .charactersGrid {
+    gap: 8px;
+  }
+
+  .startButton {
+    min-height: 34px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    height: calc(100vh - 90px);
+    max-height: calc(100vh - 90px);
+  }
+
+  .header {
+    padding: var(--space-sm) var(--space-sm) var(--space-xs);
+  }
+
+  .headerTop {
+    gap: var(--space-sm);
   }
 
   .title {
@@ -263,6 +738,243 @@
   }
 
   .subtitle {
+    font-size: 13px;
+  }
+
+  .swipeHint {
+    margin: 0 var(--space-sm);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .swipeIcon {
+    font-size: 18px;
+  }
+
+  .swipeText {
+    font-size: 12px;
+  }
+
+  .groupsContainer {
+    padding: var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .groupCard {
+    width: 240px;
+  }
+
+  .charactersGrid {
+    gap: 6px;
+  }
+
+  .characterItem {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  .groupIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .iconText {
     font-size: 14px;
+  }
+
+  .groupName {
+    font-size: 12px;
+  }
+
+  .groupRomaji {
+    font-size: 9px;
+  }
+
+  .characterItem {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+  }
+
+  .character {
+    font-size: 16px;
+  }
+
+  .charactersGrid {
+    gap: 5px;
+  }
+
+  .startButton {
+    min-height: 28px;
+    font-size: 10px;
+  }
+  .groupsContainer {
+    gap: 4px;
+  }
+
+  .groupCard {
+    width: 220px;
+  }
+
+  .cardContent {
+    gap: 4px;
+  }
+
+  .groupHeader {
+    gap: 4px;
+  }
+
+  .groupIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .iconText {
+    font-size: 12px;
+  }
+
+  .groupName {
+    font-size: 11px;
+  }
+
+  .groupRomaji {
+    font-size: 8px;
+  }
+
+  .charactersGrid {
+    gap: 2px;
+    margin: 4px 0;
+  }
+
+  .character {
+    font-size: 9px;
+  }
+
+  .progressSection {
+    gap: 2px;
+    margin: 4px 0;
+  }
+
+  .progressLabel,
+  .progressStats {
+    font-size: 8px;
+  }
+
+  .progressBar {
+    height: 3px;
+  }
+
+  .startButton {
+    min-height: 24px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
+  }
+
+  .headerSpacer {
+    width: 28px;
+    height: 28px;
+  }
+
+  .header {
+    padding: var(--space-xs) var(--space-xs) 4px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .swipeHint {
+    margin: 0 var(--space-xs);
+    padding: 4px var(--space-xs);
+  }
+
+  .swipeText {
+    font-size: 10px;
+  }
+
+  .groupsContainer {
+    gap: 2px;
+    padding: var(--space-xs);
+  }
+
+  .groupCard {
+    width: 200px;
+    padding: var(--space-xs);
+  }
+
+  .characterItem {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    border-width: 1px;
+  }
+
+  .character {
+    font-size: 12px;
+  }
+
+  .charactersGrid {
+    gap: 3px;
+    margin: 4px 0;
+  }
+
+  .groupName {
+    font-size: 10px;
+  }
+
+  .groupRomaji {
+    font-size: 7px;
+  }
+
+  .startButton {
+    min-height: 22px;
+    font-size: 8px;
+    padding: 2px 6px;
+  }
+
+  .progressLabel,
+  .progressStats {
+    font-size: 7px;
+  }
+
+  .progressBar {
+    height: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swipeHint {
+    animation: none;
+  }
+
+  .cardContent,
+  .characterItem,
+  .groupCard {
+    transition: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .characterItem {
+    border-width: 3px;
+  }
+
+  .swipeHint {
+    background: var(--primary-100);
+    border: 1px solid var(--primary-300);
+  }
+
+  .groupCard {
+    border-width: 2px;
   }
 }

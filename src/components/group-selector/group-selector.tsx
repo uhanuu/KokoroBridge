@@ -201,7 +201,6 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
           padding="xl"
           borderRadius="2xl"
           className={styles.groupCard}
-          style={{ transform: getTransform() }}
           onMouseDown={handleMouseDown}
           onMouseMove={isDragging ? handleMouseMove : undefined}
           onMouseUp={handleMouseUp}
@@ -210,6 +209,10 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          <div
+            className={styles.cardContent}
+            style={{ transform: getTransform() }}
+          >
             <div className={styles.groupHeader}>
               <div
                 className={styles.groupIcon}
@@ -268,6 +271,7 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
               onClick={() => handleGroupClick(currentGroup)}
               className={styles.startButton}
             />
+          </div>
         </Card>
 
         {/* 오른쪽 네비게이션 */}
@@ -283,42 +287,7 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
         </button>
       </div>
 
-      {/* 네비게이션 컨트롤 */}
-      <div className={styles.navigation}>
-        {/* 인디케이터 */}
-        <div className={styles.indicators}>
-          {groups.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.indicator} ${index === currentIndex ? styles.active : ""}`}
-              onClick={() => setCurrentIndex(index)}
-            />
-          ))}
-        </div>
-      </div>
 
-      {/* 그룹 리스트 (하단) */}
-      <div className={styles.groupList}>
-        <Typography variant="body2" className={styles.groupListTitle}>
-          전체 그룹 ({currentIndex + 1}/{groups.length})
-        </Typography>
-        <div className={styles.groupListItems}>
-          {groups.map((group, index) => (
-            <button
-              key={group.id}
-              className={`${styles.groupListItem} ${
-                index === currentIndex ? styles.activeItem : ""
-              }`}
-              onClick={() => setCurrentIndex(index)}
-            >
-              <span className={styles.groupListIcon} style={{ color: group.color }}>
-                {group.characters[0]}
-              </span>
-              <span className={styles.groupListName}>{group.name}</span>
-            </button>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }

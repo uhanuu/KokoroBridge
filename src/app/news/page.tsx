@@ -24,7 +24,7 @@ const newsData: NewsItem[] = [
     isRead: false,
     icon: NewReleases,
     color: "#22c55e",
-    image: "/news/sumbnail.png",
+    image: "/news/thumbnail.png",
     features: [
       "46개 히라가나 문자 완벽 학습",
       "46개 가타카나 문자 마스터",
@@ -45,7 +45,7 @@ const newsData: NewsItem[] = [
     isRead: false,
     icon: Schedule,
     color: "#f59e0b",
-    image: "/news/sumbnail.png",
+    image: "/news/thumbnail.png",
     features: [
       "기초 한자 100개 학습",
       "음독, 훈독 발음 학습",
@@ -65,7 +65,7 @@ const newsData: NewsItem[] = [
     isRead: true,
     icon: Announcement,
     color: "#8b5cf6",
-    image: "/news/sumbnail.png",
+    image: "/news/thumbnail.png",
     features: [
       "실시간 AI 대화 연습",
       "상황별 대화 시나리오",
@@ -85,7 +85,7 @@ const newsData: NewsItem[] = [
     isRead: true,
     icon: Update,
     color: "#3b82f6",
-    image: "/news/sumbnail.png",
+    image: "/news/thumbnail.png",
     features: ["상세 학습 통계 제공", "진도 달성률 시각화", "학습 패턴 분석", "목표 설정 및 관리"],
   },
   {
@@ -100,7 +100,7 @@ const newsData: NewsItem[] = [
     isRead: false,
     icon: Event,
     color: "#ef4444",
-    image: "/news/sumbnail.png",
+    image: "/news/thumbnail.png",
     features: [
       "7일 연속 학습 챌린지",
       "특별 배지 획득",
@@ -156,42 +156,42 @@ export default function NewsPage() {
         className={styles.statsCard}
       >
         <div className={styles.statsContent}>
-            <div className={styles.statsRow}>
-              <div className={styles.statItem}>
-                <Typography variant="h3" className={styles.statNumber}>
-                  {unreadCount}
-                </Typography>
-                <Typography variant="caption" className={styles.statLabel}>
-                  읽지 않은 소식
-                </Typography>
-              </div>
-              <div className={styles.statItem}>
-                <Typography variant="h3" className={styles.statNumber}>
-                  {totalCount}
-                </Typography>
-                <Typography variant="caption" className={styles.statLabel}>
-                  전체 소식
-                </Typography>
-              </div>
-              <div className={styles.buttonGroup}>
-                <ActionButton
-                  text="모두 읽기"
-                  variant="primary"
-                  iconType="check"
-                  onClick={handleMarkAllAsRead}
-                  disabled={unreadCount === 0}
-                  className={styles.readAllButton}
-                />
-                <ActionButton
-                  text="읽은글 삭제"
-                  variant="primary"
-                  iconType="delete"
-                  onClick={handleDeleteAllRead}
-                  disabled={readCount === 0}
-                  className={styles.deleteButton}
-                />
-              </div>
+          <div className={styles.statsRow}>
+            <div className={styles.statItem}>
+              <Typography variant="h3" className={styles.statNumber}>
+                {unreadCount}
+              </Typography>
+              <Typography variant="caption" className={styles.statLabel}>
+                읽지 않은 소식
+              </Typography>
             </div>
+            <div className={styles.statItem}>
+              <Typography variant="h3" className={styles.statNumber}>
+                {totalCount}
+              </Typography>
+              <Typography variant="caption" className={styles.statLabel}>
+                전체 소식
+              </Typography>
+            </div>
+            <div className={styles.buttonGroup}>
+              <ActionButton
+                text="모두 읽기"
+                variant="primary"
+                iconType="check"
+                onClick={handleMarkAllAsRead}
+                disabled={unreadCount === 0}
+                className={styles.readAllButton}
+              />
+              <ActionButton
+                text="읽은글 삭제"
+                variant="primary"
+                iconType="delete"
+                onClick={handleDeleteAllRead}
+                disabled={readCount === 0}
+                className={styles.deleteButton}
+              />
+            </div>
+          </div>
         </div>
       </Card>
 

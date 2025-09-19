@@ -3,19 +3,19 @@
   max-width: 100%;
   margin: 0 auto;
   background-color: var(--background);
-  min-height: calc(100vh - 100px);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: var(--space-md);
   align-items: center;
+  justify-content: space-between;
 }
 
 /* 헤더 */
 .header {
-  margin-bottom: var(--space-md);
-  margin-top: var(--space-lg);
   width: 100%;
   max-width: 600px;
+  flex-shrink: 0;
 }
 
 .headerTop {
@@ -102,10 +102,9 @@
   justify-content: center;
   position: relative;
   overflow: visible;
-  gap: var(--space-md);
   width: 100%;
-  max-width: none;
-  padding: 0 var(--space-sm);
+  max-width: 600px;
+  min-height: 0;
 }
 
 /* 카드 스타일 */
@@ -140,6 +139,20 @@
 
 .groupCard {
   padding: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  overflow: hidden;
+}
+
+.cardContent {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  height: 100%;
+  min-height: 500px;
+  transition: transform 0.3s ease;
 }
 
 .groupContent {
@@ -323,13 +336,14 @@
 .navigation {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: var(--space-md);
   background: var(--surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--outline);
   width: 100%;
   max-width: 600px;
+  flex-shrink: 0;
 }
 
 /* 인디케이터 */
@@ -342,30 +356,52 @@
 }
 
 .indicator {
-  width: 16px;
-  height: 16px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: none;
   background: var(--outline);
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indicatorIcon {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.6;
+  transition: all 0.3s ease;
 }
 
 .indicator.active {
-  background: var(--primary-500);
+  background: var(--surface);
   transform: scale(1.3);
   box-shadow: 0 2px 8px rgba(var(--primary-500-rgb), 0.3);
+  border: 2px solid var(--primary-500);
+}
+
+.indicator.active .indicatorIcon {
+  opacity: 1;
+  font-weight: 700;
 }
 
 .indicator:hover {
   transform: scale(1.15);
-  background: var(--text-tertiary);
+  background: var(--surface);
+  border: 1px solid var(--text-tertiary);
+}
+
+.indicator:hover .indicatorIcon {
+  opacity: 0.8;
 }
 
 .indicator.active:hover {
   transform: scale(1.3);
-  background: var(--primary-500);
+  background: var(--surface);
+  border: 2px solid var(--primary-500);
 }
 
 /* 에러 메시지 */
@@ -491,7 +527,8 @@
 @media (max-width: 768px) {
   .container {
     padding: var(--space-md);
-    gap: var(--space-md);
+    gap: var(--space-sm);
+    min-height: 100vh;
   }
 
   .header {
@@ -508,10 +545,10 @@
     padding: 0 var(--space-xs);
   }
 
-  .groupContent {
+  .cardContent {
     padding: var(--space-md);
     gap: var(--space-sm);
-    min-height: 240px;
+    min-height: 400px;
   }
 
   .groupHeader {
@@ -606,10 +643,10 @@
     padding: 0 6px;
   }
 
-  .groupContent {
+  .cardContent {
     padding: var(--space-sm);
     gap: var(--space-xs);
-    min-height: 200px;
+    min-height: 350px;
   }
 
   .groupHeader {
@@ -711,8 +748,12 @@
   }
 
   .indicator {
-    width: 10px;
-    height: 10px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .indicatorIcon {
+    font-size: 10px;
   }
 }
 
