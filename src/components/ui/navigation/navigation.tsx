@@ -1,36 +1,12 @@
 "use client";
 
-import { Home, School, Person, Notifications } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import styles from "./navigation.module.css";
+import { navigationItems } from "@/mock/navigation-mock";
 
-const navigationItems = [
-  {
-    path: "/",
-    label: "홈",
-    Icon: Home,
-  },
-  {
-    path: "/study",
-    label: "학습",
-    Icon: School,
-  },
-  {
-    path: "/news",
-    label: "새소식",
-    Icon: Notifications,
-    hasNotification: true,
-    notificationCount: 3,
-  },
-  {
-    path: "/profile",
-    label: "프로필",
-    Icon: Person,
-  },
-];
+import styles from "./navigation.module.css";
 
 export default function Navigation() {
   const pathname = usePathname();

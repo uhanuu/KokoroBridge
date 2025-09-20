@@ -6,6 +6,7 @@ import React, { useState, useMemo } from "react";
 
 import ConfirmDialog from "@/components/ui/confirm-dialog";
 import { useConfirm } from "@/hooks/useConfirm";
+import { filterLabels, sortLabels } from "@/mock/news-list-mock";
 
 import NewsCard from "../news-card/news-card";
 
@@ -37,17 +38,6 @@ interface NewsListProps {
 type FilterType = "all" | "unread" | "read";
 type SortType = "latest" | "oldest" | "priority";
 
-const filterLabels = {
-  all: "전체",
-  unread: "읽지 않음",
-  read: "읽음",
-};
-
-const sortLabels = {
-  latest: "최신순",
-  oldest: "오래된순",
-  priority: "중요도순",
-};
 
 export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListProps) {
   const [filter, setFilter] = useState<FilterType>("all");
