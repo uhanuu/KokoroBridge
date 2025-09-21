@@ -122,6 +122,7 @@ export default function ConfirmDialog({
           size="lg"
           padding="xl"
           borderRadius="2xl"
+          animated={false}
           className={styles.dialog}
         >
             {/* 헤더 섹션 (제목 + 닫기 버튼) */}

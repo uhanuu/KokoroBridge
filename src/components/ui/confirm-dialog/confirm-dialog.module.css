@@ -12,34 +12,12 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-lg);
-  animation: fadeIn 0.2s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 /* 컨테이너 */
 .container {
   width: 100%;
   max-width: 420px;
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 /* 다이얼로그 카드 */
@@ -85,19 +63,25 @@
   text-align: center;
 }
 
-.closeButton {
-  color: var(--text-tertiary);
+.headerSection .closeButton {
+  color: var(--text-primary);
   background: var(--background);
   border: 1px solid var(--outline);
   border-radius: 50%;
   position: absolute;
   right: 0;
   left: auto;
+  box-shadow: none;
 }
 
-.closeButton:hover {
+.headerSection .closeButton:hover {
   background: var(--surface-variant);
-  color: var(--text-secondary);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.headerSection .closeButton svg {
+  color: var(--text-primary);
 }
 
 /* 아이콘 섹션 */
@@ -148,6 +132,7 @@
   text-align: center;
   max-width: 100%;
   gap: var(--space-xs);
+  margin-bottom: var(--space-md);
 }
 
 
@@ -167,37 +152,45 @@
   flex-wrap: wrap;
 }
 
-.cancelButton {
+.actions .cancelButton {
   flex: 1;
   min-width: 120px;
   background: var(--background);
   color: var(--text-primary);
   border: 1px solid var(--outline);
-  box-shadow: 0 1px 3px rgba(var(--background-rgb), 0.1);
+  box-shadow: none;
 }
 
-.cancelButton:hover {
-  background: var(--surface-variant);
-  box-shadow: 0 2px 6px rgba(var(--background-rgb), 0.15);
+.actions .cancelButton:hover {
+  background: var(--background);
+  box-shadow: none;
   transform: none;
 }
 
-.cancelButton::before {
+.actions .cancelButton:active {
+  box-shadow: none;
+}
+
+.actions .cancelButton::before {
   display: none;
 }
 
-.confirmButton {
+.actions .confirmButton {
   flex: 1;
   min-width: 120px;
   box-shadow: none;
 }
 
-.confirmButton:hover {
+.actions .confirmButton:hover {
   transform: none;
   box-shadow: none;
 }
 
-.confirmButton::before {
+.actions .confirmButton:active {
+  box-shadow: none;
+}
+
+.actions .confirmButton::before {
   display: none;
 }
 
@@ -210,7 +203,7 @@
 }
 
 .warningButton:hover {
-  background: linear-gradient(135deg, var(--warning-600), var(--warning-700));
+  background: linear-gradient(135deg, var(--warning), var(--warning-600));
   transform: none;
   box-shadow: none;
 }
@@ -223,7 +216,7 @@
 }
 
 .successButton:hover {
-  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
   transform: none;
   box-shadow: none;
 }
@@ -236,7 +229,7 @@
 }
 
 .errorButton:hover {
-  background: linear-gradient(135deg, var(--error-600), var(--error-700));
+  background: linear-gradient(135deg, var(--error), var(--error-600));
   transform: none;
   box-shadow: none;
 }
@@ -249,7 +242,7 @@
 }
 
 .infoButton:hover {
-  background: linear-gradient(135deg, var(--info), var(--info-700));
+  background: linear-gradient(135deg, var(--info), var(--info));
   transform: none;
   box-shadow: none;
 }

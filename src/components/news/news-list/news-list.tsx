@@ -1,12 +1,11 @@
 "use client";
 
-import { Typography, Menu, MenuItem } from "@mui/material";
+import { Typography } from "@mui/material";
 import React, { useState, useMemo } from "react";
 
 import ConfirmDialog from "@/components/ui/confirm-dialog";
-import { FilterIcon, SortIcon } from "@/components/ui/icons";
+import DropdownButton from "@/components/ui/dropdown-button";
 import { useConfirm } from "@/hooks/useConfirm";
-import { filterLabels, sortLabels } from "@/mock/news-list-mock";
 
 import NewsCard from "../news-card/news-card";
 
@@ -38,12 +37,22 @@ interface NewsListProps {
 type FilterType = "all" | "unread" | "read";
 type SortType = "latest" | "oldest" | "priority";
 
+const filterOptions = [
+  { value: "all", label: "전체" },
+  { value: "unread", label: "읽지 않음" },
+  { value: "read", label: "읽음" }
+];
+
+const sortOptions = [
+  { value: "latest", label: "최신순" },
+  { value: "oldest", label: "오래된순" },
+  { value: "priority", label: "중요도순" }
+];
+
 
 export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListProps) {
   const [filter, setFilter] = useState<FilterType>("all");
   const [sort, setSort] = useState<SortType>("latest");
-  const [filterAnchor, setFilterAnchor] = useState<null | HTMLElement>(null);
-  const [sortAnchor, setSortAnchor] = useState<null | HTMLElement>(null);
   const { confirmProps, hideConfirm, confirm } = useConfirm();
 
   const filteredAndSortedNews = useMemo(() => {
@@ -72,31 +81,6 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
     return filtered;
   }, [news, filter, sort]);
 
-  const handleFilterClick = (event: React.MouseEvent<HTMLElement>) => {
-    setFilterAnchor(event.currentTarget);
-  };
-
-  const handleSortClick = (event: React.MouseEvent<HTMLElement>) => {
-    setSortAnchor(event.currentTarget);
-  };
-
-  const handleFilterClose = () => {
-    setFilterAnchor(null);
-  };
-
-  const handleSortClose = () => {
-    setSortAnchor(null);
-  };
-
-  const handleFilterSelect = (selectedFilter: FilterType) => {
-    setFilter(selectedFilter);
-    handleFilterClose();
-  };
-
-  const handleSortSelect = (selectedSort: SortType) => {
-    setSort(selectedSort);
-    handleSortClose();
-  };
 
   const unreadCount = news.filter((item) => !item.isRead).length;
 
@@ -117,8 +101,8 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
 
   return (
     <div className={styles.container}>
-      {/* 필터 및 정렬 헤더 */}
-      <div className={styles.controlsHeader}>
+      {/* 헤더와 필터 */}
+      <div className={styles.listHeader}>
         <div className={styles.headerInfo}>
           <Typography variant="h6" className={styles.sectionTitle}>
             소식 목록
@@ -129,85 +113,34 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
           </Typography>
         </div>
 
-        <div className={styles.controlsCompact}>
-          <button
-            onClick={handleFilterClick}
-            className={`${styles.filterChip} ${filter !== "all" ? styles.active : ""}`}
-          >
-            <FilterIcon className={styles.chipIcon} />
-            <span className={styles.chipLabel}>{filterLabels[filter]}</span>
-          </button>
-          <button
-            onClick={handleSortClick}
-            className={styles.sortChip}
-          >
-            <SortIcon className={styles.chipIcon} />
-            <span className={styles.chipLabel}>{sortLabels[sort]}</span>
-          </button>
+        <div className={styles.filterControls}>
+          <DropdownButton
+            label="필터"
+            icon={
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46 22,3"></polygon>
+              </svg>
+            }
+            options={filterOptions}
+            value={filter}
+            onChange={(value) => setFilter(value as FilterType)}
+          />
+          <DropdownButton
+            label="정렬"
+            icon={
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="m3 16 4 4 4-4"></path>
+                <path d="M7 20V4"></path>
+                <path d="m21 8-4-4-4 4"></path>
+                <path d="M17 4v16"></path>
+              </svg>
+            }
+            options={sortOptions}
+            value={sort}
+            onChange={(value) => setSort(value as SortType)}
+          />
         </div>
       </div>
-
-      {/* 필터 메뉴 */}
-      <Menu
-        anchorEl={filterAnchor}
-        open={Boolean(filterAnchor)}
-        onClose={handleFilterClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        slotProps={{
-          paper: {
-            className: styles.menuPaper,
-          }
-        }}
-      >
-        {Object.entries(filterLabels).map(([key, label]) => (
-          <MenuItem
-            key={key}
-            onClick={() => handleFilterSelect(key as FilterType)}
-            selected={filter === key}
-            className={styles.menuItem}
-          >
-            {label}
-          </MenuItem>
-        ))}
-      </Menu>
-
-      {/* 정렬 메뉴 */}
-      <Menu
-        anchorEl={sortAnchor}
-        open={Boolean(sortAnchor)}
-        onClose={handleSortClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        slotProps={{
-          paper: {
-            className: styles.menuPaper,
-          }
-        }}
-      >
-        {Object.entries(sortLabels).map(([key, label]) => (
-          <MenuItem
-            key={key}
-            onClick={() => handleSortSelect(key as SortType)}
-            selected={sort === key}
-            className={styles.menuItem}
-          >
-            {label}
-          </MenuItem>
-        ))}
-      </Menu>
 
       {/* 새소식 카드 목록 */}
       <div className={styles.newsList}>
