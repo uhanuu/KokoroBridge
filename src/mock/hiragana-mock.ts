@@ -4,11 +4,79 @@ export const hiraganaGroups = [
     name: "あ단",
     romaji: "A-Dan",
     characters: [
-      { char: "あ", romaji: "a", completed: true },
-      { char: "い", romaji: "i", completed: true },
-      { char: "う", romaji: "u", completed: true },
-      { char: "え", romaji: "e", completed: true },
-      { char: "お", romaji: "o", completed: true },
+      {
+        char: "あ",
+        romaji: "a",
+        completed: true,
+        strokeOrder: [
+          "M50 30 Q80 40 90 70 Q85 90 70 95 Q50 100 30 90 Q20 70 30 50",
+          "M35 45 Q50 35 65 45 Q70 55 60 65 Q45 70 35 60",
+          "M45 75 Q60 70 70 80 Q65 90 55 85 Q45 80 45 75"
+        ],
+        strokePoints: [
+          [{ x: 50, y: 30 }, { x: 80, y: 40 }, { x: 90, y: 70 }, { x: 85, y: 90 }, { x: 70, y: 95 }, { x: 50, y: 100 }, { x: 30, y: 90 }, { x: 20, y: 70 }, { x: 30, y: 50 }],
+          [{ x: 35, y: 45 }, { x: 50, y: 35 }, { x: 65, y: 45 }, { x: 70, y: 55 }, { x: 60, y: 65 }, { x: 45, y: 70 }, { x: 35, y: 60 }],
+          [{ x: 45, y: 75 }, { x: 60, y: 70 }, { x: 70, y: 80 }, { x: 65, y: 90 }, { x: 55, y: 85 }, { x: 45, y: 80 }, { x: 45, y: 75 }]
+        ]
+      },
+      {
+        char: "い",
+        romaji: "i",
+        completed: true,
+        strokeOrder: [
+          "M30 20 L30 95",
+          "M70 25 Q75 50 70 75 Q65 95 60 100"
+        ],
+        strokePoints: [
+          [{ x: 30, y: 20 }, { x: 30, y: 95 }],
+          [{ x: 70, y: 25 }, { x: 75, y: 50 }, { x: 70, y: 75 }, { x: 65, y: 95 }, { x: 60, y: 100 }]
+        ]
+      },
+      {
+        char: "う",
+        romaji: "u",
+        completed: true,
+        strokeOrder: [
+          "M25 35 Q50 25 75 35",
+          "M60 60 Q80 70 75 90 Q65 100 45 95 Q25 85 30 65 Q35 45 50 50"
+        ],
+        strokePoints: [
+          [{ x: 25, y: 35 }, { x: 50, y: 25 }, { x: 75, y: 35 }],
+          [{ x: 60, y: 60 }, { x: 80, y: 70 }, { x: 75, y: 90 }, { x: 65, y: 100 }, { x: 45, y: 95 }, { x: 25, y: 85 }, { x: 30, y: 65 }, { x: 35, y: 45 }, { x: 50, y: 50 }]
+        ]
+      },
+      {
+        char: "え",
+        romaji: "e",
+        completed: true,
+        strokeOrder: [
+          "M25 40 L75 40",
+          "M35 25 Q40 45 35 65 Q30 85 25 100",
+          "M45 60 Q65 55 75 65 Q70 85 60 90"
+        ],
+        strokePoints: [
+          [{ x: 25, y: 40 }, { x: 75, y: 40 }],
+          [{ x: 35, y: 25 }, { x: 40, y: 45 }, { x: 35, y: 65 }, { x: 30, y: 85 }, { x: 25, y: 100 }],
+          [{ x: 45, y: 60 }, { x: 65, y: 55 }, { x: 75, y: 65 }, { x: 70, y: 85 }, { x: 60, y: 90 }]
+        ]
+      },
+      {
+        char: "お",
+        romaji: "o",
+        completed: true,
+        strokeOrder: [
+          "M25 30 L75 30",
+          "M35 20 L35 95",
+          "M50 50 Q70 45 75 65 Q70 85 55 90 Q40 85 45 70",
+          "M20 75 L80 75"
+        ],
+        strokePoints: [
+          [{ x: 25, y: 30 }, { x: 75, y: 30 }],
+          [{ x: 35, y: 20 }, { x: 35, y: 95 }],
+          [{ x: 50, y: 50 }, { x: 70, y: 45 }, { x: 75, y: 65 }, { x: 70, y: 85 }, { x: 55, y: 90 }, { x: 40, y: 85 }, { x: 45, y: 70 }],
+          [{ x: 20, y: 75 }, { x: 80, y: 75 }]
+        ]
+      },
     ],
     color: "#22c55e",
     route: "/study/canvas/hiragana/a",
@@ -20,11 +88,75 @@ export const hiraganaGroups = [
     name: "か단",
     romaji: "Ka-Dan",
     characters: [
-      { char: "か", romaji: "ka", completed: true },
-      { char: "き", romaji: "ki", completed: true },
-      { char: "く", romaji: "ku", completed: true },
-      { char: "け", romaji: "ke", completed: false },
-      { char: "こ", romaji: "ko", completed: false },
+      {
+        char: "か",
+        romaji: "ka",
+        completed: true,
+        strokeOrder: [
+          "M25 30 L75 30",
+          "M35 20 L35 95",
+          "M50 50 Q70 45 75 65 Q70 85 55 90 Q40 85 45 70"
+        ],
+        strokePoints: [
+          [{ x: 25, y: 30 }, { x: 75, y: 30 }],
+          [{ x: 35, y: 20 }, { x: 35, y: 95 }],
+          [{ x: 50, y: 50 }, { x: 70, y: 45 }, { x: 75, y: 65 }, { x: 70, y: 85 }, { x: 55, y: 90 }, { x: 40, y: 85 }, { x: 45, y: 70 }]
+        ]
+      },
+      {
+        char: "き",
+        romaji: "ki",
+        completed: true,
+        strokeOrder: [
+          "M25 30 L75 30",
+          "M35 20 L35 95",
+          "M45 50 Q65 45 70 65"
+        ],
+        strokePoints: [
+          [{ x: 25, y: 30 }, { x: 75, y: 30 }],
+          [{ x: 35, y: 20 }, { x: 35, y: 95 }],
+          [{ x: 45, y: 50 }, { x: 65, y: 45 }, { x: 70, y: 65 }]
+        ]
+      },
+      {
+        char: "く",
+        romaji: "ku",
+        completed: true,
+        strokeOrder: [
+          "M30 40 Q50 30 70 50 Q65 70 50 80"
+        ],
+        strokePoints: [
+          [{ x: 30, y: 40 }, { x: 50, y: 30 }, { x: 70, y: 50 }, { x: 65, y: 70 }, { x: 50, y: 80 }]
+        ]
+      },
+      {
+        char: "け",
+        romaji: "ke",
+        completed: false,
+        strokeOrder: [
+          "M25 30 L75 30",
+          "M35 20 L35 95",
+          "M45 55 Q65 50 70 70"
+        ],
+        strokePoints: [
+          [{ x: 25, y: 30 }, { x: 75, y: 30 }],
+          [{ x: 35, y: 20 }, { x: 35, y: 95 }],
+          [{ x: 45, y: 55 }, { x: 65, y: 50 }, { x: 70, y: 70 }]
+        ]
+      },
+      {
+        char: "こ",
+        romaji: "ko",
+        completed: false,
+        strokeOrder: [
+          "M25 40 Q50 30 75 40",
+          "M30 70 Q50 60 70 70"
+        ],
+        strokePoints: [
+          [{ x: 25, y: 40 }, { x: 50, y: 30 }, { x: 75, y: 40 }],
+          [{ x: 30, y: 70 }, { x: 50, y: 60 }, { x: 70, y: 70 }]
+        ]
+      },
     ],
     color: "#3b82f6",
     route: "/study/canvas/hiragana/ka",
@@ -36,11 +168,41 @@ export const hiraganaGroups = [
     name: "さ단",
     romaji: "Sa-Dan",
     characters: [
-      { char: "さ", romaji: "sa", completed: true },
-      { char: "し", romaji: "shi", completed: true },
-      { char: "す", romaji: "su", completed: false },
-      { char: "せ", romaji: "se", completed: false },
-      { char: "そ", romaji: "so", completed: false },
+      {
+        char: "さ",
+        romaji: "sa",
+        completed: true,
+        strokeOrder: ["M25 30 L75 30", "M35 20 L35 95", "M45 55 Q65 50 70 70"],
+        strokePoints: [[{ x: 25, y: 30 }, { x: 75, y: 30 }], [{ x: 35, y: 20 }, { x: 35, y: 95 }], [{ x: 45, y: 55 }, { x: 65, y: 50 }, { x: 70, y: 70 }]]
+      },
+      {
+        char: "し",
+        romaji: "shi",
+        completed: true,
+        strokeOrder: ["M40 25 Q45 50 40 75 Q35 95 30 100"],
+        strokePoints: [[{ x: 40, y: 25 }, { x: 45, y: 50 }, { x: 40, y: 75 }, { x: 35, y: 95 }, { x: 30, y: 100 }]]
+      },
+      {
+        char: "す",
+        romaji: "su",
+        completed: false,
+        strokeOrder: ["M25 35 Q50 25 75 35", "M60 60 Q80 70 75 90"],
+        strokePoints: [[{ x: 25, y: 35 }, { x: 50, y: 25 }, { x: 75, y: 35 }], [{ x: 60, y: 60 }, { x: 80, y: 70 }, { x: 75, y: 90 }]]
+      },
+      {
+        char: "せ",
+        romaji: "se",
+        completed: false,
+        strokeOrder: ["M25 40 L75 40", "M35 25 L35 95", "M45 60 Q65 55 75 65"],
+        strokePoints: [[{ x: 25, y: 40 }, { x: 75, y: 40 }], [{ x: 35, y: 25 }, { x: 35, y: 95 }], [{ x: 45, y: 60 }, { x: 65, y: 55 }, { x: 75, y: 65 }]]
+      },
+      {
+        char: "そ",
+        romaji: "so",
+        completed: false,
+        strokeOrder: ["M25 35 Q50 25 75 35", "M40 55 Q60 50 65 70"],
+        strokePoints: [[{ x: 25, y: 35 }, { x: 50, y: 25 }, { x: 75, y: 35 }], [{ x: 40, y: 55 }, { x: 60, y: 50 }, { x: 65, y: 70 }]]
+      },
     ],
     color: "#f59e0b",
     route: "/study/canvas/hiragana/sa",

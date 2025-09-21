@@ -118,6 +118,24 @@
   --large: 1440px;
 }
 
+/* Light Mode Theme */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #ffffff;
+    --surface: #f8fafc;
+    --surface-variant: #f1f5f9;
+    --surface-hover: #e2e8f0;
+    --outline: #e2e8f0;
+    --outline-variant: #cbd5e1;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-tertiary: #64748b;
+    --text-primary-rgb: 30, 41, 59;
+    --background-rgb: 255, 255, 255;
+    --surface-rgb: 248, 250, 252;
+  }
+}
+
 
 /* Base Styles */
 * {

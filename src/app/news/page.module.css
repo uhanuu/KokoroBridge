@@ -29,12 +29,23 @@
 /* 통계 카드 */
 .statsCard {
   background-color: var(--surface);
+  min-height: auto;
+  padding: var(--space-md);
+}
+
+.container .statsCard.statsCard {
+  min-height: auto;
+}
+
+.container .statsCard.statsCard .cardContent {
+  height: auto;
 }
 
 .statsContent {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: 0;
+  justify-content: center;
 }
 
 .statsRow {
@@ -42,6 +53,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
+  min-height: 60px;
 }
 
 .statItem {
@@ -59,6 +71,7 @@
   flex: 1;
   align-items: center;
   min-width: 160px;
+  justify-content: center;
 }
 
 .statNumber {
@@ -84,11 +97,12 @@
   width: 100%;
   max-width: 200px;
   min-width: 140px;
-  height: 36px;
+  height: 32px;
   font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 6px 12px;
 }
 
 .deleteButton {
@@ -116,6 +130,10 @@
   .container {
     padding: var(--space-md);
     gap: var(--space-md);
+  }
+
+  .statsCard {
+    padding: var(--space-sm);
   }
 
   .statsRow {
@@ -147,8 +165,9 @@
     width: 100%;
     max-width: 180px;
     min-width: 130px;
-    height: 36px;
+    height: 32px;
     font-size: 11px;
+    padding: 6px 10px;
   }
 
   .title {
@@ -169,6 +188,10 @@
   .container {
     padding: var(--space-md);
     gap: var(--space-md);
+  }
+
+  .statsCard {
+    padding: var(--space-sm);
   }
 
   .statsRow {
@@ -200,8 +223,9 @@
     width: 100%;
     max-width: 160px;
     min-width: 120px;
-    height: 34px;
+    height: 30px;
     font-size: 10px;
+    padding: 5px 8px;
   }
 
   .title {
@@ -222,6 +246,10 @@
   .container {
     padding: var(--space-sm);
     gap: var(--space-sm);
+  }
+
+  .statsCard {
+    padding: var(--space-xs);
   }
 
   .statsRow {
@@ -252,8 +280,9 @@
     width: 100%;
     max-width: 140px;
     min-width: 100px;
-    height: 34px;
+    height: 30px;
     font-size: 10px;
+    padding: 5px 8px;
   }
 
   .statNumber {
@@ -276,6 +305,10 @@
 
 /* 아주 작은 화면 반응형 */
 @media (max-width: 360px) {
+  .statsCard {
+    padding: var(--space-xs);
+  }
+
   .statsRow {
     flex-direction: column;
     gap: var(--space-sm);
@@ -297,7 +330,8 @@
     width: 100%;
     max-width: 180px;
     min-width: 140px;
-    height: 36px;
+    height: 30px;
     font-size: 11px;
+    padding: 5px 8px;
   }
 }

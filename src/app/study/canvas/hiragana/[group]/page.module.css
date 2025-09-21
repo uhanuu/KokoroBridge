@@ -1,12 +1,7 @@
 .container {
-  height: calc(100vh - 100px);
-  max-height: calc(100vh - 100px);
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background);
+  height: 100vh;
   overflow: hidden;
-  position: relative;
+  background: var(--background);
 }
 
 /* 캔버스 컨테이너 */

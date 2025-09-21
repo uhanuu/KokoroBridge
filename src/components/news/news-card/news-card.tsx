@@ -79,7 +79,6 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
           <div className={styles.categorySection}>
             <Chip
               label={news.category}
-              size="small"
               className={styles.categoryChip}
               style={{
                 backgroundColor: `${news.color}20`,
@@ -89,7 +88,6 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             />
             <Chip
               label={priorityLabels[news.priority]}
-              size="small"
               className={styles.priorityChip}
               style={{
                 backgroundColor: `${getPriorityColor()}20`,
@@ -136,19 +134,8 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
         {!isExpanded && (
           <>
             <Typography variant="body2" className={styles.previewContent}>
-              {news.content.length > 100 ? `${news.content.substring(0, 100)}...` : news.content}
+              {news.content}
             </Typography>
-            {/* 읽지않은 카드에만 미묘한 더보기 힌트 */}
-            {!news.isRead && news.content.length > 100 && (
-              <div className={styles.moreHint}>
-                <div className={styles.expandIndicator}>
-                  <span className={styles.dots}>⋯</span>
-                </div>
-                <Typography variant="caption" className={styles.hoverHint}>
-                  클릭하여 자세히 보기
-                </Typography>
-              </div>
-            )}
           </>
         )}
 
@@ -240,6 +227,7 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             </div>
           </>
         )}
+
     </Card>
   );
 }

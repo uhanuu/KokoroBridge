@@ -1,10 +1,10 @@
 "use client";
 
-import { FilterList, Sort } from "@mui/icons-material";
-import { Typography, Chip, Menu, MenuItem } from "@mui/material";
+import { Typography, Menu, MenuItem } from "@mui/material";
 import React, { useState, useMemo } from "react";
 
 import ConfirmDialog from "@/components/ui/confirm-dialog";
+import { FilterIcon, SortIcon } from "@/components/ui/icons";
 import { useConfirm } from "@/hooks/useConfirm";
 import { filterLabels, sortLabels } from "@/mock/news-list-mock";
 
@@ -130,20 +130,20 @@ export default function NewsList({ news, onMarkAsRead, onDeleteNews }: NewsListP
         </div>
 
         <div className={styles.controlsCompact}>
-          <Chip
-            icon={<FilterList />}
-            label={filterLabels[filter]}
+          <button
             onClick={handleFilterClick}
-            className={styles.filterChip}
-            variant={filter !== "all" ? "filled" : "outlined"}
-          />
-          <Chip
-            icon={<Sort />}
-            label={sortLabels[sort]}
+            className={`${styles.filterChip} ${filter !== "all" ? styles.active : ""}`}
+          >
+            <FilterIcon className={styles.chipIcon} />
+            <span className={styles.chipLabel}>{filterLabels[filter]}</span>
+          </button>
+          <button
             onClick={handleSortClick}
             className={styles.sortChip}
-            variant="outlined"
-          />
+          >
+            <SortIcon className={styles.chipIcon} />
+            <span className={styles.chipLabel}>{sortLabels[sort]}</span>
+          </button>
         </div>
       </div>
 

@@ -4,11 +4,41 @@ export const katakanaGroups = [
     name: "ア단",
     romaji: "A-Dan",
     characters: [
-      { char: "ア", romaji: "a", completed: true },
-      { char: "イ", romaji: "i", completed: true },
-      { char: "ウ", romaji: "u", completed: true },
-      { char: "エ", romaji: "e", completed: true },
-      { char: "オ", romaji: "o", completed: false },
+      {
+        char: "ア",
+        romaji: "a",
+        completed: true,
+        strokeOrder: ["M25 30 L75 70", "M75 30 L25 70", "M50 50 L75 50"],
+        strokePoints: [[{ x: 25, y: 30 }, { x: 75, y: 70 }], [{ x: 75, y: 30 }, { x: 25, y: 70 }], [{ x: 50, y: 50 }, { x: 75, y: 50 }]]
+      },
+      {
+        char: "イ",
+        romaji: "i",
+        completed: true,
+        strokeOrder: ["M30 20 L30 95", "M70 25 Q75 50 70 75"],
+        strokePoints: [[{ x: 30, y: 20 }, { x: 30, y: 95 }], [{ x: 70, y: 25 }, { x: 75, y: 50 }, { x: 70, y: 75 }]]
+      },
+      {
+        char: "ウ",
+        romaji: "u",
+        completed: true,
+        strokeOrder: ["M25 35 Q50 25 75 35", "M60 60 Q80 70 75 90"],
+        strokePoints: [[{ x: 25, y: 35 }, { x: 50, y: 25 }, { x: 75, y: 35 }], [{ x: 60, y: 60 }, { x: 80, y: 70 }, { x: 75, y: 90 }]]
+      },
+      {
+        char: "エ",
+        romaji: "e",
+        completed: true,
+        strokeOrder: ["M25 40 L75 40", "M25 60 L75 60", "M25 80 L75 80"],
+        strokePoints: [[{ x: 25, y: 40 }, { x: 75, y: 40 }], [{ x: 25, y: 60 }, { x: 75, y: 60 }], [{ x: 25, y: 80 }, { x: 75, y: 80 }]]
+      },
+      {
+        char: "オ",
+        romaji: "o",
+        completed: false,
+        strokeOrder: ["M25 30 L75 30", "M35 20 L35 95", "M50 50 Q70 45 75 65"],
+        strokePoints: [[{ x: 25, y: 30 }, { x: 75, y: 30 }], [{ x: 35, y: 20 }, { x: 35, y: 95 }], [{ x: 50, y: 50 }, { x: 70, y: 45 }, { x: 75, y: 65 }]]
+      },
     ],
     color: "#22c55e",
     route: "/study/canvas/katakana/a",
