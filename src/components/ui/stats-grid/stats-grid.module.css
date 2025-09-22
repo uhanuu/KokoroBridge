@@ -1,0 +1,21 @@
+/* 통계 그리드 */
+.statsGrid {
+  display: grid;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}

@@ -587,7 +587,7 @@
   align-items: center;
   gap: var(--space-md);
   padding: var(--space-lg);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-xl);
   transition: all 0.3s ease;
   background: var(--surface-variant);
   border: 1px solid var(--outline);
@@ -704,7 +704,7 @@
 .learningItem {
   background-color: var(--surface);
   border: 1px solid var(--outline);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-xl);
   padding: var(--space-lg);
   display: flex;
   flex-direction: column;

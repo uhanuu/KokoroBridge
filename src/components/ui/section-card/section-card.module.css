@@ -1,0 +1,87 @@
+/* 섹션 카드 */
+.sectionCard {
+  background-color: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--outline);
+}
+
+/* 헤더 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: var(--space-xs) 0 0 0;
+  line-height: 1.4;
+}
+
+.headerAction {
+  flex-shrink: 0;
+}
+
+/* 콘텐츠 */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .header {
+    margin-bottom: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .content {
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-sm);
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .headerAction {
+    align-self: flex-end;
+  }
+}

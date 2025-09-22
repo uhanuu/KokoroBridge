@@ -1,19 +1,25 @@
 interface UserProfile {
   name: string;
   email: string;
-  level: string;
+  level: number;
   joinDate: string;
   streak: number;
   avatar?: string;
+  currentXP: number;
+  nextLevelXP: number;
+  progress: number;
 }
 
 export const mockUserProfile: UserProfile = {
-  name: "유현우",
-  email: "user@example.com",
-  level: "중급",
-  joinDate: "2023년 10월",
+  name: "김철수",
+  email: "kimcs@example.com",
+  level: 15,
+  joinDate: "2024년 1월 15일",
   streak: 12,
-  avatar: "/profile-avatar.png"
+  avatar: "/profile-avatar.png",
+  currentXP: 2350,
+  nextLevelXP: 3000,
+  progress: 78
 };
 
 export const mockLearningStats = {

@@ -1,56 +1,69 @@
 "use client";
 
-import { ChevronRight } from "@mui/icons-material";
-import { Typography } from "@mui/material";
 import React from "react";
-
+import { Typography, Switch } from "@mui/material";
 import styles from "./settings-menu-item.module.css";
 
 interface SettingsMenuItemProps {
   icon: React.ReactNode;
   title: string;
-  subtitle: string;
-  onClick: () => void;
-  isLogout?: boolean;
+  description?: string;
+  hasSwitch?: boolean;
+  isEnabled?: boolean;
+  onToggle?: (enabled: boolean) => void;
+  onClick?: () => void;
+  className?: string;
 }
 
 export default function SettingsMenuItem({
   icon,
   title,
-  subtitle,
+  description,
+  hasSwitch = false,
+  isEnabled = false,
+  onToggle,
   onClick,
-  isLogout = false
+  className
 }: SettingsMenuItemProps) {
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
+  const handleClick = () => {
+    if (hasSwitch && onToggle) {
+      onToggle(!isEnabled);
+    } else if (onClick) {
       onClick();
     }
   };
 
   return (
     <div
-      className={`${styles.settingItem} ${isLogout ? styles.logoutItem : ""}`}
-      onClick={onClick}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
+      className={`${styles.menuItem} ${className || ''}`}
+      onClick={handleClick}
     >
-      <div className={styles.settingInfo}>
-        <div className={`${styles.settingIcon} ${isLogout ? styles.logoutIcon : ""}`}>
-          {icon}
-        </div>
-        <div className={styles.settingContent}>
-          <Typography variant="body1" className={`${styles.settingTitle} ${isLogout ? styles.logoutTitle : ""}`}>
-            {title}
-          </Typography>
-          <Typography variant="caption" className={styles.settingSubtitle}>
-            {subtitle}
-          </Typography>
-        </div>
+      <div className={styles.iconWrapper}>
+        {icon}
       </div>
-      <div className={styles.chevron}>
-        <ChevronRight className={`${styles.chevronIcon} ${isLogout ? styles.chevronLogout : ""}`} />
+
+      <div className={styles.content}>
+        <Typography variant="body1" className={styles.title}>
+          {title}
+        </Typography>
+        {description && (
+          <Typography variant="caption" className={styles.description}>
+            {description}
+          </Typography>
+        )}
+      </div>
+
+      <div className={styles.action}>
+        {hasSwitch ? (
+          <Switch
+            checked={isEnabled}
+            onChange={(e) => onToggle?.(e.target.checked)}
+            color="primary"
+            size="small"
+          />
+        ) : (
+          <span className={styles.arrow}>→</span>
+        )}
       </div>
     </div>
   );

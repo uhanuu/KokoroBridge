@@ -1,466 +1,416 @@
 "use client";
 
 import {
+  Schedule,
+  Book,
+  Star,
+  EmojiEvents,
+  LocalFireDepartment,
   Notifications,
   DarkMode,
   Edit,
-  Key,
   Support,
   Info,
   ExitToApp,
-  TrendingUp,
-  Book,
-  Star,
-  Schedule,
   Lock,
   CheckCircle
 } from "@mui/icons-material";
 import { Typography, Switch, LinearProgress } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
-import Card from "@/components/ui/card";
+import SectionCard from "@/components/ui/section-card";
+import StatsGrid from "@/components/ui/stats-grid";
+import StatCard from "@/components/ui/stat-card";
+import ProgressCard from "@/components/ui/progress-card";
 import { mockUserProfile, mockLearningStats, mockAchievements } from "@/mock/profile-mock";
+
 import styles from "./profile-page.module.css";
 import ProfileInfo from "./profile-info/profile-info";
-import SettingsMenuItem from "./settings-menu-item/settings-menu-item";
-import MonthlyProgress from "../ui/bar/progress-bar/monthly-progress";
 
 export default function ProfilePage() {
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
 
-  const handleDarkModeToggle = () => {
-    setDarkMode(!darkMode);
-  };
+  const handleDarkModeToggle = useCallback(() => {
+    setDarkMode(prev => !prev);
+  }, []);
 
-  const handleNotificationsToggle = () => {
-    setNotifications(!notifications);
-  };
+  const handleNotificationsToggle = useCallback(() => {
+    setNotifications(prev => !prev);
+  }, []);
+
+  const handleActionClick = useCallback((action: string) => {
+    console.log(`${action} clicked`);
+  }, []);
 
   return (
     <div className={styles.container}>
-      {/* 프로필 정보 카드 */}
+      {/* 프로필 정보 */}
       <ProfileInfo profile={mockUserProfile} />
 
-      {/* 학습 통계 - 개요 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.statsCard}
-      >
-          <Typography variant="h6" className={styles.cardTitle}>
-            학습 통계
-          </Typography>
-          <div className={styles.statsGrid}>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <TrendingUp className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockLearningStats.overview.continuousDays}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                연속 학습
-              </Typography>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <Schedule className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockLearningStats.overview.totalHours}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                총 학습 시간
-              </Typography>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <Book className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockLearningStats.overview.completedLessons}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                완료한 레슨
-              </Typography>
-            </div>
-            <div className={styles.statItem}>
-              <div className={styles.statIconWrapper}>
-                <Star className={styles.statIcon} />
-              </div>
-              <Typography variant="h5" className={styles.statNumber}>
-                {mockLearningStats.overview.averageScore}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                평균 점수
-              </Typography>
-            </div>
-          </div>
-      </Card>
-
-      {/* 학습 스킬 진행도 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.skillProgressCard}
-      >
-          <Typography variant="h6" className={styles.cardTitle}>
-            스킬 진행도
-          </Typography>
-          <div className={styles.skillProgressList}>
-            {mockLearningStats.skillProgress.map((skill, index) => (
-              <div key={index} className={styles.skillProgressItem}>
-                <div className={styles.skillHeader}>
-                  <Typography variant="body2" className={styles.skillName}>
-                    {skill.skill}
-                  </Typography>
-                  <Typography variant="caption" className={styles.skillStats}>
-                    {skill.completed}/{skill.total} ({skill.progress}%)
-                  </Typography>
-                </div>
-                <LinearProgress
-                  variant="determinate"
-                  value={skill.progress}
-                  className={styles.skillProgressBar}
-                  sx={{
-                    "& .MuiLinearProgress-bar": {
-                      backgroundColor: skill.color,
-                    },
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-      </Card>
 
       {/* 레벨 및 경험치 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
+      <SectionCard
+        title={`레벨 ${mockUserProfile.level}`}
+        subtitle={`다음 레벨까지 ${mockUserProfile.nextLevelXP - mockUserProfile.currentXP} XP 필요`}
+        headerAction={
+          <div className={styles.xpInfo}>
+            <Typography variant="h6" className={styles.xpPercentage}>
+              {mockUserProfile.progress}%
+            </Typography>
+            <Typography variant="caption" className={styles.xpText}>
+              {mockUserProfile.currentXP} / {mockUserProfile.nextLevelXP} XP
+            </Typography>
+          </div>
+        }
         className={styles.levelCard}
       >
-          <div className={styles.levelHeader}>
-            <div className={styles.levelInfo}>
-              <Typography variant="h6" className={styles.levelTitle}>
-                {mockLearningStats.levelInfo.currentLevel}
-              </Typography>
-              <Typography variant="caption" className={styles.levelSubtitle}>
-                현재 레벨
-              </Typography>
+        <div className={styles.levelContent}>
+          <div className={styles.levelIconSection}>
+            <div className={styles.levelIconWrapper}>
+              <EmojiEvents className={styles.levelIcon} />
+              <div className={styles.levelBadge}>
+                <Typography variant="caption" className={styles.levelNumber}>
+                  {mockUserProfile.level}
+                </Typography>
+              </div>
             </div>
-            <div className={styles.xpInfo}>
-              <Typography variant="body2" className={styles.xpText}>
-                {mockLearningStats.levelInfo.currentXP} /{" "}
-                {mockLearningStats.levelInfo.nextLevelXP} XP
-              </Typography>
-              <Typography variant="caption" className={styles.xpRemaining}>
-                다음 레벨까지{" "}
-                {mockLearningStats.levelInfo.nextLevelXP -
-                  mockLearningStats.levelInfo.currentXP}{" "}
-                XP 남음
+            <div className={styles.levelRewards}>
+              <Typography variant="caption" className={styles.rewardText}>
+                레벨 업 시 특별 보상 획득 가능!
               </Typography>
             </div>
           </div>
-          <LinearProgress
-            variant="determinate"
-            value={mockLearningStats.levelInfo.progress}
-            className={styles.levelProgressBar}
+
+          <ProgressCard
+            items={[
+              {
+                label: "경험치 진행도",
+                value: mockUserProfile.progress,
+                description: `${mockUserProfile.currentXP} / ${mockUserProfile.nextLevelXP} XP`,
+                color: "var(--success-500)"
+              }
+            ]}
+            className={styles.xpProgress}
           />
-      </Card>
-
-      {/* 학습 스트릭 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.streakCard}
-      >
-          <Typography variant="h6" className={styles.cardTitle}>
-            학습 연속성
-          </Typography>
-          <div className={styles.streakGrid}>
-            <div className={styles.streakItem}>
-              <Typography variant="h4" className={styles.streakNumber}>
-                {mockLearningStats.studyStreak.current}
-              </Typography>
-              <Typography variant="caption" className={styles.streakLabel}>
-                현재 연속일
-              </Typography>
-            </div>
-            <div className={styles.streakItem}>
-              <Typography variant="h4" className={styles.streakNumber}>
-                {mockLearningStats.studyStreak.longest}
-              </Typography>
-              <Typography variant="caption" className={styles.streakLabel}>
-                최고 기록
-              </Typography>
-            </div>
-            <div className={styles.streakItem}>
-              <Typography variant="h4" className={styles.streakNumber}>
-                {mockLearningStats.studyStreak.thisMonth}
-              </Typography>
-              <Typography variant="caption" className={styles.streakLabel}>
-                이번 달
-              </Typography>
-            </div>
-            <div className={styles.streakItem}>
-              <Typography variant="h4" className={styles.streakNumber}>
-                {mockLearningStats.studyStreak.percentage}%
-              </Typography>
-              <Typography variant="caption" className={styles.streakLabel}>
-                참여율
-              </Typography>
-            </div>
-          </div>
-      </Card>
-
-      {/* 월별 진행 현황 */}
-      <MonthlyProgress monthlyData={mockLearningStats.monthlyDetailedProgress} />
+        </div>
+      </SectionCard>
 
       {/* 업적 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
+      <SectionCard
+        title="업적"
+        subtitle="학습 목표를 달성하여 특별한 업적을 잠금 해제하세요"
+        headerAction={
+          <div className={styles.achievementSummary}>
+            <Typography variant="h4" className={styles.achievementNumber}>
+              {mockAchievements.filter(a => a.isCompleted).length}
+            </Typography>
+            <Typography variant="caption" className={styles.achievementTotal}>
+              / {mockAchievements.length} 달성
+            </Typography>
+          </div>
+        }
         className={styles.achievementsCard}
       >
-          <Typography variant="h6" className={styles.cardTitle}>
-            업적
-          </Typography>
-          <div className={styles.achievementProgress}>
-            <Typography variant="body2" className={styles.progressText}>
-              {mockAchievements.filter((a) => a.isCompleted).length}/
-              {mockAchievements.length} 달성
-            </Typography>
-            <LinearProgress
-              variant="determinate"
-              value={
-                (mockAchievements.filter((a) => a.isCompleted).length /
-                  mockAchievements.length) *
-                100
-              }
-              className={styles.achievementProgressBar}
-            />
-          </div>
+        <ProgressCard
+          items={[
+            {
+              label: "달성률",
+              value: (mockAchievements.filter(a => a.isCompleted).length / mockAchievements.length) * 100,
+              description: `${mockAchievements.filter(a => a.isCompleted).length}/${mockAchievements.length} 업적 달성`,
+              color: "var(--primary-500)"
+            }
+          ]}
+          className={styles.achievementProgress}
+        />
 
-          <div className={styles.achievementList}>
-            {mockAchievements.map((achievement) => (
-              <div
-                key={achievement.id}
-                className={`${styles.achievementItem} ${
-                  !achievement.isCompleted ? styles.locked : ""
-                }`}
-              >
+        <div className={styles.achievementGrid}>
+          {mockAchievements.slice(0, 4).map((achievement) => (
+            <div
+              key={achievement.id}
+              className={`${styles.achievementItem} ${
+                achievement.isCompleted ? styles.completed : styles.locked
+              }`}
+            >
+              <div className={styles.achievementIconWrapper}>
                 <div className={styles.achievementIcon}>
                   {achievement.isCompleted ? (
+                    <span className={styles.achievementEmoji}>{achievement.icon}</span>
+                  ) : (
+                    <Lock className={styles.lockIcon} />
+                  )}
+                </div>
+                {achievement.isCompleted && (
+                  <div className={styles.completedBadge}>
                     <CheckCircle className={styles.completedIcon} />
-                  ) : (
-                    <div className={styles.lockIcon}>
-                      <Lock />
-                    </div>
-                  )}
-                  <div className={styles.iconEmoji}>{achievement.icon}</div>
-                </div>
-                <div className={styles.achievementInfo}>
-                  <Typography variant="body2" className={styles.achievementTitle}>
-                    {achievement.title}
-                  </Typography>
-                  <Typography variant="caption" className={styles.achievementDescription}>
-                    {achievement.description}
-                  </Typography>
-                  {achievement.date && (
-                    <Typography variant="caption" className={styles.achievementDate}>
-                      📅 {achievement.date}
-                    </Typography>
-                  )}
-                </div>
-                <div className={styles.achievementStatus}>
-                  {achievement.isCompleted ? (
-                    <div className={styles.completedBadge}>✓ 완료</div>
-                  ) : (
-                    <div className={styles.lockedBadge}>🔒 잠금</div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-
-          <div className={styles.achievementSummary}>
-            <div className={styles.summaryItem}>
-              <Typography variant="h4" className={styles.summaryNumber}>
-                {mockAchievements.filter((a) => a.isCompleted).length}
-              </Typography>
-              <Typography variant="caption" className={styles.summaryLabel}>
-                완료된 업적
-              </Typography>
+              <div className={styles.achievementInfo}>
+                <Typography variant="body2" className={styles.achievementTitle}>
+                  {achievement.title}
+                </Typography>
+                <Typography variant="caption" className={styles.achievementDescription}>
+                  {achievement.description}
+                </Typography>
+                {achievement.isCompleted && achievement.date && (
+                  <Typography variant="caption" className={styles.achievementDate}>
+                    {achievement.date} 달성
+                  </Typography>
+                )}
+              </div>
             </div>
-            <div className={styles.summaryItem}>
-              <Typography variant="h4" className={styles.summaryNumber}>
-                {mockAchievements.filter((a) => !a.isCompleted).length}
-              </Typography>
-              <Typography variant="caption" className={styles.summaryLabel}>
-                남은 업적
-              </Typography>
-            </div>
-          </div>
-      </Card>
+          ))}
+        </div>
 
-      {/* 설정 메뉴 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
+        <div className={styles.achievementStats}>
+          <Typography variant="caption" className={styles.statsText}>
+            🏆 다음 업적까지 {4 - mockAchievements.filter(a => a.isCompleted).length}개 남음
+          </Typography>
+        </div>
+      </SectionCard>
+
+      {/* 설정 */}
+      <SectionCard
+        title="설정"
         className={styles.settingsCard}
       >
-          <Typography variant="h6" className={styles.cardTitle}>
-            설정
-          </Typography>
-
-          <div className={styles.settingsGrid}>
-            {/* 알림 설정 */}
-            <div className={styles.toggleSettingItem}>
-              <div className={styles.toggleSettingInfo}>
-                <div className={styles.settingIcon}>
-                  <Notifications className={styles.icon} />
+        <div className={styles.settingsContent}>
+          {/* 학습 설정 카테고리 */}
+          <div className={styles.settingCategory}>
+            <Typography variant="h6" className={styles.categoryTitle}>
+              학습 설정
+            </Typography>
+            <div className={styles.categoryItems}>
+              <div className={styles.settingItem}>
+                <div className={styles.itemIcon}>
+                  <Notifications className={`${styles.settingIcon} ${styles.notificationIcon}`} />
                 </div>
-                <div className={styles.settingContent}>
-                  <Typography variant="body1" className={styles.settingTitle}>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
                     알림 설정
                   </Typography>
-                  <Typography variant="caption" className={styles.settingSubtitle}>
-                    학습 알림 및 소식 받기
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    학습 리마인더 및 알림
                   </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <Switch
+                    checked={notifications}
+                    onChange={handleNotificationsToggle}
+                    color="primary"
+                    className={styles.switch}
+                  />
                 </div>
               </div>
-              <Switch
-                checked={notifications}
-                onChange={handleNotificationsToggle}
-                color="primary"
-              />
-            </div>
 
-            {/* 다크 모드 */}
-            <div className={styles.toggleSettingItem}>
-              <div className={styles.toggleSettingInfo}>
-                <div className={styles.settingIcon}>
-                  <DarkMode className={styles.icon} />
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('goal')}
+              >
+                <div className={styles.itemIcon}>
+                  <Star className={`${styles.settingIcon} ${styles.goalIcon}`} />
                 </div>
-                <div className={styles.settingContent}>
-                  <Typography variant="body1" className={styles.settingTitle}>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    학습 목표
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    일일 학습 목표 설정
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('data')}
+              >
+                <div className={styles.itemIcon}>
+                  <Book className={`${styles.settingIcon} ${styles.dataIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    학습 데이터
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    데이터 백업 및 복원
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* 계정 설정 카테고리 */}
+          <div className={styles.settingCategory}>
+            <Typography variant="h6" className={styles.categoryTitle}>
+              계정 설정
+            </Typography>
+            <div className={styles.categoryItems}>
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('profile')}
+              >
+                <div className={styles.itemIcon}>
+                  <Edit className={`${styles.settingIcon} ${styles.profileEditIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    프로필 수정
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    이름, 이메일 등 개인정보
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('password')}
+              >
+                <div className={styles.itemIcon}>
+                  <Lock className={`${styles.settingIcon} ${styles.passwordIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    비밀번호 변경
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    계정 보안을 위한 비밀번호 변경
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('privacy')}
+              >
+                <div className={styles.itemIcon}>
+                  <CheckCircle className={`${styles.settingIcon} ${styles.privacyIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    개인정보 보호
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    데이터 수집 및 사용 동의
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* 앱 설정 카테고리 */}
+          <div className={styles.settingCategory}>
+            <Typography variant="h6" className={styles.categoryTitle}>
+              앱 설정
+            </Typography>
+            <div className={styles.categoryItems}>
+              <div className={styles.settingItem}>
+                <div className={styles.itemIcon}>
+                  <DarkMode className={`${styles.settingIcon} ${styles.darkModeIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
                     다크 모드
                   </Typography>
-                  <Typography variant="caption" className={styles.settingSubtitle}>
+                  <Typography variant="caption" className={styles.itemDescription}>
                     어두운 테마 사용
                   </Typography>
                 </div>
+                <div className={styles.itemAction}>
+                  <Switch
+                    checked={darkMode}
+                    onChange={handleDarkModeToggle}
+                    color="primary"
+                    className={styles.switch}
+                  />
+                </div>
               </div>
-              <Switch
-                checked={darkMode}
-                onChange={handleDarkModeToggle}
-                color="primary"
-              />
+
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('support')}
+              >
+                <div className={styles.itemIcon}>
+                  <Support className={`${styles.settingIcon} ${styles.supportIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    고객 지원
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    문의사항 및 도움말
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('info')}
+              >
+                <div className={styles.itemIcon}>
+                  <Info className={`${styles.settingIcon} ${styles.infoIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    앱 정보
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    버전 정보 및 라이선스
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
             </div>
           </div>
-      </Card>
 
-      {/* 계정 관리 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.accountCard}
-      >
-          <Typography variant="h6" className={styles.cardTitle}>
-            계정 관리
-          </Typography>
+        </div>
+      </SectionCard>
 
-          <div className={styles.settingsGrid}>
-            <SettingsMenuItem
-              icon={<Edit className={styles.icon} />}
-              title="프로필 수정"
-              subtitle="개인정보 및 프로필 이미지 변경"
-              onClick={() => {}}
-            />
-
-            <SettingsMenuItem
-              icon={<Key className={styles.icon} />}
-              title="비밀번호 변경"
-              subtitle="계정 보안을 위한 비밀번호 변경"
-              onClick={() => {}}
-            />
-          </div>
-      </Card>
-
-      {/* 지원 및 정보 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.supportCard}
-      >
-          <Typography variant="h6" className={styles.cardTitle}>
-            지원 및 정보
-          </Typography>
-
-          <div className={styles.settingsGrid}>
-            <SettingsMenuItem
-              icon={<Support className={styles.icon} />}
-              title="고객 지원"
-              subtitle="문의사항 및 도움말"
-              onClick={() => {}}
-            />
-
-            <SettingsMenuItem
-              icon={<Info className={styles.icon} />}
-              title="앱 정보"
-              subtitle="버전 정보 및 이용약관"
-              onClick={() => {}}
-            />
-
-            <SettingsMenuItem
-              icon={<Info className={styles.icon} />}
-              title="개인정보 처리방침"
-              subtitle="개인정보 보호 정책 확인"
-              onClick={() => {}}
-            />
-
-            <SettingsMenuItem
-              icon={<Info className={styles.icon} />}
-              title="이용약관"
-              subtitle="서비스 이용약관 확인"
-              onClick={() => {}}
-            />
-          </div>
-      </Card>
-
-      {/* 로그아웃 */}
-      <Card
-        variant="default"
-        size="lg"
-        padding="xl"
-        borderRadius="2xl"
-        className={styles.logoutCard}
-      >
-          <SettingsMenuItem
-            icon={<ExitToApp className={styles.iconLogout} />}
-            title="로그아웃"
-            subtitle="현재 계정에서 로그아웃"
-            onClick={() => {}}
-            isLogout={true}
-          />
-      </Card>
+      {/* 로그아웃 버튼 */}
+      <div className={styles.logoutSection}>
+        <button
+          className={styles.logoutButton}
+          onClick={() => handleActionClick('logout')}
+        >
+          <ExitToApp className={styles.logoutIcon} />
+          <span>로그아웃</span>
+        </button>
+      </div>
     </div>
   );
 }
