@@ -14,7 +14,8 @@ import {
   ExitToApp,
   Lock,
   CheckCircle,
-  Face
+  Face,
+  CardGiftcard
 } from "@mui/icons-material";
 import { Typography, Switch, LinearProgress } from "@mui/material";
 import React, { useState, useCallback } from "react";
@@ -31,6 +32,7 @@ import ProfileInfo from "./profile-info/profile-info";
 export default function ProfilePage() {
   const [darkMode, setDarkMode] = useState(false);
   const [notifications, setNotifications] = useState(true);
+  const [achievementFilter, setAchievementFilter] = useState<'all' | 'completed' | 'incomplete'>('all');
 
   const handleDarkModeToggle = useCallback(() => {
     setDarkMode(prev => !prev);
@@ -43,6 +45,16 @@ export default function ProfilePage() {
   const handleActionClick = useCallback((action: string) => {
     console.log(`${action} clicked`);
   }, []);
+
+  const handleAchievementFilterChange = useCallback((filter: 'all' | 'completed' | 'incomplete') => {
+    setAchievementFilter(filter);
+  }, []);
+
+  const filteredAchievements = mockAchievements.filter(achievement => {
+    if (achievementFilter === 'completed') return achievement.isCompleted;
+    if (achievementFilter === 'incomplete') return !achievement.isCompleted;
+    return true;
+  });
 
   return (
     <div className={styles.container}>
@@ -101,32 +113,32 @@ export default function ProfilePage() {
       <SectionCard
         title="업적"
         subtitle="학습 목표를 달성하여 특별한 업적을 잠금 해제하세요"
-        headerAction={
-          <div className={styles.achievementSummary}>
-            <Typography variant="h4" className={styles.achievementNumber}>
-              {mockAchievements.filter(a => a.isCompleted).length}
-            </Typography>
-            <Typography variant="caption" className={styles.achievementTotal}>
-              / {mockAchievements.length} 달성
-            </Typography>
-          </div>
-        }
         className={styles.achievementsCard}
       >
-        <ProgressCard
-          items={[
-            {
-              label: "달성률",
-              value: (mockAchievements.filter(a => a.isCompleted).length / mockAchievements.length) * 100,
-              description: `${mockAchievements.filter(a => a.isCompleted).length}/${mockAchievements.length} 업적 달성`,
-              color: "var(--primary-500)"
-            }
-          ]}
-          className={styles.achievementProgress}
-        />
+        {/* 필터 탭 */}
+        <div className={styles.achievementFilters}>
+          <button
+            className={`${styles.filterButton} ${achievementFilter === 'all' ? styles.active : ''}`}
+            onClick={() => handleAchievementFilterChange('all')}
+          >
+            전체 ({mockAchievements.length})
+          </button>
+          <button
+            className={`${styles.filterButton} ${achievementFilter === 'completed' ? styles.active : ''}`}
+            onClick={() => handleAchievementFilterChange('completed')}
+          >
+            달성 ({mockAchievements.filter(a => a.isCompleted).length})
+          </button>
+          <button
+            className={`${styles.filterButton} ${achievementFilter === 'incomplete' ? styles.active : ''}`}
+            onClick={() => handleAchievementFilterChange('incomplete')}
+          >
+            미달성 ({mockAchievements.filter(a => !a.isCompleted).length})
+          </button>
+        </div>
 
         <div className={styles.achievementGrid}>
-          {mockAchievements.slice(0, 4).map((achievement) => (
+          {filteredAchievements.map((achievement) => (
             <div
               key={achievement.id}
               className={`${styles.achievementItem} ${
@@ -164,11 +176,57 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        <div className={styles.achievementStats}>
-          <Typography variant="caption" className={styles.statsText}>
-            🏆 다음 업적까지 {4 - mockAchievements.filter(a => a.isCompleted).length}개 남음
-          </Typography>
+        {filteredAchievements.length === 0 && (
+          <div className={styles.noAchievements}>
+            <Typography variant="body2" className={styles.noAchievementsText}>
+              {achievementFilter === 'completed'
+                ? '아직 달성한 업적이 없습니다.'
+                : achievementFilter === 'incomplete'
+                ? '모든 업적을 달성했습니다! 🎉'
+                : '업적이 없습니다.'}
+            </Typography>
+          </div>
+        )}
+
+        {/* 달성률 및 보상 */}
+        <div className={styles.achievementProgressContainer}>
+          <div className={styles.progressHeader}>
+            <Typography variant="body1" className={styles.progressTitle}>
+              달성률
+            </Typography>
+            <Typography variant="h4" className={styles.progressPercentage}>
+              {Math.round((mockAchievements.filter(a => a.isCompleted).length / mockAchievements.length) * 100)}%
+            </Typography>
+          </div>
+          <div className={styles.progressBarContainer}>
+            <div
+              className={styles.progressBar}
+              style={{
+                width: `${(mockAchievements.filter(a => a.isCompleted).length / mockAchievements.length) * 100}%`
+              }}
+            />
+          </div>
+          <div className={styles.rewardSection}>
+            <Typography variant="caption" className={styles.progressDescription}>
+              {mockAchievements.filter(a => a.isCompleted).length}개 / {mockAchievements.length}개 업적 달성
+            </Typography>
+            <button
+              className={`${styles.rewardButton} ${
+                mockAchievements.filter(a => a.isCompleted).length === mockAchievements.length
+                  ? styles.rewardEnabled
+                  : styles.rewardDisabled
+              }`}
+              disabled={mockAchievements.filter(a => a.isCompleted).length !== mockAchievements.length}
+              onClick={() => handleActionClick('reward')}
+            >
+              <CardGiftcard className={styles.rewardIcon} />
+              <Typography variant="caption" className={styles.rewardText}>
+                보상받기
+              </Typography>
+            </button>
+          </div>
         </div>
+
       </SectionCard>
 
       {/* 설정 */}

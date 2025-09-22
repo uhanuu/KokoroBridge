@@ -235,7 +235,7 @@
   margin-bottom: var(--space-lg);
 }
 
-.achievementNumber {
+.achievementPercentage {
   color: var(--primary-600);
   font-weight: 800;
   margin: 0;
@@ -243,7 +243,7 @@
   font-size: 28px;
 }
 
-.achievementTotal {
+.achievementLabel {
   color: var(--text-tertiary);
   font-weight: 600;
   margin: 0;
@@ -252,6 +252,141 @@
 
 .achievementProgress {
   margin-bottom: var(--space-lg);
+}
+
+/* 새로운 달성률 디자인 */
+.achievementProgressContainer {
+  background: var(--surface-variant);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+
+.progressTitle {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.progressPercentage {
+  color: var(--primary-600);
+  font-weight: 800;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.progressBarContainer {
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  height: 8px;
+  margin-bottom: var(--space-sm);
+  overflow: hidden;
+  border: 1px solid var(--outline);
+}
+
+.progressBar {
+  background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.progressDescription {
+  color: var(--text-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* 보상 섹션 */
+.rewardSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-sm);
+}
+
+.rewardButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.rewardEnabled {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  color: white;
+  box-shadow: 0 2px 8px rgba(var(--primary-500-rgb), 0.3);
+}
+
+.rewardEnabled:hover {
+  background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(var(--primary-500-rgb), 0.4);
+}
+
+.rewardDisabled {
+  background: var(--surface);
+  color: var(--text-tertiary);
+  border: 1px solid var(--outline);
+  cursor: not-allowed;
+}
+
+.rewardIcon {
+  font-size: 18px;
+}
+
+.rewardText {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* 업적 필터 */
+.achievementFilters {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+  padding: 4px;
+  background: var(--surface-variant);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline);
+}
+
+.filterButton {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.filterButton:hover {
+  background: rgba(var(--primary-500-rgb), 0.1);
+  color: var(--text-primary);
+}
+
+.filterButton.active {
+  background: var(--primary-500);
+  color: white;
+  box-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.3);
 }
 
 .achievementGrid {
@@ -388,6 +523,20 @@
   font-weight: 600;
   margin: 0;
   font-size: 12px;
+}
+
+/* 빈 상태 */
+.noAchievements {
+  text-align: center;
+  padding: var(--space-xl);
+  background: var(--surface-variant);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline);
+}
+
+.noAchievementsText {
+  color: var(--text-secondary);
+  font-style: italic;
 }
 
 /* 설정 카드 */
@@ -578,7 +727,7 @@
     gap: var(--space-sm);
   }
 
-  .achievementNumber {
+  .achievementPercentage {
     font-size: 24px;
   }
 
