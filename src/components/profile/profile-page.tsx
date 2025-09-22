@@ -13,7 +13,8 @@ import {
   Info,
   ExitToApp,
   Lock,
-  CheckCircle
+  CheckCircle,
+  Face
 } from "@mui/icons-material";
 import { Typography, Switch, LinearProgress } from "@mui/material";
 import React, { useState, useCallback } from "react";
@@ -269,6 +270,28 @@ export default function ProfilePage() {
                   </Typography>
                   <Typography variant="caption" className={styles.itemDescription}>
                     이름, 이메일 등 개인정보
+                  </Typography>
+                </div>
+                <div className={styles.itemAction}>
+                  <div className={styles.arrow}>
+                    <span>→</span>
+                  </div>
+                </div>
+              </button>
+
+              <button
+                className={styles.settingItem}
+                onClick={() => handleActionClick('mascot')}
+              >
+                <div className={styles.itemIcon}>
+                  <Face className={`${styles.settingIcon} ${styles.mascotIcon}`} />
+                </div>
+                <div className={styles.itemInfo}>
+                  <Typography variant="body1" className={styles.itemLabel}>
+                    마스코트 이미지 변경
+                  </Typography>
+                  <Typography variant="caption" className={styles.itemDescription}>
+                    프로필 마스코트 캐릭터 선택
                   </Typography>
                 </div>
                 <div className={styles.itemAction}>

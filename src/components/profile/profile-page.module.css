@@ -416,7 +416,7 @@
 .categoryItems {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
 .settingItem {
@@ -496,15 +496,16 @@
 }
 
 /* 아이콘별 색상 */
-.notificationIcon { color: var(--warning-600); }
-.goalIcon { color: var(--success-600); }
-.dataIcon { color: var(--info-600); }
-.profileEditIcon { color: var(--primary-600); }
-.passwordIcon { color: var(--error-600); }
-.privacyIcon { color: var(--success-600); }
-.darkModeIcon { color: var(--text-primary); }
-.supportIcon { color: var(--info-600); }
-.infoIcon { color: var(--text-secondary); }
+.notificationIcon { color: #f59e0b; }
+.goalIcon { color: #10b981; }
+.dataIcon { color: #3b82f6; }
+.profileEditIcon { color: #22c55e; }
+.mascotIcon { color: #ff6b35; }
+.passwordIcon { color: #ef4444; }
+.privacyIcon { color: #06b6d4; }
+.darkModeIcon { color: #8b5cf6; }
+.supportIcon { color: #f59e0b; }
+.infoIcon { color: #06b6d4; }
 
 /* 로그아웃 섹션 */
 .logoutSection {
@@ -532,11 +533,6 @@
   box-shadow: 0 2px 8px rgba(var(--error-rgb), 0.2);
 }
 
-.logoutButton:hover {
-  background: linear-gradient(135deg, var(--error-600), var(--error-700));
-  transform: translateY(-1px);
-  box-shadow: 0 3px 12px rgba(var(--error-rgb), 0.3);
-}
 
 .logoutIcon {
   font-size: 20px;
