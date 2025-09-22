@@ -1,65 +1,238 @@
+/* 전체 컨테이너 */
 .container {
-  padding: var(--space-lg) var(--space-md);
-  max-width: 100%;
-  margin: 0 auto;
-  background-color: var(--background);
-  min-height: calc(100vh - 100px);
+  height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  background: var(--background);
+  overflow: hidden;
+  padding: var(--space-md);
+  max-width: 100%;
+  margin: 0 auto;
 }
 
-/* 헤더 */
+/* 헤더 섹션 */
 .header {
   text-align: center;
-  margin-bottom: var(--space-md);
+  flex-shrink: 0;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
 }
 
 .title {
   color: var(--text-primary);
-  font-weight: 700;
-  margin-bottom: var(--space-sm);
-}
-
-.subtitle {
-  color: var(--text-secondary);
+  font-weight: 800;
+  font-size: 1.8rem;
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
-/* 카테고리 카드 */
-.categoriesCard {
-  background-color: var(--surface);
-}
-
-.categoriesGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-lg);
-}
-
-.categoryItem {
-  background-color: var(--surface);
-  border: 1px solid var(--outline);
+/* 스와이프 힌트 */
+.swipeHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.08), rgba(var(--primary-300-rgb), 0.05));
   border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.swipeIcon {
+  color: var(--primary-500);
+  font-size: 20px;
+}
+
+.swipeText {
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 그룹 타이틀 컨테이너 */
+.groupTitleContainer {
+  background: var(--surface-variant);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md) var(--space-lg);
+  transition: all 0.3s ease;
+}
+
+.currentGroupTitle {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+/* 스와이프 컨테이너 */
+.swipeContainer {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* 카드 컨테이너 */
+.cardsContainer {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 0;
+  cursor: grab;
+  height: 100%;
+}
+
+.cardsContainer:active {
+  cursor: grabbing;
+}
+
+.cardsContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* 그룹 카드 */
+
+.groupCard {
+  flex-shrink: 0;
+  width: 100%;
+  scroll-snap-align: start;
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--outline);
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.groupCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-500), var(--primary-700));
+  z-index: 10;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  transition: transform 0.3s ease;
+}
+
+.groupCard.comingSoon {
+  opacity: 0.9;
+}
+
+.groupCard.comingSoon::before {
+  background: linear-gradient(90deg, var(--outline), var(--text-tertiary));
+  z-index: 10;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  transition: transform 0.3s ease;
+}
+
+/* 카드 컨텐츠 - 정확한 높이 계산 */
+.cardContent {
+  padding: var(--space-xl) var(--space-lg) var(--space-lg) var(--space-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 카테고리 그리드 - 높이 맞춤 최적화 */
+.categoriesGrid {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* 카테고리 아이템 - 깨짐 방지 최적화 */
+.categoryItem {
+  background: var(--surface-variant);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
   position: relative;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  user-select: none;
+  flex: 1;
+  min-height: 140px;
+  box-sizing: border-box;
+  isolation: isolate;
+  box-shadow: 0 2px 8px rgba(var(--background-rgb), 0.08);
+}
+
+.categoryItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--text-primary-rgb), 0.1), transparent);
 }
 
 .categoryItem:not(.locked):hover {
   transform: translateY(-4px);
-  border-color: var(--primary-500);
-  box-shadow: 0 8px 24px rgba(var(--primary-500-rgb), 0.12), 0 4px 12px rgba(var(--background-rgb), 0.15);
+  box-shadow: 0 8px 25px -5px rgba(var(--background-rgb), 0.3),
+    0 8px 24px rgba(var(--background-rgb), 0.15), 0 4px 12px rgba(var(--background-rgb), 0.15),
+    inset 0 1px 0 rgba(var(--text-primary-rgb), 0.08);
+  border-color: rgba(var(--primary-500-rgb), 0.3);
 }
+
+.categoryItem:not(.locked):active,
+.categoryItem.selected:not(.locked) {
+  transform: translateY(-2px) scale(0.98);
+  border-color: var(--primary-500);
+  box-shadow: 0 6px 20px rgba(var(--primary-500-rgb), 0.2);
+}
+
+/* activeGroup 클래스가 있는 그룹카드의 border-line 보정 */
+.groupCard.activeGroup::before {
+  transform: translateY(2px);
+}
+
 
 .categoryItem.locked {
   cursor: not-allowed;
-  opacity: 0.8;
+  opacity: 0.6;
+}
+
+.categoryItem.locked:active,
+.categoryItem.locked.selected {
+  transform: none;
+  border-color: var(--outline);
+  box-shadow: none;
 }
 
 .lockOverlay {
@@ -68,7 +241,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(var(--background-rgb), 0.1);
+  background: rgba(var(--background-rgb), 0.1);
   z-index: 1;
   border-radius: var(--radius-lg);
 }
@@ -77,25 +250,28 @@
   display: flex;
   align-items: center;
   gap: var(--space-md);
+  flex-shrink: 0;
 }
 
 .categoryIcon {
-  width: 56px;
-  height: 56px;
-  background-color: var(--surface-variant);
+  width: 48px;
+  height: 48px;
+  background: var(--surface);
   border: 1px solid var(--outline);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
 .iconText {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   transition: all 0.3s ease;
+  font-family: "Noto Sans CJK JP", "Hiragino Sans", sans-serif;
 }
 
 .lockIconOverlay {
@@ -103,11 +279,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(var(--background-rgb), 0.9);
+  background: rgba(var(--background-rgb), 0.95);
   border: 1px solid var(--outline);
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,95 +291,140 @@
 
 .lockIcon {
   color: var(--text-primary);
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .categoryInfo {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .categoryTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
   color: var(--text-primary);
-  font-weight: 600;
-  margin: 0;
-  margin-bottom: 2px;
+  margin: 0 0 2px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .categorySubtitle {
-  color: var(--text-secondary);
-  margin: 0;
-  font-size: 14px;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .categoryDescription {
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
+  font-size: 1rem;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
-/* 진행률 섹션 */
 .progressSection {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 2px;
+  margin-top: auto;
+  flex-shrink: 0;
+  padding-top: 2px;
 }
 
 .progressHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2px;
 }
 
 .progressLabel {
   color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 12px;
+  font-weight: 600;
+  font-size: 0.75rem;
 }
 
 .progressStats {
   color: var(--text-tertiary);
-  font-size: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 .progressBar {
   height: 6px;
-  border-radius: 3px;
-  background-color: var(--surface-variant);
+  border-radius: var(--radius-full);
+  background: var(--surface-variant);
+  overflow: hidden;
 }
 
-/* 모바일 반응형 */
+/* 하단 섹션 */
+.bottomSection {
+  padding: var(--space-md) 0 var(--space-lg) 0;
+  flex-shrink: 0;
+  margin-bottom: var(--space-md);
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: var(--outline);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator:hover {
+  background: var(--primary-400);
+}
+
+.indicatorActive {
+  background: var(--primary-500);
+  width: 24px;
+  border-radius: var(--radius-full);
+}
+
+/* 768px 이하 태블릿 */
 @media (max-width: 768px) {
   .container {
-    padding: var(--space-md);
-    gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    height: calc(100vh - 100px);
   }
 
-  .categoriesGrid {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
-
-  .categoryItem {
-    padding: var(--space-md);
-  }
-
-  .categoryIcon {
-    width: 48px;
-    height: 48px;
-  }
-
-  .iconText {
-    font-size: 20px;
+  .header {
+    margin-bottom: var(--space-sm);
   }
 
   .title {
-    font-size: 28px;
+    margin: 0 0 var(--space-sm) 0;
+    font-size: 1.5rem;
   }
-}
 
-@media (max-width: 480px) {
-  .container {
-    padding: var(--space-sm);
+  .swipeHint {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .swipeText {
+    font-size: 13px;
+  }
+
+  .cardContent {
+    padding: var(--space-md);
   }
 
   .categoriesGrid {
@@ -212,11 +433,8 @@
 
   .categoryItem {
     padding: var(--space-md);
-    gap: var(--space-sm);
-  }
-
-  .categoryHeader {
-    gap: var(--space-sm);
+    gap: 8px;
+    min-height: 110px;
   }
 
   .categoryIcon {
@@ -228,11 +446,556 @@
     font-size: 18px;
   }
 
+  .categoryTitle {
+    font-size: 1.05rem;
+  }
+
+  .categorySubtitle {
+    font-size: 0.85rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.9rem;
+  }
+
+  .bottomSection {
+    padding: var(--space-sm) 0 var(--space-md) 0;
+    margin-bottom: var(--space-sm);
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .indicatorActive {
+    width: 20px;
+  }
+}
+
+/* 480px 이하는 위의 320px~480px와 320px 이하 스타일로 커버됨 */
+
+/* 360px 이하 작은 모바일 */
+@media (max-width: 360px) {
+  .container {
+    height: calc(100vh - 90px);
+    padding: var(--space-xs);
+  }
+
+  .header {
+    margin-bottom: var(--space-xs);
+  }
+
   .title {
+    font-size: 1.2rem;
+    margin: 0 0 var(--space-xs) 0;
+  }
+
+  .swipeHint {
+    padding: var(--space-xs);
+  }
+
+  .swipeText {
+    font-size: 11px;
+  }
+
+  .swipeIcon {
+    font-size: 16px;
+  }
+
+  .cardContent {
+    padding: var(--space-sm);
+  }
+
+  .groupHeader {
+    margin-bottom: var(--space-sm);
+  }
+
+  .groupTitle {
+    font-size: 1rem;
+  }
+
+  .groupDescription {
+    font-size: 0.7rem;
+  }
+
+  .categoriesGrid {
+    gap: var(--space-sm);
+  }
+
+  .categoryItem {
+    padding: var(--space-sm);
+    gap: 5px;
+    min-height: 90px;
+  }
+
+  .categoryIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .iconText {
+    font-size: 14px;
+  }
+
+  .lockIconOverlay {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lockIcon {
+    font-size: 10px;
+  }
+
+  .categoryTitle {
+    font-size: 0.95rem;
+  }
+
+  .categorySubtitle {
+    font-size: 0.75rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .bottomSection {
+    padding: var(--space-xs) 0 var(--space-sm) 0;
+    margin-bottom: 0;
+  }
+
+  .indicator {
+    width: 6px;
+    height: 6px;
+  }
+
+  .indicatorActive {
+    width: 16px;
+  }
+
+  .progressLabel,
+  .progressStats {
+    font-size: 0.65rem;
+  }
+
+  .progressBar {
+    height: 4px;
+  }
+}
+
+/* 320px ~ 480px 중간 모바일 개선 */
+@media (min-width: 321px) and (max-width: 480px) {
+  .container {
+    padding: var(--space-sm);
+    height: calc(100vh - 90px);
+  }
+
+  .header {
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .swipeHint {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .swipeText {
+    font-size: 0.8rem;
+  }
+
+  .groupTitleContainer {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .currentGroupTitle {
+    font-size: 1.1rem;
+  }
+
+  .cardContent {
+    padding: var(--space-md);
+  }
+
+  .categoriesGrid {
+    gap: var(--space-sm);
+  }
+
+  .categoryItem {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+    min-height: 120px;
+    border-radius: var(--radius-xl);
+  }
+
+  .categoryIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .iconText {
+    font-size: 18px;
+  }
+
+  .categoryTitle {
+    font-size: 1.05rem;
+  }
+
+  .categorySubtitle {
+    font-size: 0.85rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.9rem;
+  }
+
+  .bottomSection {
+    padding: var(--space-sm) 0 var(--space-md) 0;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .indicatorActive {
+    width: 20px;
+  }
+}
+
+/* 320px 이하 매우 작은 모바일 */
+@media (max-width: 320px) {
+  .container {
+    padding: var(--space-xs);
+    height: calc(100vh - 85px);
+  }
+
+  .header {
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .swipeHint {
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-lg);
+  }
+
+  .swipeText {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .groupTitleContainer {
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-lg);
+  }
+
+  .currentGroupTitle {
+    font-size: 1rem;
+  }
+
+  .cardContent {
+    padding: var(--space-sm);
+  }
+
+  .categoriesGrid {
+    gap: var(--space-xs);
+  }
+
+  .categoryItem {
+    padding: var(--space-sm);
+    gap: var(--space-xs);
+    min-height: 100px;
+    border-radius: var(--radius-lg);
+  }
+
+  .categoryIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+  }
+
+  .iconText {
+    font-size: 14px;
+  }
+
+  .lockIconOverlay {
+    width: 20px;
+    height: 20px;
+  }
+
+  .lockIcon {
+    font-size: 10px;
+  }
+
+  .categoryTitle {
+    font-size: 0.95rem;
+  }
+
+  .categorySubtitle {
+    font-size: 0.75rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .bottomSection {
+    padding: var(--space-xs) 0 var(--space-sm) 0;
+    margin-bottom: 0;
+  }
+
+  .indicator {
+    width: 6px;
+    height: 6px;
+  }
+
+  .indicatorActive {
+    width: 16px;
+  }
+
+  .progressLabel,
+  .progressStats {
+    font-size: 0.65rem;
+  }
+
+  .progressBar {
+    height: 4px;
+  }
+}
+
+/* 가로 모드 최적화 */
+@media (max-height: 600px) and (orientation: landscape) {
+  .container {
+    height: calc(100vh - 70px);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .header {
+    margin-bottom: 4px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    margin: 0 0 4px 0;
+  }
+
+  .swipeHint {
+    padding: 4px var(--space-sm);
+  }
+
+  .swipeText {
+    font-size: 10px;
+  }
+
+  .swipeIcon {
+    font-size: 14px;
+  }
+
+  .cardContent {
+    padding: var(--space-sm);
+  }
+
+  .groupHeader {
+    margin-bottom: var(--space-xs);
+  }
+
+  .groupTitle {
+    font-size: 0.9rem;
+  }
+
+  .groupDescription {
+    font-size: 0.65rem;
+  }
+
+  .categoriesGrid {
+    gap: var(--space-xs);
+  }
+
+  .categoryItem {
+    padding: var(--space-xs);
+    gap: 2px;
+    min-height: 62px;
+  }
+
+  .categoryIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .iconText {
+    font-size: 11px;
+  }
+
+  .categoryTitle {
+    font-size: 0.85rem;
+  }
+
+  .categorySubtitle {
+    font-size: 0.7rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.7rem;
+    line-height: 1.1;
+  }
+
+  .bottomSection {
+    padding: 4px 0 var(--space-xs) 0;
+    margin-bottom: 0;
+  }
+
+  .progressLabel,
+  .progressStats {
+    font-size: 0.58rem;
+  }
+
+  .progressBar {
+    height: 3px;
+  }
+}
+
+/* 큰 화면 - 데스크톱 최적화 */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 800px;
+    padding: var(--space-xl);
+  }
+
+  .header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .title {
+    font-size: 2rem;
+    margin: 0 0 var(--space-lg) 0;
+  }
+
+  .swipeHint {
+    padding: var(--space-md) var(--space-xl);
+  }
+
+  .cardContent {
+    padding: var(--space-xl);
+  }
+
+  /* 데스크톱에서는 2열 그리드 */
+  .categoriesGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: stretch;
+  }
+
+  .categoryItem {
+    padding: var(--space-lg);
+    gap: var(--space-md);
+    min-height: 160px;
+  }
+
+  .categoryIcon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .iconText {
     font-size: 24px;
   }
 
-  .subtitle {
-    font-size: 14px;
+  .lockIconOverlay {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lockIcon {
+    font-size: 16px;
+  }
+
+  .categoryTitle {
+    font-size: 1.2rem;
+  }
+
+  .categorySubtitle {
+    font-size: 0.95rem;
+  }
+
+  .categoryDescription {
+    font-size: 1rem;
+  }
+
+  .bottomSection {
+    padding: var(--space-lg) 0 var(--space-xl) 0;
+    margin-bottom: var(--space-lg);
+  }
+
+  .progressLabel,
+  .progressStats {
+    font-size: 0.82rem;
+  }
+
+  .progressBar {
+    height: 6px;
+  }
+}
+
+/* 초대형 화면 */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1000px;
+  }
+
+  .categoryItem {
+    min-height: 175px;
+    padding: var(--space-xl);
+  }
+
+  .categoryIcon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .iconText {
+    font-size: 28px;
+  }
+}
+
+/* 다크 모드 최적화 */
+[data-theme="dark"] .groupCard {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .swipeHint {
+  background: linear-gradient(135deg, rgba(var(--primary-500-rgb), 0.15), rgba(var(--primary-300-rgb), 0.1));
+  border: 1px solid rgba(var(--primary-500-rgb), 0.2);
+}
+
+/* 애니메이션 비활성화 (성능 최적화) */
+@media (prefers-reduced-motion: reduce) {
+  .swipeHint {
+    animation: none;
+  }
+
+  .categoryItem,
+  .indicator {
+    transition: none;
+  }
+}
+
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  .categoryItem {
+    border-width: 2px;
+  }
+
+  .categoryIcon {
+    border-width: 2px;
   }
 }

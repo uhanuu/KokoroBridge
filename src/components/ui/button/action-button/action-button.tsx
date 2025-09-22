@@ -7,7 +7,7 @@ import styles from "./action-button.module.css";
 
 interface ActionButtonProps {
   text: string;
-  onClick?: () => void;
+  onClick?: (e?: React.MouseEvent) => void;
   disabled?: boolean;
   variant?: "primary" | "locked" | "completed";
   className?: string;
@@ -55,7 +55,7 @@ export default function ActionButton({
   };
 
   return (
-    <button className={buttonClass} onClick={onClick} disabled={disabled}>
+    <button className={buttonClass} onClick={(e) => onClick?.(e)} disabled={disabled}>
       <span className={styles.buttonText}>{text}</span>
       {!hideIcon && (
         <div className={styles.playIconCircle}>

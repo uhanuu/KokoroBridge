@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -19,7 +19,8 @@
   z-index: 2;
   overflow: hidden;
   white-space: nowrap;
-  min-width: 120px;
+  min-width: 100px;
+  min-height: 36px;
 }
 
 .actionButton::before {
@@ -97,15 +98,15 @@
 }
 
 .buttonText {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   position: relative;
   z-index: 2;
 }
 
 .playIconCircle {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   background-color: rgba(var(--text-primary-rgb), 0.2);
   border-radius: 50%;
   display: flex;
@@ -117,7 +118,7 @@
 }
 
 .playIcon {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-primary);
   margin-left: 1px;
 }
@@ -134,6 +135,7 @@
     font-size: 15px;
     padding: var(--space-md) var(--space-lg);
     min-width: 140px;
+    min-height: 42px;
   }
 
   .buttonText {
@@ -146,16 +148,17 @@
   }
 
   .playIcon {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
-/* 태블릿 (768px - 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* 태블릿 (769px - 1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
   .actionButton {
     font-size: 14px;
-    padding: var(--space-sm) var(--space-md);
-    min-width: 130px;
+    padding: var(--space-sm) var(--space-lg);
+    min-width: 120px;
+    min-height: 38px;
   }
 
   .buttonText {
@@ -168,20 +171,21 @@
   }
 
   .playIcon {
-    font-size: 13px;
+    font-size: 12px;
   }
 }
 
 /* 작은 태블릿/큰 모바일 (481px - 767px) */
 @media (min-width: 481px) and (max-width: 767px) {
   .actionButton {
-    font-size: 14px;
+    font-size: 13px;
     padding: var(--space-sm) var(--space-md);
-    min-width: 120px;
+    min-width: 110px;
+    min-height: 36px;
   }
 
   .buttonText {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .playIconCircle {
@@ -190,21 +194,22 @@
   }
 
   .playIcon {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
 /* 모바일 (480px 이하) */
 @media (max-width: 480px) {
   .actionButton {
-    font-size: 13px;
-    padding: var(--space-sm);
+    font-size: 12px;
+    padding: var(--space-xs) var(--space-sm);
     justify-content: center;
-    min-width: 100px;
+    min-width: 90px;
+    min-height: 32px;
   }
 
   .buttonText {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .playIconCircle {
@@ -213,21 +218,22 @@
   }
 
   .playIcon {
-    font-size: 11px;
+    font-size: 10px;
   }
 }
 
 /* 매우 작은 모바일 (360px 이하) */
 @media (max-width: 360px) {
   .actionButton {
-    font-size: 12px;
-    padding: 8px 12px;
-    min-width: 80px;
+    font-size: 11px;
+    padding: 6px 10px;
+    min-width: 75px;
     gap: 4px;
+    min-height: 28px;
   }
 
   .buttonText {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .playIconCircle {
@@ -236,6 +242,6 @@
   }
 
   .playIcon {
-    font-size: 10px;
+    font-size: 9px;
   }
 }
