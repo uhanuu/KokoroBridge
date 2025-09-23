@@ -521,7 +521,7 @@
 
 .achievementItem.completed {
   background: var(--surface-variant);
-  border-color: var(--primary-500);
+  border-color: var(--outline);
 }
 
 .achievementItem.locked {
@@ -552,8 +552,8 @@
 }
 
 .completed .achievementIcon {
-  border-color: #3b82f6;
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.2);
 }
 
 .locked .achievementIcon {
