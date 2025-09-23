@@ -1,11 +1,9 @@
 "use client";
 
 import {
-  Schedule,
   Book,
   Star,
   EmojiEvents,
-  LocalFireDepartment,
   Notifications,
   DarkMode,
   Edit,
@@ -14,17 +12,14 @@ import {
   ExitToApp,
   Lock,
   CheckCircle,
-  Face,
-  CardGiftcard
+  Face
 } from "@mui/icons-material";
-import { Typography, Switch, LinearProgress } from "@mui/material";
+import { Typography, Switch } from "@mui/material";
 import React, { useState, useCallback } from "react";
 
 import SectionCard from "@/components/ui/section-card";
-import StatsGrid from "@/components/ui/stats-grid";
-import StatCard from "@/components/ui/stat-card";
 import ProgressCard from "@/components/ui/progress-card";
-import { mockUserProfile, mockLearningStats, mockAchievements } from "@/mock/profile-mock";
+import { mockUserProfile, mockAchievements } from "@/mock/profile-mock";
 
 import styles from "./profile-page.module.css";
 import ProfileInfo from "./profile-info/profile-info";
@@ -54,7 +49,41 @@ export default function ProfilePage() {
     if (achievementFilter === 'completed') return achievement.isCompleted;
     if (achievementFilter === 'incomplete') return !achievement.isCompleted;
     return true;
+  }).sort((a, b) => {
+    // 전체 또는 달성 필터일 때 최근 달성한 업적을 먼저 보여줌
+    if (achievementFilter === 'all' || achievementFilter === 'completed') {
+      // 달성된 업적을 먼저, 그 다음 미달성 업적
+      if (a.isCompleted && !b.isCompleted) return -1;
+      if (!a.isCompleted && b.isCompleted) return 1;
+
+      // 둘 다 달성된 경우, 날짜가 있는 것을 우선하고 최근 날짜를 먼저
+      if (a.isCompleted && b.isCompleted) {
+        if (a.date && !b.date) return -1;
+        if (!a.date && b.date) return 1;
+        if (a.date && b.date) {
+          // 한국어 날짜 형식을 간단히 비교 (예: "2024년 3월 1일" vs "2024년 1월 15일")
+          const parseKoreanDate = (dateStr: string) => {
+            const match = dateStr.match(/(\d+)년\s*(\d+)월\s*(\d+)일/);
+            if (match && match[1] && match[2] && match[3]) {
+              const year = parseInt(match[1]);
+              const month = parseInt(match[2]);
+              const day = parseInt(match[3]);
+              return new Date(year, month - 1, day);
+            }
+            return new Date(0);
+          };
+
+          const dateA = parseKoreanDate(a.date);
+          const dateB = parseKoreanDate(b.date);
+          return dateB.getTime() - dateA.getTime();
+        }
+      }
+    }
+
+    // 기본적으로 ID 순서 유지
+    return a.id - b.id;
   });
+
 
   return (
     <div className={styles.container}>
@@ -137,8 +166,9 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        <div className={styles.achievementGrid}>
-          {filteredAchievements.map((achievement) => (
+        <div className={styles.achievementContainer}>
+          <div className={styles.achievementGrid}>
+            {filteredAchievements.map((achievement) => (
             <div
               key={achievement.id}
               className={`${styles.achievementItem} ${
@@ -153,11 +183,6 @@ export default function ProfilePage() {
                     <Lock className={styles.lockIcon} />
                   )}
                 </div>
-                {achievement.isCompleted && (
-                  <div className={styles.completedBadge}>
-                    <CheckCircle className={styles.completedIcon} />
-                  </div>
-                )}
               </div>
               <div className={styles.achievementInfo}>
                 <Typography variant="body2" className={styles.achievementTitle}>
@@ -172,8 +197,13 @@ export default function ProfilePage() {
                   </Typography>
                 )}
               </div>
+
+              {achievement.isCompleted && (
+                <CheckCircle className={styles.completedCheckIcon} />
+              )}
             </div>
           ))}
+          </div>
         </div>
 
         {filteredAchievements.length === 0 && (
@@ -187,45 +217,6 @@ export default function ProfilePage() {
             </Typography>
           </div>
         )}
-
-        {/* 달성률 및 보상 */}
-        <div className={styles.achievementProgressContainer}>
-          <div className={styles.progressHeader}>
-            <Typography variant="body1" className={styles.progressTitle}>
-              달성률
-            </Typography>
-            <Typography variant="h4" className={styles.progressPercentage}>
-              {Math.round((mockAchievements.filter(a => a.isCompleted).length / mockAchievements.length) * 100)}%
-            </Typography>
-          </div>
-          <div className={styles.progressBarContainer}>
-            <div
-              className={styles.progressBar}
-              style={{
-                width: `${(mockAchievements.filter(a => a.isCompleted).length / mockAchievements.length) * 100}%`
-              }}
-            />
-          </div>
-          <div className={styles.rewardSection}>
-            <Typography variant="caption" className={styles.progressDescription}>
-              {mockAchievements.filter(a => a.isCompleted).length}개 / {mockAchievements.length}개 업적 달성
-            </Typography>
-            <button
-              className={`${styles.rewardButton} ${
-                mockAchievements.filter(a => a.isCompleted).length === mockAchievements.length
-                  ? styles.rewardEnabled
-                  : styles.rewardDisabled
-              }`}
-              disabled={mockAchievements.filter(a => a.isCompleted).length !== mockAchievements.length}
-              onClick={() => handleActionClick('reward')}
-            >
-              <CardGiftcard className={styles.rewardIcon} />
-              <Typography variant="caption" className={styles.rewardText}>
-                보상받기
-              </Typography>
-            </button>
-          </div>
-        </div>
 
       </SectionCard>
 

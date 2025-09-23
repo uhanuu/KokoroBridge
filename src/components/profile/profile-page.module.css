@@ -259,7 +259,7 @@
   background: var(--surface-variant);
   border: 1px solid var(--outline);
   border-radius: var(--radius-lg);
-  padding: var(--space-lg);
+  padding: var(--space-md);
   margin-bottom: var(--space-lg);
 }
 
@@ -267,7 +267,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .progressTitle {
@@ -280,7 +280,7 @@
   color: var(--primary-600);
   font-weight: 800;
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .progressBarContainer {
@@ -293,7 +293,7 @@
 }
 
 .progressBar {
-  background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
   height: 100%;
   border-radius: var(--radius-full);
   transition: width 0.3s ease;
@@ -389,23 +389,62 @@
   box-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.3);
 }
 
+/* 업적 컨테이너 */
+.achievementContainer {
+  margin-bottom: var(--space-lg);
+}
+
+
 .achievementGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
-  margin-bottom: var(--space-lg);
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: var(--space-xs);
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-500) var(--surface-variant);
+}
+
+.achievementGrid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.achievementGrid::-webkit-scrollbar-track {
+  background: var(--surface-variant);
+  border-radius: var(--radius-full);
+}
+
+.achievementGrid::-webkit-scrollbar-thumb {
+  background: var(--primary-500);
+  border-radius: var(--radius-full);
+}
+
+.achievementGrid::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-600);
+}
+
+/* 태블릿 가로 */
+@media (max-width: 1024px) {
+  .achievementGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+    max-height: 350px;
+  }
 }
 
 .achievementItem {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--space-sm);
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
   background: var(--surface-variant);
   border: 1px solid var(--outline);
   border-radius: var(--radius-lg);
   transition: all 0.3s ease;
   position: relative;
+  min-height: 70px;
 }
 
 .achievementItem.completed {
@@ -429,19 +468,20 @@
 }
 
 .achievementIcon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background: var(--surface);
   border: 2px solid var(--outline);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .completed .achievementIcon {
-  border-color: var(--primary-500);
-  background: rgba(var(--primary-500-rgb), 0.1);
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
 }
 
 .locked .achievementIcon {
@@ -459,23 +499,11 @@
   font-size: 18px;
 }
 
-.completedBadge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 18px;
-  height: 18px;
-  background: var(--primary-500);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--surface);
-}
-
-.completedIcon {
-  color: white;
-  font-size: 10px;
+.completedCheckIcon {
+  color: #10b981;
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
 .achievementInfo {
@@ -483,7 +511,8 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  margin-right: var(--space-sm);
 }
 
 .achievementTitle {
@@ -700,9 +729,11 @@
   }
 
   .achievementGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
+    max-height: 300px;
   }
+
 
   .levelIconSection {
     flex-direction: column;
@@ -754,6 +785,26 @@
     gap: var(--space-md);
   }
 
+  .achievementGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    max-height: 280px;
+  }
+
+  .achievementIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .achievementEmoji {
+    font-size: 14px;
+  }
+
+  .lockIcon {
+    font-size: 14px;
+  }
+
+
   .levelContent {
     padding: var(--space-lg);
   }
@@ -772,11 +823,15 @@
   }
 
   .achievementIcon {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
 
   .achievementEmoji {
+    font-size: 16px;
+  }
+
+  .lockIcon {
     font-size: 16px;
   }
 
