@@ -41,6 +41,25 @@
   flex: 1;
 }
 
+/* 프로필 메인 섹션 - 반응형 */
+@media (max-width: 768px) {
+  .profileMainSection {
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .profileMainSection {
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 360px) {
+  .profileMainSection {
+    gap: var(--space-xs);
+  }
+}
+
 /* 설정 버튼 */
 .settingsButton {
   position: absolute;
@@ -119,130 +138,8 @@
   font-size: 0.8rem;
 }
 
-/* 학습 통계 섹션 */
-.statsSection {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.statsHeader {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  text-align: left;
-}
-
-.statsTitle {
-  color: var(--text-primary);
-  font-weight: 700;
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.statsSubtitle {
-  color: var(--text-secondary);
-  font-weight: 500;
-  margin: 0;
-  font-size: 0.85rem;
-}
-
-/* 학습 통계 버튼 섹션 */
-.statsSection .statsButtonsSection {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-sm);
-  width: 100%;
-}
-
-.statsButton {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  background: var(--surface-variant);
-  border: 1px solid var(--outline);
-  border-radius: var(--radius-xl);
-  padding: var(--space-sm);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  min-height: 60px;
-  width: 100%;
-  box-sizing: border-box;
-}
 
 
-.statsButton:hover {
-  background: rgba(var(--primary-500-rgb), 0.05);
-  border-color: rgba(var(--primary-500-rgb), 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(var(--background-rgb), 0.15);
-}
-
-.statsIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-lg);
-  border: 1px solid;
-}
-
-.statsIcon svg {
-  font-size: 18px;
-}
-
-/* 연속 학습일 - 빨간색 (불) */
-.statsButton:nth-child(1) .statsIcon {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
-}
-
-/* 최장 연속일 - 보라색 (트로피) */
-.statsButton:nth-child(2) .statsIcon {
-  background: rgba(139, 92, 246, 0.1);
-  border-color: rgba(139, 92, 246, 0.2);
-  color: #8b5cf6;
-}
-
-/* 완료한 레슨 - 초록색 (책) */
-.statsButton:nth-child(3) .statsIcon {
-  background: rgba(34, 197, 94, 0.1);
-  border-color: rgba(34, 197, 94, 0.2);
-  color: #22c55e;
-}
-
-/* 총 학습 시간 - 파란색 (시간) */
-.statsButton:nth-child(4) .statsIcon {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.2);
-  color: #3b82f6;
-}
-
-.statsInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-}
-
-.statsLabel {
-  color: var(--text-secondary);
-  font-weight: 600;
-  margin: 0;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.statsValue {
-  color: var(--text-primary);
-  font-weight: 800;
-  margin: 0;
-  line-height: 1;
-  font-size: 1.1rem;
-}
 
 /* 설정 메뉴 스타일 */
 .settingsContent {
@@ -371,73 +268,7 @@
 
 /* 반응형 디자인 */
 
-/* 데스크톱 - 중간 화면 (769px ~ 1023px) */
-@media (min-width: 769px) and (max-width: 1023px) {
-  .statsSection .statsButtonsSection {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
-  }
 
-  .statsButton {
-    min-height: 65px;
-    padding: var(--space-md);
-  }
-
-  .statsIcon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .statsIcon svg {
-    font-size: 18px;
-  }
-
-  .statsLabel {
-    font-size: 0.75rem;
-  }
-
-  .statsValue {
-    font-size: 1.1rem;
-  }
-}
-
-/* 데스크톱 - 큰 화면 (1024px+) */
-@media (min-width: 1024px) {
-  .statsSection .statsButtonsSection {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
-  }
-
-  .statsButton {
-    min-height: 70px;
-    padding: var(--space-md);
-  }
-
-  .statsIcon {
-    width: 36px;
-    height: 36px;
-  }
-
-  .statsIcon svg {
-    font-size: 20px;
-  }
-
-  .statsLabel {
-    font-size: 0.8rem;
-  }
-
-  .statsValue {
-    font-size: 1.2rem;
-  }
-
-  .statsTitle {
-    font-size: 1.2rem;
-  }
-
-  .statsSubtitle {
-    font-size: 0.9rem;
-  }
-}
 
 /* 태블릿 */
 @media (max-width: 768px) {
@@ -477,43 +308,6 @@
     font-size: 0.85rem;
   }
 
-  /* 통계 버튼 섹션 - 태블릿 */
-  .statsSection .statsButtonsSection {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xs);
-  }
-
-
-  .statsButton {
-    padding: var(--space-xs);
-    min-height: 55px;
-    gap: var(--space-xs);
-  }
-
-  .statsIcon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .statsIcon svg {
-    font-size: 16px;
-  }
-
-  .statsLabel {
-    font-size: 0.7rem;
-  }
-
-  .statsValue {
-    font-size: 1rem;
-  }
-
-  .statsTitle {
-    font-size: 1.05rem;
-  }
-
-  .statsSubtitle {
-    font-size: 0.8rem;
-  }
 
   .settingsContent {
     gap: var(--space-md);
@@ -521,6 +315,67 @@
 
   .settingItem {
     padding: var(--space-xs);
+  }
+
+  /* 레벨 카드 - 태블릿 */
+  .levelContent {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    text-align: center;
+  }
+
+  .levelDisplay {
+    order: 1;
+  }
+
+  .levelBadge {
+    width: 60px;
+    height: 60px;
+  }
+
+  .levelNumber {
+    font-size: 1.3rem;
+  }
+
+  .levelLabel {
+    font-size: 0.6rem;
+  }
+
+  .xpProgressSection {
+    order: 2;
+    padding-left: 0;
+    width: 100%;
+  }
+
+  .xpText {
+    font-size: 0.75rem;
+  }
+
+  /* 업적 그리드 - 태블릿 */
+  .achievementGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    max-height: 350px;
+  }
+
+  .achievementItem {
+    padding: var(--space-xs);
+    gap: 6px;
+  }
+
+  .achievementIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .achievementEmoji {
+    font-size: 16px;
+  }
+
+  .achievementTitle {
+    font-size: 0.7rem;
   }
 }
 
@@ -550,83 +405,81 @@
     font-size: 0.8rem;
   }
 
-  /* 통계 버튼 섹션 - 모바일 */
-  .statsSection .statsButtonsSection {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xs);
+
+  /* 레벨 카드 - 모바일 */
+  .levelContent {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm);
+    text-align: center;
   }
 
-  .statsButton {
-    padding: var(--space-xs);
-    min-height: 50px;
-    gap: var(--space-xs);
+  .levelBadge {
+    width: 50px;
+    height: 50px;
   }
 
-  .statsIcon {
-    width: 24px;
-    height: 24px;
+  .levelNumber {
+    font-size: 1.2rem;
   }
 
-  .statsIcon svg {
-    font-size: 14px;
+  .levelLabel {
+    font-size: 0.55rem;
   }
 
-  .statsLabel {
-    font-size: 0.65rem;
-    line-height: 1.2;
+  .xpProgressSection {
+    padding-left: 0;
+    width: 100%;
   }
 
-  .statsValue {
-    font-size: 0.9rem;
+  .xpProgressBar {
+    height: 10px;
   }
 
-  .statsInfo {
-    gap: 1px;
+  .xpText {
+    font-size: 0.7rem;
   }
 
-  .statsTitle {
-    font-size: 1rem;
+  /* 업적 그리드 - 모바일 */
+  .achievementGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    max-height: 300px;
   }
 
-  .statsSubtitle {
-    font-size: 0.75rem;
+  .achievementItem {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+    flex-direction: row;
+    min-height: 60px;
+  }
+
+  .achievementIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .achievementEmoji {
+    font-size: 16px;
+  }
+
+  .achievementTitle {
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .achievementDescription {
+    font-size: 0.7rem;
   }
 }
 
 /* 매우 작은 화면 (아이폰 SE 등) */
 @media (max-width: 360px) {
   .profileContent {
-    padding: var(--space-xs);
+    padding: var(--space-sm);
   }
 
-  .statsSection .statsButtonsSection {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-  }
-
-  .statsButton {
-    padding: 6px;
-    min-height: 45px;
-    gap: 6px;
-  }
-
-  .statsIcon {
-    width: 20px;
-    height: 20px;
-  }
-
-  .statsIcon svg {
-    font-size: 12px;
-  }
-
-  .statsLabel {
-    font-size: 0.6rem;
-    line-height: 1.1;
-  }
-
-  .statsValue {
-    font-size: 0.85rem;
-  }
 
   .mascotImage {
     width: 50px;
@@ -641,12 +494,51 @@
     font-size: 0.75rem;
   }
 
-  .statsTitle {
-    font-size: 0.95rem;
+
+  /* 레벨 카드 - 매우 작은 화면 */
+  .levelBadge {
+    width: 45px;
+    height: 45px;
   }
 
-  .statsSubtitle {
-    font-size: 0.7rem;
+  .levelNumber {
+    font-size: 1.1rem;
+  }
+
+  .levelLabel {
+    font-size: 0.5rem;
+  }
+
+  .xpProgressBar {
+    height: 8px;
+  }
+
+  .xpText {
+    font-size: 0.65rem;
+  }
+
+  /* 업적 그리드 - 매우 작은 화면 */
+  .achievementItem {
+    padding: var(--space-xs);
+    gap: var(--space-xs);
+    min-height: 50px;
+  }
+
+  .achievementIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .achievementEmoji {
+    font-size: 14px;
+  }
+
+  .achievementTitle {
+    font-size: 0.75rem;
+  }
+
+  .achievementDescription {
+    font-size: 0.65rem;
   }
 }
 
@@ -666,18 +558,711 @@
   }
 }
 
+/* 학습 통계 카드 */
+.statsCard {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  margin-bottom: var(--space-lg);
+}
+
+/* 학습 통계 카드 - 반응형 여백 */
+@media (max-width: 768px) {
+  .statsCard {
+    margin-bottom: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsCard {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+@media (max-width: 360px) {
+  .statsCard {
+    margin-bottom: var(--space-xs);
+  }
+}
+
+/* 학습 통계 버튼 섹션 - SectionCard 내부용 */
+.statsCard .statsButtonsSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.statsCard .statsButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--surface-variant);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-xl);
+  padding: var(--space-sm);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.statsCard .statsButton:hover {
+  background: rgba(var(--primary-500-rgb), 0.05);
+  border-color: rgba(var(--primary-500-rgb), 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--background-rgb), 0.15);
+}
+
+.statsCard .statsIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+}
+
+.statsCard .statsIcon svg {
+  font-size: 18px;
+}
+
+/* 연속 학습일 - 빨간색 (불) */
+.statsCard .statsButton:nth-child(1) .statsIcon {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* 최장 연속일 - 보라색 (트로피) */
+.statsCard .statsButton:nth-child(2) .statsIcon {
+  background: rgba(139, 92, 246, 0.1);
+  border-color: rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+}
+
+/* 완료한 레슨 - 초록색 (책) */
+.statsCard .statsButton:nth-child(3) .statsIcon {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+/* 총 학습 시간 - 파란색 (시간) */
+.statsCard .statsButton:nth-child(4) .statsIcon {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.statsCard .statsInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.statsCard .statsLabel {
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statsCard .statsValue {
+  color: var(--text-primary);
+  font-weight: 800;
+  margin: 0;
+  line-height: 1;
+  font-size: 1.1rem;
+}
+
+/* 레벨 카드 */
+.levelCard {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  margin-bottom: var(--space-lg);
+}
+
+/* 레벨 카드 - 반응형 여백 */
+@media (max-width: 768px) {
+  .levelCard {
+    margin-bottom: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .levelCard {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+@media (max-width: 360px) {
+  .levelCard {
+    margin-bottom: var(--space-xs);
+  }
+}
+
+.levelContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.levelDisplay {
+  flex-shrink: 0;
+  order: 1;
+}
+
+.levelBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  border-radius: 50%;
+  border: 3px solid var(--primary-300);
+  box-shadow: 0 4px 16px rgba(var(--primary-500-rgb), 0.3);
+}
+
+.levelNumber {
+  color: white;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  font-size: 1.6rem;
+}
+
+.levelLabel {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.xpProgressSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-left: var(--space-md);
+  order: 2;
+}
+
+.xpProgressHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.xpLabel {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.xpProgressBar {
+  height: 12px;
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline);
+  overflow: hidden;
+}
+
+.xpProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.xpText {
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 업적 카드 */
+.achievementsCard {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  margin-bottom: var(--space-lg);
+}
+
+/* 업적 카드 - 반응형 여백 */
+@media (max-width: 768px) {
+  .achievementsCard {
+    margin-bottom: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .achievementsCard {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+@media (max-width: 360px) {
+  .achievementsCard {
+    margin-bottom: var(--space-xs);
+  }
+}
+
+/* 업적 필터 */
+.achievementFilters {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+  padding: 4px;
+  background: var(--surface-variant);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline);
+}
+
+/* 업적 필터 - 반응형 */
+@media (max-width: 768px) {
+  .achievementFilters {
+    margin-bottom: var(--space-md);
+    padding: 3px;
+  }
+
+  .filterButton {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .achievementFilters {
+    margin-bottom: var(--space-sm);
+    padding: 2px;
+  }
+
+  .filterButton {
+    padding: var(--space-xs) var(--space-xs);
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .achievementFilters {
+    margin-bottom: var(--space-xs);
+    padding: 2px;
+  }
+
+  .filterButton {
+    padding: 6px 8px;
+    font-size: 0.7rem;
+  }
+}
+
+.filterButton {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.filterButton:hover {
+  background: rgba(var(--primary-500-rgb), 0.1);
+  color: var(--text-primary);
+}
+
+.filterButton.active {
+  background: var(--primary-500);
+  color: white;
+  box-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.3);
+}
+
+/* 업적 컨테이너 */
+.achievementContainer {
+  margin-bottom: var(--space-lg);
+}
+
+/* 업적 컨테이너 - 반응형 */
+@media (max-width: 768px) {
+  .achievementContainer {
+    margin-bottom: var(--space-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .achievementContainer {
+    margin-bottom: var(--space-sm);
+  }
+}
+
+@media (max-width: 360px) {
+  .achievementContainer {
+    margin-bottom: var(--space-xs);
+  }
+}
+
+.achievementGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: var(--space-xs);
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-500) var(--surface-variant);
+}
+
+.achievementGrid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.achievementGrid::-webkit-scrollbar-track {
+  background: var(--surface-variant);
+  border-radius: var(--radius-full);
+}
+
+.achievementGrid::-webkit-scrollbar-thumb {
+  background: var(--primary-500);
+  border-radius: var(--radius-full);
+}
+
+.achievementGrid::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-600);
+}
+
+.achievementItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-variant);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 70px;
+}
+
+.achievementItem.completed {
+  background: var(--surface-variant);
+  border-color: var(--outline);
+}
+
+.achievementItem.locked {
+  opacity: 0.6;
+  background: var(--surface-variant);
+}
+
+.achievementItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--background-rgb), 0.1);
+}
+
+.achievementIconWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.achievementIcon {
+  width: 40px;
+  height: 40px;
+  background: var(--surface);
+  border: 2px solid var(--outline);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.completed .achievementIcon {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.2);
+}
+
+.locked .achievementIcon {
+  background: var(--surface);
+  border-color: var(--outline);
+}
+
+.achievementEmoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.lockIcon {
+  color: var(--text-tertiary);
+  font-size: 18px;
+}
+
+.completedCheckIcon {
+  color: #10b981;
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.achievementInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-right: var(--space-sm);
+}
+
+.achievementTitle {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+  font-size: 14px;
+}
+
+.achievementDescription {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.3;
+  font-size: 12px;
+}
+
+.achievementDate {
+  color: var(--primary-600);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+  font-size: 10px;
+}
+
+/* 빈 상태 */
+.noAchievements {
+  text-align: center;
+  padding: var(--space-xl);
+  background: var(--surface-variant);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline);
+}
+
+/* 빈 상태 - 반응형 */
+@media (max-width: 768px) {
+  .noAchievements {
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .noAchievements {
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 360px) {
+  .noAchievements {
+    padding: var(--space-sm);
+  }
+}
+
+.noAchievementsText {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* 반응형 - 학습 통계 섹션 */
+
+
+
+/* 태블릿 */
+@media (max-width: 768px) {
+  .statsCard .statsButtonsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .statsCard .statsButton {
+    padding: var(--space-sm);
+    min-height: 60px;
+    gap: var(--space-sm);
+  }
+
+  .statsCard .statsIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .statsCard .statsIcon svg {
+    font-size: 16px;
+  }
+
+  .statsCard .statsLabel {
+    font-size: 0.7rem;
+  }
+
+  .statsCard .statsValue {
+    font-size: 1rem;
+  }
+}
+
+/* 중간 모바일 - 690px 이하 */
+@media (max-width: 690px) {
+  .statsCard .statsButtonsSection {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .statsCard .statsButton {
+    padding: var(--space-sm);
+    min-height: 55px;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .statsCard .statsIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .statsCard .statsIcon svg {
+    font-size: 16px;
+  }
+
+  .statsCard .statsLabel {
+    font-size: 0.7rem;
+    line-height: 1.2;
+  }
+
+  .statsCard .statsValue {
+    font-size: 1rem;
+  }
+
+  .achievementGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    max-height: 280px;
+  }
+
+  .achievementItem {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+    flex-direction: row;
+    min-height: 55px;
+  }
+
+  .achievementIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .achievementEmoji {
+    font-size: 16px;
+  }
+
+  .achievementTitle {
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .achievementDescription {
+    font-size: 0.7rem;
+  }
+}
+
+/* 작은 모바일 */
+@media (max-width: 480px) {
+  .statsCard .statsButtonsSection {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .statsCard .statsButton {
+    padding: var(--space-sm);
+    min-height: 50px;
+    gap: var(--space-sm);
+    width: 100%;
+  }
+
+  .statsCard .statsIcon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .statsCard .statsIcon svg {
+    font-size: 14px;
+  }
+
+  .statsCard .statsLabel {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+
+  .statsCard .statsValue {
+    font-size: 0.9rem;
+  }
+
+  .statsCard .statsInfo {
+    gap: 2px;
+  }
+}
+
+/* 매우 작은 화면 (아이폰 SE 등) */
+@media (max-width: 360px) {
+  .statsCard .statsButtonsSection {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .statsCard .statsButton {
+    padding: var(--space-sm);
+    min-height: 55px;
+    gap: var(--space-xs);
+    width: 100%;
+  }
+
+  .statsCard .statsIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .statsCard .statsIcon svg {
+    font-size: 14px;
+  }
+
+  .statsCard .statsLabel {
+    font-size: 0.65rem;
+    line-height: 1.1;
+  }
+
+  .statsCard .statsValue {
+    font-size: 0.9rem;
+  }
+}
+
 /* 접근성 */
 @media (prefers-reduced-motion: reduce) {
   .profileCard,
   .userAvatar,
-  .editIcon {
+  .editIcon,
+  .achievementItem {
     animation: none;
     transition: none;
   }
 
   .profileCard:hover,
   .userAvatar:hover,
-  .editIcon:hover {
+  .editIcon:hover,
+  .achievementItem:hover {
     transform: none;
   }
 }
