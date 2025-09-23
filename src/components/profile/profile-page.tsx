@@ -91,50 +91,44 @@ export default function ProfilePage() {
       <ProfileInfo profile={mockUserProfile} />
 
 
-      {/* 레벨 및 경험치 */}
+      {/* 레벨 시스템 */}
       <SectionCard
-        title={`레벨 ${mockUserProfile.level}`}
-        subtitle={`다음 레벨까지 ${mockUserProfile.nextLevelXP - mockUserProfile.currentXP} XP 필요`}
-        headerAction={
-          <div className={styles.xpInfo}>
-            <Typography variant="h6" className={styles.xpPercentage}>
-              {mockUserProfile.progress}%
-            </Typography>
-            <Typography variant="caption" className={styles.xpText}>
-              {mockUserProfile.currentXP} / {mockUserProfile.nextLevelXP} XP
-            </Typography>
-          </div>
-        }
+        title="레벨"
+        subtitle="학습을 통해 레벨을 올려보세요"
         className={styles.levelCard}
       >
         <div className={styles.levelContent}>
-          <div className={styles.levelIconSection}>
-            <div className={styles.levelIconWrapper}>
-              <EmojiEvents className={styles.levelIcon} />
-              <div className={styles.levelBadge}>
-                <Typography variant="caption" className={styles.levelNumber}>
-                  {mockUserProfile.level}
-                </Typography>
+          {/* 레벨 표시 */}
+          <div className={styles.levelDisplay}>
+            <div className={styles.levelBadge}>
+              <div className={styles.levelNumber}>
+                {mockUserProfile.level}
               </div>
-            </div>
-            <div className={styles.levelRewards}>
-              <Typography variant="caption" className={styles.rewardText}>
-                레벨 업 시 특별 보상 획득 가능!
+              <Typography variant="caption" className={styles.levelLabel}>
+                LEVEL
               </Typography>
             </div>
           </div>
 
-          <ProgressCard
-            items={[
-              {
-                label: "경험치 진행도",
-                value: mockUserProfile.progress,
-                description: `${mockUserProfile.currentXP} / ${mockUserProfile.nextLevelXP} XP`,
-                color: "var(--success-500)"
-              }
-            ]}
-            className={styles.xpProgress}
-          />
+          {/* 경험치 진행도 */}
+          <div className={styles.xpProgressSection}>
+            <div className={styles.xpProgressHeader}>
+              <Typography variant="body2" className={styles.xpLabel}>
+                경험치 진행도
+              </Typography>
+            </div>
+
+            <div className={styles.xpProgressBar}>
+              <div
+                className={styles.xpProgressFill}
+                style={{ width: `${mockUserProfile.progress}%` }}
+              />
+            </div>
+
+            <Typography variant="caption" className={styles.xpText}>
+              {mockUserProfile.currentXP.toLocaleString()} / {mockUserProfile.nextLevelXP.toLocaleString()} XP ({mockUserProfile.progress}%)
+            </Typography>
+          </div>
         </div>
       </SectionCard>
 

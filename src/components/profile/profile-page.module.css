@@ -108,12 +108,11 @@
   overflow: hidden;
 }
 
-.levelContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
-  padding: var(--space-xl);
+.levelCard .content {
+  display: block;
+  margin-top: var(--space-lg);
 }
+
 
 .levelIconSection {
   display: flex;
@@ -145,29 +144,7 @@
   color: white;
 }
 
-.levelBadge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: linear-gradient(135deg, var(--success-500), var(--success-600));
-  color: white;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid var(--surface);
-  font-size: 12px;
-  font-weight: 800;
-}
 
-.levelNumber {
-  font-size: 12px;
-  font-weight: 800;
-  color: white;
-  margin: 0;
-}
 
 .levelRewards {
   flex: 1;
@@ -387,6 +364,101 @@
   background: var(--primary-500);
   color: white;
   box-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.3);
+}
+
+/* 레벨 카드 */
+.levelCard {
+  margin-bottom: var(--space-lg);
+}
+
+.levelContent {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.levelDisplay {
+  flex-shrink: 0;
+  order: 1;
+}
+
+.levelBadge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  border-radius: 50%;
+  border: 3px solid var(--primary-300);
+  box-shadow: 0 4px 16px rgba(var(--primary-500-rgb), 0.3);
+}
+
+.levelNumber {
+  color: white;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  font-size: 1.6rem;
+}
+
+.levelLabel {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.xpProgressSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-left: var(--space-md);
+  order: 2;
+}
+
+.xpProgressHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.xpLabel {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.xpPercentage {
+  color: var(--primary-600);
+  font-weight: 800;
+  margin: 0;
+}
+
+.xpProgressBar {
+  height: 12px;
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--outline);
+  overflow: hidden;
+}
+
+.xpProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+.xpText {
+  color: var(--text-secondary);
+  margin: 0;
+  text-align: center;
+  font-weight: 500;
 }
 
 /* 업적 컨테이너 */
@@ -806,7 +878,21 @@
 
 
   .levelContent {
-    padding: var(--space-lg);
+    padding: var(--space-sm);
+    gap: var(--space-md);
+  }
+
+  .levelBadge {
+    width: 60px;
+    height: 60px;
+  }
+
+  .levelNumber {
+    font-size: 1.2rem;
+  }
+
+  .xpProgressSection {
+    padding-left: var(--space-sm);
   }
 
   .settingsContent {
