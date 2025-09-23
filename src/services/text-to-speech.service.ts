@@ -1,3 +1,5 @@
+import { ttsConfig } from "@/mock/tts-mock";
+
 export class TextToSpeechService {
   private synthesis: SpeechSynthesis | null = null;
   private voices: SpeechSynthesisVoice[] = [];
@@ -30,13 +32,7 @@ export class TextToSpeechService {
    * 일본어 음성 찾기
    */
   private getJapaneseVoice(): SpeechSynthesisVoice | null {
-    // 일본어 음성 우선순위
-    const preferredVoices = [
-      'Microsoft Ayumi - Japanese (Japan)',
-      'Kyoko',
-      'Otoya',
-      'Haruka'
-    ];
+    const preferredVoices = ttsConfig.preferredVoices.textToSpeech;
 
     // 우선순위에 따라 음성 찾기
     for (const voiceName of preferredVoices) {
@@ -46,7 +42,9 @@ export class TextToSpeechService {
 
     // 일본어 음성 찾기 (언어 코드 기반)
     const japaneseVoice = this.voices.find(voice =>
-      voice.lang.startsWith('ja') || voice.lang.includes('JP')
+      ttsConfig.languagePatterns.japanese.some(pattern =>
+        voice.lang.startsWith('ja') || voice.lang.includes(pattern)
+      )
     );
 
     return japaneseVoice || null;
@@ -79,13 +77,13 @@ export class TextToSpeechService {
         utterance.lang = japaneseVoice.lang;
       } else {
         // 일본어 음성이 없으면 기본 설정
-        utterance.lang = 'ja-JP';
+        utterance.lang = ttsConfig.defaultSettings.language;
       }
 
       // 옵션 설정
-      utterance.rate = options.rate ?? 0.8;  // 조금 느리게
-      utterance.pitch = options.pitch ?? 1.0;
-      utterance.volume = options.volume ?? 1.0;
+      utterance.rate = options.rate ?? ttsConfig.defaultSettings.rate;
+      utterance.pitch = options.pitch ?? ttsConfig.defaultSettings.pitch.default;
+      utterance.volume = options.volume ?? ttsConfig.defaultSettings.volume;
 
       // 이벤트 핸들러
       utterance.onend = () => {
@@ -122,10 +120,10 @@ export class TextToSpeechService {
       this.synthesis.cancel();
 
       const utterance = new SpeechSynthesisUtterance(romaji);
-      utterance.lang = 'en-US';
-      utterance.rate = options.rate ?? 0.6;
-      utterance.pitch = options.pitch ?? 1.0;
-      utterance.volume = options.volume ?? 1.0;
+      utterance.lang = ttsConfig.languagePatterns.romaji.language;
+      utterance.rate = options.rate ?? ttsConfig.languagePatterns.romaji.rate;
+      utterance.pitch = options.pitch ?? ttsConfig.defaultSettings.pitch.default;
+      utterance.volume = options.volume ?? ttsConfig.defaultSettings.volume;
 
       utterance.onend = () => {
         options.onEnd?.();
@@ -170,7 +168,9 @@ export class TextToSpeechService {
    */
   getAvailableJapaneseVoices(): SpeechSynthesisVoice[] {
     return this.voices.filter(voice =>
-      voice.lang.startsWith('ja') || voice.lang.includes('JP')
+      ttsConfig.languagePatterns.japanese.some(pattern =>
+        voice.lang.startsWith('ja') || voice.lang.includes(pattern)
+      )
     );
   }
 }

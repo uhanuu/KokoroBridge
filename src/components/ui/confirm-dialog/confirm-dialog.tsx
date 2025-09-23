@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
 import Card from "@/components/ui/card";
+import { dialogTypeConfig, confirmDialogDefaults } from "@/mock/confirm-dialog-mock";
 
 import styles from "./confirm-dialog.module.css";
 
@@ -24,44 +25,28 @@ export interface ConfirmDialogProps {
   onClose: () => void;
 }
 
-const dialogTypeConfig = {
-  warning: {
-    icon: Warning,
-    color: "#f59e0b",
-    bgColor: "rgba(245, 158, 11, 0.1)",
-  },
-  success: {
-    icon: CheckCircle,
-    color: "#22c55e",
-    bgColor: "rgba(34, 197, 94, 0.1)",
-  },
-  error: {
-    icon: Error,
-    color: "#ef4444",
-    bgColor: "rgba(239, 68, 68, 0.1)",
-  },
-  info: {
-    icon: Info,
-    color: "#3b82f6",
-    bgColor: "rgba(59, 130, 246, 0.1)",
-  },
+const iconComponents = {
+  Warning,
+  CheckCircle,
+  Error,
+  Info,
 };
 
 export default function ConfirmDialog({
   isOpen,
   title,
   message,
-  type = "warning",
-  confirmText = "확인",
-  cancelText = "취소",
-  showCancel = true,
+  type = confirmDialogDefaults.defaultType,
+  confirmText = confirmDialogDefaults.confirmText,
+  cancelText = confirmDialogDefaults.cancelText,
+  showCancel = confirmDialogDefaults.showCancel,
   mascotImage,
   onConfirm,
   onCancel,
   onClose,
 }: ConfirmDialogProps) {
   const config = dialogTypeConfig[type];
-  const IconComponent = config.icon;
+  const IconComponent = iconComponents[config.icon as keyof typeof iconComponents];
 
   useEffect(() => {
     if (isOpen) {

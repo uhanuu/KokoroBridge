@@ -1,16 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { voiceConfig } from "@/mock/voice-mock";
 
 const CatSpeech: React.FC = () => {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [isReading, setIsReading] = useState(false);
-  const [text, setText] = useState("こんにちはにゃん！");
+  const [text, setText] = useState(voiceConfig.defaultText);
 
   useEffect(() => {
     const loadVoices = () => {
       const availableVoices = speechSynthesis.getVoices();
-      setVoices(availableVoices.filter((v) => v.lang.includes("ja")));
+      setVoices(availableVoices.filter((v) => v.lang.includes(voiceConfig.languageFilter)));
     };
 
     loadVoices();
@@ -30,16 +31,16 @@ const CatSpeech: React.FC = () => {
     }
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "ja-JP";
-    utterance.rate = 0.8; // 조금 느리게
-    utterance.pitch = 1.1; // 귀여운 톤
+    utterance.lang = voiceConfig.speech.language;
+    utterance.rate = voiceConfig.speech.rate;
+    utterance.pitch = voiceConfig.speech.pitch;
 
     // 일본어 여성 음성 우선 선택 (Mac/Windows 호환)
     const japaneseVoice =
-      voices.find((v) => v.name === "O-Ren") ||
-      voices.find((v) => v.name === "Google 日本語") ||
-      voices.find((v) => v.name === "Kyoko") ||
-      voices.find((v) => v.lang === "ja-JP"); // fallback: 첫번째 일본어 음성
+      voiceConfig.preferredVoices.reduce((found, voiceName) => {
+        return found || voices.find((v) => v.name === voiceName);
+      }, undefined as SpeechSynthesisVoice | undefined) ||
+      voices.find((v) => v.lang === voiceConfig.speech.language); // fallback: 첫번째 일본어 음성
 
     if (japaneseVoice) {
       utterance.voice = japaneseVoice;
@@ -77,14 +78,14 @@ const CatSpeech: React.FC = () => {
           padding: "10px 20px",
           borderRadius: 8,
           border: "none",
-          backgroundColor: isReading ? "#f28b82" : "#8ab6f2",
+          backgroundColor: isReading ? voiceConfig.colors.speaking : voiceConfig.colors.ready,
           color: "white",
           fontWeight: "bold",
           cursor: "pointer",
           transition: "0.2s",
         }}
       >
-        {isReading ? "にゃん止め" : "にゃん読む"}
+        {isReading ? voiceConfig.buttons.stop : voiceConfig.buttons.speak}
       </button>
 
       <div
@@ -107,7 +108,7 @@ const CatSpeech: React.FC = () => {
         >
           🐱
         </span>
-        <span style={{ fontSize: 18 }}>{isReading ? "にゃん、話してる..." : "待機中にゃん"}</span>
+        <span style={{ fontSize: 18 }}>{isReading ? voiceConfig.statusMessages.speaking : voiceConfig.statusMessages.waiting}</span>
       </div>
     </div>
   );

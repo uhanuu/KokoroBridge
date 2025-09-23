@@ -12,6 +12,7 @@ import React from "react";
 import Image from "next/image";
 
 import Card from "@/components/ui/card";
+import { profileInfoStaticData, getMascotImage } from "@/mock/profile-info-mock";
 import styles from "./profile-info.module.css";
 
 interface UserProfile {
@@ -31,12 +32,6 @@ interface ProfileInfoProps {
 }
 
 export default function ProfileInfo({ profile }: ProfileInfoProps) {
-  // 레벨에 따른 마스코트 이미지 선택
-  const getMascotImage = (level: number) => {
-    if (level >= 10) return "/good-character.png";
-    if (level >= 5) return "/start-study-character.png";
-    return "/home-character.png";
-  };
 
   return (
     <Card
@@ -107,7 +102,7 @@ export default function ProfileInfo({ profile }: ProfileInfoProps) {
                   최장 연속일
                 </Typography>
                 <Typography variant="h6" className={styles.statsValue}>
-                  18일
+                  {profileInfoStaticData.statistics.longestStreak}일
                 </Typography>
               </div>
             </div>
@@ -121,7 +116,7 @@ export default function ProfileInfo({ profile }: ProfileInfoProps) {
                   완료한 레슨
                 </Typography>
                 <Typography variant="h6" className={styles.statsValue}>
-                  156
+                  {profileInfoStaticData.statistics.completedLessons}
                 </Typography>
               </div>
             </div>
@@ -135,7 +130,7 @@ export default function ProfileInfo({ profile }: ProfileInfoProps) {
                   총 학습 시간
                 </Typography>
                 <Typography variant="h6" className={styles.statsValue}>
-                  48h
+                  {profileInfoStaticData.statistics.totalStudyTime}
                 </Typography>
               </div>
             </div>

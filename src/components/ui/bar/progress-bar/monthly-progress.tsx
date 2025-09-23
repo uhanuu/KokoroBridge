@@ -5,6 +5,7 @@ import { Typography } from "@mui/material";
 import { useState, useRef, useEffect } from "react";
 
 import Card from "@/components/ui/card";
+import { monthlyProgressConfig, getAchievementLevel } from "@/mock/monthly-progress-mock";
 import styles from "./monthly-progress.module.css";
 
 interface MonthlyData {
@@ -22,7 +23,9 @@ interface MonthlyProgressProps {
 }
 
 export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
-  const [currentIndex, setCurrentIndex] = useState(Math.max(0, monthlyData.length - 3));
+  const [currentIndex, setCurrentIndex] = useState(
+    Math.max(0, monthlyData.length - monthlyProgressConfig.defaultVisibleCards)
+  );
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -33,7 +36,9 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
   };
 
   const handleNext = () => {
-    setCurrentIndex(Math.min(monthlyData.length - 3, currentIndex + 1));
+    setCurrentIndex(
+      Math.min(monthlyData.length - monthlyProgressConfig.defaultVisibleCards, currentIndex + 1)
+    );
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -96,21 +101,13 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
   useEffect(() => {
     if (scrollContainerRef.current) {
       const container = scrollContainerRef.current;
-      const cardWidth = 180; // 작은 카드 크기에 맞춰 조정
       container.scrollTo({
-        left: currentIndex * cardWidth,
+        left: currentIndex * monthlyProgressConfig.cardWidth,
         behavior: "smooth",
       });
     }
   }, [currentIndex]);
 
-  const getAchievementLevel = (score: number) => {
-    if (score >= 95) return { text: "Perfect", color: "#22c55e" };
-    if (score >= 90) return { text: "Excellent", color: "#3b82f6" };
-    if (score >= 80) return { text: "Great", color: "#f59e0b" };
-    if (score >= 70) return { text: "Good", color: "#8b5cf6" };
-    return { text: "Keep Going", color: "#6b7280" };
-  };
 
   return (
     <Card
@@ -143,9 +140,9 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
             </span>
             <button
               onClick={handleNext}
-              disabled={currentIndex >= monthlyData.length - 3}
+              disabled={currentIndex >= monthlyData.length - monthlyProgressConfig.defaultVisibleCards}
               className={`${styles.navButton} ${
-                currentIndex >= monthlyData.length - 3 ? styles.disabled : ""
+                currentIndex >= monthlyData.length - monthlyProgressConfig.defaultVisibleCards ? styles.disabled : ""
               }`}
               aria-label="다음 월"
             >
@@ -227,7 +224,7 @@ export default function MonthlyProgress({ monthlyData }: MonthlyProgressProps) {
                     <Typography variant="body2" className={styles.achievementText}>
                       평균 성취도
                     </Typography>
-                    {data.averageScore >= 80 && (
+                    {data.averageScore >= monthlyProgressConfig.achievementBadgeThreshold && (
                       <div
                         className={styles.achievementBadge}
                         style={{ background: `linear-gradient(135deg, ${achievement.color}, ${achievement.color}CC)` }}

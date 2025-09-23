@@ -1,3 +1,5 @@
+import { ttsConfig } from "@/mock/tts-mock";
+
 /**
  * Text-to-Speech 서비스
  * 일본어 문자 발음을 여성 목소리로 재생합니다.
@@ -44,12 +46,12 @@ export class TTSService {
         resolve();
       }, { once: true });
 
-      // 타임아웃 설정 (3초 후 강제 완료)
+      // 타임아웃 설정
       setTimeout(() => {
         this.voices = this.speechSynthesis!.getVoices();
         this.isInitialized = true;
         resolve();
-      }, 3000);
+      }, ttsConfig.initializationTimeout);
     });
   }
 
@@ -59,14 +61,7 @@ export class TTSService {
   private getJapaneseVoice(): SpeechSynthesisVoice | null {
     if (!this.voices.length) return null;
 
-    // 일본어 여성 음성 우선순위
-    const preferredVoices = [
-      'Kyoko',           // macOS 일본어 여성
-      'Otoya',           // macOS 일본어 남성 (대안)
-      'Google 日本語',    // Google 일본어
-      'Microsoft Haruka', // Windows 일본어 여성
-      'Microsoft Sayaka', // Windows 일본어 여성
-    ];
+    const preferredVoices = ttsConfig.preferredVoices.ttsService;
 
     // 우선순위에 따라 음성 검색
     for (const voiceName of preferredVoices) {
@@ -78,9 +73,9 @@ export class TTSService {
 
     // 일본어 음성 검색
     const japaneseVoice = this.voices.find(voice =>
-      voice.lang.includes('ja') ||
-      voice.lang.includes('jp') ||
-      voice.name.includes('Japan')
+      ttsConfig.languagePatterns.japanese.some(pattern =>
+        voice.lang.includes(pattern.toLowerCase()) || voice.name.includes(pattern)
+      )
     );
 
     return japaneseVoice || null;
@@ -115,13 +110,13 @@ export class TTSService {
         utterance.voice = voice;
         utterance.lang = voice.lang;
       } else {
-        utterance.lang = 'ja-JP';
+        utterance.lang = ttsConfig.defaultSettings.language;
       }
 
       // 음성 설정
-      utterance.rate = options?.rate ?? 0.8;     // 조금 느리게
-      utterance.pitch = options?.pitch ?? 1.2;   // 조금 높게 (여성스럽게)
-      utterance.volume = options?.volume ?? 1.0;
+      utterance.rate = options?.rate ?? ttsConfig.defaultSettings.rate;
+      utterance.pitch = options?.pitch ?? ttsConfig.defaultSettings.pitch.feminine;
+      utterance.volume = options?.volume ?? ttsConfig.defaultSettings.volume;
 
       // 이벤트 리스너
       utterance.onend = () => resolve();
@@ -180,11 +175,12 @@ export class TTSService {
     if (!this.isInitialized) return [];
 
     return this.voices.filter(voice =>
-      voice.lang.includes('ja') ||
-      voice.lang.includes('jp') ||
-      voice.name.includes('Japan') ||
-      voice.name.includes('Kyoko') ||
-      voice.name.includes('Otoya')
+      ttsConfig.languagePatterns.japanese.some(pattern =>
+        voice.lang.includes(pattern.toLowerCase()) || voice.name.includes(pattern)
+      ) ||
+      ttsConfig.voiceNameFilters.some(filter =>
+        voice.name.includes(filter)
+      )
     );
   }
 
