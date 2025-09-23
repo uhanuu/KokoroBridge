@@ -1,6 +1,13 @@
 "use client";
 
-import { VolumeUp, Lightbulb, Refresh, ArrowBack, ArrowForward, CheckCircle } from "@mui/icons-material";
+import {
+  VolumeUp,
+  Lightbulb,
+  Refresh,
+  ArrowBack,
+  ArrowForward,
+  CheckCircle,
+} from "@mui/icons-material";
 import { IconButton, Typography, LinearProgress } from "@mui/material";
 import React, { useRef, useEffect, useState, useCallback } from "react";
 
@@ -34,7 +41,7 @@ export default function PremiumWritingCanvas({
   hasPrevious = false,
   currentIndex = 0,
   totalCount = 1,
-  className = ""
+  className = "",
 }: PremiumWritingCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -84,15 +91,15 @@ export default function PremiumWritingCanvas({
     };
 
     // 마우스 이벤트
-    canvas.addEventListener('mousedown', startHandler);
-    canvas.addEventListener('mousemove', moveHandler);
-    canvas.addEventListener('mouseup', endHandler);
-    canvas.addEventListener('mouseleave', endHandler);
+    canvas.addEventListener("mousedown", startHandler);
+    canvas.addEventListener("mousemove", moveHandler);
+    canvas.addEventListener("mouseup", endHandler);
+    canvas.addEventListener("mouseleave", endHandler);
 
     // 터치 이벤트 (passive: false로 명시적 설정)
-    canvas.addEventListener('touchstart', startHandler, { passive: false });
-    canvas.addEventListener('touchmove', moveHandler, { passive: false });
-    canvas.addEventListener('touchend', endHandler, { passive: false });
+    canvas.addEventListener("touchstart", startHandler, { passive: false });
+    canvas.addEventListener("touchmove", moveHandler, { passive: false });
+    canvas.addEventListener("touchend", endHandler, { passive: false });
 
     const handleResize = () => {
       if (canvas && container) {
@@ -102,18 +109,18 @@ export default function PremiumWritingCanvas({
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       // 이벤트 리스너 정리
-      canvas.removeEventListener('mousedown', startHandler);
-      canvas.removeEventListener('mousemove', moveHandler);
-      canvas.removeEventListener('mouseup', endHandler);
-      canvas.removeEventListener('mouseleave', endHandler);
-      canvas.removeEventListener('touchstart', startHandler);
-      canvas.removeEventListener('touchmove', moveHandler);
-      canvas.removeEventListener('touchend', endHandler);
-      window.removeEventListener('resize', handleResize);
+      canvas.removeEventListener("mousedown", startHandler);
+      canvas.removeEventListener("mousemove", moveHandler);
+      canvas.removeEventListener("mouseup", endHandler);
+      canvas.removeEventListener("mouseleave", endHandler);
+      canvas.removeEventListener("touchstart", startHandler);
+      canvas.removeEventListener("touchmove", moveHandler);
+      canvas.removeEventListener("touchend", endHandler);
+      window.removeEventListener("resize", handleResize);
     };
   }, [character]);
 
@@ -122,11 +129,11 @@ export default function PremiumWritingCanvas({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    console.log('Drawing canvas background for character:', character.char);
+    // console.log('Drawing canvas background for character:', character.char);
     CanvasUtils.clearCanvas(canvas);
     CanvasUtils.drawGuideLines(canvas);
     CanvasUtils.drawCharacterGuide(canvas, character.char);
-    console.log('Canvas background drawn');
+    // console.log('Canvas background drawn');
   }, [character.char]);
 
   // 사용자 획순 다시 그리기
@@ -142,12 +149,12 @@ export default function PremiumWritingCanvas({
     userStrokes.forEach((stroke, index) => {
       const strokeOrderLength = character.strokeOrder?.length || 0;
       const isCorrectStroke = index < strokeOrderLength;
-      const color = isCorrectStroke ? '#2563eb' : '#dc2626';
+      const color = isCorrectStroke ? "#2563eb" : "#dc2626";
       CanvasUtils.drawSmoothStroke(canvas, stroke, color, 3);
     });
 
     if (currentStroke.length > 0) {
-      CanvasUtils.drawSmoothStroke(canvas, currentStroke, '#1d4ed8', 3);
+      CanvasUtils.drawSmoothStroke(canvas, currentStroke, "#1d4ed8", 3);
     }
   }, [userStrokes, currentStroke, character.char, character.strokeOrder]);
 
@@ -159,7 +166,7 @@ export default function PremiumWritingCanvas({
     if (!canvas) return;
 
     const animateHint = () => {
-      setHintProgress(prev => {
+      setHintProgress((prev) => {
         const nextProgress = prev + 0.02;
         if (nextProgress >= 1) {
           setTimeout(() => setShowHint(false), 500);
@@ -189,13 +196,7 @@ export default function PremiumWritingCanvas({
           character.strokePoints[currentStrokeIndex],
           canvas
         );
-        CanvasUtils.drawStrokeHint(
-          canvas,
-          normalizedPoints,
-          hintProgress,
-          '#ff6b6b',
-          4
-        );
+        CanvasUtils.drawStrokeHint(canvas, normalizedPoints, hintProgress, "#ff6b6b", 4);
       }
     }
   }, [showHint, hintProgress, redrawUserStrokes, userStrokes.length, character]);
@@ -210,88 +211,99 @@ export default function PremiumWritingCanvas({
     setCurrentStroke([point]);
   }, []);
 
-  const handleMove = useCallback((event: any) => {
-    if (!isDrawing) return;
+  const handleMove = useCallback(
+    (event: any) => {
+      if (!isDrawing) return;
 
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const point = CanvasUtils.getCanvasCoordinates(event.nativeEvent, canvas);
-
-    setCurrentStroke(prev => {
-      const newStroke = [...prev, point];
-
-      // 실시간으로 그리기
-      requestAnimationFrame(() => {
-        redrawUserStrokes();
-        CanvasUtils.drawSmoothStroke(canvas, newStroke, '#1d4ed8', 3);
-      });
-
-      return newStroke;
-    });
-  }, [isDrawing, redrawUserStrokes]);
-
-  const handleEnd = useCallback((event?: any) => {
-    if (!isDrawing || currentStroke.length < 2) {
-      setIsDrawing(false);
-      setCurrentStroke([]);
-      return;
-    }
-
-    setIsDrawing(false);
-
-    // 획순 검증
-    const strokeIndex = userStrokes.length;
-    if (character.strokeOrder && character.strokePoints && strokeIndex < character.strokeOrder.length && character.strokePoints[strokeIndex]) {
       const canvas = canvasRef.current;
       if (!canvas) return;
 
-      const normalizedExpectedStroke = CanvasUtils.normalizeStrokePoints(
-        character.strokePoints[strokeIndex],
-        canvas
-      );
+      const point = CanvasUtils.getCanvasCoordinates(event.nativeEvent, canvas);
 
-      const validation = strokeEngine.current.validateStroke(
-        currentStroke,
-        normalizedExpectedStroke,
-        strokeIndex
-      );
+      setCurrentStroke((prev) => {
+        const newStroke = [...prev, point];
 
-      const newUserStrokes = [...userStrokes, currentStroke];
-      setUserStrokes(newUserStrokes);
-      setCurrentStroke([]);
+        // 실시간으로 그리기
+        requestAnimationFrame(() => {
+          redrawUserStrokes();
+          CanvasUtils.drawSmoothStroke(canvas, newStroke, "#1d4ed8", 3);
+        });
 
-      // 피드백 표시
-      if (validation.isValid) {
-        showFeedback('success', `${strokeIndex + 1}번째 획순 완료!`);
-      } else {
-        showFeedback('error', validation.feedback);
+        return newStroke;
+      });
+    },
+    [isDrawing, redrawUserStrokes]
+  );
+
+  const handleEnd = useCallback(
+    (event?: any) => {
+      if (!isDrawing || currentStroke.length < 2) {
+        setIsDrawing(false);
+        setCurrentStroke([]);
+        return;
       }
 
-      // 전체 완성도 체크
-      if (character.strokeOrder && newUserStrokes.length === character.strokeOrder.length) {
-        const completion = strokeEngine.current.validateCharacterCompletion(
-          newUserStrokes,
-          character
+      setIsDrawing(false);
+
+      // 획순 검증
+      const strokeIndex = userStrokes.length;
+      if (
+        character.strokeOrder &&
+        character.strokePoints &&
+        strokeIndex < character.strokeOrder.length &&
+        character.strokePoints[strokeIndex]
+      ) {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const normalizedExpectedStroke = CanvasUtils.normalizeStrokePoints(
+          character.strokePoints[strokeIndex],
+          canvas
         );
 
-        setCompletionStatus(completion);
+        const validation = strokeEngine.current.validateStroke(
+          currentStroke,
+          normalizedExpectedStroke,
+          strokeIndex
+        );
 
-        if (completion.isComplete) {
-          showFeedback('celebrating', completion.feedback);
-          onComplete?.(completion.accuracy);
+        const newUserStrokes = [...userStrokes, currentStroke];
+        setUserStrokes(newUserStrokes);
+        setCurrentStroke([]);
+
+        // 피드백 표시
+        if (validation.isValid) {
+          showFeedback("success", `${strokeIndex + 1}번째 획순 완료!`);
+        } else {
+          showFeedback("error", validation.feedback);
+        }
+
+        // 전체 완성도 체크
+        if (character.strokeOrder && newUserStrokes.length === character.strokeOrder.length) {
+          const completion = strokeEngine.current.validateCharacterCompletion(
+            newUserStrokes,
+            character
+          );
+
+          setCompletionStatus(completion);
+
+          if (completion.isComplete) {
+            showFeedback("celebrating", completion.feedback);
+            onComplete?.(completion.accuracy);
+          }
         }
       }
-    }
-  }, [isDrawing, currentStroke, userStrokes, character, showFeedback, onComplete]);
+    },
+    [isDrawing, currentStroke, userStrokes, character, showFeedback, onComplete]
+  );
 
   // 음성 재생
   const handleSpeak = useCallback(() => {
     ttsService.current.speak(character.char, {
       onError: (error) => {
-        showFeedback('error', '음성 재생에 실패했습니다');
-        console.error('TTS Error:', error);
-      }
+        showFeedback("error", "음성 재생에 실패했습니다");
+        console.error("TTS Error:", error);
+      },
     });
   }, [character.char, showFeedback]);
 
@@ -341,7 +353,7 @@ export default function PremiumWritingCanvas({
       setCompletionStatus({
         isComplete: true,
         accuracy: 1,
-        feedback: "획순 정보가 없는 문자입니다"
+        feedback: "획순 정보가 없는 문자입니다",
       });
     }
   }, [character.char, character.strokeOrder]);
@@ -383,11 +395,7 @@ export default function PremiumWritingCanvas({
 
       {/* 진행도 바 */}
       <div className={styles.progressSection}>
-        <LinearProgress
-          variant="determinate"
-          value={progress}
-          className={styles.progressBar}
-        />
+        <LinearProgress variant="determinate" value={progress} className={styles.progressBar} />
         <Typography variant="caption" className={styles.strokeInfo}>
           {userStrokes.length} / {character.strokeOrder?.length || 0} 획순
         </Typography>
@@ -395,10 +403,7 @@ export default function PremiumWritingCanvas({
 
       {/* 캔버스 영역 */}
       <div className={styles.canvasSection}>
-        <canvas
-          ref={canvasRef}
-          className={styles.canvas}
-        />
+        <canvas ref={canvasRef} className={styles.canvas} />
 
         {completionStatus.isComplete && (
           <div className={styles.completionOverlay}>
@@ -410,11 +415,7 @@ export default function PremiumWritingCanvas({
 
       {/* 네비게이션 */}
       <div className={styles.navigation}>
-        <IconButton
-          onClick={onPrevious}
-          disabled={!hasPrevious}
-          className={styles.navButton}
-        >
+        <IconButton onClick={onPrevious} disabled={!hasPrevious} className={styles.navButton}>
           <ArrowBack />
         </IconButton>
 

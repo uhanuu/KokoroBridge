@@ -17,8 +17,8 @@ export default function KatakanaGroupPage() {
 
   // 현재 그룹 찾기
   const currentGroup = useMemo(() => {
-    return katakanaGroups.find(group => {
-      const routeParts = group.route.split('/');
+    return katakanaGroups.find((group) => {
+      const routeParts = group.route.split("/");
       return routeParts[routeParts.length - 1] === groupKey;
     });
   }, [groupKey]);
@@ -36,7 +36,7 @@ export default function KatakanaGroupPage() {
   }, [currentGroup, currentIndex]);
 
   const handleComplete = useCallback((accuracy: number) => {
-    console.log(`Character completed with accuracy: ${accuracy}`);
+    // console.log(`Character completed with accuracy: ${accuracy}`);
   }, []);
 
   if (!currentGroup) {
@@ -44,9 +44,7 @@ export default function KatakanaGroupPage() {
       <div className={styles.errorContainer}>
         <div className={styles.errorMessage}>
           <h2>잘못된 그룹입니다.</h2>
-          <button onClick={() => router.push("/study/katakana")}>
-            돌아가기
-          </button>
+          <button onClick={() => router.push("/study/katakana")}>돌아가기</button>
         </div>
       </div>
     );

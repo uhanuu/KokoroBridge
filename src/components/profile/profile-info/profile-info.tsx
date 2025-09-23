@@ -77,61 +77,72 @@ export default function ProfileInfo({ profile }: ProfileInfoProps) {
             </div>
           </div>
 
-          {/* 학습 통계 버튼들 */}
-          <div className={styles.statsButtonsSection}>
-            <div className={styles.statsButton}>
-              <div className={styles.statsIcon}>
-                <LocalFireDepartment />
-              </div>
-              <div className={styles.statsInfo}>
-                <Typography variant="caption" className={styles.statsLabel}>
-                  연속 학습일
-                </Typography>
-                <Typography variant="h6" className={styles.statsValue}>
-                  {profile.streak}
-                </Typography>
-              </div>
+          {/* 학습 통계 섹션 */}
+          <div className={styles.statsSection}>
+            <div className={styles.statsHeader}>
+              <Typography variant="h6" className={styles.statsTitle}>
+                학습 통계
+              </Typography>
+              <Typography variant="body2" className={styles.statsSubtitle}>
+                나의 학습 현황을 확인하세요
+              </Typography>
             </div>
 
-            <div className={styles.statsButton}>
-              <div className={styles.statsIcon}>
-                <EmojiEvents />
+            <div className={styles.statsButtonsSection}>
+              <div className={styles.statsButton}>
+                <div className={styles.statsIcon}>
+                  <LocalFireDepartment />
+                </div>
+                <div className={styles.statsInfo}>
+                  <Typography variant="caption" className={styles.statsLabel}>
+                    연속 학습일
+                  </Typography>
+                  <Typography variant="h6" className={styles.statsValue}>
+                    {profile.streak}
+                  </Typography>
+                </div>
               </div>
-              <div className={styles.statsInfo}>
-                <Typography variant="caption" className={styles.statsLabel}>
-                  최장 연속일
-                </Typography>
-                <Typography variant="h6" className={styles.statsValue}>
-                  {profileInfoStaticData.statistics.longestStreak}일
-                </Typography>
-              </div>
-            </div>
 
-            <div className={styles.statsButton}>
-              <div className={styles.statsIcon}>
-                <Book />
+              <div className={styles.statsButton}>
+                <div className={styles.statsIcon}>
+                  <EmojiEvents />
+                </div>
+                <div className={styles.statsInfo}>
+                  <Typography variant="caption" className={styles.statsLabel}>
+                    최장 연속일
+                  </Typography>
+                  <Typography variant="h6" className={styles.statsValue}>
+                    {profileInfoStaticData.statistics.longestStreak}일
+                  </Typography>
+                </div>
               </div>
-              <div className={styles.statsInfo}>
-                <Typography variant="caption" className={styles.statsLabel}>
-                  완료한 레슨
-                </Typography>
-                <Typography variant="h6" className={styles.statsValue}>
-                  {profileInfoStaticData.statistics.completedLessons}
-                </Typography>
-              </div>
-            </div>
 
-            <div className={styles.statsButton}>
-              <div className={styles.statsIcon}>
-                <Schedule />
+              <div className={styles.statsButton}>
+                <div className={styles.statsIcon}>
+                  <Book />
+                </div>
+                <div className={styles.statsInfo}>
+                  <Typography variant="caption" className={styles.statsLabel}>
+                    완료한 레슨
+                  </Typography>
+                  <Typography variant="h6" className={styles.statsValue}>
+                    {profileInfoStaticData.statistics.completedLessons}
+                  </Typography>
+                </div>
               </div>
-              <div className={styles.statsInfo}>
-                <Typography variant="caption" className={styles.statsLabel}>
-                  총 학습 시간
-                </Typography>
-                <Typography variant="h6" className={styles.statsValue}>
-                  {profileInfoStaticData.statistics.totalStudyTime}
-                </Typography>
+
+              <div className={styles.statsButton}>
+                <div className={styles.statsIcon}>
+                  <Schedule />
+                </div>
+                <div className={styles.statsInfo}>
+                  <Typography variant="caption" className={styles.statsLabel}>
+                    총 학습 시간
+                  </Typography>
+                  <Typography variant="h6" className={styles.statsValue}>
+                    {profileInfoStaticData.statistics.totalStudyTime}
+                  </Typography>
+                </div>
               </div>
             </div>
           </div>

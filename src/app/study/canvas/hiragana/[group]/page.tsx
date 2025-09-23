@@ -17,28 +17,28 @@ export default function HiraganaGroupPage() {
 
   // 현재 그룹 찾기
   const currentGroup = useMemo(() => {
-    return hiraganaGroups.find(group => {
-      const routeParts = group.route.split('/');
+    return hiraganaGroups.find((group) => {
+      const routeParts = group.route.split("/");
       return routeParts[routeParts.length - 1] === groupKey;
     });
   }, [groupKey]);
 
   const handlePrevious = useCallback(() => {
-    console.log('Previous clicked, currentIndex:', currentIndex);
+    // console.log('Previous clicked, currentIndex:', currentIndex);i
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     }
   }, [currentIndex]);
 
   const handleNext = useCallback(() => {
-    console.log('Next clicked, currentIndex:', currentIndex, 'total:', currentGroup?.characters.length);
+    // console.log('Next clicked, currentIndex:', currentIndex, 'total:', currentGroup?.characters.length);
     if (currentGroup && currentIndex < currentGroup.characters.length - 1) {
       setCurrentIndex(currentIndex + 1);
     }
   }, [currentGroup, currentIndex]);
 
   const handleComplete = useCallback((accuracy: number) => {
-    console.log(`Character completed with accuracy: ${accuracy}`);
+    // console.log(`Character completed with accuracy: ${accuracy}`);
   }, []);
 
   const handleBack = useCallback(() => {
@@ -50,9 +50,7 @@ export default function HiraganaGroupPage() {
       <div className={styles.errorContainer}>
         <div className={styles.errorMessage}>
           <h2>잘못된 그룹입니다.</h2>
-          <button onClick={() => router.push("/study/hiragana")}>
-            돌아가기
-          </button>
+          <button onClick={() => router.push("/study/hiragana")}>돌아가기</button>
         </div>
       </div>
     );

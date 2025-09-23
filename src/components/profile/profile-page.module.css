@@ -497,10 +497,19 @@
   background: var(--primary-600);
 }
 
+/* 769px 이상에서도 2열 유지 */
+@media (min-width: 769px) {
+  .achievementGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    max-height: 400px;
+  }
+}
+
 /* 태블릿 가로 */
 @media (max-width: 1024px) {
   .achievementGrid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
     max-height: 350px;
   }

@@ -119,11 +119,40 @@
   font-size: 0.8rem;
 }
 
+/* 학습 통계 섹션 */
+.statsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.statsHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  text-align: left;
+}
+
+.statsTitle {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.statsSubtitle {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
 /* 학습 통계 버튼 섹션 */
-.statsButtonsSection {
+.statsSection .statsButtonsSection {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-sm);
+  width: 100%;
 }
 
 .statsButton {
@@ -136,7 +165,11 @@
   padding: var(--space-sm);
   transition: all 0.3s ease;
   cursor: pointer;
+  min-height: 60px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
 
 .statsButton:hover {
   background: rgba(var(--primary-500-rgb), 0.05);
@@ -337,6 +370,76 @@
 }
 
 /* 반응형 디자인 */
+
+/* 데스크톱 - 중간 화면 (769px ~ 1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .statsSection .statsButtonsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .statsButton {
+    min-height: 65px;
+    padding: var(--space-md);
+  }
+
+  .statsIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .statsIcon svg {
+    font-size: 18px;
+  }
+
+  .statsLabel {
+    font-size: 0.75rem;
+  }
+
+  .statsValue {
+    font-size: 1.1rem;
+  }
+}
+
+/* 데스크톱 - 큰 화면 (1024px+) */
+@media (min-width: 1024px) {
+  .statsSection .statsButtonsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .statsButton {
+    min-height: 70px;
+    padding: var(--space-md);
+  }
+
+  .statsIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .statsIcon svg {
+    font-size: 20px;
+  }
+
+  .statsLabel {
+    font-size: 0.8rem;
+  }
+
+  .statsValue {
+    font-size: 1.2rem;
+  }
+
+  .statsTitle {
+    font-size: 1.2rem;
+  }
+
+  .statsSubtitle {
+    font-size: 0.9rem;
+  }
+}
+
+/* 태블릿 */
 @media (max-width: 768px) {
   .flipCardContainer {
     perspective: 800px;
@@ -362,16 +465,54 @@
   }
 
   .mascotImage {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
   }
 
   .userName {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .userEmail {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  /* 통계 버튼 섹션 - 태블릿 */
+  .statsSection .statsButtonsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xs);
+  }
+
+
+  .statsButton {
+    padding: var(--space-xs);
+    min-height: 55px;
+    gap: var(--space-xs);
+  }
+
+  .statsIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .statsIcon svg {
+    font-size: 16px;
+  }
+
+  .statsLabel {
+    font-size: 0.7rem;
+  }
+
+  .statsValue {
+    font-size: 1rem;
+  }
+
+  .statsTitle {
+    font-size: 1.05rem;
+  }
+
+  .statsSubtitle {
+    font-size: 0.8rem;
   }
 
   .settingsContent {
@@ -385,7 +526,7 @@
 
 @media (max-width: 480px) {
   .profileContent {
-    padding: var(--space-md);
+    padding: var(--space-sm);
   }
 
   .profileInfoSection {
@@ -397,16 +538,115 @@
   }
 
   .mascotImage {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
 
   .userName {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .userEmail {
+    font-size: 0.8rem;
+  }
+
+  /* 통계 버튼 섹션 - 모바일 */
+  .statsSection .statsButtonsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xs);
+  }
+
+  .statsButton {
+    padding: var(--space-xs);
+    min-height: 50px;
+    gap: var(--space-xs);
+  }
+
+  .statsIcon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .statsIcon svg {
+    font-size: 14px;
+  }
+
+  .statsLabel {
+    font-size: 0.65rem;
+    line-height: 1.2;
+  }
+
+  .statsValue {
+    font-size: 0.9rem;
+  }
+
+  .statsInfo {
+    gap: 1px;
+  }
+
+  .statsTitle {
+    font-size: 1rem;
+  }
+
+  .statsSubtitle {
+    font-size: 0.75rem;
+  }
+}
+
+/* 매우 작은 화면 (아이폰 SE 등) */
+@media (max-width: 360px) {
+  .profileContent {
+    padding: var(--space-xs);
+  }
+
+  .statsSection .statsButtonsSection {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .statsButton {
+    padding: 6px;
+    min-height: 45px;
+    gap: 6px;
+  }
+
+  .statsIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .statsIcon svg {
+    font-size: 12px;
+  }
+
+  .statsLabel {
+    font-size: 0.6rem;
+    line-height: 1.1;
+  }
+
+  .statsValue {
     font-size: 0.85rem;
+  }
+
+  .mascotImage {
+    width: 50px;
+    height: 50px;
+  }
+
+  .userName {
+    font-size: 1.1rem;
+  }
+
+  .userEmail {
+    font-size: 0.75rem;
+  }
+
+  .statsTitle {
+    font-size: 0.95rem;
+  }
+
+  .statsSubtitle {
+    font-size: 0.7rem;
   }
 }
 
