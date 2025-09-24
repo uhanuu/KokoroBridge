@@ -51,27 +51,43 @@
 .statsRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-md);
+  justify-content: flex-start;
+  gap: var(--space-lg);
   min-height: 60px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.statsSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  flex: 1;
+  justify-content: flex-start;
 }
 
 .statItem {
   text-align: center;
-  width: 120px;
   flex-shrink: 0;
   word-break: keep-all;
   overflow-wrap: break-word;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 
 .buttonGroup {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-  flex: 1;
+  flex-direction: row;
+  gap: var(--space-sm);
   align-items: center;
-  min-width: 160px;
-  justify-content: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  margin-left: auto;
+  min-width: 280px;
 }
 
 .statNumber {
@@ -94,15 +110,13 @@
 
 .readAllButton,
 .deleteButton {
-  width: 100%;
-  max-width: 200px;
-  min-width: 140px;
-  height: 32px;
-  font-size: 12px;
+  height: 36px;
+  font-size: 13px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 6px 12px;
+  padding: 8px 16px;
+  min-width: 130px;
+  flex: 1;
+  max-width: 150px;
 }
 
 .deleteButton {
@@ -114,9 +128,9 @@
 }
 
 .deleteButton:hover {
-  background: linear-gradient(135deg, var(--error-600), var(--error-700));
-  transform: translateY(-1px);
-  box-shadow: 0 3px 12px rgba(var(--error-rgb), 0.3), 0 2px 6px rgba(var(--background-rgb), 0.1);
+  background: linear-gradient(135deg, var(--error), var(--error-600));
+  transform: none;
+  box-shadow: 0 2px 8px rgba(var(--error-rgb), 0.2), 0 1px 3px rgba(var(--background-rgb), 0.1);
 }
 
 .deleteButton:active {
@@ -125,107 +139,163 @@
   transition: all 0.1s ease;
 }
 
-/* 중간 태블릿 반응형 (600px~768px) */
-@media (max-width: 768px) and (min-width: 600px) {
-  .container {
-    padding: var(--space-md);
-    gap: var(--space-md);
-  }
-
-  .statsCard {
-    padding: var(--space-sm);
-  }
-
-  .statsRow {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-sm);
-    flex-wrap: nowrap;
-  }
-
-  .statItem {
-    text-align: center;
-    width: 100px;
-    flex-shrink: 0;
-    word-break: keep-all;
-  }
-
+/* 중간 화면 이상 버튼 가로 배치 (501px 이상) */
+@media (min-width: 501px) {
   .buttonGroup {
-    flex-direction: column;
-    gap: var(--space-xs);
-    flex: 1;
-    align-items: center;
-    min-width: 150px;
+    flex-direction: row;
+    gap: var(--space-sm);
+    min-width: 240px;
   }
 
   .readAllButton,
   .deleteButton {
-    width: 100%;
-    max-width: 180px;
+    flex: 1;
+    min-width: 110px;
+    max-width: 130px;
+    height: 36px;
+    font-size: 13px;
+  }
+}
+
+/* 데스크킱/큰 태블릿 (769px 이상) */
+@media (min-width: 769px) {
+  .buttonGroup {
+    min-width: 280px;
+  }
+
+  .readAllButton,
+  .deleteButton {
     min-width: 130px;
-    height: 32px;
-    font-size: 11px;
-    padding: 6px 10px;
+    max-width: 150px;
+    height: 38px;
+    font-size: 14px;
+  }
+}
+
+/* 중간 화면 최적화 (501px-768px) */
+@media (min-width: 501px) and (max-width: 768px) {
+  .container {
+    padding: var(--space-md);
+    gap: var(--space-md);
+    max-width: 500px;
+    margin: 0 auto;
   }
 
-  .title {
-    font-size: 26px;
+  .statsCard {
+    padding: var(--space-md);
   }
 
-  .statNumber {
-    font-size: 28px;
+  .statsRow {
+    max-width: 450px;
+    gap: var(--space-sm);
+    justify-content: space-between;
   }
 
-  .statLabel {
+  .statsSection {
+    gap: var(--space-md);
+    flex: 0 1 auto;
+  }
+
+  .buttonGroup {
+    flex-direction: row;
+    gap: var(--space-xs);
+    min-width: 200px;
+    margin-left: var(--space-sm);
+  }
+
+  .readAllButton,
+  .deleteButton {
+    flex: 1;
+    min-width: 90px;
+    max-width: 100px;
+    height: 36px;
     font-size: 12px;
   }
 }
 
-/* 작은 태블릿 반응형 (480px~599px) */
-@media (max-width: 599px) and (min-width: 480px) {
+/* 작은 중간 화면 최적화 (301px-500px) */
+@media (min-width: 301px) and (max-width: 500px) {
+  .container {
+    padding: var(--space-sm);
+    gap: var(--space-md);
+    max-width: 450px;
+    margin: 0 auto;
+  }
+
+  .statsCard {
+    padding: var(--space-md);
+  }
+
+  .statsRow {
+    max-width: 400px;
+    gap: var(--space-sm);
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .statsSection {
+    gap: var(--space-md);
+    flex: 1;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: var(--space-xs);
+    min-width: 100px;
+    align-items: flex-end;
+  }
+
+  .readAllButton,
+  .deleteButton {
+    width: 100%;
+    min-width: 90px;
+    max-width: 100px;
+    height: 36px;
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
+
+/* 태블릿 반응형 (768px 이하) */
+@media (max-width: 768px) {
   .container {
     padding: var(--space-md);
     gap: var(--space-md);
   }
 
   .statsCard {
-    padding: var(--space-sm);
+    padding: var(--space-md);
   }
 
   .statsRow {
-    display: flex;
     flex-direction: row;
+    gap: var(--space-lg);
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-xs);
-    flex-wrap: nowrap;
   }
 
-  .statItem {
-    text-align: center;
-    width: 85px;
-    flex-shrink: 0;
-    word-break: keep-all;
+  .statsSection {
+    display: flex;
+    gap: var(--space-md);
+    flex: 1;
+    justify-content: flex-start;
   }
 
   .buttonGroup {
     flex-direction: column;
     gap: var(--space-xs);
-    flex: 1;
-    align-items: center;
-    min-width: 130px;
+    align-items: flex-end;
+    margin-left: 0;
+    min-width: 140px;
   }
 
   .readAllButton,
   .deleteButton {
     width: 100%;
-    max-width: 160px;
+    height: 36px;
+    font-size: 12px;
     min-width: 120px;
-    height: 30px;
-    font-size: 10px;
-    padding: 5px 8px;
+    max-width: 140px;
   }
 
   .title {
@@ -241,57 +311,45 @@
   }
 }
 
-/* 모바일 반응형 (360px~479px) */
-@media (max-width: 479px) and (min-width: 360px) {
+
+/* 모바일 반응형 (480px 이하) */
+@media (max-width: 480px) {
   .container {
     padding: var(--space-sm);
     gap: var(--space-sm);
   }
 
   .statsCard {
-    padding: var(--space-xs);
+    padding: var(--space-sm);
   }
 
   .statsRow {
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: var(--space-md);
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-xs);
   }
 
-  .statItem {
-    text-align: center;
-    width: 80px;
-    flex-shrink: 0;
-    word-break: keep-all;
+  .statsSection {
+    display: flex;
+    gap: var(--space-lg);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 
   .buttonGroup {
-    flex-direction: column;
-    gap: var(--space-xs);
-    flex: 1;
+    width: 100%;
     align-items: center;
-    min-width: 110px;
   }
 
   .readAllButton,
   .deleteButton {
     width: 100%;
-    max-width: 140px;
-    min-width: 100px;
-    height: 30px;
-    font-size: 10px;
-    padding: 5px 8px;
-  }
-
-  .statNumber {
-    font-size: 22px;
-    margin-bottom: var(--space-xs);
-  }
-
-  .statLabel {
-    font-size: 10px;
+    height: 44px;
+    font-size: 12px;
+    padding: 12px 16px;
+    min-width: 200px;
+    max-width: 280px;
   }
 
   .title {
@@ -299,39 +357,60 @@
   }
 
   .subtitle {
-    font-size: 13px;
+    font-size: 14px;
+  }
+
+  .statNumber {
+    font-size: 20px;
+  }
+
+  .statLabel {
+    font-size: 10px;
   }
 }
 
-/* 아주 작은 화면 반응형 */
+/* 매우 작은 화면 반응형 (360px 이하) */
 @media (max-width: 360px) {
+  .container {
+    padding: var(--space-xs);
+    gap: var(--space-sm);
+  }
+
   .statsCard {
     padding: var(--space-xs);
   }
 
-  .statsRow {
-    flex-direction: column;
-    gap: var(--space-sm);
+  .statsSection {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
     align-items: center;
-  }
-
-  .statItem {
-    width: 100%;
-    text-align: center;
-  }
-
-  .buttonGroup {
-    width: 100%;
-    align-items: center;
+    flex-wrap: nowrap;
   }
 
   .readAllButton,
   .deleteButton {
     width: 100%;
-    max-width: 180px;
-    min-width: 140px;
-    height: 30px;
+    height: 40px;
     font-size: 11px;
-    padding: 5px 8px;
+    padding: 8px 12px;
+    min-width: 180px;
+    max-width: 240px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .statNumber {
+    font-size: 18px;
+  }
+
+  .statLabel {
+    font-size: 9px;
   }
 }

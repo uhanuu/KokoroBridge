@@ -103,9 +103,9 @@
 /* 태블릿 가로 모드 (1024px 이상) */
 @media (min-width: 1024px) {
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: var(--space-lg);
+    padding: 0;
   }
 
   .listHeader {
@@ -122,11 +122,11 @@
 }
 
 /* 태블릿 세로 모드 (768px-1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 769px) and (max-width: 1023px) {
   .container {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: var(--space-md);
+    width: 100%;
+    margin: 0;
+    padding: 0;
   }
 
   .filterControls {
@@ -137,14 +137,58 @@
     gap: var(--space-lg);
   }
 }
+/* 모바일 태블릿 (768px 이하) */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
+  .filterControls {
+    gap: var(--space-sm);
+  }
+
+  .newsList {
+    gap: var(--space-md);
+  }
+}
+
+/* 중간 모바일/작은 태블릿 (481px-500px) */
+@media (min-width: 481px) and (max-width: 500px) {
+  .listHeader {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .headerInfo {
+    text-align: center;
+    min-width: auto;
+  }
+
+  .filterControls {
+    justify-content: center;
+    gap: var(--space-sm);
+  }
+
+  .sectionTitle {
+    font-size: 19px;
+  }
+
+  .sectionSubtitle {
+    font-size: 14px;
+  }
+}
 
 /* 모바일 (480px 이하) */
 @media (max-width: 480px) {
   .listHeader {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     gap: var(--space-sm);
+    text-align: center;
   }
 
   .headerInfo {
@@ -175,5 +219,9 @@
 
   .newsList {
     gap: var(--space-sm);
+  }
+
+  .container {
+    padding: 0;
   }
 }

@@ -345,12 +345,21 @@
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .newsCard {
-    gap: var(--space-sm);
-    padding: var(--space-md);
+    width: 100%;
+    max-width: 100%;
   }
 
   .titleSection {
     gap: var(--space-sm);
+    padding: 0 var(--space-md) var(--space-sm) var(--space-md);
+  }
+
+  .cardHeader {
+    padding: var(--space-md) var(--space-md) var(--space-xs) var(--space-md);
+  }
+
+  .previewContent {
+    padding: var(--space-xs) var(--space-md) var(--space-md) var(--space-md);
   }
 
   .newsIcon {
@@ -373,18 +382,43 @@
     flex-wrap: wrap;
     max-width: 65%;
   }
+
+  .imageContainer {
+    margin: 0 var(--space-md) var(--space-xs) var(--space-md);
+  }
+
+  .content {
+    padding: 0 var(--space-md) var(--space-xs) var(--space-md);
+  }
+
+  .featuresSection {
+    margin: 0 var(--space-md) var(--space-xs) var(--space-md);
+  }
+
+  .actionSection {
+    padding: var(--space-sm) var(--space-md) var(--space-md) var(--space-md);
+  }
 }
 
 @media (max-width: 480px) {
-  .newsCard {
-    padding: var(--space-md);
-  }
-
   .cardHeader {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-sm) var(--space-xs) var(--space-sm);
+  }
+
+  .titleSection {
+    flex-direction: row;
+    gap: var(--space-sm);
+    text-align: left;
+    align-items: center;
+    padding: 0 var(--space-sm) var(--space-sm) var(--space-sm);
+  }
+
+  .previewContent {
+    padding: var(--space-xs) var(--space-sm) var(--space-sm) var(--space-sm);
   }
 
   .categorySection {
@@ -404,26 +438,13 @@
     padding: 2px 6px;
   }
 
-  .newBadge {
-    flex-shrink: 0;
-    font-size: 8px;
-    padding: 1px 4px;
-  }
-
   .actions {
     flex-shrink: 0;
   }
 
-  .titleSection {
-    flex-direction: row;
-    gap: var(--space-sm);
-    text-align: left;
-    align-items: center;
-  }
-
   .newsIcon {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
   }
 
@@ -432,14 +453,23 @@
     line-height: 1.4;
   }
 
-  .actionSection {
-    justify-content: flex-end;
-    margin-top: var(--space-sm);
-    padding: var(--space-xs) var(--space-lg) var(--space-sm) var(--space-lg);
+  .imageContainer {
+    margin: 0 var(--space-sm) var(--space-xs) var(--space-sm);
+  }
+
+  .content {
+    padding: 0 var(--space-sm) var(--space-xs) var(--space-sm);
   }
 
   .featuresSection {
     padding: var(--space-sm);
+    margin: 0 var(--space-sm) var(--space-xs) var(--space-sm);
+  }
+
+  .actionSection {
+    justify-content: flex-end;
+    margin-top: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm) var(--space-sm) var(--space-sm);
   }
 
   .metaInfo {
@@ -450,8 +480,18 @@
 
 /* 초소형 모바일 최적화 (320px-375px) */
 @media (max-width: 375px) {
-  .newsCard {
-    padding: var(--space-xs);
+  .cardHeader {
+    padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-xs);
+  }
+
+  .titleSection {
+    padding: 0 var(--space-xs) var(--space-sm) var(--space-xs);
+  }
+
+  .previewContent {
+    padding: var(--space-xs) var(--space-xs) var(--space-sm) var(--space-xs);
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   .title {
@@ -468,16 +508,36 @@
     max-width: 55%;
   }
 
-  .previewContent {
-    font-size: 15px;
-    line-height: 1.5;
+  .imageContainer {
+    margin: 0 var(--space-xs) var(--space-xs) var(--space-xs);
+  }
+
+  .content {
+    padding: 0 var(--space-xs) var(--space-xs) var(--space-xs);
+  }
+
+  .featuresSection {
+    margin: 0 var(--space-xs) var(--space-xs) var(--space-xs);
+  }
+
+  .actionSection {
+    padding: var(--space-xs) var(--space-xs) var(--space-sm) var(--space-xs);
   }
 }
 
 /* 최소 너비 320px 지원 */
 @media (max-width: 320px) {
-  .newsCard {
-    padding: 8px;
+  .cardHeader {
+    padding: 8px 8px 4px 8px;
+  }
+
+  .titleSection {
+    padding: 0 8px var(--space-sm) 8px;
+  }
+
+  .previewContent {
+    padding: 4px 8px var(--space-sm) 8px;
+    font-size: 14px;
   }
 
   .title {
@@ -494,11 +554,23 @@
     max-width: 50%;
   }
 
-  .previewContent {
-    font-size: 14px;
-  }
-
   .date {
     font-size: 13px;
+  }
+
+  .imageContainer {
+    margin: 0 8px 4px 8px;
+  }
+
+  .content {
+    padding: 0 8px 4px 8px;
+  }
+
+  .featuresSection {
+    margin: 0 8px 4px 8px;
+  }
+
+  .actionSection {
+    padding: 4px 8px var(--space-sm) 8px;
   }
 }

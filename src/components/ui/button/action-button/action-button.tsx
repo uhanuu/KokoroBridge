@@ -9,7 +9,7 @@ interface ActionButtonProps {
   text: string;
   onClick?: (e?: React.MouseEvent) => void;
   disabled?: boolean;
-  variant?: "primary" | "locked" | "completed";
+  variant?: "primary" | "locked" | "completed" | "danger";
   className?: string;
   hideIcon?: boolean;
   iconType?: "play" | "check" | "notifications" | "science" | "visibility" | "event" | "delete";
@@ -28,6 +28,7 @@ export default function ActionButton({
     ${styles.actionButton}
     ${variant === "locked" ? styles.lockedButton : ""}
     ${variant === "completed" ? styles.completedButton : ""}
+    ${variant === "danger" ? styles.dangerButton : ""}
     ${className}
   `.trim();
 

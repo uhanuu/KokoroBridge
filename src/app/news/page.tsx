@@ -57,21 +57,23 @@ export default function NewsPage() {
       >
         <div className={styles.statsContent}>
           <div className={styles.statsRow}>
-            <div className={styles.statItem}>
-              <Typography variant="h3" className={styles.statNumber}>
-                {unreadCount}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                읽지 않은 소식
-              </Typography>
-            </div>
-            <div className={styles.statItem}>
-              <Typography variant="h3" className={styles.statNumber}>
-                {totalCount}
-              </Typography>
-              <Typography variant="caption" className={styles.statLabel}>
-                전체 소식
-              </Typography>
+            <div className={styles.statsSection}>
+              <div className={styles.statItem}>
+                <Typography variant="h3" className={styles.statNumber}>
+                  {unreadCount}
+                </Typography>
+                <Typography variant="caption" className={styles.statLabel}>
+                  읽지 않은 소식
+                </Typography>
+              </div>
+              <div className={styles.statItem}>
+                <Typography variant="h3" className={styles.statNumber}>
+                  {totalCount}
+                </Typography>
+                <Typography variant="caption" className={styles.statLabel}>
+                  전체 소식
+                </Typography>
+              </div>
             </div>
             <div className={styles.buttonGroup}>
               <ActionButton
@@ -84,7 +86,7 @@ export default function NewsPage() {
               />
               <ActionButton
                 text="읽은글 삭제"
-                variant="primary"
+                variant="danger"
                 iconType="delete"
                 onClick={handleDeleteAllRead}
                 disabled={readCount === 0}
