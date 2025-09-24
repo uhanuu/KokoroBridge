@@ -1,3 +1,4 @@
+
 /* 프로필 카드 */
 .profileCard {
   background-color: var(--surface);
@@ -145,8 +146,8 @@
 .settingsContent {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  margin-top: var(--space-lg);
+  gap: calc(var(--space-xl) + var(--space-md));
+  margin-top: var(--space-sm);
 }
 
 .settingCategory {
@@ -241,17 +242,75 @@
   transform: scale(0.8);
 }
 
+/* 설정 메인 카드 */
+.settingsMainCard {
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  margin-bottom: var(--space-lg);
+}
+
+/* 로그아웃 섹션 */
+.logoutSection {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--outline);
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md);
+  background: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: var(--radius-lg);
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logoutButton:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.logoutIcon {
+  font-size: 18px;
+}
+
 /* 아이콘별 색상 */
 .notificationIcon {
   color: #3b82f6;
+}
+
+.goalIcon {
+  color: #8b5cf6;
+}
+
+.dataIcon {
+  color: #22c55e;
 }
 
 .profileEditIcon {
   color: #22c55e;
 }
 
+.mascotIcon {
+  color: #f59e0b;
+}
+
 .passwordIcon {
   color: #ef4444;
+}
+
+.privacyIcon {
+  color: #10b981;
 }
 
 .darkModeIcon {
@@ -310,7 +369,7 @@
 
 
   .settingsContent {
-    gap: var(--space-md);
+    gap: calc(var(--space-lg) + var(--space-sm));
   }
 
   .settingItem {
@@ -584,15 +643,15 @@
   }
 }
 
-/* 학습 통계 버튼 섹션 - SectionCard 내부용 */
-.statsCard .statsButtonsSection {
+/* 학습 통계 버튼 섹션 */
+.statsButtonsSection {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-sm);
   width: 100%;
 }
 
-.statsCard .statsButton {
+.statsButton {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
@@ -607,14 +666,14 @@
   box-sizing: border-box;
 }
 
-.statsCard .statsButton:hover {
+.statsButton:hover {
   background: rgba(var(--primary-500-rgb), 0.05);
   border-color: rgba(var(--primary-500-rgb), 0.2);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(var(--background-rgb), 0.15);
 }
 
-.statsCard .statsIcon {
+.statsIcon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -624,46 +683,46 @@
   border: 1px solid;
 }
 
-.statsCard .statsIcon svg {
+.statsIcon svg {
   font-size: 18px;
 }
 
 /* 연속 학습일 - 빨간색 (불) */
-.statsCard .statsButton:nth-child(1) .statsIcon {
+.statsButton:nth-child(1) .statsIcon {
   background: rgba(239, 68, 68, 0.1);
   border-color: rgba(239, 68, 68, 0.2);
   color: #ef4444;
 }
 
 /* 최장 연속일 - 보라색 (트로피) */
-.statsCard .statsButton:nth-child(2) .statsIcon {
+.statsButton:nth-child(2) .statsIcon {
   background: rgba(139, 92, 246, 0.1);
   border-color: rgba(139, 92, 246, 0.2);
   color: #8b5cf6;
 }
 
 /* 완료한 레슨 - 초록색 (책) */
-.statsCard .statsButton:nth-child(3) .statsIcon {
+.statsButton:nth-child(3) .statsIcon {
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.2);
   color: #22c55e;
 }
 
 /* 총 학습 시간 - 파란색 (시간) */
-.statsCard .statsButton:nth-child(4) .statsIcon {
+.statsButton:nth-child(4) .statsIcon {
   background: rgba(59, 130, 246, 0.1);
   border-color: rgba(59, 130, 246, 0.2);
   color: #3b82f6;
 }
 
-.statsCard .statsInfo {
+.statsInfo {
   display: flex;
   flex-direction: column;
   gap: 2px;
   flex: 1;
 }
 
-.statsCard .statsLabel {
+.statsLabel {
   color: var(--text-secondary);
   font-weight: 600;
   margin: 0;
@@ -672,7 +731,7 @@
   letter-spacing: 0.5px;
 }
 
-.statsCard .statsValue {
+.statsValue {
   color: var(--text-primary);
   font-weight: 800;
   margin: 0;
@@ -1086,64 +1145,68 @@
 
 /* 태블릿 */
 @media (max-width: 768px) {
-  .statsCard .statsButtonsSection {
+  .statsButtonsSection {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-sm);
   }
 
-  .statsCard .statsButton {
+  .statsButton {
     padding: var(--space-sm);
     min-height: 60px;
     gap: var(--space-sm);
   }
 
-  .statsCard .statsIcon {
+  .statsIcon {
     width: 30px;
     height: 30px;
   }
 
-  .statsCard .statsIcon svg {
+  .statsIcon svg {
     font-size: 16px;
   }
 
-  .statsCard .statsLabel {
+  .statsLabel {
     font-size: 0.7rem;
   }
 
-  .statsCard .statsValue {
+  .statsValue {
     font-size: 1rem;
   }
 }
 
 /* 중간 모바일 - 690px 이하 */
 @media (max-width: 690px) {
-  .statsCard .statsButtonsSection {
+  .settingsContent {
+    gap: calc(var(--space-lg) + var(--space-sm));
+  }
+
+  .statsButtonsSection {
     grid-template-columns: 1fr;
     gap: var(--space-sm);
   }
 
-  .statsCard .statsButton {
+  .statsButton {
     padding: var(--space-sm);
     min-height: 55px;
     gap: var(--space-sm);
     width: 100%;
   }
 
-  .statsCard .statsIcon {
+  .statsIcon {
     width: 28px;
     height: 28px;
   }
 
-  .statsCard .statsIcon svg {
+  .statsIcon svg {
     font-size: 16px;
   }
 
-  .statsCard .statsLabel {
+  .statsLabel {
     font-size: 0.7rem;
     line-height: 1.2;
   }
 
-  .statsCard .statsValue {
+  .statsValue {
     font-size: 1rem;
   }
 
@@ -1181,70 +1244,78 @@
 
 /* 작은 모바일 */
 @media (max-width: 480px) {
-  .statsCard .statsButtonsSection {
+  .settingsContent {
+    gap: calc(var(--space-md) + var(--space-sm));
+  }
+
+  .statsButtonsSection {
     grid-template-columns: 1fr;
     gap: var(--space-sm);
   }
 
-  .statsCard .statsButton {
+  .statsButton {
     padding: var(--space-sm);
     min-height: 50px;
     gap: var(--space-sm);
     width: 100%;
   }
 
-  .statsCard .statsIcon {
+  .statsIcon {
     width: 26px;
     height: 26px;
   }
 
-  .statsCard .statsIcon svg {
+  .statsIcon svg {
     font-size: 14px;
   }
 
-  .statsCard .statsLabel {
+  .statsLabel {
     font-size: 0.65rem;
     line-height: 1.2;
   }
 
-  .statsCard .statsValue {
+  .statsValue {
     font-size: 0.9rem;
   }
 
-  .statsCard .statsInfo {
+  .statsInfo {
     gap: 2px;
   }
 }
 
 /* 매우 작은 화면 (아이폰 SE 등) */
 @media (max-width: 360px) {
-  .statsCard .statsButtonsSection {
+  .settingsContent {
+    gap: calc(var(--space-md) + var(--space-sm));
+  }
+
+  .statsButtonsSection {
     grid-template-columns: 1fr;
     gap: var(--space-sm);
   }
 
-  .statsCard .statsButton {
+  .statsButton {
     padding: var(--space-sm);
     min-height: 55px;
     gap: var(--space-xs);
     width: 100%;
   }
 
-  .statsCard .statsIcon {
+  .statsIcon {
     width: 24px;
     height: 24px;
   }
 
-  .statsCard .statsIcon svg {
+  .statsIcon svg {
     font-size: 14px;
   }
 
-  .statsCard .statsLabel {
+  .statsLabel {
     font-size: 0.65rem;
     line-height: 1.1;
   }
 
-  .statsCard .statsValue {
+  .statsValue {
     font-size: 0.9rem;
   }
 }

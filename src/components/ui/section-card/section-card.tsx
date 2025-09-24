@@ -6,7 +6,7 @@ import Card from "@/components/ui/card";
 import styles from "./section-card.module.css";
 
 interface SectionCardProps {
-  title: string;
+  title?: string;
   subtitle?: string;
   children: React.ReactNode;
   className?: string;
@@ -28,23 +28,25 @@ export default function SectionCard({
       borderRadius="2xl"
       className={`${styles.sectionCard} ${className || ""}`}
     >
-      <div className={styles.header}>
-        <div className={styles.headerContent}>
-          <Typography variant="h6" className={styles.title}>
-            {title}
-          </Typography>
-          {subtitle && (
-            <Typography variant="body2" className={styles.subtitle}>
-              {subtitle}
+      {title && (
+        <div className={styles.header}>
+          <div className={styles.headerContent}>
+            <Typography variant="h6" className={styles.title}>
+              {title}
             </Typography>
+            {subtitle && (
+              <Typography variant="body2" className={styles.subtitle}>
+                {subtitle}
+              </Typography>
+            )}
+          </div>
+          {headerAction && (
+            <div className={styles.headerAction}>
+              {headerAction}
+            </div>
           )}
         </div>
-        {headerAction && (
-          <div className={styles.headerAction}>
-            {headerAction}
-          </div>
-        )}
-      </div>
+      )}
       <div className={styles.content}>
         {children}
       </div>
