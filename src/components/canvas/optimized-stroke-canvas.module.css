@@ -1,0 +1,681 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  padding: var(--space-lg);
+  gap: var(--space-md);
+  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
+  color: var(--text-primary);
+  border-radius: var(--radius-3xl);
+  box-shadow: 0 8px 32px rgba(var(--background-rgb), 0.12);
+  border: 1px solid var(--outline);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--text-primary-rgb), 0.1),
+    transparent
+  );
+}
+
+/* 헤더 영역 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  background: rgba(var(--surface-variant-rgb), 0.5);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--outline);
+  backdrop-filter: blur(10px);
+}
+
+.backButton {
+  background: rgba(var(--surface-rgb), 0.8);
+  border: 1px solid var(--outline);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backButton:hover {
+  background: var(--surface);
+  transform: translateX(-2px);
+  box-shadow: 0 4px 12px rgba(var(--background-rgb), 0.15);
+}
+
+.characterInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.romaji {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary-500);
+  text-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.3);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.progressText {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 14px;
+  background: rgba(var(--surface-rgb), 0.8);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--outline);
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.controlButton {
+  width: 48px;
+  height: 48px;
+  background: rgba(var(--surface-rgb), 0.9);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.controlButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--primary-500-rgb), 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.controlButton:hover::before {
+  left: 100%;
+}
+
+.controlButton:hover {
+  background: var(--surface);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--background-rgb), 0.2),
+    0 2px 8px rgba(var(--primary-500-rgb), 0.15);
+}
+
+.controlButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.controlButton svg {
+  color: var(--primary-500);
+  font-size: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 통계 섹션 */
+.statsSection {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-sm) 0;
+}
+
+.statsChips {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 진행도 섹션 */
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(var(--surface-variant-rgb), 0.3);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--outline);
+}
+
+.progressBar {
+  height: 8px;
+  border-radius: 4px;
+  background-color: rgba(var(--outline-rgb), 0.3);
+  box-shadow: inset 0 1px 3px rgba(var(--background-rgb), 0.2);
+}
+
+.progressBar .MuiLinearProgress-bar {
+  background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(var(--primary-500-rgb), 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.progressBar .MuiLinearProgress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.strokeInfo {
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* 캔버스 섹션 */
+.canvasSection {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border-radius: var(--radius-3xl);
+  border: 2px solid var(--outline);
+  box-shadow: inset 0 2px 8px rgba(var(--background-rgb), 0.1),
+    0 8px 25px rgba(var(--background-rgb), 0.15);
+  overflow: hidden;
+}
+
+.canvasSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-500),
+    var(--primary-600),
+    var(--primary-500)
+  );
+  opacity: 0.6;
+}
+
+.canvas {
+  border-radius: var(--radius-xl);
+  cursor: crosshair;
+  touch-action: none;
+  transition: all 0.3s ease;
+  background: radial-gradient(
+    circle at center,
+    rgba(var(--primary-500-rgb), 0.02),
+    transparent
+  );
+}
+
+.canvas:hover {
+  box-shadow: 0 0 20px rgba(var(--primary-500-rgb), 0.1);
+}
+
+/* 완성 오버레이 */
+.completionOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  background: rgba(var(--surface-rgb), 0.95);
+  border-radius: var(--radius-3xl);
+  border: 2px solid var(--primary-500);
+  box-shadow: 0 20px 40px rgba(var(--background-rgb), 0.3),
+    0 8px 16px rgba(var(--primary-500-rgb), 0.2);
+  backdrop-filter: blur(20px);
+  animation: completionBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes completionBounce {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.completionIcon {
+  font-size: 48px;
+  color: var(--primary-500);
+  animation: completionPulse 2s infinite;
+}
+
+@keyframes completionPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.completionText {
+  color: var(--text-primary);
+  font-weight: 800;
+  margin: 0;
+  text-align: center;
+}
+
+.accuracyText {
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  background: rgba(var(--primary-500-rgb), 0.1);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--primary-500-rgb), 0.2);
+}
+
+/* 네비게이션 */
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  background: rgba(var(--surface-variant-rgb), 0.5);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--outline);
+  backdrop-filter: blur(10px);
+}
+
+.navButton {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
+  border: 2px solid var(--outline);
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.navButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--primary-500-rgb), 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.navButton:hover::before {
+  left: 100%;
+}
+
+.navButton:hover {
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  border-color: var(--primary-400);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(var(--primary-500-rgb), 0.3),
+    0 4px 12px rgba(var(--background-rgb), 0.15);
+}
+
+.navButton:hover svg {
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.navButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  background: rgba(var(--surface-rgb), 0.5);
+}
+
+.navButton:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.navButton svg {
+  color: var(--primary-500);
+  font-size: 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.navInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  flex: 1;
+  max-width: 200px;
+}
+
+.characterDisplay {
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-shadow: 0 4px 8px rgba(var(--background-rgb), 0.3);
+  font-family: "Noto Sans CJK JP", "Hiragino Sans", serif;
+  line-height: 1;
+  animation: characterGlow 3s ease-in-out infinite;
+}
+
+@keyframes characterGlow {
+  0%,
+  100% {
+    text-shadow: 0 4px 8px rgba(var(--background-rgb), 0.3);
+  }
+  50% {
+    text-shadow: 0 4px 8px rgba(var(--background-rgb), 0.3),
+      0 0 20px rgba(var(--primary-500-rgb), 0.4);
+  }
+}
+
+.characterType {
+  color: var(--text-tertiary);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(var(--surface-rgb), 0.8);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--outline);
+}
+
+/* 반응형 디자인 */
+
+/* 태블릿 (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: var(--space-md);
+    border-radius: var(--radius-2xl);
+  }
+
+  .header {
+    padding: var(--space-sm);
+  }
+
+  .romaji {
+    font-size: 28px;
+  }
+
+  .controlButton {
+    width: 44px;
+    height: 44px;
+  }
+
+  .controlButton svg {
+    font-size: 22px;
+  }
+
+  .characterDisplay {
+    font-size: 64px;
+  }
+
+  .navButton {
+    width: 52px;
+    height: 52px;
+  }
+
+  .navButton svg {
+    font-size: 26px;
+  }
+}
+
+/* 모바일 (max-width: 767px) */
+@media (max-width: 767px) {
+  .container {
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+    border-radius: var(--radius-xl);
+    height: 100vh;
+    max-height: 100vh;
+  }
+
+  .header {
+    padding: var(--space-sm);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .characterInfo {
+    order: -1;
+    width: 100%;
+    text-align: center;
+  }
+
+  .romaji {
+    font-size: 24px;
+  }
+
+  .progressText {
+    font-size: 12px;
+  }
+
+  .controls {
+    gap: var(--space-xs);
+  }
+
+  .controlButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .controlButton svg {
+    font-size: 20px;
+  }
+
+  .statsChips {
+    gap: var(--space-xs);
+  }
+
+  .progressSection {
+    padding: var(--space-sm);
+  }
+
+  .strokeInfo {
+    font-size: 12px;
+  }
+
+  .canvasSection {
+    border-width: 1px;
+    border-radius: var(--radius-2xl);
+  }
+
+  .canvas {
+    border-radius: var(--radius-lg);
+  }
+
+  .completionOverlay {
+    padding: var(--space-lg);
+    border-radius: var(--radius-2xl);
+  }
+
+  .completionIcon {
+    font-size: 40px;
+  }
+
+  .characterDisplay {
+    font-size: 56px;
+  }
+
+  .navigation {
+    padding: var(--space-md);
+  }
+
+  .navButton {
+    width: 48px;
+    height: 48px;
+  }
+
+  .navButton svg {
+    font-size: 24px;
+  }
+
+  .characterType {
+    font-size: 10px;
+  }
+}
+
+/* 초소형 모바일 (max-width: 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-xs);
+    gap: var(--space-xs);
+  }
+
+  .header {
+    padding: var(--space-xs);
+  }
+
+  .romaji {
+    font-size: 20px;
+  }
+
+  .controlButton {
+    width: 36px;
+    height: 36px;
+  }
+
+  .controlButton svg {
+    font-size: 18px;
+  }
+
+  .characterDisplay {
+    font-size: 48px;
+  }
+
+  .navButton {
+    width: 44px;
+    height: 44px;
+  }
+
+  .navButton svg {
+    font-size: 22px;
+  }
+
+  .completionOverlay {
+    padding: var(--space-md);
+  }
+
+  .completionIcon {
+    font-size: 36px;
+  }
+
+  .statsSection {
+    padding: var(--space-xs) 0;
+  }
+
+  .progressSection {
+    padding: var(--space-xs);
+  }
+}
+
+/* 다크모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .canvas {
+    background: radial-gradient(
+      circle at center,
+      rgba(var(--primary-400-rgb), 0.03),
+      transparent
+    );
+  }
+
+  .completionOverlay {
+    background: rgba(var(--surface-rgb), 0.98);
+    border-color: var(--primary-400);
+  }
+}
+
+/* 애니메이션 감소 설정 */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .controlButton,
+  .navButton,
+  .canvas,
+  .completionOverlay,
+  .completionIcon,
+  .characterDisplay {
+    animation: none;
+    transition: none;
+  }
+
+  .progressBar .MuiLinearProgress-bar::after {
+    animation: none;
+  }
+}
+
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  .container {
+    border: 2px solid var(--text-primary);
+  }
+
+  .canvasSection {
+    border: 3px solid var(--text-primary);
+  }
+
+  .controlButton,
+  .navButton {
+    border: 2px solid var(--text-primary);
+  }
+}

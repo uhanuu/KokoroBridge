@@ -1,0 +1,148 @@
+/* 헤더 섹션 - 한 줄 수평 정렬 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-variant) 50%, var(--surface) 100%);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--outline);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 10;
+  min-height: 70px;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.centerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  margin: 0 1rem;
+}
+
+/* Material-UI Typography 컴포넌트 스타일 오버라이드 */
+.centerSection .romaji.romaji {
+  font-size: 2.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 8px rgba(var(--background-rgb), 0.3);
+  line-height: 1.2;
+  margin: 0 0 0.25rem 0;
+}
+
+.centerSection .progressText.progressText {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: var(--surface-variant);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--outline);
+  box-shadow: var(--shadow-xs);
+  margin: 0;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.controlButton {
+  width: 48px;
+  height: 48px;
+  background: var(--surface);
+  border: 1px solid var(--outline);
+  box-shadow: var(--shadow-xs);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.controlButton:hover {
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-500);
+}
+
+.controlButton:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-xs);
+}
+
+.controlButton svg {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  transition: color 0.2s ease;
+}
+
+.controlButton:hover svg {
+  color: var(--primary-500);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .header {
+    padding: 0.5rem;
+    min-height: 60px;
+  }
+
+  .centerSection {
+    margin: 0 0.5rem;
+  }
+
+  .centerSection .romaji.romaji {
+    font-size: 1.875rem;
+  }
+
+  .rightSection {
+    gap: 0.25rem;
+  }
+
+  .controlButton {
+    width: 44px;
+    height: 44px;
+  }
+
+  .controlButton svg {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.5rem 0.75rem;
+    min-height: 55px;
+  }
+
+  .centerSection {
+    margin: 0 0.25rem;
+  }
+
+  .centerSection .romaji.romaji {
+    font-size: 1.5rem;
+  }
+
+  .centerSection .progressText.progressText {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .controlButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .controlButton svg {
+    font-size: 1rem;
+  }
+}

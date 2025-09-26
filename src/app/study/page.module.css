@@ -187,6 +187,7 @@
   user-select: none;
   flex: 1;
   min-height: 140px;
+  max-height: 180px;
   box-sizing: border-box;
   isolation: isolate;
   box-shadow: 0 2px 8px rgba(var(--background-rgb), 0.08);
@@ -328,14 +329,19 @@
   margin: 0;
   line-height: 1.4;
   font-weight: 600;
-  flex-shrink: 0;
+  flex-shrink: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  min-height: 0;
 }
 
 .progressSection {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin-top: auto;
   flex-shrink: 0;
   padding-top: 2px;
 }
@@ -364,6 +370,12 @@
   border-radius: var(--radius-full);
   background: var(--surface-variant);
   overflow: hidden;
+}
+
+/* ActionButton이 항상 보이도록 보장 */
+.categoryItem > :last-child {
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 /* 하단 섹션 */
@@ -397,6 +409,26 @@
   background: var(--primary-500);
   width: 24px;
   border-radius: var(--radius-full);
+}
+
+/* 중간 화면 (500px-767px) - max-width 설정 */
+@media (min-width: 500px) and (max-width: 767px) {
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-md);
+    height: calc(100vh - 100px);
+  }
+
+  .cardContent {
+    padding: var(--space-md);
+  }
+
+  .categoryItem {
+    padding: var(--space-md);
+    min-height: 120px;
+    max-height: 140px;
+  }
 }
 
 /* 768px 이하 태블릿 */
@@ -435,6 +467,7 @@
     padding: var(--space-md);
     gap: 8px;
     min-height: 110px;
+    max-height: 130px;
   }
 
   .categoryIcon {
@@ -527,6 +560,7 @@
     padding: var(--space-sm);
     gap: 5px;
     min-height: 90px;
+    max-height: 110px;
   }
 
   .categoryIcon {
@@ -628,6 +662,7 @@
     padding: var(--space-md);
     gap: var(--space-sm);
     min-height: 120px;
+    max-height: 140px;
     border-radius: var(--radius-xl);
   }
 
@@ -713,6 +748,7 @@
     padding: var(--space-sm);
     gap: var(--space-xs);
     min-height: 100px;
+    max-height: 120px;
     border-radius: var(--radius-lg);
   }
 
@@ -824,6 +860,7 @@
     padding: var(--space-xs);
     gap: 2px;
     min-height: 62px;
+    max-height: 75px;
   }
 
   .categoryIcon {
@@ -863,86 +900,170 @@
   }
 }
 
+/* 아이패드 화면 최적화 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    max-width: 700px;
+    padding: var(--space-md);
+    height: calc(100vh - 110px);
+  }
+
+  .header {
+    margin-bottom: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .swipeContainer {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cardsContainer {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .cardContent {
+    padding: var(--space-md);
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .categoriesGrid {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .categoryItem {
+    min-height: 120px;
+    max-height: 140px;
+    padding: var(--space-sm);
+  }
+
+  .categoryDescription {
+    font-size: 0.85rem;
+  }
+
+  .bottomSection {
+    padding: var(--space-xs) 0 var(--space-sm) 0;
+    margin-bottom: var(--space-xs);
+    flex-shrink: 0;
+  }
+}
+
 /* 큰 화면 - 데스크톱 최적화 */
 @media (min-width: 1024px) {
   .container {
     max-width: 800px;
-    padding: var(--space-xl);
+    padding: var(--space-md);
+    height: calc(100vh - 120px);
   }
 
   .header {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    flex-shrink: 0;
   }
 
   .title {
-    font-size: 2rem;
-    margin: 0 0 var(--space-lg) 0;
+    font-size: 1.6rem;
+    margin: 0 0 var(--space-sm) 0;
   }
 
   .swipeHint {
-    padding: var(--space-md) var(--space-xl);
+    padding: var(--space-xs) var(--space-md);
+  }
+
+  .swipeContainer {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cardsContainer {
+    flex: 1;
+    min-height: 0;
   }
 
   .cardContent {
-    padding: var(--space-xl);
+    padding: var(--space-md);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
   }
 
   /* 데스크톱에서는 2열 그리드 */
   .categoriesGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
+    gap: var(--space-sm);
     align-items: stretch;
+    flex: 1;
+    min-height: 0;
   }
 
   .categoryItem {
-    padding: var(--space-lg);
-    gap: var(--space-md);
-    min-height: 160px;
+    padding: var(--space-sm);
+    gap: var(--space-xs);
+    min-height: 130px;
+    max-height: 145px;
+    display: flex;
+    flex-direction: column;
   }
 
   .categoryIcon {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
   }
 
   .iconText {
-    font-size: 24px;
+    font-size: 18px;
   }
 
   .lockIconOverlay {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
   }
 
   .lockIcon {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .categoryTitle {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
 
   .categorySubtitle {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 
   .categoryDescription {
-    font-size: 1rem;
+    font-size: 0.85rem;
+    flex-shrink: 1;
+    min-height: 0;
+  }
+
+  .progressSection {
+    margin-top: auto;
+    flex-shrink: 0;
   }
 
   .bottomSection {
-    padding: var(--space-lg) 0 var(--space-xl) 0;
-    margin-bottom: var(--space-lg);
+    padding: var(--space-xs) 0 var(--space-sm) 0;
+    margin-bottom: var(--space-xs);
+    flex-shrink: 0;
   }
 
   .progressLabel,
   .progressStats {
-    font-size: 0.82rem;
+    font-size: 0.7rem;
   }
 
   .progressBar {
-    height: 6px;
+    height: 4px;
   }
 }
 
@@ -950,20 +1071,22 @@
 @media (min-width: 1440px) {
   .container {
     max-width: 1000px;
+    height: calc(100vh - 120px);
   }
 
   .categoryItem {
-    min-height: 175px;
-    padding: var(--space-xl);
+    min-height: 150px;
+    max-height: 170px;
+    padding: var(--space-lg);
   }
 
   .categoryIcon {
-    width: 64px;
-    height: 64px;
+    width: 52px;
+    height: 52px;
   }
 
   .iconText {
-    font-size: 28px;
+    font-size: 22px;
   }
 }
 

@@ -92,6 +92,12 @@ export class TextToSpeechService {
       };
 
       utterance.onerror = (event) => {
+        // canceled, interrupted, not-allowed는 정상적인 동작이므로 에러로 처리하지 않음
+        if (event.error === 'canceled' || event.error === 'interrupted' || event.error === 'not-allowed') {
+          resolve();
+          return;
+        }
+
         const error = new Error(`Speech synthesis failed: ${event.error}`);
         options.onError?.(error);
         reject(error);
@@ -131,6 +137,12 @@ export class TextToSpeechService {
       };
 
       utterance.onerror = (event) => {
+        // canceled, interrupted, not-allowed는 정상적인 동작이므로 에러로 처리하지 않음
+        if (event.error === 'canceled' || event.error === 'interrupted' || event.error === 'not-allowed') {
+          resolve();
+          return;
+        }
+
         const error = new Error(`Speech synthesis failed: ${event.error}`);
         options.onError?.(error);
         reject(error);

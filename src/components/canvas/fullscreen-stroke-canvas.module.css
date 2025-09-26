@@ -1,0 +1,428 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  background: linear-gradient(135deg, var(--surface), var(--surface-variant));
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 상단 로마지 섹션 - 10% */
+.romajiSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  min-height: 60px;
+  padding: var(--space-sm);
+  background: rgba(var(--surface-variant-rgb), 0.5);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--outline);
+}
+
+.romaji {
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--primary-500);
+  text-shadow: 0 2px 4px rgba(var(--primary-500-rgb), 0.3);
+  margin: 0;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.progressText {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: clamp(12px, 2vw, 14px);
+  background: rgba(var(--surface-rgb), 0.8);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--outline);
+  margin-top: var(--space-xs);
+}
+
+/* 헤더 - 8% */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 8vh;
+  min-height: 60px;
+  padding: 0 var(--space-lg);
+  background: rgba(var(--surface-variant-rgb), 0.3);
+  border-bottom: 1px solid var(--outline);
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.controlButton {
+  width: clamp(44px, 6vw, 56px);
+  height: clamp(44px, 6vw, 56px);
+  background: rgba(var(--surface-rgb), 0.9);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.controlButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--primary-500-rgb), 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.controlButton:hover::before {
+  left: 100%;
+}
+
+.controlButton:hover {
+  background: var(--surface);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--background-rgb), 0.2),
+    0 2px 8px rgba(var(--primary-500-rgb), 0.15);
+}
+
+.controlButton svg {
+  color: var(--primary-500);
+  font-size: clamp(20px, 3vw, 24px);
+  position: relative;
+  z-index: 1;
+}
+
+/* 진행도 섹션 - 7% */
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-sm);
+  height: 7vh;
+  min-height: 50px;
+  padding: 0 var(--space-lg);
+  background: rgba(var(--surface-variant-rgb), 0.2);
+}
+
+.progressBar {
+  height: 8px;
+  border-radius: 4px;
+  background-color: rgba(var(--outline-rgb), 0.3);
+  box-shadow: inset 0 1px 3px rgba(var(--background-rgb), 0.2);
+}
+
+.progressBar .MuiLinearProgress-bar {
+  background: linear-gradient(90deg, var(--primary-500), var(--primary-600));
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(var(--primary-500-rgb), 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.progressBar .MuiLinearProgress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.strokeInfo {
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: clamp(12px, 2vw, 14px);
+}
+
+/* 캔버스 섹션 - 75% */
+.canvasSection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  background: var(--surface);
+  position: relative;
+}
+
+.canvasSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-500),
+    var(--primary-600),
+    var(--primary-500)
+  );
+  opacity: 0.6;
+}
+
+.canvas {
+  border-radius: var(--radius-2xl);
+  cursor: crosshair;
+  touch-action: none;
+  transition: all 0.3s ease;
+  background: radial-gradient(
+    circle at center,
+    rgba(var(--primary-500-rgb), 0.02),
+    transparent
+  );
+  box-shadow:
+    inset 0 2px 8px rgba(var(--background-rgb), 0.1),
+    0 8px 25px rgba(var(--background-rgb), 0.15);
+  border: 2px solid var(--outline);
+}
+
+.canvas:hover {
+  box-shadow:
+    inset 0 2px 8px rgba(var(--background-rgb), 0.1),
+    0 8px 25px rgba(var(--background-rgb), 0.15),
+    0 0 20px rgba(var(--primary-500-rgb), 0.1);
+}
+
+/* 태블릿 (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0;
+  }
+
+  .romajiSection {
+    height: 12vh;
+    padding: var(--space-md);
+  }
+
+  .header {
+    height: 10vh;
+    padding: 0 var(--space-md);
+  }
+
+  .progressSection {
+    height: 8vh;
+    padding: 0 var(--space-md);
+  }
+
+  .canvasSection {
+    padding: var(--space-md);
+  }
+
+  .controlButton {
+    width: clamp(40px, 5vw, 48px);
+    height: clamp(40px, 5vw, 48px);
+  }
+
+  .controlButton svg {
+    font-size: clamp(18px, 2.5vw, 22px);
+  }
+}
+
+/* 모바일 (max-width: 767px) */
+@media (max-width: 767px) {
+  .container {
+    padding: 0;
+  }
+
+  .romajiSection {
+    height: 12vh;
+    min-height: 70px;
+    padding: var(--space-sm);
+  }
+
+  .romaji {
+    font-size: clamp(20px, 5vw, 32px);
+  }
+
+  .progressText {
+    font-size: clamp(10px, 2.5vw, 12px);
+  }
+
+  .header {
+    height: 10vh;
+    min-height: 70px;
+    padding: 0 var(--space-md);
+  }
+
+  .rightSection {
+    gap: var(--space-xs);
+  }
+
+  .controlButton {
+    width: clamp(36px, 8vw, 44px);
+    height: clamp(36px, 8vw, 44px);
+  }
+
+  .controlButton svg {
+    font-size: clamp(16px, 4vw, 20px);
+  }
+
+  .progressSection {
+    height: 8vh;
+    min-height: 50px;
+    padding: 0 var(--space-md);
+  }
+
+  .strokeInfo {
+    font-size: clamp(10px, 2.5vw, 12px);
+  }
+
+  .canvasSection {
+    padding: var(--space-sm);
+  }
+
+  .canvas {
+    border-radius: var(--radius-xl);
+    border-width: 1px;
+  }
+}
+
+/* 초소형 모바일 (max-width: 480px) */
+@media (max-width: 480px) {
+  .romajiSection {
+    height: 10vh;
+    min-height: 60px;
+    padding: var(--space-xs);
+  }
+
+  .romaji {
+    font-size: clamp(18px, 6vw, 28px);
+  }
+
+  .header {
+    height: 8vh;
+    min-height: 60px;
+    padding: 0 var(--space-sm);
+  }
+
+  .rightSection {
+    gap: 2px;
+  }
+
+  .controlButton {
+    width: clamp(32px, 10vw, 40px);
+    height: clamp(32px, 10vw, 40px);
+  }
+
+  .controlButton svg {
+    font-size: clamp(14px, 5vw, 18px);
+  }
+
+  .progressSection {
+    height: 7vh;
+    min-height: 45px;
+    padding: 0 var(--space-sm);
+  }
+
+  .canvasSection {
+    padding: var(--space-xs);
+  }
+}
+
+/* 가로모드 대응 */
+@media (orientation: landscape) and (max-height: 600px) {
+  .romajiSection {
+    height: 15vh;
+    min-height: 50px;
+  }
+
+  .header {
+    height: 12vh;
+    min-height: 50px;
+  }
+
+  .progressSection {
+    height: 8vh;
+    min-height: 40px;
+  }
+
+  .romaji {
+    font-size: clamp(16px, 3vh, 24px);
+  }
+
+  .controlButton {
+    width: clamp(30px, 5vh, 40px);
+    height: clamp(30px, 5vh, 40px);
+  }
+
+  .controlButton svg {
+    font-size: clamp(12px, 2.5vh, 16px);
+  }
+}
+
+/* 다크모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .canvas {
+    background: radial-gradient(
+      circle at center,
+      rgba(var(--primary-400-rgb), 0.03),
+      transparent
+    );
+  }
+}
+
+/* 애니메이션 감소 설정 */
+@media (prefers-reduced-motion: reduce) {
+  .controlButton,
+  .canvas {
+    animation: none;
+    transition: none;
+  }
+
+  .progressBar .MuiLinearProgress-bar::after {
+    animation: none;
+  }
+}
+
+/* 고대비 모드 */
+@media (prefers-contrast: high) {
+  .container {
+    border: 2px solid var(--text-primary);
+  }
+
+  .canvas {
+    border: 3px solid var(--text-primary);
+  }
+
+  .controlButton {
+    border: 2px solid var(--text-primary);
+  }
+}

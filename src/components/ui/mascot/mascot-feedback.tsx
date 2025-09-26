@@ -50,31 +50,42 @@ export default function MascotFeedback({
   const [isVisible, setIsVisible] = useState(false);
   const [animationClass, setAnimationClass] = useState('');
 
-  useEffect(() => {
-    if (visible) {
-      setIsVisible(true);
-      setAnimationClass(styles.fadeIn);
-
-      if (duration > 0) {
-        const timer = setTimeout(() => {
-          handleHide();
-        }, duration);
-
-        return () => clearTimeout(timer);
-      }
-    } else {
-      handleHide();
-    }
-  }, [visible, duration]);
-
   const handleHide = () => {
-    setAnimationClass(styles.fadeOut);
+    setAnimationClass(styles.fadeOut || '');
     setTimeout(() => {
       setIsVisible(false);
       setAnimationClass('');
       onHide?.();
     }, 300);
   };
+
+  useEffect(() => {
+    if (visible) {
+      setIsVisible(true);
+      setAnimationClass(styles.fadeIn || '');
+
+      if (duration > 0) {
+        const timer = setTimeout(() => {
+          setAnimationClass(styles.fadeOut || '');
+          setTimeout(() => {
+            setIsVisible(false);
+            setAnimationClass('');
+            onHide?.();
+          }, 300);
+        }, duration);
+
+        return () => clearTimeout(timer);
+      }
+    } else {
+      setAnimationClass(styles.fadeOut || '');
+      setTimeout(() => {
+        setIsVisible(false);
+        setAnimationClass('');
+        onHide?.();
+      }, 300);
+    }
+    // onHide는 의존성에서 제외 (부모 컴포넌트에서 변경될 수 있음)
+  }, [visible, duration]);
 
   const config = MASCOT_CONFIGS[type];
   const imageSrc = customImage?.src || config.imageSrc;
@@ -189,7 +200,7 @@ export function useMascotFeedback() {
     visible: false,
   });
 
-  const showFeedback = (type: MascotType, message?: string, duration?: number) => {
+  const showFeedback = (type: MascotType, message?: string, _duration?: number) => {
     setFeedback({ type, message, visible: true });
   };
 

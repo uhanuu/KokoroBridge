@@ -29,10 +29,10 @@ export default function StudyPage() {
   const handleCategoryClick = (categoryId: number) => {
     if (isDragging) return;
     setSelectedCategory(categoryId);
-    // 0.3초 후에 선택 해제 (시각적 피드백용)
-    setTimeout(() => {
+    // 즉시 선택 해제 (불필요한 timeout 제거)
+    requestAnimationFrame(() => {
       setSelectedCategory(null);
-    }, 300);
+    });
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -118,14 +118,12 @@ export default function StudyPage() {
       }
     };
 
-    let scrollTimeout: NodeJS.Timeout;
+    let scrollTimeout: number;
     const handleScroll = () => {
-      // 이전 타임아웃 클리어
       clearTimeout(scrollTimeout);
-      // 스크롤이 끝난 후 50ms 후에 인덱스 업데이트
-      scrollTimeout = setTimeout(() => {
+      scrollTimeout = window.setTimeout(() => {
         updateCurrentIndex();
-      }, 50);
+      }, 16); // requestAnimationFrame과 유사한 16ms로 최적화
     };
 
     const container = containerRef.current;
@@ -136,7 +134,7 @@ export default function StudyPage() {
     window.addEventListener('resize', handleResize);
 
     return () => {
-      clearTimeout(scrollTimeout);
+      window.clearTimeout(scrollTimeout);
       if (container) {
         container.removeEventListener('scroll', handleScroll);
       }

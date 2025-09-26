@@ -1,0 +1,277 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.feedbackContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 2rem;
+  pointer-events: none;
+}
+
+.mascotContainer {
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.mascotEmoji {
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+  box-shadow: 0 8px 32px rgba(var(--primary-500-rgb), 0.2);
+  animation: mascotBounce 0.8s ease-out;
+}
+
+@keyframes mascotBounce {
+  0% {
+    transform: scale(0.8) translateY(20px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) translateY(-10px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.characterDisplay {
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.character {
+  font-size: 3rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-shadow: 0 4px 12px rgba(var(--background-rgb), 0.4);
+  animation: characterPop 0.6s ease-out 0.2s both;
+}
+
+@keyframes characterPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.scoreContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  padding: 1rem 2rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--outline);
+  box-shadow: var(--shadow-lg);
+  animation: scoreSlide 0.8s ease-out 0.4s both;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes scoreSlide {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.score {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.message {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* 애니메이션 클래스 */
+.slideIn {
+  animation: feedbackSlideIn 0.5s ease-out;
+}
+
+.slideOut {
+  animation: feedbackSlideOut 0.3s ease-in;
+}
+
+@keyframes feedbackSlideIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes feedbackSlideOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* 파티클 효과 */
+.particles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: particleFloat 3s ease-in-out infinite;
+  opacity: 0;
+}
+
+.particle1 { top: 10%; left: 20%; animation-delay: 0s; }
+.particle2 { top: 20%; right: 15%; animation-delay: 0.2s; }
+.particle3 { top: 40%; left: 10%; animation-delay: 0.4s; }
+.particle4 { top: 60%; right: 20%; animation-delay: 0.6s; }
+.particle5 { bottom: 30%; left: 15%; animation-delay: 0.8s; }
+.particle6 { bottom: 20%; right: 10%; animation-delay: 1s; }
+.particle7 { top: 30%; left: 50%; animation-delay: 1.2s; }
+.particle8 { bottom: 40%; left: 40%; animation-delay: 1.4s; }
+
+@keyframes particleFloat {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .feedbackContainer {
+    padding: 1.5rem;
+  }
+
+  .mascotEmoji {
+    width: 100px;
+    height: 100px;
+    font-size: 3rem;
+  }
+
+  .character {
+    font-size: 2.5rem;
+  }
+
+  .score {
+    font-size: 2rem;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+
+  .scoreContainer {
+    padding: 0.75rem 1.5rem;
+  }
+
+  .particles {
+    width: 250px;
+    height: 250px;
+  }
+
+  .particle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .feedbackContainer {
+    padding: 1rem;
+  }
+
+  .mascotEmoji {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
+
+  .character {
+    font-size: 2rem;
+  }
+
+  .score {
+    font-size: 1.75rem;
+  }
+
+  .message {
+    font-size: 0.875rem;
+  }
+
+  .scoreContainer {
+    padding: 0.5rem 1rem;
+  }
+
+  .particles {
+    width: 200px;
+    height: 200px;
+  }
+
+  .particle {
+    font-size: 1rem;
+  }
+}
