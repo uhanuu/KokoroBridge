@@ -77,8 +77,21 @@ export default function SuccessModal({
     return "#6366f1";
   };
 
+  const handleOverlayKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      handleUserAction(onClose);
+    }
+  };
+
   return (
-    <div className={styles.overlay} onClick={() => handleUserAction(onClose)}>
+    <div
+      className={styles.overlay}
+      onClick={() => handleUserAction(onClose)}
+      onKeyDown={handleOverlayKeyDown}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+    >
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.iconContainer}>
           <CheckCircle

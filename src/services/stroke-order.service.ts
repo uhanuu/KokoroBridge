@@ -198,7 +198,7 @@ export class StrokeOrderService {
   ): Promise<void> {
     const strokeData = this.getStrokeOrder(character);
     if (!strokeData) {
-      console.warn(`'${character}' 문자의 획순 데이터를 찾을 수 없습니다.`);
+      // 문자의 획순 데이터를 찾을 수 없습니다.
       return;
     }
 

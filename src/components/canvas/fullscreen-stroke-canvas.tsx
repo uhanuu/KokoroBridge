@@ -11,8 +11,8 @@ import React, {
   memo,
 } from "react";
 
-import FullscreenCanvasHeader from "@/components/ui/header/fullscreen-canvas-header";
 import ScoreFeedback from "@/components/ui/feedback/score-feedback";
+import FullscreenCanvasHeader from "@/components/ui/header/fullscreen-canvas-header";
 import {
   CharacterStrokeData,
   StrokePoint,

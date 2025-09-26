@@ -1,4 +1,5 @@
 import { Announcement, NewReleases, Update, Event, Schedule } from "@mui/icons-material";
+
 import { NewsItem } from "@/components/news/news-list/news-list";
 
 export const newsData: NewsItem[] = [

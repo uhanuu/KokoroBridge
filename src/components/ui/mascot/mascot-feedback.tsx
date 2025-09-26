@@ -9,14 +9,14 @@ import styles from "./mascot-feedback.module.css";
 
 export type MascotType = 'success' | 'error' | 'thinking' | 'celebrating' | 'encouraging' | 'hint';
 
-interface MascotConfig {
-  imageSrc: string;
-  imageAlt: string;
-  defaultMessage: string;
-  animationClass: string;
-  showParticles?: boolean;
-  particleType?: string;
-}
+// interface MascotConfig {
+//   imageSrc: string;
+//   imageAlt: string;
+//   defaultMessage: string;
+//   animationClass: string;
+//   showParticles?: boolean;
+//   particleType?: string;
+// }
 
 interface MascotFeedbackProps {
   type: MascotType;
@@ -59,6 +59,13 @@ export default function MascotFeedback({
     }, 300);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+      e.preventDefault();
+      handleHide();
+    }
+  };
+
   useEffect(() => {
     if (visible) {
       setIsVisible(true);
@@ -85,7 +92,7 @@ export default function MascotFeedback({
       }, 300);
     }
     // onHide는 의존성에서 제외 (부모 컴포넌트에서 변경될 수 있음)
-  }, [visible, duration]);
+  }, [visible, duration, onHide]);
 
   const config = MASCOT_CONFIGS[type];
   const imageSrc = customImage?.src || config.imageSrc;
@@ -118,9 +125,11 @@ export default function MascotFeedback({
         ${className}
       `.trim()}
       onClick={handleHide}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="mascot-message"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label="마스코트 피드백 닫기"
+      aria-describedby="mascot-message"
     >
       <div className={`${styles.mascotContainer} ${styles[type]}`}>
         <div className={`${styles.mascot} ${styles[config.animationClass]}`}>

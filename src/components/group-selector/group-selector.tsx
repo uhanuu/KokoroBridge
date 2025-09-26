@@ -3,7 +3,7 @@
 import { ArrowBack, TouchApp, ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 import ActionButton from "@/components/ui/button/action-button";
 import Card from "@/components/ui/card";
@@ -34,7 +34,7 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  // const containerRef = useRef<HTMLDivElement>(null);
 
   const handlePrevious = useCallback(() => {
     if (currentIndex > 0) {

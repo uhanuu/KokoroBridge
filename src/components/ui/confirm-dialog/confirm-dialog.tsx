@@ -87,6 +87,12 @@ export default function ConfirmDialog({
     }
   };
 
+  const handleBackdropKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -100,7 +106,14 @@ export default function ConfirmDialog({
   };
 
   return (
-    <div className={styles.backdrop} onClick={handleBackdropClick}>
+    <div
+      className={styles.backdrop}
+      onClick={handleBackdropClick}
+      onKeyDown={handleBackdropKeyDown}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+    >
       <div className={styles.container}>
         <Card
           variant="default"

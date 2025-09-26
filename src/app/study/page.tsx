@@ -140,7 +140,7 @@ export default function StudyPage() {
       }
       window.removeEventListener('resize', handleResize);
     };
-  }, [updateCurrentIndex]);
+  }, [updateCurrentIndex, currentIndex]);
 
   return (
     <div className={styles.container}>
@@ -189,6 +189,14 @@ export default function StudyPage() {
                       selectedCategory === category.id ? styles.selected : ""
                     }`}
                     onClick={() => handleCategoryClick(category.id)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleCategoryClick(category.id);
+                      }
+                    }}
+                    tabIndex={0}
+                    role="button"
                   >
                     {category.isLocked && <div className={styles.lockOverlay} />}
                     <div className={styles.categoryHeader}>

@@ -6,7 +6,6 @@ import {
   Refresh,
   ArrowBack,
   ArrowForward,
-  PlayArrow,
   Pause,
   CheckCircle,
 } from "@mui/icons-material";
@@ -32,7 +31,6 @@ import {
   AnimationFrame,
 } from "@/services/stroke-animation.service";
 import { TextToSpeechService } from "@/services/text-to-speech.service";
-import { CanvasUtils } from "@/utils/canvas.utils";
 
 import styles from "./optimized-stroke-canvas.module.css";
 
@@ -120,6 +118,7 @@ class CanvasRenderer {
     this.ctx.beginPath();
 
     const scaledPoints = this.scalePoints(points);
+    if (scaledPoints.length === 0) return;
     this.ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
 
     if (scaledPoints.length === 2) {
@@ -255,7 +254,7 @@ class InputHandler {
 
   private getCoordinates(event: MouseEvent | TouchEvent): StrokePoint {
     const rect = this.canvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
+    // const dpr = window.devicePixelRatio || 1;
 
     let clientX: number, clientY: number;
 
@@ -315,7 +314,7 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
   const [accuracy, setAccuracy] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const { feedback, showFeedback } = useMascotFeedback();
+  const { showFeedback } = useMascotFeedback();
 
   // 초기화
   useEffect(() => {
@@ -388,7 +387,7 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
         handleSpeak();
       }, audioConfig.pronunciationDelay);
     }
-  }, [character.char, autoPlay, redrawCanvas]);
+  }, [character.char, autoPlay, redrawCanvas, handleSpeak]);
 
   // 획순 완료 처리
   const handleStrokeComplete = useCallback((stroke: StrokePoint[]) => {
@@ -475,9 +474,9 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
     if (!ttsServiceRef.current) return;
 
     ttsServiceRef.current.speak(character.char, {
-      onError: (error) => {
+      onError: (_error) => {
         showFeedback("error", "음성 재생에 실패했습니다");
-        console.error("TTS Error:", error);
+        // TTS Error
       },
     });
   }, [character.char, showFeedback]);

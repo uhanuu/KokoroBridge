@@ -61,8 +61,8 @@ export default function EnhancedWritingCanvas({
       const maxWidth = containerRect.width - 32; // 패딩 고려
       const maxHeight = window.innerHeight - 300; // 헤더, 버튼 등 공간 고려
 
-      let newWidth = propWidth || Math.min(maxWidth, 400);
-      let newHeight = propHeight || Math.min(maxHeight, 400);
+      const newWidth = propWidth || Math.min(maxWidth, 400);
+      const newHeight = propHeight || Math.min(maxHeight, 400);
 
       // 정사각형 유지
       const size = Math.min(newWidth, newHeight, maxWidth, maxHeight);
@@ -94,7 +94,7 @@ export default function EnhancedWritingCanvas({
     if (character && showStrokeDemo && showDemo) {
       playStrokeDemo();
     }
-  }, [character, showDemo]);
+  }, [character, showDemo, showStrokeDemo]);
 
   const initializeForCharacter = useCallback(() => {
     // 검증 서비스 초기화
@@ -160,7 +160,7 @@ export default function EnhancedWritingCanvas({
       } else if (event instanceof MouseEvent) {
         clientX = event.clientX;
         clientY = event.clientY;
-        if ('pressure' in event && event.pressure > 0) {
+        if ('pressure' in event && typeof event.pressure === 'number' && event.pressure > 0) {
           pressure = event.pressure;
         }
       } else {
@@ -254,13 +254,13 @@ export default function EnhancedWritingCanvas({
       }
 
       onValidationResult?.(result);
-    } catch (error) {
-      console.error('Stroke validation error:', error);
+    } catch (_error) {
+      // Stroke validation error
       showFeedback('error', '획순 검증 중 오류가 발생했습니다.');
     }
 
     setCurrentStroke([]);
-  }, [isDrawing, currentStroke, onValidationResult, onCharacterComplete, character]);
+  }, [isDrawing, currentStroke, onValidationResult, onCharacterComplete, character, showFeedback]);
 
   // 마우스/터치 이벤트 등록
   useEffect(() => {
@@ -304,8 +304,8 @@ export default function EnhancedWritingCanvas({
     setIsPlaying(true);
     try {
       await ttsService.speak(character);
-    } catch (error) {
-      console.error('TTS Error:', error);
+    } catch (_error) {
+      // TTS Error
     } finally {
       setIsPlaying(false);
     }
@@ -323,8 +323,8 @@ export default function EnhancedWritingCanvas({
         strokeWidth: 3,
         speed: 0.8,
       });
-    } catch (error) {
-      console.error('Stroke demo error:', error);
+    } catch (_error) {
+      // Stroke demo error
     }
   }, [character]);
 

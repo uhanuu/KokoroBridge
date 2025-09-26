@@ -1,6 +1,6 @@
 "use client";
 
-import { Lock, CheckCircle } from "@mui/icons-material";
+import { Lock } from "@mui/icons-material";
 import { Typography, LinearProgress } from "@mui/material";
 import Image from "next/image";
 import React from "react";

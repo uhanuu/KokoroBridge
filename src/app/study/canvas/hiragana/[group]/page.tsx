@@ -6,7 +6,7 @@ import React, { useState, useCallback, useMemo } from "react";
 import FullscreenStrokeCanvas from "@/components/canvas/fullscreen-stroke-canvas";
 import GroupCompletionModal from "@/components/ui/modal/group-completion-modal";
 import { hiraganaGroups } from "@/mock/hiragana-mock";
-import { hiraganaStrokeData, CharacterStrokeData } from "@/mock/study-canvas-mock";
+import { hiraganaStrokeData, CharacterStrokeData, StrokePoint } from "@/mock/study-canvas-mock";
 
 import styles from "./page.module.css";
 
@@ -130,7 +130,7 @@ export default function HiraganaGroupPage() {
     type: "hiragana",
     completed: currentCharacter.completed || false,
     strokeCount: (currentCharacter as { strokeOrder?: unknown[] }).strokeOrder?.length || 1,
-    strokes: (currentCharacter as { strokePoints?: unknown[] }).strokePoints || [],
+    strokes: (currentCharacter as { strokePoints?: StrokePoint[][] }).strokePoints || [],
     animationFrames: [],
     difficulty: "medium",
     practiceCount: 0,

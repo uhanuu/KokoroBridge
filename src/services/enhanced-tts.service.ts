@@ -70,8 +70,8 @@ export class EnhancedTTSService {
       onEnd: () => {
         this.processQueue();
       },
-      onError: (error) => {
-        console.error('TTS Error:', error);
+      onError: (_error) => {
+        // TTS Error
         this.processQueue();
       }
     });
@@ -166,14 +166,14 @@ export class EnhancedTTSService {
           this.isProcessing = false;
           this.processQueue();
         },
-        onError: (error) => {
-          console.error('TTS Queue Error:', error);
+        onError: (_error) => {
+          // TTS Queue Error
           this.isProcessing = false;
           this.processQueue();
         }
       });
-    } catch (error) {
-      console.error('TTS Queue Processing Error:', error);
+    } catch (_error) {
+      // TTS Queue Processing Error
       this.isProcessing = false;
       this.processQueue();
     }

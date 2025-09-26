@@ -10,7 +10,7 @@ interface DropdownOption {
 }
 
 interface DropdownButtonProps {
-  label: string;
+  label?: string;
   icon?: React.ReactNode;
   options: DropdownOption[];
   value: string;
@@ -19,7 +19,7 @@ interface DropdownButtonProps {
 }
 
 export default function DropdownButton({
-  label,
+  label: _label,
   icon,
   options,
   value,

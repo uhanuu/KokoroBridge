@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Typography, Switch } from "@mui/material";
+
 import styles from "./settings-menu-item.module.css";
 
 interface SettingsMenuItemProps {
@@ -37,6 +38,14 @@ export default function SettingsMenuItem({
     <div
       className={`${styles.menuItem} ${className || ''}`}
       onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
+      tabIndex={0}
+      role="button"
     >
       <div className={styles.iconWrapper}>
         {icon}

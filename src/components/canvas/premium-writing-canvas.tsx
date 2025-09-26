@@ -59,7 +59,7 @@ export default function PremiumWritingCanvas({
 
   const strokeEngine = useRef(new StrokeOrderEngine());
   const ttsService = useRef(new TextToSpeechService());
-  const { feedback, showFeedback, hideFeedback } = useMascotFeedback();
+  const { showFeedback, hideFeedback } = useMascotFeedback();
 
   // 캔버스 초기화 및 이벤트 리스너 등록
   useEffect(() => {
@@ -236,7 +236,7 @@ export default function PremiumWritingCanvas({
   );
 
   const handleEnd = useCallback(
-    (event?: any) => {
+    (_event?: any) => {
       if (!isDrawing || currentStroke.length < 2) {
         setIsDrawing(false);
         setCurrentStroke([]);
@@ -300,9 +300,9 @@ export default function PremiumWritingCanvas({
   // 음성 재생
   const handleSpeak = useCallback(() => {
     ttsService.current.speak(character.char, {
-      onError: (error) => {
+      onError: (_error) => {
         showFeedback("error", "음성 재생에 실패했습니다");
-        console.error("TTS Error:", error);
+        // TTS Error
       },
     });
   }, [character.char, showFeedback]);
@@ -356,7 +356,7 @@ export default function PremiumWritingCanvas({
         feedback: "획순 정보가 없는 문자입니다",
       });
     }
-  }, [character.char, character.strokeOrder]);
+  }, [character.char, character.strokeOrder, hideFeedback]);
 
   const progress = character.strokeOrder?.length
     ? (userStrokes.length / character.strokeOrder.length) * 100

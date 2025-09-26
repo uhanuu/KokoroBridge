@@ -64,6 +64,13 @@ export default function ScoreFeedback({
     handleClose();
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+      e.preventDefault();
+      handleClose();
+    }
+  };
+
   const getScoreMessage = (accuracy: number): string => {
     if (accuracy >= 95) return `${accuracy}점이에요! 완벽해요!`;
     if (accuracy >= 85) return `${accuracy}점이에요! 훌륭해요!`;
@@ -92,8 +99,10 @@ export default function ScoreFeedback({
     <div
       className={`${styles.overlay} ${animationClass}`}
       onClick={handleClick}
-      role="dialog"
-      aria-modal="true"
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label="점수 피드백 닫기"
     >
       <div className={styles.feedbackContainer}>
         {/* 마스코트 이모지 */}

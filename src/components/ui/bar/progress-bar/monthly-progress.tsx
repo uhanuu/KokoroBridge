@@ -1,11 +1,12 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Typography } from "@mui/material";
-import { useState, useRef, useEffect } from "react";
 
 import Card from "@/components/ui/card";
 import { monthlyProgressConfig, getAchievementLevel } from "@/mock/monthly-progress-mock";
+
 import styles from "./monthly-progress.module.css";
 
 interface MonthlyData {

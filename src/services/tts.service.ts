@@ -121,7 +121,7 @@ export class TTSService {
       // 이벤트 리스너
       utterance.onend = () => resolve();
       utterance.onerror = (event) => {
-        console.error('TTS Error:', event.error);
+        // TTS Error
         reject(new Error(`음성 재생 실패: ${event.error}`));
       };
 

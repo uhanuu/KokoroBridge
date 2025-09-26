@@ -1,14 +1,15 @@
 "use client";
 
-import { Settings, ArrowBack } from "@mui/icons-material";
-import { Typography, IconButton } from "@mui/material";
 import React, { useState, useCallback } from "react";
 import Image from "next/image";
+import { Settings, ArrowBack } from "@mui/icons-material";
+import { Typography, IconButton } from "@mui/material";
 
 import Card from "@/components/ui/card";
 import SectionCard from "@/components/ui/section-card";
 import { mockAchievements } from "@/mock/profile-mock";
 import { getMascotImage } from "@/mock/profile-info-mock";
+
 import ProfileContent from "./profile-content";
 import SettingsContent from "./settings-content";
 import styles from "./profile-info.module.css";
@@ -45,12 +46,12 @@ export default function ProfileInfo({ profile }: ProfileInfoProps) {
   );
 
   const handleSettingsClick = useCallback(() => {
-    console.log('Settings clicked, isFlipped:', !isFlipped);
+    // Settings clicked
     setIsFlipped(true);
   }, [isFlipped]);
 
   const handleBackClick = useCallback(() => {
-    console.log('Back clicked, isFlipped:', isFlipped);
+    // Back clicked
     setIsFlipped(false);
   }, [isFlipped]);
 

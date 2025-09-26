@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './card.module.css';
 
 export interface CardProps {
@@ -36,8 +37,21 @@ export const Card: React.FC<CardProps> = ({
     className
   ].filter(Boolean).join(' ');
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (onClick && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      onClick();
+    }
+  };
+
   return (
-    <div className={cardClasses} onClick={onClick}>
+    <div
+      className={cardClasses}
+      onClick={onClick}
+      onKeyDown={onClick ? handleKeyDown : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      role={onClick ? "button" : undefined}
+    >
       <div className={styles.cardContent}>
         {children}
       </div>

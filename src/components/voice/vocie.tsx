@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import { voiceConfig } from "@/mock/voice-mock";
 
 const CatSpeech: React.FC = () => {

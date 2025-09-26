@@ -47,7 +47,7 @@ export class StrokeAnimationService {
       if (!this.isPlaying) return;
 
       const elapsed = timestamp - this.startTime;
-      const totalDuration = animConfig.duration + (animConfig.delay * characterData.strokeCount);
+      // const totalDuration = animConfig.duration + (animConfig.delay * characterData.strokeCount);
 
       if (elapsed < animConfig.delay) {
         // 시작 지연

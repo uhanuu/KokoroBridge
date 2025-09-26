@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import {
   LocalFireDepartment,
   Schedule,
@@ -9,11 +10,11 @@ import {
   CheckCircle
 } from "@mui/icons-material";
 import { Typography } from "@mui/material";
-import React from "react";
 
 import SectionCard from "@/components/ui/section-card";
 import { profileInfoStaticData } from "@/mock/profile-info-mock";
 import { mockAchievements } from "@/mock/profile-mock";
+
 import styles from "./profile-info.module.css";
 
 interface UserProfile {

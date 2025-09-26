@@ -57,8 +57,21 @@ export default function GroupCompletionModal({
 
   const characterTypeName = characterType === "hiragana" ? "히라가나" : "가타카나";
 
+  const handleOverlayKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
   return (
-    <div className={styles.overlay} onClick={onClose}>
+    <div
+      className={styles.overlay}
+      onClick={onClose}
+      onKeyDown={handleOverlayKeyDown}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+    >
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.iconContainer}>
           <CheckCircle

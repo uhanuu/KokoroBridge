@@ -180,7 +180,17 @@ export default function NewsCard({ news, onMarkAsRead, onDeleteNews }: NewsCardP
             )}
 
             {/* 액션 버튼들 */}
-            <div className={styles.actionSection} onClick={(e) => e.stopPropagation()}>
+            <div
+              className={styles.actionSection}
+              onClick={(e) => e.stopPropagation()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.stopPropagation();
+                }
+              }}
+              tabIndex={0}
+              role="button"
+            >
               {/* 참여형 버튼들 */}
               {news.type === "release" && (
                 <ActionButton

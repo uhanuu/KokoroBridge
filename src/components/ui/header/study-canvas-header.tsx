@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowBack, ArrowForward, ArrowBackIos } from "@mui/icons-material";
+import { ArrowForward, ArrowBackIos } from "@mui/icons-material";
 import { Typography, IconButton, LinearProgress } from "@mui/material";
 import { useRouter } from "next/navigation";
 import React from "react";
