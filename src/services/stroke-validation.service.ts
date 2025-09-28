@@ -85,6 +85,19 @@ export class StrokeValidationService {
 
     // 현재 획순 검증
     const currentExpectedStroke = this.currentStrokeData.strokes[this.currentStrokeIndex];
+    if (!currentExpectedStroke) {
+      return {
+        isCorrect: false,
+        score: 0,
+        currentStrokeIndex: this.currentStrokeIndex,
+        feedback: {
+          message: '획순 데이터를 찾을 수 없습니다.',
+          type: 'error' as const
+        },
+        completedStrokes: this.currentStrokeIndex,
+        totalStrokes: this.currentStrokeData.strokes.length
+      };
+    }
     const validationScore = this.validateStroke(userStroke, currentExpectedStroke);
 
     if (validationScore >= this.validationSettings.sequenceTolerance) {
@@ -164,6 +177,7 @@ export class StrokeValidationService {
 
     const userStart = userStroke.points[0];
     const expectedStart = expectedStroke.points[0];
+    if (!userStart || !expectedStart) return 0;
 
     const distance = this.calculateDistance(userStart, expectedStart);
     const tolerance = this.validationSettings.positionTolerance;
@@ -182,6 +196,7 @@ export class StrokeValidationService {
 
     const userEnd = userStroke.points[userStroke.points.length - 1];
     const expectedEnd = expectedStroke.points[expectedStroke.points.length - 1];
+    if (!userEnd || !expectedEnd) return 0;
 
     const distance = this.calculateDistance(userEnd, expectedEnd);
     const tolerance = this.validationSettings.positionTolerance;
@@ -226,10 +241,11 @@ export class StrokeValidationService {
     const minLength = Math.min(sampledUserPoints.length, sampledExpectedPoints.length);
 
     for (let i = 0; i < minLength; i++) {
-      const distance = this.calculateDistance(
-        sampledUserPoints[i],
-        sampledExpectedPoints[i]
-      );
+      const userPoint = sampledUserPoints[i];
+      const expectedPoint = sampledExpectedPoints[i];
+      if (!userPoint || !expectedPoint) continue;
+
+      const distance = this.calculateDistance(userPoint, expectedPoint);
       totalDistance += distance;
     }
 

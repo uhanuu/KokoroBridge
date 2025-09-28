@@ -67,12 +67,14 @@ export default function MascotFeedback({
   };
 
   useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+
     if (visible) {
       setIsVisible(true);
       setAnimationClass(styles.fadeIn || '');
 
       if (duration > 0) {
-        const timer = setTimeout(() => {
+        timer = setTimeout(() => {
           setAnimationClass(styles.fadeOut || '');
           setTimeout(() => {
             setIsVisible(false);
@@ -80,8 +82,6 @@ export default function MascotFeedback({
             onHide?.();
           }, 300);
         }, duration);
-
-        return () => clearTimeout(timer);
       }
     } else {
       setAnimationClass(styles.fadeOut || '');
@@ -91,6 +91,12 @@ export default function MascotFeedback({
         onHide?.();
       }, 300);
     }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
     // onHide는 의존성에서 제외 (부모 컴포넌트에서 변경될 수 있음)
   }, [visible, duration, onHide]);
 

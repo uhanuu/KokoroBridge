@@ -61,10 +61,10 @@ export default function HiraganaGroupPage() {
 
       // 마지막 문자 완료시는 성공 모달이 자동으로 사라진 후 그룹 완료 모달 표시
       if (isLastCharacter) {
-        // 성공 모달이 자동으로 사라지는 시간 후 그룹 완료 모달 표시 (2.5초 + 여유시간)
+        // 성공 모달이 1.5초 후에 사라지므로 그에 맞춰 조정 (1.5초 + 애니메이션 시간 + 여유시간)
         setTimeout(() => {
           setShowGroupCompletionModal(true);
-        }, 2800);
+        }, 2000);
       }
     }, 0);
   }, [currentGroup, currentIndex, groupAccuracyHistory]);

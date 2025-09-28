@@ -198,6 +198,7 @@ class InputHandler {
   private currentStroke: StrokePoint[] = [];
   private usingTouch = false;
   private isDestroyed = false;
+  private isDisabled = false;
 
   private boundHandleStart = this.handleStart.bind(this);
   private boundHandleMove = this.handleMove.bind(this);
@@ -228,7 +229,7 @@ class InputHandler {
   }
 
   private handleStart(event: MouseEvent | TouchEvent): void {
-    if (this.isDestroyed) return;
+    if (this.isDestroyed || this.isDisabled) return;
     event.preventDefault();
 
     if (event instanceof TouchEvent) {
@@ -302,6 +303,15 @@ class InputHandler {
     const y = ((clientY - rect.top) / rect.height) * 100;
 
     return { x, y };
+  }
+
+  setDisabled(disabled: boolean): void {
+    this.isDisabled = disabled;
+    if (disabled && this.isDrawing) {
+      // 비활성화될 때 현재 그리기 중이면 중단
+      this.isDrawing = false;
+      this.currentStroke = [];
+    }
   }
 
   destroy(): void {
@@ -608,11 +618,10 @@ const FullscreenStrokeCanvas: React.FC<FullscreenStrokeCanvasProps> = memo(({
   // 점수 피드백 닫기
   const handleCloseFeedback = useCallback(() => {
     setShowScoreFeedback(false);
-    // 다음 문자가 있으면 자동으로 이동
-    if (hasNext && onNext) {
-      onNext();
-    }
-  }, [hasNext, onNext]);
+    // 현재 그리고 있는 획순 상태 초기화
+    setCurrentDrawingStroke([]);
+    // 자동 이동 로직 제거 - 사용자가 명시적으로 다음 버튼을 눌러야 함
+  }, []);
 
   // 진행도 계산
   const progress = useMemo(() => {
@@ -643,6 +652,13 @@ const FullscreenStrokeCanvas: React.FC<FullscreenStrokeCanvasProps> = memo(({
       }
     };
   }, [handleStrokeComplete, handleStrokeUpdate]);
+
+  // 점수 피드백 표시 상태에 따른 입력 제어
+  useEffect(() => {
+    if (inputHandlerRef.current) {
+      inputHandlerRef.current.setDisabled(showScoreFeedback);
+    }
+  }, [showScoreFeedback]);
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -680,7 +696,10 @@ const FullscreenStrokeCanvas: React.FC<FullscreenStrokeCanvasProps> = memo(({
         accuracy={finalAccuracy}
         character={character.char}
         onClose={handleCloseFeedback}
-        autoCloseDelay={2500}
+        onNext={onNext}
+        hasNext={hasNext}
+        isLastCharacter={!hasNext}
+        autoCloseDelay={0}
       />
     </div>
   );

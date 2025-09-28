@@ -195,12 +195,7 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
           <ChevronLeft className={styles.chevronIcon} />
         </button>
 
-        <Card
-          variant="default"
-          size="lg"
-          padding="xl"
-          borderRadius="2xl"
-          className={styles.groupCard}
+        <div
           onMouseDown={handleMouseDown}
           onMouseMove={isDragging ? handleMouseMove : undefined}
           onMouseUp={handleMouseUp}
@@ -209,6 +204,13 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+          <Card
+            variant="default"
+            size="lg"
+            padding="xl"
+            borderRadius="2xl"
+            className={styles.groupCard}
+          >
           <div
             className={styles.cardContent}
             style={{ transform: getTransform() }}
@@ -272,7 +274,8 @@ export default function GroupSelector({ groups, title, subtitle, onBack }: Group
               className={styles.startButton}
             />
           </div>
-        </Card>
+          </Card>
+        </div>
 
         {/* 오른쪽 네비게이션 */}
         <button

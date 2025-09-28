@@ -45,7 +45,8 @@ export class EnhancedTTSService {
     let insertIndex = this.queue.length;
 
     for (let i = 0; i < this.queue.length; i++) {
-      if (priorityOrder[item.priority] < priorityOrder[this.queue[i].priority]) {
+      const queueItem = this.queue[i];
+      if (queueItem && priorityOrder[item.priority] < priorityOrder[queueItem.priority]) {
         insertIndex = i;
         break;
       }

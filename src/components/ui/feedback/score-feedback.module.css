@@ -275,3 +275,96 @@
     font-size: 1rem;
   }
 }
+
+/* 액션 버튼 스타일 */
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  z-index: 3;
+  position: relative;
+  animation: buttonsSlide 0.8s ease-out 0.6s both;
+}
+
+@keyframes buttonsSlide {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.actionButton {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  pointer-events: auto;
+  min-width: 120px;
+  box-shadow: var(--shadow-md);
+}
+
+.nextButton {
+  background: var(--primary-500);
+  color: white;
+}
+
+.nextButton:hover {
+  background: var(--primary-600);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.closeButton {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--outline);
+}
+
+.closeButton:hover {
+  background: var(--surface-variant);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* 반응형 - 액션 버튼 */
+@media (max-width: 768px) {
+  .actionButtons {
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .actionButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .actionButtons {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .actionButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    width: 100%;
+    min-width: auto;
+  }
+}

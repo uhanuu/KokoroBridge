@@ -66,6 +66,7 @@ export class StrokeAnimationService {
 
       if (currentStrokeIndex < totalStrokes) {
         const currentStroke = characterData.strokes[currentStrokeIndex];
+        if (!currentStroke) return;
         const pointCount = Math.floor(strokeProgress * currentStroke.length);
         const visiblePoints = currentStroke.slice(0, Math.max(1, pointCount));
 
@@ -162,6 +163,7 @@ export class StrokeAnimationService {
 
       if (currentStrokeIndex < characterData.strokeCount) {
         const currentStroke = characterData.strokes[currentStrokeIndex];
+        if (!currentStroke) continue;
         const pointCount = Math.floor(strokeProgress * currentStroke.length);
         const visiblePoints = currentStroke.slice(0, Math.max(1, pointCount));
 

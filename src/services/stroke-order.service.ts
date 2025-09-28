@@ -242,6 +242,7 @@ export class StrokeOrderService {
     // 각 획순을 순차적으로 그리기
     for (let i = 0; i < strokeData.strokes.length; i++) {
       const stroke = strokeData.strokes[i];
+      if (!stroke) continue;
       await this.animateStroke(ctx, stroke, displayWidth, displayHeight, speed);
 
       // 획순 간 잠시 대기 (마지막 획순이 아닌 경우)
@@ -267,6 +268,7 @@ export class StrokeOrderService {
 
     // 시작점으로 이동
     const startPoint = points[0];
+    if (!startPoint) return Promise.resolve();
     ctx.beginPath();
     ctx.moveTo(startPoint.x * canvasWidth, startPoint.y * canvasHeight);
 
@@ -284,6 +286,7 @@ export class StrokeOrderService {
         if (currentSegment < totalSegments) {
           const currentPoint = points[currentSegment];
           const nextPoint = points[currentSegment + 1];
+          if (!currentPoint || !nextPoint) return;
 
           // 보간된 위치 계산
           const x = currentPoint.x + (nextPoint.x - currentPoint.x) * segmentProgress;
@@ -299,8 +302,10 @@ export class StrokeOrderService {
         } else {
           // 마지막 점까지 확실히 그리기
           const lastPoint = points[points.length - 1];
-          ctx.lineTo(lastPoint.x * canvasWidth, lastPoint.y * canvasHeight);
-          ctx.stroke();
+          if (lastPoint) {
+            ctx.lineTo(lastPoint.x * canvasWidth, lastPoint.y * canvasHeight);
+            ctx.stroke();
+          }
           resolve();
         }
       };

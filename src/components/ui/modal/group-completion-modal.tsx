@@ -1,11 +1,7 @@
 "use client";
 
 import {
-  CheckCircle,
-  ArrowForward,
-  Refresh,
-  Home,
-  School
+  CheckCircle
 } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import React from "react";
@@ -101,14 +97,12 @@ export default function GroupCompletionModal({
                   text="다음 그룹으로"
                   variant="primary"
                   onClick={onNextGroup}
-                  startIcon={<ArrowForward />}
                   className={styles.actionButton}
                 />
                 <ActionButton
                   text="이 그룹 다시하기"
-                  variant="secondary"
+                  variant="primary"
                   onClick={onRestartGroup}
-                  startIcon={<Refresh />}
                   className={styles.actionButton}
                 />
               </>
@@ -118,14 +112,12 @@ export default function GroupCompletionModal({
                   text={`${characterTypeName} 선택으로`}
                   variant="primary"
                   onClick={onBackToSelection}
-                  startIcon={<School />}
                   className={styles.actionButton}
                 />
                 <ActionButton
                   text="처음 그룹부터"
-                  variant="secondary"
+                  variant="primary"
                   onClick={onRestartGroup}
-                  startIcon={<Refresh />}
                   className={styles.actionButton}
                 />
               </>
@@ -133,9 +125,8 @@ export default function GroupCompletionModal({
 
             <ActionButton
               text="학습하기로"
-              variant="outline"
+              variant="primary"
               onClick={() => window.location.href = '/study'}
-              startIcon={<Home />}
               className={styles.actionButton}
             />
           </div>

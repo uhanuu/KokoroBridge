@@ -9,6 +9,9 @@ interface ScoreFeedbackProps {
   accuracy: number;
   character: string;
   onClose: () => void;
+  onNext?: () => void;
+  hasNext?: boolean;
+  isLastCharacter?: boolean;
   autoCloseDelay?: number;
 }
 
@@ -17,6 +20,9 @@ export default function ScoreFeedback({
   accuracy,
   character,
   onClose,
+  onNext,
+  hasNext = false,
+  isLastCharacter = false,
   autoCloseDelay = 2500,
 }: ScoreFeedbackProps) {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,11 +34,13 @@ export default function ScoreFeedback({
       setIsVisible(true);
       setAnimationClass(styles.slideIn || "");
 
-      // 자동 닫기 타이머
-      if (autoCloseDelay > 0) {
+      // 마지막 문자일 때는 1.5초 후 자동 닫기, 그 외에는 설정된 시간
+      const delayTime = isLastCharacter ? 1500 : autoCloseDelay;
+
+      if (delayTime > 0) {
         autoCloseTimeoutRef.current = setTimeout(() => {
           handleClose();
-        }, autoCloseDelay);
+        }, delayTime);
       }
     } else {
       handleClose();
@@ -44,7 +52,7 @@ export default function ScoreFeedback({
         autoCloseTimeoutRef.current = null;
       }
     };
-  }, [isOpen, autoCloseDelay]);
+  }, [isOpen, autoCloseDelay, isLastCharacter]);
 
   const handleClose = () => {
     if (autoCloseTimeoutRef.current) {
@@ -60,12 +68,19 @@ export default function ScoreFeedback({
     }, 300);
   };
 
-  const handleClick = () => {
-    handleClose();
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    // 모달 외부 클릭을 막기 위해 아무 동작하지 않음
+    e.stopPropagation();
+  };
+
+  const handleModalClick = (e: React.MouseEvent) => {
+    // 모달 내부 클릭 시 이벤트 전파 중단
+    e.stopPropagation();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+    // ESC 키로만 닫을 수 있도록 수정 (Enter, Space는 버튼 동작과 충돌 방지)
+    if (e.key === 'Escape') {
       e.preventDefault();
       handleClose();
     }
@@ -98,13 +113,14 @@ export default function ScoreFeedback({
   return (
     <div
       className={`${styles.overlay} ${animationClass}`}
-      onClick={handleClick}
+      onClick={handleOverlayClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      role="button"
-      aria-label="점수 피드백 닫기"
+      role="dialog"
+      aria-modal="true"
+      aria-label="점수 피드백"
     >
-      <div className={styles.feedbackContainer}>
+      <div className={styles.feedbackContainer} onClick={handleModalClick}>
         {/* 마스코트 이모지 */}
         <div className={styles.mascotContainer}>
           <div className={styles.mascotEmoji}>
@@ -129,6 +145,39 @@ export default function ScoreFeedback({
             {getScoreMessage(accuracy)}
           </div>
         </div>
+
+        {/* 액션 버튼들 - 마지막 문자가 아닐 때만 표시 */}
+        {!isLastCharacter && (
+          <div className={styles.actionButtons}>
+            {hasNext ? (
+              <>
+                <button
+                  className={`${styles.actionButton} ${styles.nextButton}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onNext?.();
+                    handleClose();
+                  }}
+                >
+                  다음 문자
+                </button>
+                <button
+                  className={`${styles.actionButton} ${styles.closeButton}`}
+                  onClick={handleClose}
+                >
+                  계속 연습
+                </button>
+              </>
+            ) : (
+              <button
+                className={`${styles.actionButton} ${styles.closeButton}`}
+                onClick={handleClose}
+              >
+                닫기
+              </button>
+            )}
+          </div>
+        )}
 
         {/* 파티클 효과 */}
         {accuracy >= 85 && (

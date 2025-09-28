@@ -89,6 +89,7 @@ export class StrokeOrderEngine {
     for (let i = 0; i < pointCount; i++) {
       const userPoint = userNormalized[i];
       const correctPoint = correctNormalized[i];
+      if (!userPoint || !correctPoint) continue;
       const distance = this.calculateDistance(userPoint, correctPoint);
       totalDistance += Math.min(distance, this.STROKE_TOLERANCE);
     }
@@ -131,7 +132,9 @@ export class StrokeOrderEngine {
 
     const totalLength = this.calculateStrokeLength(stroke);
     const segmentLength = totalLength / (targetPoints - 1);
-    const normalized: Point[] = [stroke[0]];
+    const firstPoint = stroke[0];
+    if (!firstPoint) return stroke;
+    const normalized: Point[] = [firstPoint];
 
     let currentLength = 0;
     let currentIndex = 0;
@@ -140,13 +143,19 @@ export class StrokeOrderEngine {
       const targetLength = i * segmentLength;
 
       while (currentIndex < stroke.length - 1 && currentLength < targetLength) {
-        const segLength = this.calculateDistance(stroke[currentIndex], stroke[currentIndex + 1]);
+        const point1 = stroke[currentIndex];
+        const point2 = stroke[currentIndex + 1];
+        if (!point1 || !point2) break;
+        const segLength = this.calculateDistance(point1, point2);
         currentLength += segLength;
         currentIndex++;
       }
 
       if (currentIndex < stroke.length) {
-        normalized.push(stroke[currentIndex]);
+        const point = stroke[currentIndex];
+        if (point) {
+          normalized.push(point);
+        }
       }
     }
 
@@ -161,6 +170,7 @@ export class StrokeOrderEngine {
 
     const start = stroke[0];
     const end = stroke[stroke.length - 1];
+    if (!start || !end) return 0;
 
     const dx = end.x - start.x;
     const dy = end.y - start.y;
@@ -174,7 +184,10 @@ export class StrokeOrderEngine {
   private calculateStrokeLength(stroke: Point[]): number {
     let length = 0;
     for (let i = 1; i < stroke.length; i++) {
-      length += this.calculateDistance(stroke[i - 1], stroke[i]);
+      const point1 = stroke[i - 1];
+      const point2 = stroke[i];
+      if (!point1 || !point2) continue;
+      length += this.calculateDistance(point1, point2);
     }
     return length;
   }
@@ -214,7 +227,7 @@ export class StrokeOrderEngine {
     const scaleX = canvasSize.width / 100;
     const scaleY = canvasSize.height / 100;
 
-    return path.replace(/(\d+\.?\d*)/g, (match, number) => {
+    return path.replace(/(\d+\.?\d*)/g, (_match, number) => {
       const num = parseFloat(number);
       // X, Y 좌표를 구분하여 스케일링 (간단한 구현)
       return (num * Math.min(scaleX, scaleY)).toFixed(1);
@@ -238,9 +251,13 @@ export class StrokeOrderEngine {
     let totalAccuracy = 0;
 
     for (let i = 0; i < Math.min(userStrokes.length, totalStrokes); i++) {
+      const userStroke = userStrokes[i];
+      const correctStroke = correctCharacter.strokePoints[i];
+      if (!userStroke || !correctStroke) continue;
+
       const validation = this.validateStroke(
-        userStrokes[i],
-        correctCharacter.strokePoints[i],
+        userStroke,
+        correctStroke,
         i
       );
 

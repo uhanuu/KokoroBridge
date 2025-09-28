@@ -119,20 +119,30 @@ class CanvasRenderer {
 
     const scaledPoints = this.scalePoints(points);
     if (scaledPoints.length === 0) return;
-    this.ctx.moveTo(scaledPoints[0].x, scaledPoints[0].y);
+
+    const firstPoint = scaledPoints[0];
+    if (!firstPoint) return;
+    this.ctx.moveTo(firstPoint.x, firstPoint.y);
 
     if (scaledPoints.length === 2) {
-      this.ctx.lineTo(scaledPoints[1].x, scaledPoints[1].y);
+      const secondPoint = scaledPoints[1];
+      if (secondPoint) {
+        this.ctx.lineTo(secondPoint.x, secondPoint.y);
+      }
     } else {
       for (let i = 1; i < scaledPoints.length - 1; i++) {
         const current = scaledPoints[i];
         const next = scaledPoints[i + 1];
-        const controlX = (current.x + next.x) / 2;
-        const controlY = (current.y + next.y) / 2;
-        this.ctx.quadraticCurveTo(current.x, current.y, controlX, controlY);
+        if (current && next) {
+          const controlX = (current.x + next.x) / 2;
+          const controlY = (current.y + next.y) / 2;
+          this.ctx.quadraticCurveTo(current.x, current.y, controlX, controlY);
+        }
       }
       const lastPoint = scaledPoints[scaledPoints.length - 1];
-      this.ctx.lineTo(lastPoint.x, lastPoint.y);
+      if (lastPoint) {
+        this.ctx.lineTo(lastPoint.x, lastPoint.y);
+      }
     }
 
     this.ctx.stroke();
@@ -144,12 +154,15 @@ class CanvasRenderer {
     // 현재 그리고 있는 지점에 점 표시
     if (frame.points.length > 0) {
       const lastPoint = frame.points[frame.points.length - 1];
-      this.drawPoint(lastPoint, color, 6);
+      if (lastPoint) {
+        this.drawPoint(lastPoint, color, 6);
+      }
     }
   }
 
   drawPoint(point: StrokePoint, color: string, radius: number): void {
     const scaledPoint = this.scalePoints([point])[0];
+    if (!scaledPoint) return;
     this.ctx.fillStyle = color;
     this.ctx.beginPath();
     this.ctx.arc(scaledPoint.x, scaledPoint.y, radius, 0, Math.PI * 2);
@@ -373,6 +386,18 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
     });
   }, [character.char, character.strokeCount, userStrokes]);
 
+  // 음성 재생
+  const handleSpeak = useCallback(() => {
+    if (!ttsServiceRef.current) return;
+
+    ttsServiceRef.current.speak(character.char, {
+      onError: (_error) => {
+        showFeedback("error", "음성 재생에 실패했습니다");
+        // TTS Error
+      },
+    });
+  }, [character.char, showFeedback]);
+
   // 캐릭터 변경 시 초기화
   useEffect(() => {
     setUserStrokes([]);
@@ -399,7 +424,8 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
     if (strokeIndex < character.strokeCount) {
       // 정확도 계산 (간단한 구현)
       const correctStroke = character.strokes[strokeIndex];
-      const strokeAccuracy = calculateStrokeAccuracy(stroke, correctStroke);
+      if (correctStroke) {
+        const strokeAccuracy = calculateStrokeAccuracy(stroke, correctStroke);
 
       if (strokeAccuracy > 0.6) {
         setCompletedStrokes(prev => prev + 1);
@@ -407,11 +433,16 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
       } else {
         showFeedback("error", "다시 시도해보세요");
       }
+      }
 
       // 전체 완성도 체크
       if (newUserStrokes.length === character.strokeCount) {
         const totalAccuracy = newUserStrokes.reduce((acc, userStroke, idx) => {
-          return acc + calculateStrokeAccuracy(userStroke, character.strokes[idx]);
+          const correctStroke = character.strokes[idx];
+          if (correctStroke) {
+            return acc + calculateStrokeAccuracy(userStroke, correctStroke);
+          }
+          return acc;
         }, 0) / character.strokeCount;
 
         setAccuracy(Math.round(totalAccuracy * 100));
@@ -429,14 +460,21 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
     if (userStroke.length < 2 || correctStroke.length < 2) return 0;
 
     // 시작점과 끝점 비교
+    const userStart = userStroke[0];
+    const correctStart = correctStroke[0];
+    const userEnd = userStroke[userStroke.length - 1];
+    const correctEnd = correctStroke[correctStroke.length - 1];
+
+    if (!userStart || !correctStart || !userEnd || !correctEnd) return 0;
+
     const startDistance = Math.sqrt(
-      Math.pow(userStroke[0].x - correctStroke[0].x, 2) +
-      Math.pow(userStroke[0].y - correctStroke[0].y, 2)
+      Math.pow(userStart.x - correctStart.x, 2) +
+      Math.pow(userStart.y - correctStart.y, 2)
     );
 
     const endDistance = Math.sqrt(
-      Math.pow(userStroke[userStroke.length - 1].x - correctStroke[correctStroke.length - 1].x, 2) +
-      Math.pow(userStroke[userStroke.length - 1].y - correctStroke[correctStroke.length - 1].y, 2)
+      Math.pow(userEnd.x - correctEnd.x, 2) +
+      Math.pow(userEnd.y - correctEnd.y, 2)
     );
 
     const maxDistance = 20; // 허용 오차
@@ -468,18 +506,6 @@ const OptimizedStrokeCanvas: React.FC<OptimizedStrokeCanvasProps> = memo(({
       { duration: canvasConfig.animationDuration, delay: canvasConfig.hintDelay }
     );
   }, [character, isAnimating, redrawCanvas]);
-
-  // 음성 재생
-  const handleSpeak = useCallback(() => {
-    if (!ttsServiceRef.current) return;
-
-    ttsServiceRef.current.speak(character.char, {
-      onError: (_error) => {
-        showFeedback("error", "음성 재생에 실패했습니다");
-        // TTS Error
-      },
-    });
-  }, [character.char, showFeedback]);
 
   // 초기화
   const handleReset = useCallback(() => {

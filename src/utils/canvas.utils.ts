@@ -151,10 +151,14 @@ export class CanvasUtils {
     ctx.lineJoin = 'round';
 
     ctx.beginPath();
-    ctx.moveTo(points[0].x, points[0].y);
+    const firstPoint = points[0];
+    if (!firstPoint) return;
+    ctx.moveTo(firstPoint.x, firstPoint.y);
 
     for (let i = 1; i < points.length; i++) {
-      ctx.lineTo(points[i].x, points[i].y);
+      const point = points[i];
+      if (!point) continue;
+      ctx.lineTo(point.x, point.y);
     }
 
     ctx.stroke();
@@ -181,15 +185,21 @@ export class CanvasUtils {
 
     if (points.length === 2) {
       // 점이 2개뿐이면 직선
-      ctx.moveTo(points[0].x, points[0].y);
-      ctx.lineTo(points[1].x, points[1].y);
+      const point1 = points[0];
+      const point2 = points[1];
+      if (!point1 || !point2) return;
+      ctx.moveTo(point1.x, point1.y);
+      ctx.lineTo(point2.x, point2.y);
     } else {
       // 3개 이상이면 부드러운 곡선
-      ctx.moveTo(points[0].x, points[0].y);
+      const startPoint = points[0];
+      if (!startPoint) return;
+      ctx.moveTo(startPoint.x, startPoint.y);
 
       for (let i = 1; i < points.length - 1; i++) {
         const currentPoint = points[i];
         const nextPoint = points[i + 1];
+        if (!currentPoint || !nextPoint) continue;
         const controlX = (currentPoint.x + nextPoint.x) / 2;
         const controlY = (currentPoint.y + nextPoint.y) / 2;
 
@@ -198,7 +208,9 @@ export class CanvasUtils {
 
       // 마지막 점까지 연결
       const lastPoint = points[points.length - 1];
-      ctx.lineTo(lastPoint.x, lastPoint.y);
+      if (lastPoint) {
+        ctx.lineTo(lastPoint.x, lastPoint.y);
+      }
     }
 
     ctx.stroke();
@@ -225,7 +237,9 @@ export class CanvasUtils {
     // 현재 진행 위치에 점 표시
     if (hintPoints.length > 0) {
       const lastPoint = hintPoints[hintPoints.length - 1];
-      this.drawPoint(canvas, lastPoint, color, 6);
+      if (lastPoint) {
+        this.drawPoint(canvas, lastPoint, color, 6);
+      }
     }
   }
 
@@ -253,8 +267,11 @@ export class CanvasUtils {
   private static calculatePathLength(points: Point[]): number {
     let length = 0;
     for (let i = 1; i < points.length; i++) {
-      const dx = points[i].x - points[i - 1].x;
-      const dy = points[i].y - points[i - 1].y;
+      const currentPoint = points[i];
+      const prevPoint = points[i - 1];
+      if (!currentPoint || !prevPoint) continue;
+      const dx = currentPoint.x - prevPoint.x;
+      const dy = currentPoint.y - prevPoint.y;
       length += Math.sqrt(dx * dx + dy * dy);
     }
     return length;
@@ -266,24 +283,29 @@ export class CanvasUtils {
   private static getPointsUpToLength(points: Point[], targetLength: number): Point[] {
     if (targetLength <= 0) return [];
 
-    const result: Point[] = [points[0]];
+    const firstPoint = points[0];
+    if (!firstPoint) return [];
+    const result: Point[] = [firstPoint];
     let currentLength = 0;
 
     for (let i = 1; i < points.length; i++) {
-      const dx = points[i].x - points[i - 1].x;
-      const dy = points[i].y - points[i - 1].y;
+      const currentPoint = points[i];
+      const prevPoint = points[i - 1];
+      if (!currentPoint || !prevPoint) continue;
+      const dx = currentPoint.x - prevPoint.x;
+      const dy = currentPoint.y - prevPoint.y;
       const segmentLength = Math.sqrt(dx * dx + dy * dy);
 
       if (currentLength + segmentLength <= targetLength) {
-        result.push(points[i]);
+        result.push(currentPoint);
         currentLength += segmentLength;
       } else {
         // 부분적으로 포함될 점 계산
         const remainingLength = targetLength - currentLength;
         const ratio = remainingLength / segmentLength;
         const interpolatedPoint: Point = {
-          x: points[i - 1].x + dx * ratio,
-          y: points[i - 1].y + dy * ratio
+          x: prevPoint.x + dx * ratio,
+          y: prevPoint.y + dy * ratio
         };
         result.push(interpolatedPoint);
         break;
